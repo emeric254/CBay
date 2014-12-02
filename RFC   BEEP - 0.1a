@@ -1,0 +1,365 @@
+Upssitech STRI Working Group                             V. Guenat
+Request for Comments: 1                                  E. Tosi
+                                                         E. Aacha
+                                                         Novembre 2014
+
+
+            Bid Emission and Exchange Protocol -- BEEP/0.1a
+
+Status of this Memo
+Work in progress [...]
+
+
+Abstract
+[...]
+
+
+Table of Contents
+[...]
+
+
+   1   Introduction
+   1.1   Purpose
+   [...]
+
+
+   1.2   Requirements
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [34].
+
+   An implementation is not compliant if it fails to satisfy one or more
+   of the MUST or REQUIRED level requirements for the protocols it
+   implements. An implementation that satisfies all the MUST or REQUIRED
+   level and all the SHOULD level requirements for its protocols is said
+   to be "unconditionally compliant"; one that satisfies all the MUST
+   level requirements but not all the SHOULD level requirements for its
+   protocols is said to be "conditionally compliant."
+
+   1.3   Terminology
+
+
+   This specification uses a number of terms to refer to the roles
+   played by participants in, and objects of, the BEEP communication.
+
+   connection
+      A transport layer virtual circuit established between two programs
+      for the purpose of communication.
+
+   message
+      The basic unit of BEEP communication, consisting of a structured
+      sequence of octets matching the syntax defined in section 4 and
+      transmitted via the connection.
+
+   request
+      An BEEP request message, as defined in section 5.
+
+   response
+      An BEEP response message, as defined in section 6.
+
+   resource
+      A network data object or service that can be identified by a URI,
+      as defined in section 3.2. Resources may be available in multiple
+      representations (e.g. multiple languages, data formats, size, and
+      resolutions) or vary in other ways.
+
+   entity
+      The information transferred as the payload of a request or
+      response. An entity consists of metainformation in the form of
+      entity-header fields and content in the form of an entity-body, as
+      described in section 7.
+
+   representation
+      An entity included with a response that is subject to content
+      negotiation, as described in section 12. There may exist multiple
+      representations associated with a particular response status.
+
+   content negotiation
+      The mechanism for selecting the appropriate representation when
+      servicing a request, as described in section 12. The
+      representation of entities in any response can be negotiated
+      (including error responses).
+
+   client
+      A program that establishes connections for the purpose of sending
+      requests.
+
+   server
+      An application program that accepts connections in order to
+      service requests by sending back responses. Any given program may
+      be capable of being both a client and a server; our use of these
+      terms refers only to the role being performed by the program for a
+      particular connection, rather than to the program's capabilities
+      in general. Likewise, any server may act as an origin server,
+      proxy, gateway, or tunnel, switching behavior based on the nature
+      of each request.
+
+   origin server
+      The server on which a given resource resides or is to be created.
+
+   semantically transparent
+      A cache behaves in a "semantically transparent" manner, with
+      respect to a particular response, when its use affects neither the
+      requesting client nor the origin server, except to improve
+      performance. When a cache is semantically transparent, the client
+      receives exactly the same response (except for hop-by-hop headers)
+      that it would have received had its request been handled directly
+      by the origin server.
+
+   upstream/downstream
+      Upstream and downstream describe the flow of a message: all
+      messages flow from upstream to downstream.
+
+   1.4   Overall Operation
+   [...]
+
+
+   2   Notational Conventions and Generic Grammar : Basic Rules
+
+
+   The following rules are used throughout this specification to
+   describe basic parsing constructs. The US-ASCII coded character set
+   is defined by ANSI X3.4-1986 [21].
+
+       OCTET          = <any 8-bit sequence of data>
+       CHAR           = <any US-ASCII character (octets 0 - 127)>
+       DIGIT          = <any US-ASCII digit "0".."9">
+       SP             = <US-ASCII SP, space (32)>
+       CR             = <US-ASCII CR, carriage return (13)>
+       LF             = <US-ASCII LF, linefeed (10)>
+       <">            = <US-ASCII double-quote mark (34)>
+
+   3   Protocol Parameters
+   3.2   Date/Time Formats
+   3.2.1    Full Date
+
+      This application allows only one full date format :
+         24-11-2014 14:41:12 GMT
+
+   3.2.2    Delta Seconds
+
+      Delta Seconds represents a difference between server's starting
+      time and current time.
+
+   3.3   Character Sets
+
+      BEEP uses the same definition of the term "character set" as that
+   described for BEEP :
+      The term "character set" is used in this document to refer to a
+   method used with one or more tables to convert a sequence of octets
+   into a sequence of characters. Note that unconditional conversion in
+   the other direction is not required, in that not all characters may
+   be available in a given character set and a character set may provide
+   more than one sequence of octets to represent a particular character.
+   This definition is intended to allow various kinds of character
+   encoding, from simple single-table mappings such as US-ASCII to
+   complex table switching methods such as those that use ISO-2022's
+   techniques. However, the definition associated with a BEEP character
+   set name MUST fully specify the mapping to be performed from octets
+   to characters. In particular, use of external profiling information
+   to determine the exact mapping is not permitted.
+
+
+   4   BEEP Message
+   4.1   Message Types
+
+   BEEP messages consist of requests from client to server and responses
+   from server to client.
+   Request (section 5) and Response (section 6) messages use a generic
+   message format for transferring entities (the payload of the
+   message). Field names are case-sensitive. The field value MAY be
+   preceded by any amount of LWS, though a single SP is preferred.
+
+   4.2   Message Headers
+
+   Headers are only response-headers.
+   Each header field consists of a name followed by a colon (":") and
+   the field value.
+
+   4.3   Message Body
+
+   The message-body is used to transfer informations associated with a
+   request or a response.
+
+   4.4   Message Length
+
+   The message-length is the length of the message-body. (cf entity
+   section (8) for the length of an entity).
+
+
+   5   Request
+
+   A request message from a client to a server includes, within the
+   first line of that message, the method to be applied to the resource,
+   the identifier of the resource, and the protocol version in use.
+
+   5.1   Request-Line
+
+   The Request-Line begins with a method keyword, followed by the entity
+   on which is applied this method.
+
+   5.1.1   Method
+
+   The Method keyword indicates the method to be used on the resource
+   identified by the Request-entity. The method is case-sensitive.
+
+       Method         = "GET"                    cf. section 9.2
+                      | "PUT"                    cf. section 9.3
+                      | "DELETE"                 cf. section 9.4
+                      | "CONNECT"                cf. section 9.5
+
+   6   Response
+
+   After receiving and interpreting a request message, a server responds
+   with an BEEP response message.
+
+   6.1   Status-Line
+
+   The first line of a Response message is the Status-Line, consisting
+   of the protocol version followed by a numeric status code and its
+   associated textual phrase, with each element separated by SP
+   characters. No CR is allowed except in the final CR sequence.
+
+       Status-Line = BEEP-Version SP Status-Code SP Reason-Phrase CR
+
+   6.1.1   Status Code and Reason Phrase
+
+   The Status-Code element is a signed 1-digit integer. This is the
+   result code of the attempt to understand and satisfy the request.
+   These codes are fully defined in section 10. The Reason-Phrase is
+   intended to give a short textual description of the Status-Code. The
+   Status-Code is intended for use by automata and the Reason-Phrase is
+   intended for the human user. The client is not required to examine or
+   display the Reason-Phrase.
+
+   6.2   Response Header Fields
+
+   7   Entity
+   7.1   Entity Header Fields
+   [...]
+
+   7.2   Entity Body
+   [...]
+
+   7.2.1    Type
+   [...]
+
+   7.2.2    Entity Length
+   [...]
+
+   8   Connections
+   8.1   Persistent Connections
+   [...]
+
+   8.1.1   Purpose
+   [...]
+
+   8.1.2   Overall Operation
+   [...]
+
+   8.2   Message Transmission Requirements
+   [...]
+
+   8.2.1   Client Behavior if Server Prematurely Closes Connection
+   [...]
+
+   9   Method Definitions
+   9.1   Safe and Idempotent Methods
+   [...]
+
+   9.1.1   Safe Methods
+   [...]
+
+   9.1.2   Idempotent Methods
+   [...]
+
+   9.2   GET
+   [...]
+
+   9.3   PUT
+   [...]
+
+   9.4   DELETE
+   [...]
+
+   9.5   CONNECT
+   [...]
+
+   10   Status Code Definitions
+   [...]
+
+   10.1   Positive x
+   10.1.1   0 OK
+   [...]
+
+   10.1.2   1 Created
+   [...]
+
+   10.2   Negative -x
+   10.2.1   -1 Bad Request
+   [...]
+
+   10.2.2   -2 Not Created
+   [...]
+
+   10.2.3   -3 Internal Server Error
+   [...]
+
+   10.2.4   -4 Conflict
+   [...]
+
+   10.2.5   -5 Forbidden
+   [...]
+
+   11   Access Authentication
+   [...]
+
+   12 [...]
+   [...]
+
+   12.1  Side Effects of GET
+   [...]
+
+   12.2   Invalidation After Updates or Deletions
+   [...]
+
+   12.3   Write-Through Mandatory
+   [...]
+
+   13   Header Field Definitions
+   [...]
+
+   14   Security Considerations
+   [...]
+
+   14.1   Personal Information
+   [...]
+
+   14.2   Privacy Issues Connected to Accept Headers
+   [...]
+
+   14.3   Attacks Based On File and Path Names
+   [...]
+
+   14.4   Authentication Credentials and Idle Clients
+   [...]
+
+   15   Acknowledgments
+   [...]
+
+   16   References
+   [...]
+
+   17   Authors' Addresses
+   [...]
+
+   18   Appendices
+   [...]
+
+   19   Index
+   [...]
+
+   20   Full Copyright Statement
+   [...]
+
