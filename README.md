@@ -1,4 +1,4 @@
-CBay (Projet C) - Enchères Distribuées
+#CBay (Projet C) - Enchères Distribuées
 ====
 
 Le but du projet est de construire une application C en mode client/serveur (en utilisant les bibliothèques du TP 3) qui permet de gérer des enchères distribuées du même style que celles proposées sur le site eBay.
@@ -11,16 +11,14 @@ L’application client pourra par la suite être utilisée pour consulter la lis
 La liste des objets mis aux enchères sera conservée côté serveur dans un ou plusieurs fichiers.
 Déroulement de l'enchère 
 
-On développe maintenant le déroulement de l'enchère de manière simplifiée.
-====
+##On développe maintenant le déroulement de l'enchère de manière simplifiée.
 
 Un acheteur qui veut enchérir sur un objet précise, via le client, l’objet (avec son nom ou, mieux, un identifiant unique géré par le serveur), la somme proposée et son identité (nom, prénom, numéro de téléphone, adresse, …). Si la somme est supérieure au prix de départ ou au prix actuellement proposé (si une enchère a déjà été proposée) l’enchère est prise en compte et on conserve les informations de l’acheteur dans un fichier.
 
 Le client permettra enfin de préciser qu’une enchère est terminée et le serveur devra alors préciser qui est l’acheteur de l’objet ou un message d’erreur si aucune enchère n’a été enregistrée.
 
 
-Organisation du projet et travail attendu
-====
+##Organisation du projet et travail attendu
 
 Le projet est à faire par groupes de deux étudiants qui doivent faire partie du même groupe de niveau d’Anglais (étant donné que les séances d’encadrement projet sont le lundi après-midi).
 
@@ -31,11 +29,10 @@ Ecrivez les algorithmes des applications cliente et serveur.
 Développez une version simplifiée de l’application.
 
 
-La version finale du projet devra nous parvenir par mail à ... et ... le jour de la validation.
+La version finale du projet devra parvenir par mail à A.A et P.T le jour de la validation.
 
  
-Options
-====
+##Options
 
 Le système permettra d’authentifier les utilisateurs qui pourront être vendeurs, acheteurs ou administrateurs.
 
