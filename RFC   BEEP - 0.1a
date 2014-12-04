@@ -66,7 +66,7 @@ Table of Contents
 
    entity
       The information transferred as the payload of a request or
-      response. An entity consists of metainformation in the form of
+      response. An entity consists of meta-information in the form of
       entity-header fields and content in the form of an entity-body, as
       described in section 7.
 
@@ -229,7 +229,7 @@ Table of Contents
    result code of the attempt to understand and satisfy the request.
    These codes are fully defined in section 10. The Reason-Phrase is
    intended to give a short textual description of the Status-Code. The
-   Status-Code is intended for use by automata and the Reason-Phrase is
+   Status-Code is intended for use by automate and the Reason-Phrase is
    intended for the human user. The client is not required to examine or
    display the Reason-Phrase.
 
@@ -291,26 +291,29 @@ Table of Contents
 
    10.1   Positive x
    10.1.1   0 OK
-   [...]
+   Status code after a successfully answered user or administrator 
+   request unless account and object bid creation.
 
    10.1.2   1 Created
-   [...]
+   Result of a successful account or object bid creation.
 
    10.2   Negative -x
    10.2.1   -1 Bad Request
-   [...]
+   Result of an invalid, unknown or unsupported request.
 
    10.2.2   -2 Not Created
-   [...]
+   Result of a failed account or object bid creation.
+   
 
    10.2.3   -3 Internal Server Error
-   [...]
+   Result of an unknown or internal server error.
 
    10.2.4   -4 Conflict
-   [...]
+   Result of a concurrent object bid read and write access between more than one user 
+   and/or administrator.
 
    10.2.5   -5 Forbidden
-   [...]
+   Result of 
 
    11   Access Authentication
    [...]
