@@ -47,6 +47,9 @@ Table of Contents
       A transport layer virtual circuit established between two programs
       for the purpose of communication.
 
+   login IDs
+      A combination of a login and a password.
+
    message
       The basic unit of BEEP communication, consisting of a structured
       sequence of octets matching the syntax defined in section 4 and
@@ -137,6 +140,8 @@ Table of Contents
       This application allows only one full date format :
          24-11-2014 14:41:12 GMT
 
+      This is a format from the RFC 3339.
+
    3.2.2    Delta Seconds
 
       Delta Seconds represents a difference between server's starting
@@ -162,6 +167,7 @@ Table of Contents
 
 
    4   BEEP Message
+
    4.1   Message Types
 
    BEEP messages consist of requests from client to server and responses
@@ -173,20 +179,21 @@ Table of Contents
 
    4.2   Message Headers
 
-   Headers are only response-headers.
+   Headers are only response-headers. Headers end with a single CR.
    Each header field consists of a name followed by a colon (":") and
-   the field value.
+   the field value. Header fields ends with a semi-colon (";"). The
+   headers are case-sensitive.
 
    4.3   Message Body
 
    The message-body is used to transfer informations associated with a
-   request or a response.
+   request or a response. The message body ends with a double CR.
 
    4.4   Message Length
 
-   The message-length is the length of the message-body. (cf entity
-   section (8) for the length of an entity).
-
+   The message-length is the length of the headers if there is any plus
+   the length of the message-body (cf entity section (8) for the length
+   of an entity).
 
    5   Request
 
@@ -233,7 +240,21 @@ Table of Contents
    intended for the human user. The client is not required to examine or
    display the Reason-Phrase.
 
+   6.1.2 Status-line length
+
+   (insérer schéma ici).
+
    6.2   Response Header Fields
+
+   (ici parler de la longueur, ajouter schéma).
+
+   6.2.1 Content-Length
+
+   It's the response body length.
+
+   6.2.2 Content-Type
+
+   It's the type of the body (which entity is it ?).
 
    7   Entity
    7.1   Entity Header Fields
@@ -290,79 +311,114 @@ Table of Contents
    [...]
 
    10.1   Positive x
+
    10.1.1   0 OK
-   Status code after a successfully answered user or administrator 
-   request unless account and object bid creation.
+   The request has succeeded. The information returned with the
+   response is dependent on the method used in the request, for
+   example :
+
+   GET      an entity corresponding to the requested resource
+        is sent in the response;
+
+   PUT      an entity-header with the return status;
+
+   DELETE   an entity-header with the return status;
+
+   CONNECT  an entity-header with the return status;
 
    10.1.2   1 Created
    Result of a successful account or object bid creation.
 
    10.2   Negative -x
+
    10.2.1   -1 Bad Request
-   Result of an invalid, unknown or unsupported request.
+   The request could not be understood by the server due to malformed
+   syntax. The client SHOULD NOT repeat the request without
+   modifications.
 
    10.2.2   -2 Not Created
+   The request could not be understood by the server due to a problem
+   with the ressource designed by the request.
    Result of a failed account or object bid creation.
-   
 
    10.2.3   -3 Internal Server Error
-   Result of an unknown or internal server error.
+   The server encountered an unexpected condition which prevented it
+   from fulfilling the request.
+   Result of an unknown, unpredictable or internal (core) server error.
 
    10.2.4   -4 Conflict
-   Result of a concurrent object bid read and write access between more than one user 
-   and/or administrator.
+   Result of a concurrent object bid read and write access between more
+   than one user and/or administrator.
 
    10.2.5   -5 Forbidden
-   Result of 
+   The server understood the request, but is refusing to fulfill it.
+   Authorization will not help and the request SHOULD NOT be repeated.
+   Result of giving invalid connection ids, or call a method which needs
+   rights but without them.
 
    11   Access Authentication
-   [...]
+   It require to use the CONNECT method with the user's login IDs.
+   The server sends back a response message composed of the status line.
 
-   12 [...]
-   [...]
+   12   Security Considerations
+   At the moment, no encryption module is in use, all the content is
+   sent clearly through the Internet. Please be careful while using this
+   version of the protocol. You MUST consider these severe security
+   issues !
 
-   12.1  Side Effects of GET
-   [...]
+   12.1   Personal Information
+   Your login, your password, and any informations you could send CAN be
+   viewed by anyone who is watching your communications under this
+   protocol.
 
-   12.2   Invalidation After Updates or Deletions
-   [...]
+   12.2   Privacy Issues Connected to Accept Headers
+   [...] (DDoS, memory leak attacks, ... other issues ?)
 
-   12.3   Write-Through Mandatory
-   [...]
+   12.3   Authentication Credentials and Idle Clients
+   [...] (anyone can stole a session to an another user, cf 14.1 ...)
 
-   13   Header Field Definitions
-   [...]
+   13   Acknowledgments
+   This specification makes heavy use of the generic definitions as they
+   can be seen in the RFC 2616. We would like to thanks the author to
+   allow us to use those definitions.
 
-   14   Security Considerations
-   [...]
+   Moreover, we want to thanks our professors P. Torguet and A. Aoun for
+   all their teaching and advising.
 
-   14.1   Personal Information
-   [...]
+   14   References
+   [1] R. Fielding, UC Irvine, J. Gettys, Compaq/W3C, J. Mogul, Compaq,
+       H. Frystyk, W3C/MIT, L. Masinter, Xerox, P. Leach, Microsoft,
+       T. Berners-Lee, W3C/MIT, "Hypertext Transfer Protocol", RFC 2616,
+       June 1999.
 
-   14.2   Privacy Issues Connected to Accept Headers
-   [...]
+   15   Full Copyright Statement
+   For the general definitions and some help in the structuration of our
+   rfc, we used the rfc 2616 (HTTP/1.1), as it is authorized by the
+   copyright statement below.
 
-   14.3   Attacks Based On File and Path Names
-   [...]
+   Copyright (C) The Internet Society (1999).  All Rights Reserved.
 
-   14.4   Authentication Credentials and Idle Clients
-   [...]
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
 
-   15   Acknowledgments
-   [...]
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
 
-   16   References
-   [...]
-
-   17   Authors' Addresses
-   [...]
-
-   18   Appendices
-   [...]
-
-   19   Index
-   [...]
-
-   20   Full Copyright Statement
-   [...]
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
 
