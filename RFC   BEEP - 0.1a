@@ -242,11 +242,28 @@ Table of Contents
 
    6.1.2 Status-line length
 
-   (insérer schéma ici).
+   The maximum length of the status-line is described below :
+   |---------------|----|-----------------|----|
+   | {Status Code} | SP | {Reason Phrase} | CR |
+   |---------------|----|-----------------|----|
+   |       2       |  1 |        28       |  1 |
+   |---------------|----|-----------------|----|
 
    6.2   Response Header Fields
 
-   (ici parler de la longueur, ajouter schéma).
+   The maximum length of the response header line is described below :
+   |----------------|---|----|------------------|---|-»
+   | Content-length | : | SP | {Content-length} | ; |-»
+   |----------------|---|----|------------------|---|-»
+   |       14       | 1 |  1 |        15        | 1 |-»
+   |----------------|---|----|------------------|---|-»
+
+   «-|--------------|---|----|----------------|---|----|
+   «-| Content-type | : | SP | {Content-type} | ; | CR |
+   «-|--------------|---|----|----------------|---|----|
+   «-|      12      | 1 |  1 |       16       | 1 |  1 |
+   «-|--------------|---|----|----------------|---|----|
+
 
    6.2.1 Content-Length
 
@@ -296,16 +313,36 @@ Table of Contents
    [...]
 
    9.2   GET
-   [...]
+   This method requires X parameters and have the following length :
+   |-----|----|----------|---|----|
+   | GET | SP | {OBJECT} | ; | CR |
+   |-----|----|----------|---|----|
+   |  3  |  1 | {OBJECT} | 1 |  1 |
+   |-----|----|----------|---|----|
 
    9.3   PUT
-   [...]
+   This method requires X parameters and have the following length :
+   |-----|----|----------|---|----|
+   | PUT | SP | {OBJECT} | ; | CR |
+   |-----|----|----------|---|----|
+   |  3  |  1 | {OBJECT} | 1 |  1 |
+   |-----|----|----------|---|----|
 
    9.4   DELETE
-   [...]
+   This method requires one parameters and have the following length :
+   |--------|----|----------|---|----|
+   | DELETE | SP | {OBJECT} | ; | CR |
+   |--------|----|----------|---|----|
+   |    6   |  1 | {OBJECT} | 1 |  1 |
+   |--------|----|----------|---|----|
 
    9.5   CONNECT
-   [...]
+   This method requires two parameters and have the following length :
+   |---------|----|---------|---|------------|---|----|
+   | CONNECT | SP | {LOGIN} | ; | {PASSWORD} | ; | CR |
+   |---------|----|---------|---|------------|---|----|
+   |    7    |  1 |    27   | 1 |     26     | 1 |  1 |
+   |---------|----|---------|---|------------|---|----|
 
    10   Status Code Definitions
    [...]
