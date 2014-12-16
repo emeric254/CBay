@@ -6,22 +6,18 @@ Request for Comments: 1                                  E. Tosi
 
             Bid Emission and Exchange Protocol -- BEEP/0.1a
 
-Status of this Memo
-Work in progress [...]
-
-
-Abstract
-[...]
-
 
 Table of Contents
 [...]
 
 
    1   Introduction
+   
    1.1   Purpose
-   [...]
-
+   
+   The Bid Emission and Exchange Protocol is a protocol for a distributed
+   bid systems. It enable clients to bid for objects among a list. This
+   protocol is referred to as the BEEP/0.1a.
 
    1.2   Requirements
 
@@ -38,7 +34,6 @@ Table of Contents
    to be "unconditionally compliant"; 
 
    1.3   Terminology
-
 
    This specification uses a number of terms to refer to the roles
    played by participants in, and objects of, the BEEP communication.
@@ -115,11 +110,18 @@ Table of Contents
       messages flow from upstream to downstream.
 
    1.4   Overall Operation
-   [...]
-
+   
+   BEEP is a request/response protocol. The client send a request to the
+   server and the server answer with a response. All the messages
+   (requests and responses) go through a connection between the server
+   and the client. The connection MUST be established before any request
+   other than those using the CONNECT method occurs.
+   The request is composed of a method, an entity and the protocol
+   version.
+   The response is composed of a status-line, response-headers and in
+   some cases an entity.
 
    2   Notational Conventions and Generic Grammar : Basic Rules
-
 
    The following rules are used throughout this specification to
    describe basic parsing constructs. The US-ASCII coded character set
@@ -134,10 +136,13 @@ Table of Contents
        SP             = <US-ASCII SP, space (32)>
        CR             = <US-ASCII CR, carriage return (13)>
        LF             = <US-ASCII LF, linefeed (10)>
+       LWS            = <US-ASCII LWS, linear white space (9)>
        <">            = <US-ASCII double-quote mark (34)>
 
    3   Protocol Parameters
+   
    3.2   Date/Time Formats
+   
    3.2.1    Full Date
 
       This application allows only one full date format :
@@ -274,7 +279,7 @@ Table of Contents
 
    6.2.2 Content-Type
 
-   It's the type of the body (which entity is it ?).
+   It's the type of entity of the body (cf section 7).
 
    7   Entity
 
@@ -313,6 +318,7 @@ Table of Contents
    1 + 4 + 75 + 64 + 96 + 80 = 320
 
    8   Connections
+   
    8.1   Persistent Connections
    [...]
 
@@ -331,6 +337,7 @@ Table of Contents
    [...]
 
    9   Method Definitions
+   
    9.1   Safe and Idempotent Methods
    [...]
 
@@ -340,7 +347,9 @@ Table of Contents
    9.1.2   Idempotent Methods
    [...]
 
-   9.2   GET
+  9.2   GET
+  
+   The GET method enable the client to ask the server to send back an entity.
    This method requires X parameters and have the following length :
    |-----|----|----------|---|----|
    | GET | SP | {OBJECT} | ; | CR |
@@ -352,6 +361,9 @@ Table of Contents
    + (Object length)
 
    9.3   PUT
+   
+   The client requests the server to store the a requested entity sent
+   in the core of the request.
    This method requires X parameters and have the following length :
    |-----|----|----------|---|----|
    | PUT | SP | {OBJECT} | ; | CR |
@@ -363,6 +375,9 @@ Table of Contents
    + (Object length)
 
    9.4   DELETE
+   
+   The client requests the server to delete the requested entity from
+   his database. For the entity types, cf section 7.
    This method requires one parameters and have the following length :
    |--------|----|----------|---|----|
    | DELETE | SP | {OBJECT} | ; | CR |
@@ -374,6 +389,9 @@ Table of Contents
    + (Object length)
 
    9.5   CONNECT
+   
+   The CONNECT method is used by the client to establish a permanent
+   connection with the server.
    This method requires two parameters and have the following length :
    |---------|----|---------|---|------------|---|----|
    | CONNECT | SP | {LOGIN} | ; | {PASSWORD} | ; | CR |
@@ -382,12 +400,13 @@ Table of Contents
    |---------|----|---------|---|------------|---|----|
 
    10   Status Code Definitions
+   
    The status code is the first part of the server answer for a request.
-   [...]
 
    10.1   Positive (X)
 
    10.1.1   0 OK
+   
    The request has succeeded. The information returned with the
    response is dependent on the method used in the request, for
    example :
@@ -401,46 +420,55 @@ Table of Contents
       | CONNECT  an entity-header with the return status;
 
    10.1.2   1 Created
+   
    Result of a successful account or object bid creation.
 
    10.2   Negative (-X)
 
    10.2.1   -1 Bad Request
+   
    The request could not be understood by the server due to malformed
    syntax. The client SHOULD NOT repeat the request without
    modifications.
 
    10.2.2   -2 Not Created
+   
    The request could not be understood by the server due to a problem
    with the ressource designed by the request.
    Result of a failed account or object bid creation.
 
    10.2.3   -3 Internal Server Error
+   
    The server encountered an unexpected condition which prevented it
    from fulfilling the request.
    Result of an unknown, unpredictable or internal (core) server error.
 
    10.2.4   -4 Conflict
+   
    Result of a concurrent object bid read and write access between more
    than one user and/or administrator.
 
    10.2.5   -5 Forbidden
+   
    The server understood the request, but is refusing to fulfill it.
    Authorization will not help and the request SHOULD NOT be repeated.
    Result of giving invalid connection ids, or call a method which needs
    rights but without them.
 
    11   Access Authentication
+   
    It require to use the CONNECT method with the user's login IDs.
    The server sends back a response message composed of the status line.
 
    12   Security Considerations
+   
    At the moment, no encryption module is in use, all the content is
    sent clearly through the Internet. Please be careful while using this
    version of the protocol. You MUST consider these severe security
    issues !
 
    12.1   Personal Information
+   
    Your login, your password, and any informations you could send CAN be
    viewed by anyone who is watching your communications under this
    protocol.
@@ -452,6 +480,7 @@ Table of Contents
    [...] (anyone can stole a session to an another user, cf 14.1 ...)
 
    13   Acknowledgments
+   
    This specification makes heavy use of the generic definitions as they
    can be seen in the RFC 2616. We would like to thanks the author to
    allow us to use those definitions.
@@ -460,12 +489,14 @@ Table of Contents
    all their teaching and advising.
 
    14   References
+   
    [1] R. Fielding, UC Irvine, J. Gettys, Compaq/W3C, J. Mogul, Compaq,
        H. Frystyk, W3C/MIT, L. Masinter, Xerox, P. Leach, Microsoft,
        T. Berners-Lee, W3C/MIT, "Hypertext Transfer Protocol", RFC 2616,
        June 1999.
 
    15   Full Copyright Statement
+   
    For the general definitions and some help in the structuration of our
    rfc, we used the rfc 2616 (HTTP/1.1), as it is authorized by the
    copyright statement below.
