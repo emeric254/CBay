@@ -29,9 +29,9 @@ Table of Contents
    of the MUST or REQUIRED level requirements for the protocols it
    implements. An implementation that satisfies all the MUST
    level requirements but not all the SHOULD level requirements for its
-   protocols is said to be "conditionally compliant"; one that satisfies all the MUST or REQUIRED
-   level and all the SHOULD level requirements for its protocols is said
-   to be "unconditionally compliant"; 
+   protocols is said to be "conditionally compliant"; one that satisfies 
+   all the MUST or REQUIRED level and all the SHOULD level requirements 
+   for its protocols is said to be "unconditionally compliant"; 
 
    1.3   Terminology
 
@@ -366,7 +366,7 @@ Table of Contents
    |-----|----|----------|---|----|
 
    (CHAR length) = 6
-   + (Object length)
+   + ({Object} length)
 
    9.3   PUT
    
@@ -380,7 +380,7 @@ Table of Contents
    |-----|----|----------|---|----|
 
    (CHAR length) = 6
-   + (Object length)
+   + ({Object} length)
 
    9.4   DELETE
    
@@ -394,7 +394,7 @@ Table of Contents
    |--------|----|----------|---|----|
 
    (CHAR length) = 9
-   + (Object length)
+   + ({Object} length)
 
    9.5   CONNECT
    
