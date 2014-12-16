@@ -59,7 +59,7 @@ Table of Contents
       A BEEP request message, as defined in section 5.
 
    response
-      An BEEP response message, as defined in section 6.
+      A BEEP response message, as defined in section 6.
 
    resource
       A network data object or service that can be identified by a URI,
@@ -128,6 +128,9 @@ Table of Contents
        OCTET          = <any 8-bit sequence of data>
        CHAR           = <any US-ASCII character (octets 0 - 127)>
        DIGIT          = <any US-ASCII digit "0".."9">
+       INT            = <basic signed integer type. cf ISO/IEC 9899>
+       LONG INT       = <long signed integer type. cf ISO/IEC 9899>
+       FLOAT          = <floating-point type. cf IEEE 754>
        SP             = <US-ASCII SP, space (32)>
        CR             = <US-ASCII CR, carriage return (13)>
        LF             = <US-ASCII LF, linefeed (10)>
@@ -282,7 +285,7 @@ Table of Contents
    |----------|----------|------------|-------------|------------|-»
    |    ID    |   Name   | Base Price | Description | Start Time |-»
    |----------|----------|------------|-------------|------------|-»
-   | LONG INT | CHAR[96] |    FLOAT   |  CHAR[320]  |  long INT  |-»
+   | LONG INT | CHAR[96] |    FLOAT   |  CHAR[320]  |  LONG INT  |-»
    |----------|----------|------------|-------------|------------|-»
 
    «-|----------|----------|-------------------|-------------------|
@@ -302,11 +305,11 @@ Table of Contents
    7.2    Entity Length
 
    7.2.1 Object bid
-   An object bid is (in OCTET)
+   An object bid is (OCTET) :
    4 + 96 + 4 + 320 + 4 + 4 + 96 + 4 + 4 = 536
 
    7.2.2 User account
-   An user account is (in OCTET)
+   An user account is (OCTET) :
    1 + 4 + 75 + 64 + 96 + 80 = 320
 
    8   Connections
