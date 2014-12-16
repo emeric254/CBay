@@ -31,11 +31,11 @@ Table of Contents
 
    An implementation is not compliant if it fails to satisfy one or more
    of the MUST or REQUIRED level requirements for the protocols it
-   implements. An implementation that satisfies all the MUST or REQUIRED
-   level and all the SHOULD level requirements for its protocols is said
-   to be "unconditionally compliant"; one that satisfies all the MUST
+   implements. An implementation that satisfies all the MUST
    level requirements but not all the SHOULD level requirements for its
-   protocols is said to be "conditionally compliant."
+   protocols is said to be "conditionally compliant"; one that satisfies all the MUST or REQUIRED
+   level and all the SHOULD level requirements for its protocols is said
+   to be "unconditionally compliant"; 
 
    1.3   Terminology
 
@@ -45,18 +45,18 @@ Table of Contents
 
    connection
       A transport layer virtual circuit established between two programs
-      for the purpose of communication.
+      in order to establish a communication.
 
    login IDs
-      A combination of a login and a password.
+      A combination of login and password.
 
    message
       The basic unit of BEEP communication, consisting of a structured
       sequence of octets matching the syntax defined in section 4 and
-      transmitted via the connection.
+      transmitted via the previously established connection.
 
    request
-      An BEEP request message, as defined in section 5.
+      A BEEP request message, as defined in section 5.
 
    response
       An BEEP response message, as defined in section 6.
