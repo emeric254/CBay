@@ -242,16 +242,16 @@ Table of Contents
 
    6.1.2 Status-line length
 
-   The maximum length of the status-line is described below :
+   The CHAR length of the status-line is described below :
    |---------------|----|-----------------|----|
    | {Status Code} | SP | {Reason Phrase} | CR |
    |---------------|----|-----------------|----|
-   |       2       |  1 |        28       |  1 |
+   |       2       |  1 |        12       |  1 |
    |---------------|----|-----------------|----|
 
    6.2   Response Header Fields
 
-   The maximum length of the response header line is described below :
+   The CHAR length of the response header line is described below :
    |----------------|---|----|------------------|---|-»
    | Content-length | : | SP | {Content-length} | ; |-»
    |----------------|---|----|------------------|---|-»
@@ -274,16 +274,38 @@ Table of Contents
    It's the type of the body (which entity is it ?).
 
    7   Entity
-   7.1   Entity Header Fields
+
+   7.1    Type
    [...]
 
-   7.2   Entity Body
+   7.1.1 Object bid
+   |----------|----------|------------|-------------|------------|-»
+   |    ID    |   Name   | Base Price | Description | Start Time |-»
+   |----------|----------|------------|-------------|------------|-»
+   | LONG INT | CHAR[96] |    FLOAT   |  CHAR[320]  |  long INT  |-»
+   |----------|----------|------------|-------------|------------|-»
+
+   «-|----------|----------|-------------------|-------------------|
+   «-| End Time |  Adress  | Current Bid Price | Current Bid Buyer |
+   «-|----------|----------|-------------------|-------------------|
+   «-| LONG INT | CHAR[96] |       FLOAT       |     LONG INT      |
+   «-|----------|----------|-------------------|-------------------|
+
+
+   7.1.2 User account
+   |------|----------|----------|-----------|----------|----------|
+   | Type |    ID    |   Name   |  Lastname |  Adress  |   Mail   |
+   |------|----------|----------|-----------|----------|----------|
+   | CHAR | LONG INT | CHAR[64] |  CHAR[64] | CHAR[96] | CHAR[64] |
+   |------|----------|----------|-----------|----------|----------|
+
+   7.2    Entity Length
    [...]
 
-   7.2.1    Type
+   7.2.1 Object bid
    [...]
 
-   7.2.2    Entity Length
+   7.2.2 User account
    [...]
 
    8   Connections
@@ -297,6 +319,8 @@ Table of Contents
    [...]
 
    8.2   Message Transmission Requirements
+   A network connection is required if the server and clients don't run
+   on the same system.
    [...]
 
    8.2.1   Client Behavior if Server Prematurely Closes Connection
