@@ -276,7 +276,7 @@ Table of Contents
    7   Entity
 
    7.1    Type
-   [...]
+   Entity used by BEEP are composed of basic C vars.
 
    7.1.1 Object bid
    |----------|----------|------------|-------------|------------|-»
@@ -296,17 +296,18 @@ Table of Contents
    |------|----------|----------|-----------|----------|----------|
    | Type |    ID    |   Name   |  Lastname |  Adress  |   Mail   |
    |------|----------|----------|-----------|----------|----------|
-   | CHAR | LONG INT | CHAR[64] |  CHAR[64] | CHAR[96] | CHAR[64] |
+   | CHAR | LONG INT | CHAR[75] |  CHAR[64] | CHAR[96] | CHAR[80] |
    |------|----------|----------|-----------|----------|----------|
 
    7.2    Entity Length
-   [...]
 
    7.2.1 Object bid
-   [...]
+   An object bid is (in OCTET)
+   4 + 96 + 4 + 320 + 4 + 4 + 96 + 4 + 4 = 536
 
    7.2.2 User account
-   [...]
+   An user account is (in OCTET)
+   1 + 4 + 75 + 64 + 96 + 80 = 320
 
    8   Connections
    8.1   Persistent Connections
@@ -344,6 +345,9 @@ Table of Contents
    |  3  |  1 | {OBJECT} | 1 |  1 |
    |-----|----|----------|---|----|
 
+   (CHAR length) = 6
+   + (Object length)
+
    9.3   PUT
    This method requires X parameters and have the following length :
    |-----|----|----------|---|----|
@@ -352,6 +356,9 @@ Table of Contents
    |  3  |  1 | {OBJECT} | 1 |  1 |
    |-----|----|----------|---|----|
 
+   (CHAR length) = 6
+   + (Object length)
+
    9.4   DELETE
    This method requires one parameters and have the following length :
    |--------|----|----------|---|----|
@@ -359,6 +366,9 @@ Table of Contents
    |--------|----|----------|---|----|
    |    6   |  1 | {OBJECT} | 1 |  1 |
    |--------|----|----------|---|----|
+
+   (CHAR length) = 9
+   + (Object length)
 
    9.5   CONNECT
    This method requires two parameters and have the following length :
@@ -369,28 +379,28 @@ Table of Contents
    |---------|----|---------|---|------------|---|----|
 
    10   Status Code Definitions
+   The status code is the first part of the server answer for a request.
    [...]
 
-   10.1   Positive x
+   10.1   Positive (X)
 
    10.1.1   0 OK
    The request has succeeded. The information returned with the
    response is dependent on the method used in the request, for
    example :
-
-   GET      an entity corresponding to the requested resource
-        is sent in the response;
-
-   PUT      an entity-header with the return status;
-
-   DELETE   an entity-header with the return status;
-
-   CONNECT  an entity-header with the return status;
+      | GET      an entity corresponding to the requested resource
+      |          is sent in the response;
+      |
+      | PUT      an entity-header with the return status;
+      |
+      | DELETE   an entity-header with the return status;
+      |
+      | CONNECT  an entity-header with the return status;
 
    10.1.2   1 Created
    Result of a successful account or object bid creation.
 
-   10.2   Negative -x
+   10.2   Negative (-X)
 
    10.2.1   -1 Bad Request
    The request could not be understood by the server due to malformed
