@@ -271,7 +271,7 @@ Table of Contents
 
    6.2.2 Content-Type
 
-   It's the type of the body (which entity is it ?).
+   It's the type of entity of the body (cf section 7).
 
    7   Entity
 
@@ -337,7 +337,8 @@ Table of Contents
    9.1.2   Idempotent Methods
    [...]
 
-   9.2   GET
+  9.2   GET
+   The GET method enable the user to ask the server to send back an entity.
    This method requires X parameters and have the following length :
    |-----|----|----------|---|----|
    | GET | SP | {OBJECT} | ; | CR |
@@ -349,6 +350,8 @@ Table of Contents
    + (Object length)
 
    9.3   PUT
+   The user requests the server to store the a requested entity sent
+   in the core of the request.
    This method requires X parameters and have the following length :
    |-----|----|----------|---|----|
    | PUT | SP | {OBJECT} | ; | CR |
@@ -360,6 +363,8 @@ Table of Contents
    + (Object length)
 
    9.4   DELETE
+   The user requests the server to delete the requested entity from
+   his database. For the entity types, cf section 7.
    This method requires one parameters and have the following length :
    |--------|----|----------|---|----|
    | DELETE | SP | {OBJECT} | ; | CR |
@@ -371,6 +376,8 @@ Table of Contents
    + (Object length)
 
    9.5   CONNECT
+   The CONNECT method is used by the client to establish a permanent
+   connection with the server.
    This method requires two parameters and have the following length :
    |---------|----|---------|---|------------|---|----|
    | CONNECT | SP | {LOGIN} | ; | {PASSWORD} | ; | CR |
