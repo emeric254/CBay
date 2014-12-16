@@ -320,10 +320,21 @@ Table of Contents
    [...]
 
    8.1.1   Purpose
-   [...]
+   
+   The purpose of the persistent connection is for the client to always
+   browse through a fresh object list because the server will regularly
+   sends the freshest object list.
 
    8.1.2   Overall Operation
-   [...]
+   
+   The client send a request using the CONNECT method with its login and
+   password, if there is any, or a PUT request to create a user account.
+   
+   In the first case, CONNECT is used and the pair ID/password is correct.
+   If not, the connection SHOULD stop and the client MAY try with an
+   other ID/password couple, or with the PUT request.
+   
+   
 
    8.2   Message Transmission Requirements
    A network connection is required if the server and clients don't run
