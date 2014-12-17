@@ -216,10 +216,10 @@ Table of Contents
    The Method keyword indicates the method to be used on the resource
    identified by the Request-entity. The method is case-sensitive.
 
-       Method         = "GET"                    cf. section 9.2
-                      | "PUT"                    cf. section 9.3
-                      | "DELETE"                 cf. section 9.4
-                      | "CONNECT"                cf. section 9.5
+       Method         = "GET"                    cf. section 9.1
+                      | "PUT"                    cf. section 9.2
+                      | "DELETE"                 cf. section 9.3
+                      | "CONNECT"                cf. section 9.4
 
    6   Response
 
@@ -284,18 +284,23 @@ Table of Contents
    Entity used by BEEP are composed of basic C vars.
 
    7.1.1 Object bid
-   |----------|----------|------------|-------------|------------|-»
-   |    ID    |   Name   | Base Price | Description | Start Time |-»
-   |----------|----------|------------|-------------|------------|-»
-   | LONG INT | CHAR[96] |    FLOAT   |  CHAR[320]  |  long INT  |-»
-   |----------|----------|------------|-------------|------------|-»
+   |----------|----------|------------|-------------|-----------|-»
+   |    ID    |   Name   | Base Price | Description | Vendor ID |-»
+   |----------|----------|------------|-------------|-----------|-»
+   | LONG INT | CHAR[96] |    FLOAT   |  CHAR[320]  |  LONG INT |-»
+   |----------|----------|------------|-------------|-----------|-»
 
-   «-|----------|----------|-------------------|-------------------|
-   «-| End Time |  Adress  | Current Bid Price | Current Bid Buyer |
-   «-|----------|----------|-------------------|-------------------|
-   «-| LONG INT | CHAR[96] |       FLOAT       |     LONG INT      |
-   «-|----------|----------|-------------------|-------------------|
+   «-|------------|----------|----------|-------------------|-»
+   «-| Start Time | End Time |  Adress  | Current Bid Price |-»
+   «-|------------|----------|----------|-------------------|-»
+   «-|  LONG INT  | LONG INT | CHAR[96] |       FLOAT       |-»
+   «-|------------|----------|----------|-------------------|-»
 
+   «-|----------------------|
+   «-| Current Bid Buyer ID |
+   «-|----------------------|
+   «-|       LONG INT       |
+   «-|----------------------|
 
    7.1.2 User account
    |------|----------|----------|-----------|----------|----------|
