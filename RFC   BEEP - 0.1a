@@ -307,23 +307,23 @@ Table of Contents
    7.2    Entity Length
 
    7.2.1 Object bid
+   
    An object bid is (in OCTET)
    4 + 96 + 4 + 320 + 4 + 4 + 96 + 4 + 4 = 536
 
    7.2.2 User account
+   
    An user account is (in OCTET)
    1 + 4 + 75 + 64 + 96 + 80 = 320
 
    8   Connections
    
    8.1   Persistent Connections
-   [...]
 
    8.1.1   Purpose
    
-   The purpose of the persistent connection is for the client to always
-   browse through a fresh object list because the server will regularly
-   sends the freshest object list.
+   The purpose of the persistent connection is for the client to connect
+   only once. That way it will reduce the number CONNECT requests.
 
    8.1.2   Overall Operation
    
@@ -331,31 +331,24 @@ Table of Contents
    password, if there is any, or a PUT request to create a user account.
    
    In the first case, CONNECT is used and the pair ID/password is correct.
-   If not, the connection SHOULD stop and the client MAY try with an
-   other ID/password couple, or with the PUT request.
-   
-   
+   After that, the client is allowed to use the command to add, delete or
+   bid for an object or to obtain the objects's list.
+   If not, the client SHOULD use an other ID/password couple to connect
+   or use the PUT request to create an account.
 
    8.2   Message Transmission Requirements
+   
    A network connection is required if the server and clients don't run
    on the same system.
    [...]
 
    8.2.1   Client Behavior if Server Prematurely Closes Connection
-   [...]
+   
+   If the server closes the connection, the client SHOULD shut down either.
 
    9   Method Definitions
-   
-   9.1   Safe and Idempotent Methods
-   [...]
 
-   9.1.1   Safe Methods
-   [...]
-
-   9.1.2   Idempotent Methods
-   [...]
-
-  9.2   GET
+   9.1   GET
   
    The GET method enable the client to ask the server to send back an entity.
    This method requires X parameters and have the following length :
@@ -368,7 +361,7 @@ Table of Contents
    (CHAR length) = 6
    + ({Object} length)
 
-   9.3   PUT
+   9.2   PUT
    
    The client requests the server to store the a requested entity sent
    in the core of the request.
@@ -382,10 +375,12 @@ Table of Contents
    (CHAR length) = 6
    + ({Object} length)
 
-   9.4   DELETE
+   9.3   DELETE
    
    The client requests the server to delete the requested entity from
-   his database. For the entity types, cf section 7.
+   his database. For the entity types, cf section 7. To delete an
+   object or a user account, the client must be authenticed as the
+   object's creator or an administrator.
    This method requires one parameters and have the following length :
    |--------|----|----------|---|----|
    | DELETE | SP | {OBJECT} | ; | CR |
@@ -396,7 +391,7 @@ Table of Contents
    (CHAR length) = 9
    + ({Object} length)
 
-   9.5   CONNECT
+   9.4   CONNECT
    
    The CONNECT method is used by the client to establish a permanent
    connection with the server.
@@ -482,9 +477,11 @@ Table of Contents
    protocol.
 
    12.2   Privacy Issues Connected to Accept Headers
+   
    [...] (DDoS, memory leak attacks, ... other issues ?)
 
    12.3   Authentication Credentials and Idle Clients
+   
    [...] (anyone can stole a session to an another user, cf 14.1 ...)
 
    13   Acknowledgments
