@@ -332,7 +332,9 @@ Table of Contents
    8.1.1   Purpose
    
    The purpose of the persistent connection is for the client to connect
-   only once. That way it will reduce the number CONNECT requests.
+   only once. That way it will reduce the number CONNECT requests, and
+   clients don't have to send headers with their credentials for each request
+   they made.
 
    8.1.2   Overall Operation
    
@@ -347,8 +349,8 @@ Table of Contents
 
    8.2   Message Transmission Requirements
    
-   One (or more) network connection is required if the server and clients don't run
-   on the same system.
+   One (or more) network connection is required if the server and clients
+   don't run on the same system.
    BEEP also require the choosen connexion port availability.
 
    8.2.1   Client Behavior if Server Prematurely Closes Connection
