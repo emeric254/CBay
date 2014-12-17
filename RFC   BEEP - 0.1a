@@ -254,6 +254,8 @@ Table of Contents
    |       2       |  1 |        12       |  1 |
    |---------------|----|-----------------|----|
 
+   (total CHAR length) = 16
+
    6.2   Response Header Fields
 
    The CHAR length of the response header line is described below :
@@ -268,6 +270,8 @@ Table of Contents
    «-|--------------|---|----|----------------|---|----|
    «-|      12      | 1 |  1 |       16       | 1 |  1 |
    «-|--------------|---|----|----------------|---|----|
+
+   (total CHAR length) = 64
 
 
    6.2.1 Content-Length
@@ -343,13 +347,14 @@ Table of Contents
 
    8.2   Message Transmission Requirements
    
-   A network connection is required if the server and clients don't run
+   One (or more) network connection is required if the server and clients don't run
    on the same system.
-   [...]
+   BEEP also require the choosen connexion port availability.
 
    8.2.1   Client Behavior if Server Prematurely Closes Connection
    
    If the server closes the connection, the client SHOULD shut down either.
+   After that the client CAN restart its use.
 
    9   Method Definitions
 
@@ -363,7 +368,7 @@ Table of Contents
    |  3  |  1 | {OBJECT} | 1 |  1 |
    |-----|----|----------|---|----|
 
-   (CHAR length) = 6
+   (total CHAR length) = 6
    + ({Object} length)
 
    9.2   PUT
@@ -377,7 +382,7 @@ Table of Contents
    |  3  |  1 | {OBJECT} | 1 |  1 |
    |-----|----|----------|---|----|
 
-   (CHAR length) = 6
+   (total CHAR length) = 6
    + ({Object} length)
 
    9.3   DELETE
@@ -393,7 +398,7 @@ Table of Contents
    |    6   |  1 | {OBJECT} | 1 |  1 |
    |--------|----|----------|---|----|
 
-   (CHAR length) = 9
+   (total CHAR length) = 9
    + ({Object} length)
 
    9.4   CONNECT
@@ -406,6 +411,8 @@ Table of Contents
    |---------|----|---------|---|------------|---|----|
    |    7    |  1 |    27   | 1 |     26     | 1 |  1 |
    |---------|----|---------|---|------------|---|----|
+
+   (total CHAR length) = 64
 
    10   Status Code Definitions
    
@@ -487,7 +494,9 @@ Table of Contents
 
    12.3   Authentication Credentials and Idle Clients
    
-   [...] (anyone can stole a session to an another user, cf 14.1 ...)
+   At the moment, all your credentials pass through one or more networks
+   without protections. Anyone can take them from the BEEP connect
+   request and/or from the answer of a GET request of user informations.
 
    13   Acknowledgments
    
