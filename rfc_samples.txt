@@ -1,0 +1,43 @@
+- Création d'un compte utilisateur
+
+------------------- PUT <user-entity> BEEP/0.1a ------------------->
+
+<------------------ BEEP/0.1a 1 Created ----------------------------
+
+
+- Connexion au serveur avec un compte utilisateur
+
+------------------- CONNECT login password BEEP/0.1a -------------->
+
+<------------------ BEEP/0.1a 0 Ok ---------------------------------
+
+
+- Mise en vente d'un objet
+
+------------------- PUT <object-entity> BEEP/0.1a ----------------->
+
+<------------------ BEEP/0.1a 1 Created ----------------------------
+
+
+- Suppression d'un objet
+
+------------------- DELETE <object-entity> BEEP/0.1a -------------->
+
+<------------------ BEEP/0.1a 0 Ok ---------------------------------
+
+
+- Ajout d'une enchère sur un objet
+
+------------------- PUT <object-entity> BEEP/0.1a ----------------->
+
+<------------------ BEEP/0.1a 0 Ok ---------------------------------
+
+
+- Obtention de la liste des objets disponibles
+
+------------------- GET <> BEEP/0.1a ------------------------------>
+
+<------------------ BEEP/0.1a 0 Ok     -----------------------------
+		    Content-length: X;
+		    Content-type: X;
+		    <liste-objets>
