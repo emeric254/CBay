@@ -16,7 +16,7 @@ Table of Contents
    1.1   Purpose
 
    The Bid Emission and Exchange Protocol is a protocol for a distributed
-   bid systems. It enable clients to bid for objects among a list. This
+   bid systems. It enables users using the client to bid for objects among a list. This
    protocol is referred to as the BEEP/0.1a.
 
    1.2   Requirements
@@ -337,13 +337,13 @@ Table of Contents
    8.1.1   Purpose
 
    The purpose of the persistent connection is for the client to connect
-   only once. That way it will reduce the number CONNECT requests, and
-   clients don't have to send headers with their credentials for each request
-   they made.
+   only once. That way it will reduce the number of CONNECT requests, and
+   clients won't have to send headers with their credentials with each request
+   initiated.
 
    8.1.2   Overall Operation
 
-   The client send a request using the CONNECT method with its login and
+   The client sends a request using the CONNECT method with its login and
    password, if there is any, or a PUT request to create a user account.
 
    In the first case, CONNECT is used and the pair ID/password is correct.
