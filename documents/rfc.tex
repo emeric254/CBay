@@ -157,3 +157,102 @@ messages flow from upstream to downstream.
    set name MUST fully specify the mapping to be performed from octets
    to characters. In particular, use of external profiling information
    to determine the exact mapping is not permitted.
+
+
+    \clearpage
+\chapter{BEEP Message}
+    \section{Message Types}
+        \paragraph{}
+   BEEP messages consist of requests from client to server and responses
+   from server to client.
+        \paragraph{}
+   Request (section 5) and Response (section 6) messages use a generic
+   message format for transferring entities (the payload of the
+   message). Field names are case-sensitive. The field value MAY be
+   preceded by any amount of LWS, though a single SP is preferred.
+
+    \section{Message Headers}
+        \paragraph{}
+   Headers are only response-headers. Headers end with a single CR.
+   Each header field consists of a name followed by a colon (":") and
+   the field value. Header fields ends with a semi-colon (";"). The
+   headers are case-sensitive.
+
+    \section{Message Body}
+        \paragraph{}
+   The message-body is used to transfer informations associated with a
+   request or a response. The message body ends with a double CR.
+
+    \section{Message Length}
+        \paragraph{}
+   The message-length is the length of the headers if there is any plus
+   the length of the message-body (cf entity section (8) for the length
+   of an entity).
+
+
+    \clearpage
+\chapter{Request}
+    \section{Request-Line}
+        \paragraph{}
+   The Request-Line begins with a method keyword, followed by the entity
+   on which is applied this method.
+        \paragraph{}
+   The Method keyword indicates the method to be used on the resource
+   identified by the Request-entity. The method is case-sensitive.
+        \paragraph{}
+       Method         = "GET"                    cf. section 9.1
+        \paragraph{}
+                      | "PUT"                    cf. section 9.2
+        \paragraph{}
+                      | "DELETE"                 cf. section 9.3
+        \paragraph{}
+                      | "CONNECT"                cf. section 9.4
+
+
+    \clearpage
+\chapter{Response}
+    \paragraph{}
+   After receiving and interpreting a request message, a server responds
+   with an BEEP response message.
+    \section{Status-Line}
+        \paragraph{}
+   The first line of a Response message is the Status-Line, consisting
+   of the protocol version followed by a numeric status code and its
+   associated textual phrase, with each element separated by SP
+   characters. No CR is allowed except in the final CR sequence.
+        \paragraph{}
+       Status-Line = BEEP-Version SP Status-Code SP Reason-Phrase CR
+        \paragraph{Status Code and Reason Phrase}
+   The Status-Code element is a signed 1-digit integer. This is the
+   result code of the attempt to understand and satisfy the request.
+   These codes are fully defined in section 10. The Reason-Phrase is
+   intended to give a short textual description of the Status-Code. The
+   Status-Code is intended for use by automate and the Reason-Phrase is
+   intended for the human user. The client is not required to examine or
+   display the Reason-Phrase.
+        \paragraph{Status-line length}
+   The CHAR length of the status-line is described below :
+   |---------------|----|-----------------|----|
+   | {Status Code} | SP | {Reason Phrase} | CR |
+   |---------------|----|-----------------|----|
+   |       2       |  1 |        12       |  1 |
+   |---------------|----|-----------------|----|
+
+   (total CHAR length) = 16
+    \section{Response Header Fields}
+        \paragraph{}
+   The CHAR length of the response header line is described below :
+   |----------------|---|----|------------------|---|-»
+   | Content-length | : | SP | {Content-length} | ; |-»
+   |----------------|---|----|------------------|---|-»
+   |       14       | 1 |  1 |        15        | 1 |-»
+   |----------------|---|----|------------------|---|-»
+
+   «-|--------------|---|----|----------------|---|----|
+   «-| Content-type | : | SP | {Content-type} | ; | CR |
+   «-|--------------|---|----|----------------|---|----|
+   «-|      12      | 1 |  1 |       16       | 1 |  1 |
+   «-|--------------|---|----|----------------|---|----|
+
+   (total CHAR length) = 64
+
