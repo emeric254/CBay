@@ -255,4 +255,46 @@ messages flow from upstream to downstream.
    «-|--------------|---|----|----------------|---|----|
 
    (total CHAR length) = 64
+        \paragraph{Content-Length}
+   It's the response body length.
+        \paragraph{Content-Type}
+   It's the type of entity of the body (cf section 7).
+
+
+    \clearpage
+\chapter{Entity}
+    \section{Type}
+        \paragraph{}
+   Entity used by BEEP are composed of basic C vars.
+        \paragraph{Object bid}
+   |----------|----------|------------|-------------|-----------|-»
+   |    ID    |   Name   | Base Price | Description | Vendor ID |-»
+   |----------|----------|------------|-------------|-----------|-»
+   | LONG INT | CHAR[96] |    FLOAT   |  CHAR[320]  |  LONG INT |-»
+   |----------|----------|------------|-------------|-----------|-»
+
+   «-|------------|----------|----------|-------------------|-»
+   «-| Start Time | End Time |  Adress  | Current Bid Price |-»
+   «-|------------|----------|----------|-------------------|-»
+   «-|  LONG INT  | LONG INT | CHAR[96] |       FLOAT       |-»
+   «-|------------|----------|----------|-------------------|-»
+
+   «-|----------------------|
+   «-| Current Bid Buyer ID |
+   «-|----------------------|
+   «-|       LONG INT       |
+   «-|----------------------|
+        \paragraph{User account}
+   |------|----------|----------|-----------|----------|----------|
+   | Type |    ID    |   Name   |  Lastname |  Adress  |   Mail   |
+   |------|----------|----------|-----------|----------|----------|
+   | CHAR | LONG INT | CHAR[75] |  CHAR[64] | CHAR[96] | CHAR[80] |
+   |------|----------|----------|-----------|----------|----------|
+    \section{Entity Length}
+        \paragraph{Object bid}
+   An object bid is (in OCTET)
+   4 + 96 + 4 + 320 + 4 + 4 + 96 + 4 + 4 = 536
+        \paragraph{User account}
+   An user account is (in OCTET)
+   1 + 4 + 75 + 64 + 96 + 80 = 320
 
