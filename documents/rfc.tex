@@ -1,0 +1,159 @@
+
+\chapter{Introduction}
+    \section{Purpose}
+        \paragraph{}
+The Bid Emission and Exchange Protocol is a protocol for a distributed
+bid systems. It enables users using the client to bid for objects among a list. This
+protocol is referred to as the BEEP/0.1a.
+
+    \section{Requirements}
+        \paragraph{}
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119 [34].
+        \paragraph{}
+An implementation is not compliant if it fails to satisfy one or more
+of the MUST or REQUIRED level requirements for the protocols it
+implements. An implementation that satisfies all the MUST
+level requirements but not all the SHOULD level requirements for its
+protocols is said to be "conditionally compliant"; one that satisfies
+all the MUST or REQUIRED level and all the SHOULD level requirements
+for its protocols is said to be "unconditionally compliant";
+        \paragraph{}
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119 [34].
+
+    \section{Terminology}
+        \paragraph{}
+This specification uses a number of terms to refer to the roles
+played by participants in, and objects of, the BEEP communication.
+        \paragraph{connection}
+A transport layer virtual circuit established between two programs
+in order to establish a communication.
+        \paragraph{login IDs}
+A combination of login and password.
+        \paragraph{message}
+The basic unit of BEEP communication, consisting of a structured
+sequence of octets matching the syntax defined in section 4 and
+transmitted via the previously established connection.
+        \paragraph{request}
+A BEEP request message, as defined in section 5.
+        \paragraph{response}
+A BEEP response message, as defined in section 6.
+        \paragraph{resource}
+A network data object or service that can be identified by a URI,
+as defined in section 3.2. Resources may be available in multiple
+representations (e.g. multiple languages, data formats, size, and
+resolutions) or vary in other ways.
+        \paragraph{entity}
+The information transferred as the payload of a request or
+response. An entity consists of meta-information in the form of
+entity-header fields and content in the form of an entity-body, as
+described in section 7.
+        \paragraph{representation}
+An entity included with a response that is subject to content
+negotiation, as described in section 12. There may exist multiple
+representations associated with a particular response status.
+        \paragraph{content negotiation}
+The mechanism for selecting the appropriate representation when
+servicing a request, as described in section 12. The
+representation of entities in any response can be negotiated
+(including error responses).
+        \paragraph{client}
+A program that establishes connections for the purpose of sending
+requests.
+        \paragraph{server}
+An application program that accepts connections in order to
+service requests by sending back responses. Any given program may
+be capable of being both a client and a server; our use of these
+terms refers only to the role being performed by the program for a
+particular connection, rather than to the program's capabilities
+in general. Likewise, any server may act as an origin server,
+proxy, gateway, or tunnel, switching behavior based on the nature
+of each request.
+        \paragraph{origin server}
+The server on which a given resource resides or is to be created.
+        \paragraph{semantically transparent}
+A cache behaves in a "semantically transparent" manner, with
+respect to a particular response, when its use affects neither the
+requesting client nor the origin server, except to improve
+performance. When a cache is semantically transparent, the client
+receives exactly the same response (except for hop-by-hop headers)
+that it would have received had its request been handled directly
+by the origin server.
+        \paragraph{upstream/downstream}
+Upstream and downstream describe the flow of a message: all
+messages flow from upstream to downstream.
+
+    \section{Overall Operation}
+        \paragraph{}
+   BEEP is a request/response protocol. The client send a request to the
+   server and the server answer with a response. All the messages
+   (requests and responses) go through a connection between the server
+   and the client. The connection MUST be established before any request
+   other than those using the CONNECT method occurs.
+   The request is composed of a method, an entity and the protocol
+   version.
+        \paragraph{}
+   The response is composed of a status-line, response-headers and in
+   some cases an entity.
+
+
+    \clearpage
+\chapter{Notational Conventions and Generic Grammar : Basic Rules}
+    \paragraph{}
+   The following rules are used throughout this specification to
+   describe basic parsing constructs. The US-ASCII coded character set
+   is defined by ANSI X3.4-1986 [21].
+    \paragraph{}
+       OCTET          = <any 8-bit sequence of data>
+    \paragraph{}
+       CHAR           = <any US-ASCII character (octets 0 - 127)>
+    \paragraph{}
+       DIGIT          = <any US-ASCII digit "0".."9">
+    \paragraph{}
+       INT            = <basic signed integer type. cf ISO/IEC 9899>
+    \paragraph{}
+       LONG INT       = <long signed integer type. cf ISO/IEC 9899>
+    \paragraph{}
+       FLOAT          = <floating-point type. cf IEEE 754>
+    \paragraph{}
+       SP             = <US-ASCII SP, space (32)>
+    \paragraph{}
+       CR             = <US-ASCII CR, carriage return (13)>
+    \paragraph{}
+       LF             = <US-ASCII LF, linefeed (10)>
+    \paragraph{}
+       LWS            = <US-ASCII LWS, linear white space (9)>
+    \paragraph{}
+       <">            = <US-ASCII double-quote mark (34)>
+
+
+    \clearpage
+\chapter{Protocol Parameters}
+    \section{Date/Time Formats}
+        \paragraph{Full Date}
+      This application allows only one full date format :
+         24-11-2014 14:41:12 GMT
+      This is a format from the RFC 3339.
+        \paragraph{Delta Seconds}
+      Delta Seconds represents a difference between server's starting
+      time and current time.
+    \section{Character Sets}
+        \paragraph{}
+      BEEP uses the same definition of the term "character set" as that
+   described for BEEP :
+      The term "character set" is used in this document to refer to a
+   method used with one or more tables to convert a sequence of octets
+   into a sequence of characters. Note that unconditional conversion in
+   the other direction is not required, in that not all characters may
+   be available in a given character set and a character set may provide
+   more than one sequence of octets to represent a particular character.
+   This definition is intended to allow various kinds of character
+   encoding, from simple single-table mappings such as US-ASCII to
+   complex table switching methods such as those that use ISO-2022's
+   techniques. However, the definition associated with a BEEP character
+   set name MUST fully specify the mapping to be performed from octets
+   to characters. In particular, use of external profiling information
+   to determine the exact mapping is not permitted.
