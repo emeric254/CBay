@@ -1,0 +1,506 @@
+
+\chapter{Introduction}
+    \section{Purpose}
+        \paragraph{}
+The Bid Emission and Exchange Protocol is a protocol for a distributed
+bid systems. It enables users using the client to bid for objects among a list. This
+protocol is referred to as the BEEP/0.1a.
+
+    \section{Requirements}
+        \paragraph{}
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119 [34].
+        \paragraph{}
+An implementation is not compliant if it fails to satisfy one or more
+of the MUST or REQUIRED level requirements for the protocols it
+implements. An implementation that satisfies all the MUST
+level requirements but not all the SHOULD level requirements for its
+protocols is said to be "conditionally compliant"; one that satisfies
+all the MUST or REQUIRED level and all the SHOULD level requirements
+for its protocols is said to be "unconditionally compliant";
+        \paragraph{}
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119 [34].
+
+    \section{Terminology}
+        \paragraph{}
+This specification uses a number of terms to refer to the roles
+played by participants in, and objects of, the BEEP communication.
+        \paragraph{connection}
+A transport layer virtual circuit established between two programs
+in order to establish a communication.
+        \paragraph{login IDs}
+A combination of login and password.
+        \paragraph{message}
+The basic unit of BEEP communication, consisting of a structured
+sequence of octets matching the syntax defined in section 4 and
+transmitted via the previously established connection.
+        \paragraph{request}
+A BEEP request message, as defined in section 5.
+        \paragraph{response}
+A BEEP response message, as defined in section 6.
+        \paragraph{resource}
+A network data object or service that can be identified by a URI,
+as defined in section 3.2. Resources may be available in multiple
+representations (e.g. multiple languages, data formats, size, and
+resolutions) or vary in other ways.
+        \paragraph{entity}
+The information transferred as the payload of a request or
+response. An entity consists of meta-information in the form of
+entity-header fields and content in the form of an entity-body, as
+described in section 7.
+        \paragraph{representation}
+An entity included with a response that is subject to content
+negotiation, as described in section 12. There may exist multiple
+representations associated with a particular response status.
+        \paragraph{content negotiation}
+The mechanism for selecting the appropriate representation when
+servicing a request, as described in section 12. The
+representation of entities in any response can be negotiated
+(including error responses).
+        \paragraph{client}
+A program that establishes connections for the purpose of sending
+requests.
+        \paragraph{server}
+An application program that accepts connections in order to
+service requests by sending back responses. Any given program may
+be capable of being both a client and a server; our use of these
+terms refers only to the role being performed by the program for a
+particular connection, rather than to the program's capabilities
+in general. Likewise, any server may act as an origin server,
+proxy, gateway, or tunnel, switching behavior based on the nature
+of each request.
+        \paragraph{origin server}
+The server on which a given resource resides or is to be created.
+        \paragraph{semantically transparent}
+A cache behaves in a "semantically transparent" manner, with
+respect to a particular response, when its use affects neither the
+requesting client nor the origin server, except to improve
+performance. When a cache is semantically transparent, the client
+receives exactly the same response (except for hop-by-hop headers)
+that it would have received had its request been handled directly
+by the origin server.
+        \paragraph{upstream/downstream}
+Upstream and downstream describe the flow of a message: all
+messages flow from upstream to downstream.
+
+    \section{Overall Operation}
+        \paragraph{}
+BEEP is a request/response protocol. The client send a request to the
+server and the server answer with a response. All the messages
+(requests and responses) go through a connection between the server
+and the client. The connection MUST be established before any request
+other than those using the CONNECT method occurs.
+The request is composed of a method, an entity and the protocol
+version.
+        \paragraph{}
+The response is composed of a status-line, response-headers and in
+some cases an entity.
+
+
+    \clearpage
+\chapter{Notational Conventions and Generic Grammar : Basic Rules}
+    \paragraph{}
+The following rules are used throughout this specification to
+describe basic parsing constructs. The US-ASCII coded character set
+is defined by ANSI X3.4-1986 [21].
+    \paragraph{}
+OCTET          = <any 8-bit sequence of data>
+    \paragraph{}
+CHAR           = <any US-ASCII character (octets 0 - 127)>
+    \paragraph{}
+DIGIT          = <any US-ASCII digit "0".."9">
+    \paragraph{}
+INT            = <basic signed integer type. cf ISO/IEC 9899>
+    \paragraph{}
+LONG INT       = <long signed integer type. cf ISO/IEC 9899>
+    \paragraph{}
+FLOAT          = <floating-point type. cf IEEE 754>
+    \paragraph{}
+SP             = <US-ASCII SP, space (32)>
+    \paragraph{}
+CR             = <US-ASCII CR, carriage return (13)>
+    \paragraph{}
+LF             = <US-ASCII LF, linefeed (10)>
+    \paragraph{}
+LWS            = <US-ASCII LWS, linear white space (9)>
+    \paragraph{}
+<">            = <US-ASCII double-quote mark (34)>
+
+
+    \clearpage
+\chapter{Protocol Parameters}
+    \section{Date/Time Formats}
+        \paragraph{Full Date}
+This application allows only one full date format :
+    24-11-2014 14:41:12 GMT
+This is a format from the RFC 3339.
+        \paragraph{Delta Seconds}
+Delta Seconds represents a difference between server's starting
+time and current time.
+    \section{Character Sets}
+        \paragraph{}
+BEEP uses the same definition of the term "character set" as that
+described for BEEP :
+The term "character set" is used in this document to refer to a
+method used with one or more tables to convert a sequence of octets
+into a sequence of characters. Note that unconditional conversion in
+the other direction is not required, in that not all characters may
+be available in a given character set and a character set may provide
+more than one sequence of octets to represent a particular character.
+This definition is intended to allow various kinds of character
+encoding, from simple single-table mappings such as US-ASCII to
+complex table switching methods such as those that use ISO-2022's
+techniques. However, the definition associated with a BEEP character
+set name MUST fully specify the mapping to be performed from octets
+to characters. In particular, use of external profiling information
+to determine the exact mapping is not permitted.
+
+
+    \clearpage
+\chapter{BEEP Message}
+    \section{Message Types}
+        \paragraph{}
+BEEP messages consist of requests from client to server and responses
+from server to client.
+        \paragraph{}
+Request (section 5) and Response (section 6) messages use a generic
+message format for transferring entities (the payload of the
+message). Field names are case-sensitive. The field value MAY be
+preceded by any amount of LWS, though a single SP is preferred.
+
+    \section{Message Headers}
+        \paragraph{}
+Headers are only response-headers. Headers end with a single CR.
+Each header field consists of a name followed by a colon (":") and
+the field value. Header fields ends with a semi-colon (";"). The
+headers are case-sensitive.
+
+    \section{Message Body}
+        \paragraph{}
+The message-body is used to transfer informations associated with a
+request or a response. The message body ends with a double CR.
+
+    \section{Message Length}
+        \paragraph{}
+The message-length is the length of the headers if there is any plus
+the length of the message-body (cf entity section (8) for the length
+of an entity).
+
+
+    \clearpage
+\chapter{Request}
+    \section{Request-Line}
+        \paragraph{}
+The Request-Line begins with a method keyword, followed by the entity
+on which is applied this method.
+        \paragraph{}
+The Method keyword indicates the method to be used on the resource
+identified by the Request-entity. The method is case-sensitive.
+        \paragraph{}
+Method         = "GET"                    cf. section 9.1
+        \paragraph{}
+                | "PUT"                    cf. section 9.2
+        \paragraph{}
+                | "DELETE"                 cf. section 9.3
+        \paragraph{}
+                | "CONNECT"                cf. section 9.4
+
+
+    \clearpage
+\chapter{Response}
+    \paragraph{}
+After receiving and interpreting a request message, a server responds
+with an BEEP response message.
+    \section{Status-Line}
+        \paragraph{}
+The first line of a Response message is the Status-Line, consisting
+of the protocol version followed by a numeric status code and its
+associated textual phrase, with each element separated by SP
+characters. No CR is allowed except in the final CR sequence.
+        \paragraph{}
+Status-Line = BEEP-Version SP Status-Code SP Reason-Phrase CR
+        \paragraph{Status Code and Reason Phrase}
+The Status-Code element is a signed 1-digit integer. This is the
+result code of the attempt to understand and satisfy the request.
+These codes are fully defined in section 10. The Reason-Phrase is
+intended to give a short textual description of the Status-Code. The
+Status-Code is intended for use by automate and the Reason-Phrase is
+intended for the human user. The client is not required to examine or
+display the Reason-Phrase.
+        \paragraph{Status-line length}
+The CHAR length of the status-line is described below :
+|---------------|----|-----------------|----|
+| {Status Code} | SP | {Reason Phrase} | CR |
+|---------------|----|-----------------|----|
+|       2       |  1 |        12       |  1 |
+|---------------|----|-----------------|----|
+
+(total CHAR length) = 16
+    \section{Response Header Fields}
+        \paragraph{}
+The CHAR length of the response header line is described below :
+|----------------|---|----|------------------|---|-»
+| Content-length | : | SP | {Content-length} | ; |-»
+|----------------|---|----|------------------|---|-»
+|       14       | 1 |  1 |        15        | 1 |-»
+|----------------|---|----|------------------|---|-»
+
+«-|--------------|---|----|----------------|---|----|
+«-| Content-type | : | SP | {Content-type} | ; | CR |
+«-|--------------|---|----|----------------|---|----|
+«-|      12      | 1 |  1 |       16       | 1 |  1 |
+«-|--------------|---|----|----------------|---|----|
+
+(total CHAR length) = 64
+        \paragraph{Content-Length}
+It's the response body length.
+        \paragraph{Content-Type}
+It's the type of entity of the body (cf section 7).
+
+
+    \clearpage
+\chapter{Entity}
+    \section{Type}
+        \paragraph{}
+Entity used by BEEP are composed of basic C vars.
+        \paragraph{Object bid}
+|----------|----------|------------|-------------|-----------|-»
+|    ID    |   Name   | Base Price | Description | Vendor ID |-»
+|----------|----------|------------|-------------|-----------|-»
+| LONG INT | CHAR[96] |    FLOAT   |  CHAR[320]  |  LONG INT |-»
+|----------|----------|------------|-------------|-----------|-»
+
+«-|------------|----------|----------|-------------------|-»
+«-| Start Time | End Time |  Adress  | Current Bid Price |-»
+«-|------------|----------|----------|-------------------|-»
+«-|  LONG INT  | LONG INT | CHAR[96] |       FLOAT       |-»
+«-|------------|----------|----------|-------------------|-»
+
+«-|----------------------|
+«-| Current Bid Buyer ID |
+«-|----------------------|
+«-|       LONG INT       |
+«-|----------------------|
+        \paragraph{User account}
+|------|----------|----------|-----------|----------|----------|
+| Type |    ID    |   Name   |  Lastname |  Adress  |   Mail   |
+|------|----------|----------|-----------|----------|----------|
+| CHAR | LONG INT | CHAR[75] |  CHAR[64] | CHAR[96] | CHAR[80] |
+|------|----------|----------|-----------|----------|----------|
+    \section{Entity Length}
+        \paragraph{Object bid}
+An object bid is (in OCTET)
+4 + 96 + 4 + 320 + 4 + 4 + 96 + 4 + 4 = 536
+        \paragraph{User account}
+An user account is (in OCTET)
+1 + 4 + 75 + 64 + 96 + 80 = 320
+
+
+    \clearpage
+\chapter{Connections}
+    \section{Persistent Connections}
+        \paragraph{Purpose}
+The purpose of the persistent connection is for the client to connect
+only once. That way it will reduce the number CONNECT requests, and
+clients don't have to send headers with their credentials for each request
+they made.
+        \paragraph{Overall Operation}
+The client send a request using the CONNECT method with its login and
+password, if there is any, or a PUT request to create a user account.
+In the first case, CONNECT is used and the pair ID/password is correct.
+After that, the client is allowed to use the command to add, delete or
+bid for an object or to obtain the objects's list.
+If not, the client SHOULD use an other ID/password couple to connect
+or use the PUT request to create an account.
+    \section{Message Transmission Requirements}
+        \paragraph{}
+One (or more) network connection is required if the server and clients
+don't run on the same system.
+BEEP also require the choosen connexion port availability.
+        \paragraph{Client Behavior if Server Prematurely Closes Connection}
+If the server closes the connection, the client SHOULD shut down either.
+After that the client CAN restart its use.
+
+
+    \clearpage
+\chapter{Method Definitions}
+    \section{GET}
+        \paragraph{}
+The GET method enable the client to ask the server to send back an entity.
+This method requires X parameters and have the following length :
+|-----|----|----------|---|----|
+| GET | SP | {OBJECT} | ; | CR |
+|-----|----|----------|---|----|
+|  3  |  1 | {OBJECT} | 1 |  1 |
+|-----|----|----------|---|----|
+        \paragraph{}
+(total CHAR length) = 6
++ ({Object} length)
+    \section{PUT}
+        \paragraph{}
+The client requests the server to store the a requested entity sent
+in the core of the request.
+This method requires X parameters and have the following length :
+|-----|----|----------|---|----|
+| PUT | SP | {OBJECT} | ; | CR |
+|-----|----|----------|---|----|
+|  3  |  1 | {OBJECT} | 1 |  1 |
+|-----|----|----------|---|----|
+        \paragraph{}
+(total CHAR length) = 6
++ ({Object} length)
+    \section{DELETE}
+        \paragraph{}
+The client requests the server to delete the requested entity from
+his database. For the entity types, cf section 7. To delete an
+object or a user account, the client must be authenticed as the
+object's creator or an administrator.
+This method requires one parameters and have the following length :
+|--------|----|----------|---|----|
+| DELETE | SP | {OBJECT} | ; | CR |
+|--------|----|----------|---|----|
+|    6   |  1 | {OBJECT} | 1 |  1 |
+|--------|----|----------|---|----|
+        \paragraph{}
+(total CHAR length) = 9
++ ({Object} length)
+    \section{CONNECT}
+        \paragraph{}
+The CONNECT method is used by the client to establish a permanent
+connection with the server.
+This method requires two parameters and have the following length :
+|---------|----|---------|---|------------|---|----|
+| CONNECT | SP | {LOGIN} | ; | {PASSWORD} | ; | CR |
+|---------|----|---------|---|------------|---|----|
+|    7    |  1 |    27   | 1 |     26     | 1 |  1 |
+|---------|----|---------|---|------------|---|----|
+        \paragraph{}
+(total CHAR length) = 64
+
+
+    \clearpage
+\chapter{Status Code Definitions}
+        \paragraph{}
+The status code is the first part of the server answer for a request.
+    \section{Positive (X)}
+        \paragraph{0 OK}
+The request has succeeded. The information returned with the
+response is dependent on the method used in the request, for
+example :
+    | GET      an entity corresponding to the requested resource
+    |          is sent in the response;
+    |
+    | PUT      an entity-header with the return status;
+    |
+    | DELETE   an entity-header with the return status;
+    |
+    | CONNECT  an entity-header with the return status;
+        \paragraph{1 Created}
+Result of a successful account or object bid creation.
+    \section{Negative (-X)}
+        \paragraph{-1 Bad Request}
+The request could not be understood by the server due to malformed
+syntax. The client SHOULD NOT repeat the request without
+modifications.
+        \paragraph{-2 Not Created}
+The request could not be understood by the server due to a problem
+with the ressource designed by the request.
+Result of a failed account or object bid creation.
+        \paragraph{-3 Internal Server Error}
+The server encountered an unexpected condition which prevented it
+from fulfilling the request.
+Result of an unknown, unpredictable or internal (core) server error.
+        \paragraph{-4 Conflict}
+Result of a concurrent object bid read and write access between more
+than one user and/or administrator.
+        \paragraph{-5 Forbidden}
+The server understood the request, but is refusing to fulfill it.
+Authorization will not help and the request SHOULD NOT be repeated.
+Result of giving invalid connection ids, or call a method which needs
+rights but without them.
+
+
+    \clearpage
+\chapter{Access Authentication}
+        \paragraph{}
+It require to use the CONNECT method with the user's login IDs.
+The server sends back a response message composed of the status line.
+
+
+    \clearpage
+\chapter{Security Considerations}
+        \paragraph{}
+At the moment, no encryption module is in use, all the content is
+sent clearly through the Internet. Please be careful while using this
+version of the protocol. You MUST consider these severe security
+issues !
+    \section{Personal Information}
+        \paragraph{}
+Your login, your password, and any informations you could send CAN be
+viewed by anyone who is watching your communications under this
+protocol.
+    \section{Privacy Issues Connected to Accept Headers}
+        \paragraph{}
+..............
+    \section{Authentication Credentials and Idle Clients}
+        \paragraph{}
+At the moment, all your credentials pass through one or more networks
+without protections. Anyone can take them from the BEEP connect
+request and/or from the answer of a GET request of user informations.
+
+
+    \clearpage
+\chapter{Acknowledgments}
+        \paragraph{}
+This specification makes heavy use of the generic definitions as they
+can be seen in the RFC 2616. We would like to thanks the author to
+allow us to use those definitions.
+        \paragraph{}
+Moreover, we want to thanks our professors P. Torguet and A. Aoun for
+all their teaching and advising.
+
+
+    \clearpage
+\chapter{References}
+        \paragraph{}
+   [1] R. Fielding, UC Irvine, J. Gettys, Compaq/W3C, J. Mogul, Compaq,
+       H. Frystyk, W3C/MIT, L. Masinter, Xerox, P. Leach, Microsoft,
+       T. Berners-Lee, W3C/MIT, "Hypertext Transfer Protocol", RFC 2616,
+       June 1999.
+
+
+    \clearpage
+\chapter{Full Copyright Statement}
+        \paragraph{}
+For the general definitions and some help in the structuration of our
+rfc, we used the rfc 2616 (HTTP/1.1), as it is authorized by the
+copyright statement below.
+        \paragraph{}
+Copyright (C) The Internet Society (1999).  All Rights Reserved.
+        \paragraph{}
+This document and translations of it may be copied and furnished to
+others, and derivative works that comment on or otherwise explain it
+or assist in its implementation may be prepared, copied, published
+and distributed, in whole or in part, without restriction of any
+kind, provided that the above copyright notice and this paragraph are
+included on all such copies and derivative works.  However, this
+document itself may not be modified in any way, such as by removing
+the copyright notice or references to the Internet Society or other
+Internet organizations, except as needed for the purpose of
+developing Internet standards in which case the procedures for
+copyrights defined in the Internet Standards process must be
+followed, or as required to translate it into languages other than
+English.
+        \paragraph{}
+The limited permissions granted above are perpetual and will not be
+revoked by the Internet Society or its successors or assigns.
+        \paragraph{}
+This document and the information contained herein is provided on an
+"AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
