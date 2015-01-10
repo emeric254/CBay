@@ -1,11 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "defines.h"
 #include "client.h"
 
-#define PORT_SERVEUR "80"
-#define ADR_SERVEUR "www.stri.ups-tlse.fr"
 
+int main(void)
+{
+    int choixMenu = menuAccueil();
+    do
+    {
+        CLEAR();
+        switch(choixMenu)
+        {
+            case CHOIX_MENU_QUITTER:
+                printf("\n\t\t Merci d'avoir utiliser BEEP !\n\n");
+                break;
+            case CHOIX_MENU_ACCUEIL_CONNEXION:
+                // if(connexion) menuConnexion();
+                break;
+            case CHOIX_MENU_ACCUEIL_CREATIONCOMPTE:
+                printf("\t\t\tBienvenue sur l'utilitaire de création de compte\n");
+                // menuCreationCompte();
+                break;
+            case CHOIX_MENU_ACCUEIL_ANONYME:
+                choixMenu = menuPrincipal();
+                break;
+            default:
+                printf("\n\t\t --- Veuillez rentrer un choix correct !\n\n");
+                break;
+        }
+        choixMenu = menuAccueil();
+    }while(choixMenu)
+
+    printf("\nappuyer sur une touche pour quitter");
+    getc(stdin); // équivaut à une pause
+    return 0;
+}
+
+
+/*
 int main() {
     char *message = NULL;
 
@@ -28,3 +62,4 @@ int main() {
 
     return 0;
 }
+*/

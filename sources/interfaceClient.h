@@ -1,10 +1,19 @@
 #ifndef __INTERFACECLIENT_H__
 #define __INTERFACECLIENT_H__
 
-/* Accueil.
+
+/* menuAccueil.
  * Affiche l'écran d'accueil.
+ * retourne le choix de l'utilisateur.
  */
-void Accueil();
+int menuAccueil();
+
+
+/* menuPrincipal.
+ * Affiche le menu principal.
+ * retourne le choix de l'utilisateur.
+ */
+int menuPrincipal();
 
 /* ... */
 
