@@ -8,13 +8,6 @@
  */
 int Initialisation(char *machine);
 
-/* Initialisation.
- * Connexion au serveur sur la machine donnee et au service donne.
- * Utilisez localhost pour un fonctionnement local.
- * renvoie 1 si a c'est bien pass 0 sinon
- */
-int InitialisationAvecService(char *machine, char *service);
-
 /* Recoit un message envoye par le serveur.
  * retourne le message ou NULL en cas d'erreur.
  * Note : il faut liberer la memoire apres traitement.

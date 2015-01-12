@@ -7,34 +7,79 @@
 
 int main(void)
 {
-    int choixMenu = menuAccueil();
-    do
+    // variables
+    int choixMenu; // le choix fait par l'utilisateur
+
+    // on fais le ménage sur l'écran pour commencer
+    CLEAR();
+
+    // début de la boucle "interface"
+    while ( CHOIX_MENU_QUITTER != ( choixMenu = menuAccueil() ) )
     {
         CLEAR();
+
+        // debug
+        printf("[%d]\n",choixMenu);
+
         switch(choixMenu)
         {
             case CHOIX_MENU_QUITTER:
                 printf("\n\t\t Merci d'avoir utiliser BEEP !\n\n");
                 break;
+
             case CHOIX_MENU_ACCUEIL_CONNEXION:
                 // if(connexion) menuConnexion();
+                // CLEAR();
                 break;
+
             case CHOIX_MENU_ACCUEIL_CREATIONCOMPTE:
                 printf("\t\t\tBienvenue sur l'utilitaire de création de compte\n");
                 // menuCreationCompte();
+                // CLEAR();
                 break;
+
             case CHOIX_MENU_ACCUEIL_ANONYME:
-                choixMenu = menuPrincipal();
+                while(CHOIX_MENU_QUITTER != (choixMenu = menuPrincipal()))
+                {
+                    CLEAR();
+
+                    // debug
+                    printf("[%d]\n",choixMenu);
+
+                    switch(choixMenu)
+                    {
+                        case CHOIX_MENU_QUITTER:
+                            // rien a faire car retour demandé
+                            break;
+
+                        case CHOIX_MENU_PRINCIPAL_LISTE:
+                            printf("\n\t\t --- WIP >> liste\n\n");
+                            break;
+
+                        case CHOIX_MENU_PRINCIPAL_RECHERCHE:
+                            printf("\n\t\t --- WIP >> recherche\n\n");
+                            break;
+
+                        default:
+                            printf("\n\t\t --- Veuillez rentrer un choix correct !\n\n");
+                            break;
+                    }
+                }
+                CLEAR();
                 break;
+
             default:
                 printf("\n\t\t --- Veuillez rentrer un choix correct !\n\n");
                 break;
         }
-        choixMenu = menuAccueil();
-    }while(choixMenu)
+    }
 
-    printf("\nappuyer sur une touche pour quitter");
-    getc(stdin); // équivaut à une pause
+/*
+    printf("\nappuyer sur une touche pour quitter...");
+    videBuffer();
+    fgetc(stdin); // équivaut à une pause
+*/
+
     return 0;
 }
 
