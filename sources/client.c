@@ -4,63 +4,55 @@
 #include <ctype.h>
 #include <string.h>
 #include <sys/types.h>
-
-#ifdef WIN32
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#else
-#include <unistd.h>
-#include <netdb.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <strings.h>
-#endif
-
 #include <errno.h>
 
 #ifdef WIN32
-#define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
-#define close closesocket
-#define socklen_t int
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #define perror(x) fprintf(stderr, "%d : %s\n", WSAGetLastError(), (x))
+    #define close closesocket
+    #define socklen_t int
+#else
+    #include <unistd.h>
+    #include <netdb.h>
+    #include <sys/socket.h>
+    #include <sys/select.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
+    #include <strings.h>
 #endif
 
-#include "defines.h"
 
+#include "defines.h"
 #include "client.h"
 
-/* Variables cachees */
+
+/* Variable(s) privée(s) */
 
 /* le socket client */
 int socketClient;
+
 /* le tampon de reception */
 char tamponClient[LONGUEUR_TAMPON];
 int debutTampon;
 int finTampon;
 int finConnexion = FALSE;
 
+
 /* Initialisation.
  * Connexion au serveur sur la machine donnee.
  * Utilisez localhost pour un fonctionnement local.
  */
-int Initialisation(char *machine) {
-    return InitialisationAvecService(machine, "13214");
-}
-
-/* Initialisation.
- * Connexion au serveur sur la machine donnee et au service donne.
- * Utilisez localhost pour un fonctionnement local.
- */
-int InitialisationAvecService(char *machine, char *service) {
+int InitialisationAvecService(char *machine) {
     int n;
     struct addrinfo hints, *res, *ressave;
+    char *service = PORT_SERVEUR;
 
 #ifdef WIN32
     WSADATA wsaData;
     if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR)
     {
-        printf("WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
+        fprintf(stderr,"WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
         WSACleanup();
         exit(1);
     }
@@ -71,7 +63,8 @@ int InitialisationAvecService(char *machine, char *service) {
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
 
-    if ( (n = getaddrinfo(machine, service, &hints, &res)) != 0)  {
+    if ( (n = getaddrinfo(machine, service, &hints, &res)) )
+    {
             fprintf(stderr, "Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
             return 0;
     }
@@ -82,7 +75,7 @@ int InitialisationAvecService(char *machine, char *service) {
         if (socketClient < 0)
             continue;   /* ignore this one */
 
-        if (connect(socketClient, res->ai_addr, res->ai_addrlen) == 0)
+        if ( ! connect(socketClient, res->ai_addr, res->ai_addrlen))
             break;      /* success */
 
         close(socketClient);    /* ignore this one */
