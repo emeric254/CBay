@@ -11,6 +11,7 @@ int main(void)
     do
     {
         CLEAR();
+        printf("\n\n\t\t\t\t\t\t\t%d\n\n",choixMenu);
         switch(choixMenu)
         {
             case CHOIX_MENU_QUITTER:
@@ -30,10 +31,12 @@ int main(void)
                 printf("\n\t\t --- Veuillez rentrer un choix correct !\n\n");
                 break;
         }
-        choixMenu = menuAccueil();
-    }while(choixMenu)
 
-    printf("\nappuyer sur une touche pour quitter");
+        if(choixMenu)
+            choixMenu = menuAccueil();
+    }while(choixMenu);
+
+    printf("\nappuyer sur une touche pour quitter\n");
     getc(stdin); // équivaut à une pause
     return 0;
 }

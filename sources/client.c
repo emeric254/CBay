@@ -43,7 +43,7 @@ int finConnexion = FALSE;
  * Connexion au serveur sur la machine donnee.
  * Utilisez localhost pour un fonctionnement local.
  */
-int InitialisationAvecService(char *machine) {
+int Initialisation(char *machine) {
     int n;
     struct addrinfo hints, *res, *ressave;
     char *service = PORT_SERVEUR;
