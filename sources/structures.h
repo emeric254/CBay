@@ -10,6 +10,13 @@
 void videBuffer();
 
 
+/* saisieChar.
+ * saisie d'un caractere, elimine les '\n' et EOF
+ * retourne un caractere
+*/
+char saisieChar();
+
+
 /* ... */
 
 //

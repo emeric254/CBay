@@ -7,11 +7,13 @@
 
 int main(void)
 {
+    // variables
+    int choixMenu; // le choix fait par l'utilisateur
+
     // on fais le ménage sur l'écran pour commencer
     CLEAR();
 
-    int choixMenu;
-
+    // début de la boucle "interface"
     while ( CHOIX_MENU_QUITTER != ( choixMenu = menuAccueil() ) )
     {
         CLEAR();

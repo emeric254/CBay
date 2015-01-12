@@ -6,19 +6,6 @@
 #include "defines.h"
 
 
-/* saisieChar
- */
-char saisieChar()
-{
-    char temp = fgetc(stdin);
-    while(temp == '\n' || temp == EOF)
-    {
-        temp = fgetc(stdin);
-    }
-
-    return temp;
-}
-
 /* menuAccueil
  */
 int menuAccueil()
