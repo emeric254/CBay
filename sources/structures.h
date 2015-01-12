@@ -4,6 +4,12 @@
 #include "defines.h"
 
 
+/* videBuffer.
+ * vide le buffer
+*/
+void videBuffer();
+
+
 /* ... */
 
 //

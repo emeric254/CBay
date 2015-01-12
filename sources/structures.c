@@ -5,3 +5,13 @@
 #include "structures.h"
 
 
+/* videBuffer.
+*/
+void videBuffer()
+{
+    char buffer = fgetc(stdin);
+    while(buffer != '\n' && buffer != EOF)
+    {
+        buffer = fgetc(stdin);
+    }
+}
