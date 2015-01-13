@@ -28,14 +28,52 @@ int main(void)
                 break;
 
             case CHOIX_MENU_ACCUEIL_CONNEXION:
-                // if(connexion) menuConnexion();
-                // CLEAR();
+                /*
+                while(CHOIX_MENU_QUITTER != (choixMenu = menuConnexion()))
+                {
+                    CLEAR();
+
+                    // debug
+                    printf("[%d]\n",choixMenu);
+
+                    switch(choixMenu)
+                    {
+                        case CHOIX_MENU_QUITTER:
+                            // rien a faire car retour demandé
+                            break;
+
+                        default:
+                            printf("\n\t\t --- Veuillez rentrer un choix correct !\n\n");
+                            break;
+                    }
+                }
+                CLEAR();
+                */
                 break;
 
             case CHOIX_MENU_ACCUEIL_CREATIONCOMPTE:
                 printf("\t\t\tBienvenue sur l'utilitaire de création de compte\n");
-                // menuCreationCompte();
-                // CLEAR();
+                /*
+                while(CHOIX_MENU_QUITTER != (choixMenu = menuCreationCompte()))
+                {
+                    CLEAR();
+
+                    // debug
+                    printf("[%d]\n",choixMenu);
+
+                    switch(choixMenu)
+                    {
+                        case CHOIX_MENU_QUITTER:
+                            // rien a faire car retour demandé
+                            break;
+
+                        default:
+                            printf("\n\t\t --- Veuillez rentrer un choix correct !\n\n");
+                            break;
+                    }
+                }
+                CLEAR();
+                */
                 break;
 
             case CHOIX_MENU_ACCUEIL_ANONYME:
