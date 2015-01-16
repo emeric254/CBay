@@ -5,31 +5,26 @@
 #include <sys/types.h>
 
 #ifdef WIN32
-#include <winsock2.h>
-#include <ws2tcpip.h>
+	#include <winsock2.h>
+	#include <ws2tcpip.h>
+	#define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
+	#define close closesocket
+	#define socklen_t int
 #else
-#include <unistd.h>
-#include <netdb.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <strings.h>
+	#include <unistd.h>
+	#include <netdb.h>
+	#include <sys/socket.h>
+	#include <sys/select.h>
+	#include <netinet/in.h>
+	#include <arpa/inet.h>
+	#include <strings.h>
 #endif
 
 #include <errno.h>
 
 #include "defines.h"
-
 #include "serveur.h"
 
-
-
-#ifdef WIN32
-#define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
-#define close closesocket
-#define socklen_t int
-#endif
 
 /* Variables cachees */
 
