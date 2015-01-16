@@ -39,7 +39,7 @@ int main(void)
                     switch(choixMenu)
                     {
                         case CHOIX_MENU_QUITTER:
-                            // rien a faire car retour demandé
+                            // rien à faire car retour demandé
                             break;
 
                         default:
@@ -64,7 +64,7 @@ int main(void)
                     switch(choixMenu)
                     {
                         case CHOIX_MENU_QUITTER:
-                            // rien a faire car retour demandé
+                            // rien à faire car retour demandé
                             break;
 
                         default:
@@ -87,7 +87,7 @@ int main(void)
                     switch(choixMenu)
                     {
                         case CHOIX_MENU_QUITTER:
-                            // rien a faire car retour demandé
+                            // rien à faire car retour demandé
                             break;
 
                         case CHOIX_MENU_PRINCIPAL_LISTE:
