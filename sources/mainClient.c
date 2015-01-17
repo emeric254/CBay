@@ -23,10 +23,6 @@ int main(void)
 
         switch(choixMenu)
         {
-            case CHOIX_MENU_QUITTER:
-                printf("\n\t\t Merci d'avoir utiliser BEEP !\n\n");
-                break;
-
             case CHOIX_MENU_ACCUEIL_CONNEXION:
                 /*
                 while(CHOIX_MENU_QUITTER != (choixMenu = menuConnexion()))
@@ -111,6 +107,9 @@ int main(void)
                 break;
         }
     }
+
+    CLEAR();
+    printf("\n\t\t Merci d'avoir utiliser BEEP !\n\n");
 
 /*
     printf("\nappuyer sur une touche pour quitter...");
