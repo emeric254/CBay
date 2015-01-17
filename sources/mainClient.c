@@ -23,19 +23,58 @@ int main(void)
 
         switch(choixMenu)
         {
-            case CHOIX_MENU_QUITTER:
-                printf("\n\t\t Merci d'avoir utiliser BEEP !\n\n");
-                break;
-
             case CHOIX_MENU_ACCUEIL_CONNEXION:
-                // if(connexion) menuConnexion();
-                // CLEAR();
+                // pour l'instant afficher ca
+                printf("\t\t\tBienvenue sur le menu de connexion\n");
+
+                /*
+                while(CHOIX_MENU_QUITTER != (choixMenu = menuConnexion()))
+                {
+                    CLEAR();
+
+                    // debug
+                    printf("[%d]\n",choixMenu);
+
+                    switch(choixMenu)
+                    {
+                        case CHOIX_MENU_QUITTER:
+                            // rien à faire car retour demandé
+                            break;
+
+                        default:
+                            printf("\n\t\t --- Veuillez rentrer un choix correct !\n\n");
+                            break;
+                    }
+                }
+                CLEAR();
+                */
                 break;
 
             case CHOIX_MENU_ACCUEIL_CREATIONCOMPTE:
+                // pour l'instant afficher ca
                 printf("\t\t\tBienvenue sur l'utilitaire de création de compte\n");
-                // menuCreationCompte();
-                // CLEAR();
+
+                /*
+                while(CHOIX_MENU_QUITTER != (choixMenu = menuCreationCompte()))
+                {
+                    CLEAR();
+
+                    // debug
+                    printf("[%d]\n",choixMenu);
+
+                    switch(choixMenu)
+                    {
+                        case CHOIX_MENU_QUITTER:
+                            // rien à faire car retour demandé
+                            break;
+
+                        default:
+                            printf("\n\t\t --- Veuillez rentrer un choix correct !\n\n");
+                            break;
+                    }
+                }
+                CLEAR();
+                */
                 break;
 
             case CHOIX_MENU_ACCUEIL_ANONYME:
@@ -49,7 +88,7 @@ int main(void)
                     switch(choixMenu)
                     {
                         case CHOIX_MENU_QUITTER:
-                            // rien a faire car retour demandé
+                            // rien à faire car retour demandé
                             break;
 
                         case CHOIX_MENU_PRINCIPAL_LISTE:
@@ -73,6 +112,9 @@ int main(void)
                 break;
         }
     }
+
+    CLEAR();
+    printf("\n\t\t Merci d'avoir utiliser BEEP !\n\n");
 
 /*
     printf("\nappuyer sur une touche pour quitter...");
