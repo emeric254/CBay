@@ -24,6 +24,9 @@ int main(void)
         switch(choixMenu)
         {
             case CHOIX_MENU_ACCUEIL_CONNEXION:
+                // pour l'instant afficher ca
+                printf("\t\t\tBienvenue sur le menu de connexion\n");
+
                 /*
                 while(CHOIX_MENU_QUITTER != (choixMenu = menuConnexion()))
                 {
@@ -48,7 +51,9 @@ int main(void)
                 break;
 
             case CHOIX_MENU_ACCUEIL_CREATIONCOMPTE:
+                // pour l'instant afficher ca
                 printf("\t\t\tBienvenue sur l'utilitaire de création de compte\n");
+
                 /*
                 while(CHOIX_MENU_QUITTER != (choixMenu = menuCreationCompte()))
                 {
