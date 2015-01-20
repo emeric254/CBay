@@ -17,6 +17,23 @@ void videBuffer();
 char saisieChar();
 
 
+
+typedef struct
+{
+}ObjectBid;
+
+
+typedef struct
+{
+	char type;
+	long int id;
+	char [75]name;
+	char [64]lastname;
+	char [96]adress;
+	char [80]mail;	
+} UserAccount;
+
+
 /*
 
    7.1.1 Object bid
@@ -37,13 +54,6 @@ char saisieChar();
    «-|----------------------|
    «-|       LONG INT       |
    «-|----------------------|
-
-   7.1.2 User account
-   |------|----------|----------|-----------|----------|----------|
-   | Type |    ID    |   Name   |  Lastname |  Adress  |   Mail   |
-   |------|----------|----------|-----------|----------|----------|
-   | CHAR | LONG INT | CHAR[75] |  CHAR[64] | CHAR[96] | CHAR[80] |
-   |------|----------|----------|-----------|----------|----------|
 
 */
 
