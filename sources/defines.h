@@ -15,12 +15,17 @@
 #define ADR_SERVEUR "127.0.0.1"
 
 
+//
+#define STATUS_LINE_LENGTH 16
+#define RESPONSE_HEADER_LENGTH 64
+
+
 // codes retour requete positifs
 #define STATUS_CODE_OK 0
 #define STATUS_CODE_CREATED 1
 //reason phrases
-#define REASON_PHRASE_OK 0
-#define REASON_PHRASE_CREATED 1
+#define REASON_PHRASE_OK "Ok"
+#define REASON_PHRASE_CREATED "Created"
 
 
 // codes retour requete negatifs
@@ -30,11 +35,11 @@
 #define STATUS_CODE_CONFLICT -4
 #define STATUS_CODE_FORBIDDEN -5
 // reason phrases
-#define REASON_PHRASE_BAD_REQUEST -1
-#define REASON_PHRASE_NOT_CREATED -2
-#define REASON_PHRASE_INTERNAL_SERVER_ERROR -3
-#define REASON_PHRASE_CONFLICT -4
-#define REASON_PHRASE_FORBIDDEN -5
+#define REASON_PHRASE_BAD_REQUEST "Bad Request"
+#define REASON_PHRASE_NOT_CREATED "Not Created"
+#define REASON_PHRASE_INTERNAL_SERVER_ERROR "Internal Server Error"
+#define REASON_PHRASE_CONFLICT "Conflict"
+#define REASON_PHRASE_FORBIDDEN "Forbidden"
 
 
 
