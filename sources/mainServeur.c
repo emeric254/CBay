@@ -5,6 +5,9 @@
 #include "serveur.h"
 
 int main() {
+
+    /*
+
     char *message = NULL;
     char *nomFichier = NULL;
     size_t tailleNomFichier=0;
@@ -66,6 +69,8 @@ int main() {
         }
         TerminaisonClient();
     }
+
+    */
 
     return 0;
 }

@@ -23,11 +23,10 @@ int main(void)
 
         switch(choixMenu)
         {
-            case CHOIX_MENU_QUITTER:
-                printf("\n\t\t Merci d'avoir utiliser BEEP !\n\n");
-                break;
-
             case CHOIX_MENU_ACCUEIL_CONNEXION:
+                // pour l'instant afficher ca
+                printf("\t\t\tBienvenue sur le menu de connexion\n");
+
                 /*
                 while(CHOIX_MENU_QUITTER != (choixMenu = menuConnexion()))
                 {
@@ -39,7 +38,7 @@ int main(void)
                     switch(choixMenu)
                     {
                         case CHOIX_MENU_QUITTER:
-                            // rien a faire car retour demandé
+                            // rien à faire car retour demandé
                             break;
 
                         default:
@@ -52,7 +51,9 @@ int main(void)
                 break;
 
             case CHOIX_MENU_ACCUEIL_CREATIONCOMPTE:
+                // pour l'instant afficher ca
                 printf("\t\t\tBienvenue sur l'utilitaire de création de compte\n");
+
                 /*
                 while(CHOIX_MENU_QUITTER != (choixMenu = menuCreationCompte()))
                 {
@@ -64,7 +65,7 @@ int main(void)
                     switch(choixMenu)
                     {
                         case CHOIX_MENU_QUITTER:
-                            // rien a faire car retour demandé
+                            // rien à faire car retour demandé
                             break;
 
                         default:
@@ -87,7 +88,7 @@ int main(void)
                     switch(choixMenu)
                     {
                         case CHOIX_MENU_QUITTER:
-                            // rien a faire car retour demandé
+                            // rien à faire car retour demandé
                             break;
 
                         case CHOIX_MENU_PRINCIPAL_LISTE:
@@ -111,6 +112,9 @@ int main(void)
                 break;
         }
     }
+
+    CLEAR();
+    printf("\n\t\t Merci d'avoir utiliser BEEP !\n\n");
 
 /*
     printf("\nappuyer sur une touche pour quitter...");
