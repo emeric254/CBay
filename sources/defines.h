@@ -20,6 +20,18 @@
 #define RESPONSE_HEADER_LENGTH 64
 
 
+// response header fields
+#define RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH "Content-length"
+#define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE "Content-type"
+
+
+//request methods
+#define REQUEST_METHOD_GET "GET"
+#define REQUEST_METHOD_PUT "PUT"
+#define REQUEST_METHOD_CONNECT "CONNECT"
+#define REQUEST_METHOD_DELETE "DELETE"
+
+
 // codes retour requete positifs
 #define STATUS_CODE_OK 0
 #define STATUS_CODE_CREATED 1
@@ -43,7 +55,7 @@
 
 
 
-// code de retours
+// code de retours application
 #define ERREUR_OUVERTURE -1
 #define ERREUR_LECTURE -2
 #define ERREUR_ECRITURE -3
@@ -53,14 +65,16 @@
 
 
 // valeurs des choix dans les menus
+// commun
 #define CHOIX_MENU_QUITTER 0
-
+// menu accueil
 #define CHOIX_MENU_ACCUEIL_CONNEXION 1
 #define CHOIX_MENU_ACCUEIL_CREATIONCOMPTE 2
 #define CHOIX_MENU_ACCUEIL_ANONYME 3
-
+// menu principal
 #define CHOIX_MENU_PRINCIPAL_LISTE 1
 #define CHOIX_MENU_PRINCIPAL_RECHERCHE 2
+
 
 
 // portabilitée
@@ -73,99 +87,3 @@
 
 
 #endif
-
-
-/*
-
-6.1.2 Status-line length
-
-   The CHAR length of the status-line is described below :
-   |---------------|----|-----------------|----|
-   | {Status Code} | SP | {Reason Phrase} | CR |
-   |---------------|----|-----------------|----|
-   |       2       |  1 |        12       |  1 |
-   |---------------|----|-----------------|----|
-
-   (total CHAR length) = 16
-
-   6.2   Response Header Fields
-
-   The CHAR length of the response header line is described below :
-   |----------------|---|----|------------------|---|-»
-   | Content-length | : | SP | {Content-length} | ; |-»
-   |----------------|---|----|------------------|---|-»
-   |       14       | 1 |  1 |        15        | 1 |-»
-   |----------------|---|----|------------------|---|-»
-
-   «-|--------------|---|----|----------------|---|----|
-   «-| Content-type | : | SP | {Content-type} | ; | CR |
-   «-|--------------|---|----|----------------|---|----|
-   «-|      12      | 1 |  1 |       16       | 1 |  1 |
-   «-|--------------|---|----|----------------|---|----|
-
-   (total CHAR length) = 64
-
-*/
-
-
-/*
- 
- 9.1   GET
-  
-   The GET method enable the client to ask the server to send back an entity.
-   This method requires X parameters and have the following length :
-   |-----|----|----------|---|----|
-   | GET | SP | {OBJECT} | ; | CR |
-   |-----|----|----------|---|----|
-   |  3  |  1 | {OBJECT} | 1 |  1 |
-   |-----|----|----------|---|----|
-
-   (total CHAR length) = 6
-   + ({Object} length)
-
-   9.2   PUT
-   
-   The client requests the server to store the a requested entity sent
-   in the core of the request.
-   This method requires X parameters and have the following length :
-   |-----|----|----------|---|----|
-   | PUT | SP | {OBJECT} | ; | CR |
-   |-----|----|----------|---|----|
-   |  3  |  1 | {OBJECT} | 1 |  1 |
-   |-----|----|----------|---|----|
-
-   (total CHAR length) = 6
-   + ({Object} length)
-
-   9.3   DELETE
-   
-   The client requests the server to delete the requested entity from
-   his database. For the entity types, cf section 7. To delete an
-   object or a user account, the client must be authenticed as the
-   object's creator or an administrator.
-   This method requires one parameters and have the following length :
-   |--------|----|----------|---|----|
-   | DELETE | SP | {OBJECT} | ; | CR |
-   |--------|----|----------|---|----|
-   |    6   |  1 | {OBJECT} | 1 |  1 |
-   |--------|----|----------|---|----|
-
-   (total CHAR length) = 9
-   + ({Object} length)
-
-   9.4   CONNECT
-   
-   The CONNECT method is used by the client to establish a permanent
-   connection with the server.
-   This method requires two parameters and have the following length :
-   |---------|----|---------|---|------------|---|----|
-   | CONNECT | SP | {LOGIN} | ; | {PASSWORD} | ; | CR |
-   |---------|----|---------|---|------------|---|----|
-   |    7    |  1 |    27   | 1 |     26     | 1 |  1 |
-   |---------|----|---------|---|------------|---|----|
-
-   (total CHAR length) = 64
-  
-*/
-
-
