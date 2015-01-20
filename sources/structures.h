@@ -20,7 +20,17 @@ char saisieChar();
 
 typedef struct
 {
-}ObjectBid;
+	long int id;
+	char [96]name;
+	float basePrice;
+	char [320]description;
+	long int idVendor;
+	long int startTime;
+	long int endTime;
+	char[96] adress;
+	float  currentBidPrice;
+	long int currentBidIdBuyer;
+} ObjectBid;
 
 
 typedef struct
@@ -34,34 +44,7 @@ typedef struct
 } UserAccount;
 
 
-/*
-
-   7.1.1 Object bid
-   |----------|----------|------------|-------------|-----------|-»
-   |    ID    |   Name   | Base Price | Description | Vendor ID |-»
-   |----------|----------|------------|-------------|-----------|-»
-   | LONG INT | CHAR[96] |    FLOAT   |  CHAR[320]  |  LONG INT |-»
-   |----------|----------|------------|-------------|-----------|-»
-
-   «-|------------|----------|----------|-------------------|-»
-   «-| Start Time | End Time |  Adress  | Current Bid Price |-»
-   «-|------------|----------|----------|-------------------|-»
-   «-|  LONG INT  | LONG INT | CHAR[96] |       FLOAT       |-»
-   «-|------------|----------|----------|-------------------|-»
-
-   «-|----------------------|
-   «-| Current Bid Buyer ID |
-   «-|----------------------|
-   «-|       LONG INT       |
-   «-|----------------------|
-
-*/
-
 //
-
-
-
-/* ... */
 
 
 #endif
