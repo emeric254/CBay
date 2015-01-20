@@ -17,6 +17,12 @@ void videBuffer();
 char saisieChar();
 
 
+/* verifMail.
+ * verifie si la chaine de taille n est une adresse mail correctement constituee
+ * retourne TRUE ou FALSE
+*/
+int verifMail(char *mail, int taille);
+
 
 typedef struct
 {
