@@ -22,7 +22,7 @@ client: $(CLIENTOBJECT)
 		$(CC) -o $@ $^ $(LDFLAGS)
 
 # le serveur
-server: $(SERVEROBJECT)
+serveur: $(SERVEROBJECT)
 		$(CC) -o $@ $^ $(LDFLAGS)
 
 # pour créer chaque '.o' depuis son '.c'

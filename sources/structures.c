@@ -29,3 +29,17 @@ char saisieChar()
 
     return temp;
 }
+
+
+/* saisieUtilisateur.
+*/
+void saisieUtilisateur(UserAccount * account)
+{
+}
+
+
+/* saisieVente.
+*/
+void saisieVente(ObjectBid * bid)
+{
+}
