@@ -1,10 +1,12 @@
 CC=gcc
 CFLAGS=-W -Wall
+
 CLIENTSOURCES=structures.o interfaceClient.o client.o mainClient.o
 SERVERSOURCES=structures.o server.o mainServer.o
+EXEC=client server
+
 CLIENTOBJECT=$(CLIENTSOURCES:.c=.o)
 SERVEROBJECT=$(SERVERSOURCES:.c=.o)
-EXEC=client server
 
 all: $(CLIENTSOURCES) $(SERVERSOURCES) $(EXEC)
 
