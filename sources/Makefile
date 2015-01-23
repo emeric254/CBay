@@ -6,9 +6,9 @@ CFLAGS=-W -Wall
 # fichiers nécessaires pour le client (dans l'ordre de dépendance)
 CLIENTSOURCES=structures.c interfaceClient.c client.c mainClient.c
 #  fichier nécessaires pour le serveur (dans l'ordre de dépendance)
-SERVERSOURCES=structures.c server.c mainServer.c
+SERVERSOURCES=structures.c serveur.c mainServeur.c
 # les deux executables
-EXEC=client server
+EXEC=client serveur
 
 # on produit la liste des '.o' depuis celle des '.c'
 CLIENTOBJECT=$(CLIENTSOURCES:.c=.o)
