@@ -4,6 +4,33 @@
 #include "defines.h"
 
 
+typedef struct ObjectBid
+{
+    long int id;
+    char name[96];
+    float basePrice;
+    char description[320];
+    long int idVendor;
+    long int startTime;
+    long int endTime;
+    char adress[96];
+    float  currentBidPrice;
+    long int currentBidIdBuyer;
+} ObjectBid;
+
+
+typedef struct UserAccount
+{
+    char type;
+    long int id;
+    char name[75];
+    char lastname[64];
+    char adress[96];
+    char mail[80];
+} UserAccount;
+
+
+
 /* videBuffer.
  * vide le buffer
 */
@@ -18,36 +45,30 @@ char saisieChar();
 
 
 /* verifMail.
- * verifie si la chaine de taille n est une adresse mail correctement constituee
+ * verifie si la chaine 'mail' de taille 'taille' est une adresse mail correctement constituee
  * retourne TRUE ou FALSE
 */
 int verifMail(char *mail, int taille);
 
 
-typedef struct
-{
-    long int id;
-    char [96]name;
-    float basePrice;
-    char [320]description;
-    long int idVendor;
-    long int startTime;
-    long int endTime;
-    char[96] adress;
-    float  currentBidPrice;
-    long int currentBidIdBuyer;
-} ObjectBid;
+/* saisieUtilisateur.
+ * fais saisir a l'utilisateur un UserAccount,
+ * sauf l'id !
+ * modifi le UserAccount saisi
+*/
+void saisieUtilisateur(UserAccount * account);
 
 
-typedef struct
-{
-    char type;
-    long int id;
-    char [75]name;
-    char [64]lastname;
-    char [96]adress;
-    char [80]mail;
-} UserAccount;
+/* saisieVente.
+ * fais saisir a l'utilisateur un ObjectBid,
+ * sauf les champs
+ *      id
+ *      idVendor
+ *      currentBidPrice
+ *      currentBidIdBuyer
+ * modifi le ObjectBid saisi
+*/
+void saisieVente(ObjectBid * bid);
 
 
 //

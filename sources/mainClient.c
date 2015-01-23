@@ -2,6 +2,8 @@
 #include <stdlib.h>
 
 #include "defines.h"
+#include "structures.h"
+#include "interfaceClient.h"
 #include "client.h"
 
 

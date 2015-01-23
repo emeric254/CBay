@@ -31,6 +31,20 @@ char saisieChar()
 }
 
 
+/* saisieUtilisateur.
+*/
+void saisieUtilisateur(UserAccount * account)
+{
+}
+
+
+/* saisieVente.
+*/
+void saisieVente(ObjectBid * bid)
+{
+}
+
+
 /* verifMail.
 */
 int verifMail(char *mail, int taille)
