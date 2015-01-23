@@ -12,11 +12,11 @@ Table of Contents
 
 
    1   Introduction
-   
+
    1.1   Purpose
-   
+
    The Bid Emission and Exchange Protocol is a protocol for a distributed
-   bid systems. It enable clients to bid for objects among a list. This
+   bid systems. It enables users using the client to bid for objects among a list. This
    protocol is referred to as the BEEP/0.1a.
 
    1.2   Requirements
@@ -29,9 +29,9 @@ Table of Contents
    of the MUST or REQUIRED level requirements for the protocols it
    implements. An implementation that satisfies all the MUST
    level requirements but not all the SHOULD level requirements for its
-   protocols is said to be "conditionally compliant"; one that satisfies 
-   all the MUST or REQUIRED level and all the SHOULD level requirements 
-   for its protocols is said to be "unconditionally compliant"; 
+   protocols is said to be "conditionally compliant"; one that satisfies
+   all the MUST or REQUIRED level and all the SHOULD level requirements
+   for its protocols is said to be "unconditionally compliant";
 
    1.3   Terminology
 
@@ -54,7 +54,7 @@ Table of Contents
       A BEEP request message, as defined in section 5.
 
    response
-      An BEEP response message, as defined in section 6.
+      A BEEP response message, as defined in section 6.
 
    resource
       A network data object or service that can be identified by a URI,
@@ -110,7 +110,7 @@ Table of Contents
       messages flow from upstream to downstream.
 
    1.4   Overall Operation
-   
+
    BEEP is a request/response protocol. The client send a request to the
    server and the server answer with a response. All the messages
    (requests and responses) go through a connection between the server
@@ -130,6 +130,9 @@ Table of Contents
        OCTET          = <any 8-bit sequence of data>
        CHAR           = <any US-ASCII character (octets 0 - 127)>
        DIGIT          = <any US-ASCII digit "0".."9">
+       INT            = <basic signed integer type. cf ISO/IEC 9899>
+       LONG INT       = <long signed integer type. cf ISO/IEC 9899>
+       FLOAT          = <floating-point type. cf IEEE 754>
        SP             = <US-ASCII SP, space (32)>
        CR             = <US-ASCII CR, carriage return (13)>
        LF             = <US-ASCII LF, linefeed (10)>
@@ -137,9 +140,9 @@ Table of Contents
        <">            = <US-ASCII double-quote mark (34)>
 
    3   Protocol Parameters
-   
+
    3.2   Date/Time Formats
-   
+
    3.2.1    Full Date
 
       This application allows only one full date format :
@@ -288,6 +291,7 @@ Table of Contents
    Entity used by BEEP are composed of basic C vars.
 
    7.1.1 Object bid
+
    |----------|----------|------------|-------------|-----------|-»
    |    ID    |   Name   | Base Price | Description | Vendor ID |-»
    |----------|----------|------------|-------------|-----------|-»
@@ -306,6 +310,7 @@ Table of Contents
    «-|       LONG INT       |
    «-|----------------------|
 
+
    7.1.2 User account
    |------|----------|----------|-----------|----------|----------|
    | Type |    ID    |   Name   |  Lastname |  Adress  |   Mail   |
@@ -316,31 +321,31 @@ Table of Contents
    7.2    Entity Length
 
    7.2.1 Object bid
-   
+
    An object bid is (in OCTET)
    4 + 96 + 4 + 320 + 4 + 4 + 96 + 4 + 4 = 536
 
    7.2.2 User account
-   
+
    An user account is (in OCTET)
    1 + 4 + 75 + 64 + 96 + 80 = 320
 
    8   Connections
-   
+
    8.1   Persistent Connections
 
    8.1.1   Purpose
-   
+
    The purpose of the persistent connection is for the client to connect
-   only once. That way it will reduce the number CONNECT requests, and
-   clients don't have to send headers with their credentials for each request
-   they made.
+   only once. That way it will reduce the number of CONNECT requests, and
+   clients won't have to send headers with their credentials with each request
+   initiated.
 
    8.1.2   Overall Operation
-   
-   The client send a request using the CONNECT method with its login and
+
+   The client sends a request using the CONNECT method with its login and
    password, if there is any, or a PUT request to create a user account.
-   
+
    In the first case, CONNECT is used and the pair ID/password is correct.
    After that, the client is allowed to use the command to add, delete or
    bid for an object or to obtain the objects's list.
@@ -348,20 +353,20 @@ Table of Contents
    or use the PUT request to create an account.
 
    8.2   Message Transmission Requirements
-   
+
    One (or more) network connection is required if the server and clients
    don't run on the same system.
    BEEP also require the choosen connexion port availability.
 
    8.2.1   Client Behavior if Server Prematurely Closes Connection
-   
+
    If the server closes the connection, the client SHOULD shut down either.
    After that the client CAN restart its use.
 
    9   Method Definitions
 
    9.1   GET
-  
+
    The GET method enable the client to ask the server to send back an entity.
    This method requires X parameters and have the following length :
    |-----|----|----------|---|----|
@@ -374,7 +379,7 @@ Table of Contents
    + ({Object} length)
 
    9.2   PUT
-   
+
    The client requests the server to store the a requested entity sent
    in the core of the request.
    This method requires X parameters and have the following length :
@@ -388,7 +393,7 @@ Table of Contents
    + ({Object} length)
 
    9.3   DELETE
-   
+
    The client requests the server to delete the requested entity from
    his database. For the entity types, cf section 7. To delete an
    object or a user account, the client must be authenticed as the
@@ -404,7 +409,7 @@ Table of Contents
    + ({Object} length)
 
    9.4   CONNECT
-   
+
    The CONNECT method is used by the client to establish a permanent
    connection with the server.
    This method requires two parameters and have the following length :
@@ -417,13 +422,13 @@ Table of Contents
    (total CHAR length) = 64
 
    10   Status Code Definitions
-   
+
    The status code is the first part of the server answer for a request.
 
    10.1   Positive (X)
 
    10.1.1   0 OK
-   
+
    The request has succeeded. The information returned with the
    response is dependent on the method used in the request, for
    example :
@@ -437,71 +442,71 @@ Table of Contents
       | CONNECT  an entity-header with the return status;
 
    10.1.2   1 Created
-   
+
    Result of a successful account or object bid creation.
 
    10.2   Negative (-X)
 
    10.2.1   -1 Bad Request
-   
+
    The request could not be understood by the server due to malformed
    syntax. The client SHOULD NOT repeat the request without
    modifications.
 
    10.2.2   -2 Not Created
-   
+
    The request could not be understood by the server due to a problem
    with the ressource designed by the request.
    Result of a failed account or object bid creation.
 
    10.2.3   -3 Internal Server Error
-   
+
    The server encountered an unexpected condition which prevented it
    from fulfilling the request.
    Result of an unknown, unpredictable or internal (core) server error.
 
    10.2.4   -4 Conflict
-   
+
    Result of a concurrent object bid read and write access between more
    than one user and/or administrator.
 
    10.2.5   -5 Forbidden
-   
+
    The server understood the request, but is refusing to fulfill it.
    Authorization will not help and the request SHOULD NOT be repeated.
    Result of giving invalid connection ids, or call a method which needs
    rights but without them.
 
    11   Access Authentication
-   
+
    It require to use the CONNECT method with the user's login IDs.
    The server sends back a response message composed of the status line.
 
    12   Security Considerations
-   
+
    At the moment, no encryption module is in use, all the content is
    sent clearly through the Internet. Please be careful while using this
    version of the protocol. You MUST consider these severe security
    issues !
 
    12.1   Personal Information
-   
+
    Your login, your password, and any informations you could send CAN be
    viewed by anyone who is watching your communications under this
    protocol.
 
    12.2   Privacy Issues Connected to Accept Headers
-   
+
    [...] (DDoS, memory leak attacks, ... other issues ?)
 
    12.3   Authentication Credentials and Idle Clients
-   
+
    At the moment, all your credentials pass through one or more networks
    without protections. Anyone can take them from the BEEP connect
    request and/or from the answer of a GET request of user informations.
 
    13   Acknowledgments
-   
+
    This specification makes heavy use of the generic definitions as they
    can be seen in the RFC 2616. We would like to thanks the author to
    allow us to use those definitions.
@@ -510,14 +515,14 @@ Table of Contents
    all their teaching and advising.
 
    14   References
-   
+
    [1] R. Fielding, UC Irvine, J. Gettys, Compaq/W3C, J. Mogul, Compaq,
        H. Frystyk, W3C/MIT, L. Masinter, Xerox, P. Leach, Microsoft,
        T. Berners-Lee, W3C/MIT, "Hypertext Transfer Protocol", RFC 2616,
        June 1999.
 
    15   Full Copyright Statement
-   
+
    For the general definitions and some help in the structuration of our
    rfc, we used the rfc 2616 (HTTP/1.1), as it is authorized by the
    copyright statement below.

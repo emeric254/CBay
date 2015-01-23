@@ -43,3 +43,19 @@ void saisieUtilisateur(UserAccount * account)
 void saisieVente(ObjectBid * bid)
 {
 }
+
+
+/* verifMail.
+*/
+int verifMail(char *mail, int taille)
+{
+    int i = 0;
+    int arobase = 0 ;
+    // test '@'
+    for(i=0;i<taille;i++)
+        if(mail[i] = '@')
+            arobase ++;
+    //
+
+    return (arobase == 1)? TRUE : FALSE;
+}
