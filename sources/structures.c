@@ -71,18 +71,18 @@ void saisieUtilisateur(UserAccount * account)
 
     CLEAR();
     printf("Enter your name\n");
-    fgets(account->name,sizeof(account->name)*sizeof(char),stdin);
+    fgets(account->name,sizeof(account->name),stdin);
     CLEAR();
     printf("Enter your lastname\n");
-    fgets(account->lastname,sizeof(account->lastname)*sizeof(char),stdin);
+    fgets(account->lastname,sizeof(account->lastname),stdin);
     CLEAR();
     printf("Enter your adress\n");
-    fgets(account->adress,sizeof(account->adress)*sizeof(char),stdin);
+    fgets(account->adress,sizeof(account->adress),stdin);
     do
     {
         CLEAR();
         printf("Enter your mail\n");
-        fgets(account->mail,sizeof(account->mail)*sizeof(char),stdin);
+        fgets(account->mail,sizeof(account->mail),stdin);
     }while(!verifMail(account->mail,strlen(account->mail)));
 
 
@@ -98,6 +98,19 @@ void saisieVente(ObjectBid * bid)
         fprintf(stderr,"null pointer");
         exit(ERREUR_POINTEUR);
     }
+
+    CLEAR();
+    printf("Enter the bid name\n");
+    fgets(bid->name,sizeof(bid->name),stdin);
+    CLEAR();
+    printf("Enter the bid base price\n");
+    fscanf(stdin,"%f",&(bid->basePrice));
+    CLEAR();
+    printf("Enter the bid description\n");
+    fgets(bid->description,sizeof(bid->description),stdin);
+    CLEAR();
+    printf("Enter the bid adress\n");
+    fgets(bid->adress,sizeof(bid->adress),stdin);
 }
 
 
