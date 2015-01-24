@@ -39,7 +39,7 @@ void saisieUtilisateur(UserAccount * account)
     if(account == NULL)
     {
         fprintf(stderr,"null pointer");
-        return ERREUR_POINTEUR;
+        exit(ERREUR_POINTEUR);
     }
 
     do
@@ -67,7 +67,17 @@ void saisieUtilisateur(UserAccount * account)
         }
     }while(validInput);
 
-
+    printf("Enter your name\n");
+    fgets(account->name,sizeof(account->name)*sizeof(char),stdin);
+    printf("Enter your lastname\n");
+    fgets(account->lastname,sizeof(account->lastname)*sizeof(char),stdin);
+    printf("Enter your adress\n");
+    fgets(account->adress,sizeof(account->adress)*sizeof(char),stdin);
+    do
+    {
+        printf("Enter your mail\n");
+        fgets(account->mail,sizeof(account->mail)*sizeof(char),stdin);
+    }while(!verifMail(account->mail,strlen(account->mail)));
 
 
 }
@@ -80,7 +90,7 @@ void saisieVente(ObjectBid * bid)
     if(bid == NULL)
     {
         fprintf(stderr,"null pointer");
-        return ERREUR_POINTEUR;
+        exit(ERREUR_POINTEUR);
     }
 }
 
@@ -92,7 +102,7 @@ int verifMail(char *mail, int taille)
     if(mail == NULL)
     {
         fprintf(stderr,"null pointer");
-        return ERREUR_POINTEUR;
+        exit(ERREUR_POINTEUR);
     }
     int i = 0;
     int arobase = 0 ;
