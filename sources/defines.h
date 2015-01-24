@@ -53,6 +53,14 @@
 #define REASON_PHRASE_CONFLICT "Conflict"
 #define REASON_PHRASE_FORBIDDEN "Forbidden"
 
+// account types
+#define ACCOUNT_TYPE_ADMIN 'a'
+#define ACCOUNT_TYPE_VENDOR 'v'
+#define ACCOUNT_TYPE_USER 'u'
+// account labels
+#define ACCOUNT_LABEL_ADMIN "Admin, become a god ;) "
+#define ACCOUNT_LABEL_VENDOR "Vendor, limited to sell things"
+#define ACCOUNT_LABEL_USER "User, limited to bought things"
 
 
 // code de retours application
@@ -62,6 +70,7 @@
 #define ERREUR_LECTURE_BUFF -4
 #define ERREUR_OUVERTURE_BUFF -5
 #define ERREUR_USER -6
+#define ERREUR_POINTEUR -6
 
 
 // valeurs des choix dans les menus
