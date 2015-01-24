@@ -37,6 +37,11 @@ typedef struct UserAccount
 void videBuffer();
 
 
+/* cleanCRString.
+ * clean a string from all carriage return ('\n' & '\r)
+*/
+void basePrice(char *string);
+
 /* saisieChar.
  * saisie d'un caractere, elimine les '\n' et EOF
  * retourne un caractere
