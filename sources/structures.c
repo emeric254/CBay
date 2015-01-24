@@ -35,6 +35,8 @@ char saisieChar()
 */
 void saisieUtilisateur(UserAccount * account)
 {
+    if(account == NULL)
+        fprintf(stderr,"null pointer");
 }
 
 
@@ -42,6 +44,8 @@ void saisieUtilisateur(UserAccount * account)
 */
 void saisieVente(ObjectBid * bid)
 {
+    if(bid == NULL)
+        fprintf(stderr,"null pointer");
 }
 
 
@@ -53,7 +57,7 @@ int verifMail(char *mail, int taille)
     int arobase = 0 ;
     // test '@'
     for(i=0;i<taille;i++)
-        if(mail[i] = '@')
+        if((mail[i] = '@'))
             arobase ++;
     //
 

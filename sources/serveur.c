@@ -5,19 +5,19 @@
 #include <sys/types.h>
 
 #ifdef WIN32
-	#include <winsock2.h>
-	#include <ws2tcpip.h>
-	#define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
-	#define close closesocket
-	#define socklen_t int
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
+    #define close closesocket
+    #define socklen_t int
 #else
-	#include <unistd.h>
-	#include <netdb.h>
-	#include <sys/socket.h>
-	#include <sys/select.h>
-	#include <netinet/in.h>
-	#include <arpa/inet.h>
-	#include <strings.h>
+    #include <unistd.h>
+    #include <netdb.h>
+    #include <sys/socket.h>
+    #include <sys/select.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
+    #include <strings.h>
 #endif
 
 #include <errno.h>
@@ -350,8 +350,8 @@ int envoyerContenuFichierTexte(char *nomFichier){
 int envoyerReponse200HTML(char *nomFichier){
     int retour=0;
     char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",longueur_fichier(nomFichier));
-    if(retour = Emission(content))
+    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if(!retour)
@@ -369,8 +369,8 @@ int envoyerReponse404(){
     fprintf(stderr,"erreur 404\n");
 #endif
     char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 404 Not Found\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",longueur_fichier(nomFichier));
-    if(retour = Emission(content))
+    sprintf(content,"HTTP/1.1 404 Not Found\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if (!retour)
@@ -389,8 +389,8 @@ int envoyerReponse500(){
 #endif
     Emission("\n\n");
     char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 500 Internal Server Error\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",longueur_fichier(nomFichier));
-    if(retour = Emission(content))
+    sprintf(content,"HTTP/1.1 500 Internal Server Error\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if(!retour)
@@ -404,7 +404,7 @@ int envoyerReponse500(){
 int envoyerContenuFichierBinaire(char *nomFichier){
     FILE * fichier = NULL;
     int retour = 0;
-    int longeur = longueur_fichier(nomFichier);
+//    int longeur = longueur_fichier(nomFichier);
     int taille_lue = 0;
     char ptr[LONGUEUR_TAMPON];
 
@@ -440,8 +440,8 @@ int envoyerContenuFichierBinaire(char *nomFichier){
 int envoyerReponse200JPG(char *nomFichier){
     int retour=0;
     char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/jpg; charset=UTF-8\nContent-Length: %d\n\n",longueur_fichier(nomFichier));
-    if(retour = Emission(content))
+    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/jpg; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
         retour = envoyerContenuFichierBinaire(nomFichier);
     return retour;
 }
@@ -451,8 +451,8 @@ int envoyerReponse200JPG(char *nomFichier){
 int envoyerReponse200ICO(char *nomFichier){
     int retour=0;
     char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: image/vnd.microsoft.ico; charset=UTF-8\nContent-Length: %d\n\n",longueur_fichier(nomFichier));
-    if(retour = Emission(content))
+    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: image/vnd.microsoft.ico; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
         retour = envoyerContenuFichierBinaire(nomFichier);
     return retour;
 }
@@ -477,8 +477,8 @@ int envoyerReponse400(){
     fprintf(stderr,"erreur 400\n");
 #endif
     char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 400 Bad Request\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",longueur_fichier(nomFichier));
-    if(retour = Emission(content))
+    sprintf(content,"HTTP/1.1 400 Bad Request\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if(!retour)
@@ -494,8 +494,8 @@ int envoyerReponse403(){
     fprintf(stderr,"erreur 403\n");
 #endif
     char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 403 Forbidden\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",longueur_fichier(nomFichier));
-    if(retour = Emission(content))
+    sprintf(content,"HTTP/1.1 403 Forbidden\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if(!retour)
