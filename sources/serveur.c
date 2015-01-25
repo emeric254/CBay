@@ -152,7 +152,7 @@ char *Reception() {
     while(!fini) {
         /* on cherche dans le tampon courant */
         while((finTampon > debutTampon) && (!trouve)) {
-            //fprintf(stderr, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
+            //fprintf(ERROROUTPUT, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
             //      tamponClient[debutTampon], tamponClient[debutTampon], index, debutTampon);
             if (tamponClient[debutTampon]=='\n')
                 trouve = TRUE;
@@ -165,7 +165,7 @@ char *Reception() {
             message[index] = '\0';
             debutTampon++;
             fini = TRUE;
-            //fprintf(stderr, "trouve\n");
+            //fprintf(ERROROUTPUT, "trouve\n");
 #ifdef WIN32
             return _strdup(message);
 #else
@@ -174,14 +174,14 @@ char *Reception() {
         } else {
             /* il faut en lire plus */
             debutTampon = 0;
-            //fprintf(stderr, "recv\n");
+            //fprintf(ERROROUTPUT, "recv\n");
             retour = recv(socketService, tamponClient, LONGUEUR_TAMPON, 0);
-            //fprintf(stderr, "retour : %d\n", retour);
+            //fprintf(ERROROUTPUT, "retour : %d\n", retour);
             if (retour < 0) {
                 perror("Reception, erreur de recv.");
                 return NULL;
             } else if(retour == 0) {
-                fprintf(stderr, "Reception, le client a ferme la connexion.\n");
+                fprintf(ERROROUTPUT, "Reception, le client a ferme la connexion.\n");
                 finConnexion = TRUE;
                 // on n'en recevra pas plus, on renvoie ce qu'on avait ou null sinon
                 if(index > 0) {
@@ -212,7 +212,7 @@ char *Reception() {
 int Emission(char *message) {
     int taille;
     if(strstr(message, "\n") == NULL) {
-        fprintf(stderr, "Emission, Le message n'est pas termine par \\n.\n");
+        fprintf(ERROROUTPUT, "Emission, Le message n'est pas termine par \\n.\n");
     }
     taille = strlen(message);
     if (send(socketService, message, taille,0) == -1) {
@@ -243,7 +243,7 @@ int ReceptionBinaire(char *donnees, size_t tailleMax) {
             perror("ReceptionBinaire, erreur de recv.");
             return -1;
         } else if(retour == 0) {
-            fprintf(stderr, "ReceptionBinaire, le client a ferme la connexion.\n");
+            fprintf(ERROROUTPUT, "ReceptionBinaire, le client a ferme la connexion.\n");
             return 0;
         } else {
             /*
@@ -288,7 +288,7 @@ int extraitFichier(char *requete, char **nomFichier, size_t *maxNomFichier){
     if(sscanf(requete,"GET /%ms HTTP",nomFichier)!=1) // alloue automatiquement
     {
 #ifdef DEBUG
-    fprintf(stderr,"erreur requete invalide : extraitFichier(%s)\n",requete);
+    fprintf(ERROROUTPUT,"erreur requete invalide : extraitFichier(%s)\n",requete);
 #endif
         return 0;
     }
@@ -308,7 +308,7 @@ size_t longueur_fichier(char *nomFichier){
       fclose(fichier);
   }
 #ifdef DEBUG
-    fprintf(stderr,"fichier inexistant : longueur_fichier(%s)\n",nomFichier);
+    fprintf(ERROROUTPUT,"fichier inexistant : longueur_fichier(%s)\n",nomFichier);
 #endif
   return longeur; // -1 si inexistant, 0 si vide, sinon X
 }
@@ -326,7 +326,7 @@ int envoyerContenuFichierTexte(char *nomFichier){
     if(fichier == NULL)
     {
 #ifdef DEBUG
-    fprintf(stderr,"erreur ouverture fichier : envoiContenuFichierTexte(%s)\n",nomFichier);
+    fprintf(ERROROUTPUT,"erreur ouverture fichier : envoiContenuFichierTexte(%s)\n",nomFichier);
 #endif
         return 0;
     }
@@ -335,7 +335,7 @@ int envoyerContenuFichierTexte(char *nomFichier){
         if(!EmissionBinaire(data,strlen(data))) // l'envoyer
         {
 #ifdef DEBUG
-    fprintf(stderr,"erreur envoi : envoiContenuFichierTexte(%s)\n",nomFichier);
+    fprintf(ERROROUTPUT,"erreur envoi : envoiContenuFichierTexte(%s)\n",nomFichier);
 #endif
             retour ++;
         }
@@ -355,7 +355,7 @@ int envoyerReponse200HTML(char *nomFichier){
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if(!retour)
-        fprintf(stderr,"erreur envoi : envoyerReponse200HTML(%s)\n",nomFichier);
+        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse200HTML(%s)\n",nomFichier);
 #endif
     return retour;
 }
@@ -366,7 +366,7 @@ int envoyerReponse404(){
     int retour=0;
     char nomFichier[]="404.html";
 #ifdef DEBUG
-    fprintf(stderr,"erreur 404\n");
+    fprintf(ERROROUTPUT,"erreur 404\n");
 #endif
     char content [LONGUEUR_TAMPON];
     sprintf(content,"HTTP/1.1 404 Not Found\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
@@ -374,7 +374,7 @@ int envoyerReponse404(){
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if (!retour)
-        fprintf(stderr,"erreur envoi : envoyerReponse404(%s)\n",nomFichier);
+        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse404(%s)\n",nomFichier);
 #endif
     return retour;
 }
@@ -385,7 +385,7 @@ int envoyerReponse500(){
     int retour=0;
     char nomFichier[]="500.html";
 #ifdef DEBUG
-    fprintf(stderr,"erreur 500\n");
+    fprintf(ERROROUTPUT,"erreur 500\n");
 #endif
     Emission("\n\n");
     char content [LONGUEUR_TAMPON];
@@ -394,7 +394,7 @@ int envoyerReponse500(){
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if(!retour)
-        fprintf(stderr,"erreur envoi : envoyerReponse500(%s)\n",nomFichier);
+        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse500(%s)\n",nomFichier);
 #endif
     return retour;
 }
@@ -413,7 +413,7 @@ int envoyerContenuFichierBinaire(char *nomFichier){
     if(fichier == NULL)
     {
 #ifdef DEBUG
-    fprintf(stderr,"erreur ouverture fichier : envoyerContenuFichierBinaire(%s)\n",nomFichier);
+    fprintf(ERROROUTPUT,"erreur ouverture fichier : envoyerContenuFichierBinaire(%s)\n",nomFichier);
 #endif
         return 0;
     }
@@ -424,7 +424,7 @@ int envoyerContenuFichierBinaire(char *nomFichier){
             if(!EmissionBinaire(ptr,LONGUEUR_TAMPON))
             {
 #ifdef DEBUG
-    fprintf(stderr,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
+    fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
 #endif
                 retour ++;
             }
@@ -474,7 +474,7 @@ int envoyerReponse400(){
     int retour=0;
     char nomFichier[]="400.html";
 #ifdef DEBUG
-    fprintf(stderr,"erreur 400\n");
+    fprintf(ERROROUTPUT,"erreur 400\n");
 #endif
     char content [LONGUEUR_TAMPON];
     sprintf(content,"HTTP/1.1 400 Bad Request\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
@@ -482,7 +482,7 @@ int envoyerReponse400(){
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if(!retour)
-        fprintf(stderr,"erreur envoi : envoyerReponse400(%s)\n",nomFichier);
+        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse400(%s)\n",nomFichier);
 #endif
     return retour;
 }
@@ -491,7 +491,7 @@ int envoyerReponse403(){
     int retour=0;
     char nomFichier[]="403.html";
 #ifdef DEBUG
-    fprintf(stderr,"erreur 403\n");
+    fprintf(ERROROUTPUT,"erreur 403\n");
 #endif
     char content [LONGUEUR_TAMPON];
     sprintf(content,"HTTP/1.1 403 Forbidden\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
@@ -499,7 +499,7 @@ int envoyerReponse403(){
         retour = envoyerContenuFichierTexte(nomFichier);
 #ifdef DEBUG
     if(!retour)
-        fprintf(stderr,"erreur envoi : envoyerReponse403(%s)\n",nomFichier);
+        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse403(%s)\n",nomFichier);
 #endif
     return retour;
 }

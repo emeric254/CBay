@@ -38,7 +38,7 @@ void saisieUtilisateur(UserAccount * account)
     int validInput = FALSE;
     if(account == NULL)
     {
-        fprintf(stderr,"null pointer");
+        fprintf(ERROROUTPUT,"null pointer");
         exit(ERREUR_POINTEUR);
     }
 
@@ -95,7 +95,7 @@ void saisieVente(ObjectBid * bid)
 {
     if(bid == NULL)
     {
-        fprintf(stderr,"null pointer");
+        fprintf(ERROROUTPUT,"null pointer");
         exit(ERREUR_POINTEUR);
     }
 
@@ -120,7 +120,7 @@ int verifMail(char *mail, int taille)
 {
     if(mail == NULL)
     {
-        fprintf(stderr,"null pointer");
+        fprintf(ERROROUTPUT,"null pointer");
         exit(ERREUR_POINTEUR);
     }
     int i = 0;

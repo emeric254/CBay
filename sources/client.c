@@ -9,7 +9,7 @@
 #ifdef WIN32
     #include <winsock2.h>
     #include <ws2tcpip.h>
-    #define perror(x) fprintf(stderr, "%d : %s\n", WSAGetLastError(), (x))
+    #define perror(x) fprintf(ERROROUTPUT, "%d : %s\n", WSAGetLastError(), (x))
     #define close closesocket
     #define socklen_t int
 #else
@@ -52,7 +52,7 @@ int Initialisation(char *machine) {
     WSADATA wsaData;
     if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR)
     {
-        fprintf(stderr,"WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
+        fprintf(ERROROUTPUT,"WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
         WSACleanup();
         exit(1);
     }
@@ -65,7 +65,7 @@ int Initialisation(char *machine) {
 
     if ( (n = getaddrinfo(machine, service, &hints, &res)) )
     {
-            fprintf(stderr, "Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
+            fprintf(ERROROUTPUT, "Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
             return 0;
     }
     ressave = res;
@@ -111,7 +111,7 @@ char *Reception() {
     while(!fini) {
         /* on cherche dans le tampon courant */
         while((finTampon > debutTampon) && (!trouve)) {
-            //fprintf(stderr, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
+            //fprintf(ERROROUTPUT, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
             //                  tamponClient[debutTampon], tamponClient[debutTampon], index, debutTampon);
             if (tamponClient[debutTampon]=='\n')
                 trouve = TRUE;
@@ -124,7 +124,7 @@ char *Reception() {
             message[index] = '\0';
             debutTampon++;
             fini = TRUE;
-            //fprintf(stderr, "trouve\n");
+            //fprintf(ERROROUTPUT, "trouve\n");
 #ifdef WIN32
             return _strdup(message);
 #else
@@ -133,14 +133,14 @@ char *Reception() {
         } else {
             /* il faut en lire plus */
             debutTampon = 0;
-            //fprintf(stderr, "recv\n");
+            //fprintf(ERROROUTPUT, "recv\n");
             retour = recv(socketClient, tamponClient, LONGUEUR_TAMPON, 0);
-            //fprintf(stderr, "retour : %d\n", retour);
+            //fprintf(ERROROUTPUT, "retour : %d\n", retour);
             if (retour < 0) {
                 perror("Reception, erreur de recv.");
                 return NULL;
             } else if(retour == 0) {
-                fprintf(stderr, "Reception, le serveur a ferme la connexion.\n");
+                fprintf(ERROROUTPUT, "Reception, le serveur a ferme la connexion.\n");
                 finConnexion = TRUE;
                 // on n'en recevra pas plus, on renvoie ce qu'on avait ou null sinon
                 if(index > 0) {
@@ -171,7 +171,7 @@ char *Reception() {
 int Emission(char *message) {
     int taille;
     if(strstr(message, "\n") == NULL) {
-        fprintf(stderr, "Emission, Le message n'est pas termine par \\n.\n");
+        fprintf(ERROROUTPUT, "Emission, Le message n'est pas termine par \\n.\n");
     }
     taille = strlen(message);
     if (send(socketClient, message, taille,0) == -1) {
@@ -203,7 +203,7 @@ int ReceptionBinaire(char *donnees, size_t tailleMax) {
             perror("ReceptionBinaire, erreur de recv.");
             return -1;
         } else if(retour == 0) {
-            fprintf(stderr, "ReceptionBinaire, le serveur a ferme la connexion.\n");
+            fprintf(ERROROUTPUT, "ReceptionBinaire, le serveur a ferme la connexion.\n");
             return 0;
         } else {
             /*

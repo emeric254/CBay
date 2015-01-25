@@ -8,7 +8,7 @@
 #define TRUE 1
 #define FALSE 0
 #define LONGUEUR_TAMPON 4096
-
+#define ERROROUTPUT stderr
 
 //
 #define PORT_SERVEUR "25000"
