@@ -86,9 +86,11 @@
 
 
 
-// portabilitée
 #if defined __WIN32__
     #define CLEAR() system("cls")
+    #define perror(x) fprintf(ERROROUTPUT, "%d : %s\n", WSAGetLastError(), (x))
+    #define close closesocket
+    #define socklen_t int
 #else
     #define CLEAR() system("clear")
 #endif

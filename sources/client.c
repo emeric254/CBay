@@ -9,9 +9,6 @@
 #ifdef WIN32
     #include <winsock2.h>
     #include <ws2tcpip.h>
-    #define perror(x) fprintf(ERROROUTPUT, "%d : %s\n", WSAGetLastError(), (x))
-    #define close closesocket
-    #define socklen_t int
 #else
     #include <unistd.h>
     #include <netdb.h>

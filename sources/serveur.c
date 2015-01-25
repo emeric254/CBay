@@ -7,9 +7,6 @@
 #ifdef WIN32
     #include <winsock2.h>
     #include <ws2tcpip.h>
-    #define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
-    #define close closesocket
-    #define socklen_t int
 #else
     #include <unistd.h>
     #include <netdb.h>
