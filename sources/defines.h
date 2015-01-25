@@ -21,8 +21,8 @@
 
 
 // response header fields
-#define RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH "Content-length"
-#define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE "Content-type"
+#define RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH "Content-length: "
+#define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE "Content-type: "
 
 
 //request methods

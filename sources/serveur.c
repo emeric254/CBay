@@ -277,6 +277,7 @@ void Terminaison() {
 
 // ------------------------------------------------------------
 
+
 /* ex 8.a
  * Utilisation de pointeur de pointeur puisque l'on s'amuse avec le pointeur ;)
 */
@@ -284,34 +285,28 @@ int extraitFichier(char *requete, char **nomFichier, size_t *maxNomFichier){
     free(*nomFichier); //
     if(sscanf(requete,"GET /%ms HTTP",nomFichier)!=1) // alloue automatiquement
     {
-#ifdef DEBUG
-    fprintf(ERROROUTPUT,"erreur requete invalide : extraitFichier(%s)\n",requete);
-#endif
+        fprintf(ERROROUTPUT,"erreur requete invalide : extraitFichier(%s)\n",requete);
         return 0;
     }
     *maxNomFichier = strlen(*nomFichier); // longeur du nom du fichier
     return 1;
 }
 
-/* ex 8.b
-*/
+
 size_t longueur_fichier(char *nomFichier){
-  int longeur = -1;
-  FILE * fichier = fopen(nomFichier,"r");
-  if (fichier!=NULL)
-  {
-      fseek(fichier,0,SEEK_END); // on se place a la fin du fichier
-      longeur = ftell(fichier); // on regarde ou on est pour connaitre la taille du fichier
-      fclose(fichier);
-  }
-#ifdef DEBUG
+    int longeur = -1;
+    FILE * fichier = fopen(nomFichier,"r");
+    if (fichier!=NULL)
+    {
+        fseek(fichier,0,SEEK_END); // on se place a la fin du fichier
+        longeur = ftell(fichier); // on regarde ou on est pour connaitre la taille du fichier
+        fclose(fichier);
+    }
     fprintf(ERROROUTPUT,"fichier inexistant : longueur_fichier(%s)\n",nomFichier);
-#endif
-  return longeur; // -1 si inexistant, 0 si vide, sinon X
+    return longeur; // -1 si inexistant, 0 si vide, sinon X
 }
 
-/* ex 8.c
-*/
+
 int envoyerContenuFichierTexte(char *nomFichier){
     FILE * fichier = NULL;
     int retour = 0;
@@ -338,8 +333,7 @@ int envoyerContenuFichierTexte(char *nomFichier){
     return !retour;
 }
 
-/* ex 8.d
-*/
+
 int envoyerReponse200HTML(char *nomFichier){
     int retour=0;
     char content [LONGUEUR_TAMPON];
@@ -351,39 +345,7 @@ int envoyerReponse200HTML(char *nomFichier){
     return retour;
 }
 
-/* ex 8.e
-*/
-int envoyerReponse404(){
-    int retour=0;
-    char nomFichier[]="404.html";
-    fprintf(ERROROUTPUT,"erreur 404\n");
-    char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 404 Not Found\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierTexte(nomFichier);
-    if (!retour)
-        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse404(%s)\n",nomFichier);
-    return retour;
-}
 
-/* ex 8.f
-*/
-int envoyerReponse500(){
-    int retour=0;
-    char nomFichier[]="500.html";
-    fprintf(ERROROUTPUT,"erreur 500\n");
-    Emission("\n\n");
-    char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 500 Internal Server Error\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierTexte(nomFichier);
-    if(!retour)
-        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse500(%s)\n",nomFichier);
-    return retour;
-}
-
-/* ex 11.a
-*/
 int envoyerContenuFichierBinaire(char *nomFichier){
     FILE * fichier = NULL;
     int retour = 0;
@@ -414,8 +376,7 @@ int envoyerContenuFichierBinaire(char *nomFichier){
     return !retour;
 }
 
-/* ex 11.b
-*/
+
 int envoyerReponse200JPG(char *nomFichier){
     int retour=0;
     char content [LONGUEUR_TAMPON];
@@ -425,18 +386,6 @@ int envoyerReponse200JPG(char *nomFichier){
     return retour;
 }
 
-/* ex 13.a
-*/
-int envoyerReponse200ICO(char *nomFichier){
-    int retour=0;
-    char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: image/vnd.microsoft.ico; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierBinaire(nomFichier);
-    return retour;
-}
-
-// autres :
 
 // verifie l'extension/le suffixe d'un fichier
 int testExtension(char *nomFichier, char *extension){
@@ -449,28 +398,29 @@ int testExtension(char *nomFichier, char *extension){
     return ( len_fic > ( len_ext + 1 ) ) ? ( ! strcmp( &nomFichier[len_fic - len_ext], extension ) ) : 0;
 }
 
-int envoyerReponse400(){
+
+int sendStatusLine(){
     int retour=0;
-    char nomFichier[]="400.html";
-    fprintf(ERROROUTPUT,"erreur 400\n");
-    char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 400 Bad Request\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierTexte(nomFichier);
-    if(!retour)
-        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse400(%s)\n",nomFichier);
+    char statusLine[STATUS_LINE_LENGTH+1];
+    // ici mettre le {Status Code}
+    statusLine[2] = ' ';
+    // strcpy(&statusLine[3], {Reason Phrase});
+    statusLine[15] = '\n';
+    statusLine[16] = '\0';
     return retour;
 }
 
-int envoyerReponse403(){
+
+int sendHeaderField(){
     int retour=0;
-    char nomFichier[]="403.html";
-    fprintf(ERROROUTPUT,"erreur 403\n");
-    char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 403 Forbidden\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierTexte(nomFichier);
-    if(!retour)
-        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse403(%s)\n",nomFichier);
+    char headerField [RESPONSE_HEADER_LENGTH+1];
+    strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
+    // ici mettre le {Content-length}
+    headerField[31] = ';';
+    strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
+    // ici mettre le {Content-type}
+    headerField[62] = ';';
+    headerField[63] = '\n';
+    headerField[64] = '\0';
     return retour;
 }

@@ -66,36 +66,25 @@ size_t longueur_fichier(char *nomFichier);
 */
 int envoyerContenuFichierTexte(char *nomFichier);
 
-/* ex 8.d
-*/
-int envoyerReponse200HTML(char *nomFichier);
-
-/* ex 8.e
-*/
-int envoyerReponse404();
-
-/* ex 8.f
-*/
-int envoyerReponse500();
-
 /* ex 11.a
 */
 int envoyerContenuFichierBinaire(char *nomFichier);
-
-/* ex 11.b
-*/
-int envoyerReponse200JPG(char *nomFichier);
-
-/* ex 13.a
-*/
-int envoyerReponse200ICO(char *nomFichier);
 
 /* autres
 */
 int testExtension(char *nomFichier, char *extension);
 
-int envoyerReponse400();
 
-int envoyerReponse403();
+/*
+ *
+*/
+int sendStatusLine();
+
+
+/*
+ *
+*/
+int sendHeaderField();
+
 
 #endif
