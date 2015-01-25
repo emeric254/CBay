@@ -35,13 +35,13 @@ int socketService;
 char tamponClient[LONGUEUR_TAMPON];
 int debutTampon;
 int finTampon;
-int finConnexion = 0;
+int finConnexion = FALSE;
 
 /* Initialisation.
  * Creation du serveur.
  */
 int Initialisation() {
-    return InitialisationAvecService("13214");
+    return InitialisationAvecService(PORT_SERVEUR);
 }
 
 /* Initialisation.
@@ -54,14 +54,14 @@ int InitialisationAvecService(char *service) {
     struct addrinfo hints, *res, *ressave;
 
     #ifdef WIN32
-    WSADATA wsaData;
-    if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR)
-    {
-        printf("WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
-        WSACleanup();
-        exit(1);
-    }
-    memset(&hints, 0, sizeof(struct addrinfo));
+        WSADATA wsaData;
+        if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR)
+        {
+            fprintf(ERROROUTPUT, "WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
+            WSACleanup();
+            exit(1);
+        }
+        memset(&hints, 0, sizeof(struct addrinfo));
     #else
     bzero(&hints, sizeof(struct addrinfo));
     #endif
@@ -71,7 +71,7 @@ int InitialisationAvecService(char *service) {
     hints.ai_socktype = SOCK_STREAM;
 
     if ( (n = getaddrinfo(NULL, service, &hints, &res)) != 0)  {
-            printf("Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
+            fprintf(ERROROUTPUT, "Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
             return 0;
     }
     ressave = res;
@@ -322,18 +322,14 @@ int envoyerContenuFichierTexte(char *nomFichier){
 
     if(fichier == NULL)
     {
-#ifdef DEBUG
-    fprintf(ERROROUTPUT,"erreur ouverture fichier : envoiContenuFichierTexte(%s)\n",nomFichier);
-#endif
+        fprintf(ERROROUTPUT,"erreur ouverture fichier : envoiContenuFichierTexte(%s)\n",nomFichier);
         return 0;
     }
 
     while(fgets(data, longeur, fichier)!=NULL) // lire une ligne
         if(!EmissionBinaire(data,strlen(data))) // l'envoyer
         {
-#ifdef DEBUG
-    fprintf(ERROROUTPUT,"erreur envoi : envoiContenuFichierTexte(%s)\n",nomFichier);
-#endif
+            fprintf(ERROROUTPUT,"erreur envoi : envoiContenuFichierTexte(%s)\n",nomFichier);
             retour ++;
         }
 
@@ -350,10 +346,8 @@ int envoyerReponse200HTML(char *nomFichier){
     sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
     if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
-#ifdef DEBUG
     if(!retour)
         fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse200HTML(%s)\n",nomFichier);
-#endif
     return retour;
 }
 
@@ -362,17 +356,13 @@ int envoyerReponse200HTML(char *nomFichier){
 int envoyerReponse404(){
     int retour=0;
     char nomFichier[]="404.html";
-#ifdef DEBUG
     fprintf(ERROROUTPUT,"erreur 404\n");
-#endif
     char content [LONGUEUR_TAMPON];
     sprintf(content,"HTTP/1.1 404 Not Found\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
     if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
-#ifdef DEBUG
     if (!retour)
         fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse404(%s)\n",nomFichier);
-#endif
     return retour;
 }
 
@@ -381,18 +371,14 @@ int envoyerReponse404(){
 int envoyerReponse500(){
     int retour=0;
     char nomFichier[]="500.html";
-#ifdef DEBUG
     fprintf(ERROROUTPUT,"erreur 500\n");
-#endif
     Emission("\n\n");
     char content [LONGUEUR_TAMPON];
     sprintf(content,"HTTP/1.1 500 Internal Server Error\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
     if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
-#ifdef DEBUG
     if(!retour)
         fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse500(%s)\n",nomFichier);
-#endif
     return retour;
 }
 
@@ -409,9 +395,7 @@ int envoyerContenuFichierBinaire(char *nomFichier){
 
     if(fichier == NULL)
     {
-#ifdef DEBUG
-    fprintf(ERROROUTPUT,"erreur ouverture fichier : envoyerContenuFichierBinaire(%s)\n",nomFichier);
-#endif
+        fprintf(ERROROUTPUT,"erreur ouverture fichier : envoyerContenuFichierBinaire(%s)\n",nomFichier);
         return 0;
     }
 
@@ -420,9 +404,7 @@ int envoyerContenuFichierBinaire(char *nomFichier){
         if(taille_lue>0)
             if(!EmissionBinaire(ptr,LONGUEUR_TAMPON))
             {
-#ifdef DEBUG
-    fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
-#endif
+                fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
                 retour ++;
             }
     }while(taille_lue>0);
@@ -470,33 +452,25 @@ int testExtension(char *nomFichier, char *extension){
 int envoyerReponse400(){
     int retour=0;
     char nomFichier[]="400.html";
-#ifdef DEBUG
     fprintf(ERROROUTPUT,"erreur 400\n");
-#endif
     char content [LONGUEUR_TAMPON];
     sprintf(content,"HTTP/1.1 400 Bad Request\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
     if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
-#ifdef DEBUG
     if(!retour)
         fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse400(%s)\n",nomFichier);
-#endif
     return retour;
 }
 
 int envoyerReponse403(){
     int retour=0;
     char nomFichier[]="403.html";
-#ifdef DEBUG
     fprintf(ERROROUTPUT,"erreur 403\n");
-#endif
     char content [LONGUEUR_TAMPON];
     sprintf(content,"HTTP/1.1 403 Forbidden\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
     if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
-#ifdef DEBUG
     if(!retour)
         fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse403(%s)\n",nomFichier);
-#endif
     return retour;
 }
