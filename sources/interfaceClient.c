@@ -4,6 +4,7 @@
 
 #include "interfaceClient.h"
 #include "defines.h"
+#include "structures.h"
 
 
 /* menuAccueil

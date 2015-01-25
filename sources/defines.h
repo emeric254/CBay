@@ -11,7 +11,7 @@
 #define TRUE 1
 #define FALSE 0
 #define LONGUEUR_TAMPON 4096
-
+#define ERROROUTPUT stderr
 
 //
 #define PORT_SERVEUR "25000"
@@ -24,8 +24,8 @@
 
 
 // response header fields
-#define RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH "Content-length"
-#define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE "Content-type"
+#define RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH "Content-length: "
+#define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE "Content-type: "
 
 
 //request methods
@@ -36,8 +36,8 @@
 
 
 // codes retour requete positifs
-#define STATUS_CODE_OK 0
-#define STATUS_CODE_CREATED 1
+#define STATUS_CODE_OK 00
+#define STATUS_CODE_CREATED 01
 //reason phrases
 #define REASON_PHRASE_OK "Ok"
 #define REASON_PHRASE_CREATED "Created"
@@ -56,6 +56,14 @@
 #define REASON_PHRASE_CONFLICT "Conflict"
 #define REASON_PHRASE_FORBIDDEN "Forbidden"
 
+// account types
+#define ACCOUNT_TYPE_ADMIN 'a'
+#define ACCOUNT_TYPE_VENDOR 'v'
+#define ACCOUNT_TYPE_USER 'u'
+// account labels
+#define ACCOUNT_LABEL_ADMIN "Admin, become a god ;) "
+#define ACCOUNT_LABEL_VENDOR "Vendor, limited to sell things"
+#define ACCOUNT_LABEL_USER "User, limited to bought things"
 
 
 // code de retours application
@@ -66,6 +74,7 @@
 #define ERREUR_LECTURE_BUFF -4
 #define ERREUR_OUVERTURE_BUFF -5
 #define ERREUR_USER -6
+#define ERREUR_POINTEUR -6
 
 
 // valeurs des choix dans les menus
@@ -81,9 +90,11 @@
 
 
 
-// portabilitée
 #if defined __WIN32__
     #define CLEAR() system("cls")
+    #define perror(x) fprintf(ERROROUTPUT, "%d : %s\n", WSAGetLastError(), (x))
+    #define close closesocket
+    #define socklen_t int
 #else
     #define CLEAR() system("clear")
 #endif
