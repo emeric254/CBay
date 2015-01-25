@@ -3,6 +3,9 @@
 
 /* ... */
 
+// Save files
+#define ACC_FILE "accounts.txt"
+#define OBJ_FILE "objects.txt"
 
 //
 #define TRUE 1
@@ -56,6 +59,7 @@
 
 
 // code de retours application
+#define SUCCES 0
 #define ERREUR_OUVERTURE -1
 #define ERREUR_LECTURE -2
 #define ERREUR_ECRITURE -3

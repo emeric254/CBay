@@ -66,10 +66,34 @@ void saisieUtilisateur(UserAccount * account);
  *      idVendor
  *      currentBidPrice
  *      currentBidIdBuyer
- * modifi le ObjectBid saisi
+ * modifie le ObjectBid saisi
 */
 void saisieVente(ObjectBid * bid);
 
+/* accSave
+ * Save account's informations into the ACC_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int accSave (UserAccount user);
+
+/* accLoad
+ * Load account's informations from the ACC_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int accLoad (UserAccount *user);
+
+/* objSave
+ * Save object's informations into the OBJ_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int objSave (ObjectBid obj);
+
+
+/* objLoad
+ * Load object's informations into the OBJ_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int objLoad (ObjectBid *obj);
 
 //
 

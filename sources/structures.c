@@ -59,3 +59,43 @@ int verifMail(char *mail, int taille)
 
     return (arobase == 1)? TRUE : FALSE;
 }
+
+int accSave (UserAccount user)
+{
+    FILE* f;
+    if((f=fopen(ACC_FILE,"ab"))==NULL)
+        return(ERREUR_OUVERTURE);
+    fwrite(&user,sizeof(UserAccount),1,f);
+    fclose(f);
+    return SUCCESS;
+}
+
+int accLoad (UserAccount *user)
+{
+    FILE* f;
+    if((f=fopen(ACC_FILE,"rb"))==NULL)
+        return(ERREUR_OUVERTURE);
+    fread(&user,sizeof(UserAccount),1,f);
+    fclose(f);
+    return SUCCESS;
+}
+
+int objSave (ObjectBid obj)
+{
+    FILE* f;
+    if((f=fopen(OBJ_FILE,"rb"))==NULL)
+        return(ERREUR_OUVERTURE);
+    fread(&obj,sizeof(ObjectBid),1,f);
+    fclose(f);
+    return SUCCESS;
+}
+
+int objLoad (ObjectBid *obj)
+{
+    FILE* f;
+    if((f=fopen(ACC_FILE,"rb"))==NULL)
+        return(ERREUR_OUVERTURE);
+    fread(&obj,sizeof(ObjectBid),1,f);
+    fclose(f);
+    return SUCCESS;
+}
