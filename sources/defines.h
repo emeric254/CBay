@@ -33,8 +33,8 @@
 
 
 // codes retour requete positifs
-#define STATUS_CODE_OK 0
-#define STATUS_CODE_CREATED 1
+#define STATUS_CODE_OK 00
+#define STATUS_CODE_CREATED 01
 //reason phrases
 #define REASON_PHRASE_OK "Ok"
 #define REASON_PHRASE_CREATED "Created"

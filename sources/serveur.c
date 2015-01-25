@@ -399,12 +399,58 @@ int testExtension(char *nomFichier, char *extension){
 }
 
 
-int sendStatusLine(){
+int sendStatusLine(int statusCode){
     int retour=0;
     char statusLine[STATUS_LINE_LENGTH+1];
-    // ici mettre le {Status Code}
+    switch(statusCode)
+    {
+        case STATUS_CODE_OK:
+            strcpy(statusLine, "STATUS_CODE_OK");
+            break;
+        case STATUS_CODE_CREATED:
+            strcpy(statusLine, "STATUS_CODE_CREATED");
+            break;
+        case STATUS_CODE_BAD_REQUEST:
+            strcpy(statusLine, "STATUS_CODE_BAD_REQUEST");
+            break;
+        case STATUS_CODE_NOT_CREATED:
+            strcpy(statusLine, "STATUS_CODE_NOT_CREATED");
+            break;
+        case STATUS_CODE_CONFLICT:
+            strcpy(statusLine, "STATUS_CODE_CONFLICT");
+            break;
+        case STATUS_CODE_FORBIDDEN:
+            strcpy(statusLine, "STATUS_CODE_FORBIDDEN");
+            break;
+        default:    // equivalent to : case STATUS_CODE_INTERNAL_SERVER_ERROR:
+            strcpy(statusLine, "STATUS_CODE_INTERNAL_SERVER_ERROR");
+            break;
+    }
     statusLine[2] = ' ';
-    // strcpy(&statusLine[3], {Reason Phrase});
+    switch(statusCode)
+    {
+        case STATUS_CODE_OK:
+            strcpy(&statusLine[3], REASON_PHRASE_OK);
+            break;
+        case STATUS_CODE_CREATED:
+            strcpy(&statusLine[3], REASON_PHRASE_CREATED);
+            break;
+        case STATUS_CODE_BAD_REQUEST:
+            strcpy(&statusLine[3], REASON_PHRASE_BAD_REQUEST);
+            break;
+        case STATUS_CODE_NOT_CREATED:
+            strcpy(&statusLine[3], REASON_PHRASE_NOT_CREATED);
+            break;
+        case STATUS_CODE_CONFLICT:
+            strcpy(&statusLine[3], REASON_PHRASE_CONFLICT);
+            break;
+        case STATUS_CODE_FORBIDDEN:
+            strcpy(&statusLine[3], REASON_PHRASE_FORBIDDEN);
+            break;
+        default:    // equivalent to : case STATUS_CODE_INTERNAL_SERVER_ERROR:
+            strcpy(&statusLine[3], REASON_PHRASE_INTERNAL_SERVER_ERROR);
+            break;
+    }
     statusLine[15] = '\n';
     statusLine[16] = '\0';
     return retour;

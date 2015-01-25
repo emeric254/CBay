@@ -78,7 +78,7 @@ int testExtension(char *nomFichier, char *extension);
 /*
  *
 */
-int sendStatusLine();
+int sendStatusLine(int statusCode);
 
 
 /*
