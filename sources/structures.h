@@ -7,13 +7,13 @@
 typedef struct ObjectBid
 {
     long int id;
-    char name[96];
+    char name[OBJECTBID_NAME_LENGTH];
     float basePrice;
-    char description[320];
+    char description[OBJECTBID_DESCRIPTION_LENGTH];
     long int idVendor;
     long int startTime;
     long int endTime;
-    char adress[96];
+    char adress[OBJECTBID_ADRESS_LENGTH];
     float  currentBidPrice;
     long int currentBidIdBuyer;
 } ObjectBid;

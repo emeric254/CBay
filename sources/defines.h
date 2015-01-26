@@ -76,6 +76,11 @@
 #define ERREUR_USER -6
 #define ERREUR_POINTEUR -6
 
+// struct len
+#define OBJECTBID_NAME_LENGTH 96
+#define OBJECTBID_DESCRIPTION_LENGTH 320
+#define OBJECTBID_ADRESS_LENGTH 96
+
 
 // valeurs des choix dans les menus
 // commun

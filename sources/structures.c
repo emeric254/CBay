@@ -72,6 +72,7 @@ void saisieUtilisateur(UserAccount * account)
     CLEAR();
     printf("Enter your name\n");
     fgets(account->name,sizeof(account->name),stdin);
+    if(strlen(account->name))
     CLEAR();
     printf("Enter your lastname\n");
     fgets(account->lastname,sizeof(account->lastname),stdin);
@@ -141,7 +142,7 @@ int accSave (UserAccount user)
         return(ERREUR_OUVERTURE);
     fwrite(&user,sizeof(UserAccount),1,f);
     fclose(f);
-    return SUCCESS;
+    return TRUE;
 }
 
 int accLoad (UserAccount *user)
@@ -151,7 +152,7 @@ int accLoad (UserAccount *user)
         return(ERREUR_OUVERTURE);
     fread(&user,sizeof(UserAccount),1,f);
     fclose(f);
-    return SUCCESS;
+    return TRUE;
 }
 
 int objSave (ObjectBid obj)
@@ -161,7 +162,7 @@ int objSave (ObjectBid obj)
         return(ERREUR_OUVERTURE);
     fread(&obj,sizeof(ObjectBid),1,f);
     fclose(f);
-    return SUCCESS;
+    return TRUE;
 }
 
 int objLoad (ObjectBid *obj)
@@ -171,5 +172,5 @@ int objLoad (ObjectBid *obj)
         return(ERREUR_OUVERTURE);
     fread(&obj,sizeof(ObjectBid),1,f);
     fclose(f);
-    return SUCCESS;
+    return TRUE;
 }
