@@ -23,10 +23,10 @@ typedef struct UserAccount
 {
     char type;
     long int id;
-    char name[75];
-    char lastname[64];
-    char adress[96];
-    char mail[80];
+    char name[USERACCOUNT_NAME_LENGTH];
+    char lastname[USERACCOUNT_LASTNAME_LENGTH];
+    char adress[USERACCOUNT_ADRESS_LENGTH];
+    char mail[USERACCOUNT_MAIL_LENGTH];
 } UserAccount;
 
 

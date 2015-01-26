@@ -76,10 +76,16 @@
 #define ERREUR_USER -6
 #define ERREUR_POINTEUR -6
 
-// struct len
+// ObjectBid structure member length
 #define OBJECTBID_NAME_LENGTH 96
 #define OBJECTBID_DESCRIPTION_LENGTH 320
 #define OBJECTBID_ADRESS_LENGTH 96
+
+// UserAccount structure member length
+#define USERACCOUNT_NAME_LENGTH 75
+#define USERACCOUNT_LASTNAME_LENGTH 64
+#define USERACCOUNT_ADRESS_LENGTH 96
+#define USERACCOUNT_MAIL_LENGTH 80
 
 
 // valeurs des choix dans les menus
