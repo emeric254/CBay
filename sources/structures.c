@@ -73,16 +73,22 @@ void saisieUtilisateur(UserAccount * account)
 
     printf("Enter your name\n");
     fgets(account->name,USERACCOUNT_NAME_LENGTH,stdin);
+    if(strlen(account->name)<USERACCOUNT_NAME_LENGTH)
+        account->name[strlen(account->name) - 1] = '\0';
     videBuffer();
     CLEAR();
 
     printf("Enter your lastname\n");
     fgets(account->lastname,USERACCOUNT_LASTNAME_LENGTH,stdin);
+    if(strlen(account->lastname)<USERACCOUNT_LASTNAME_LENGTH)
+        account->lastname[strlen(account->lastname) - 1] = '\0';
     videBuffer();
     CLEAR();
 
     printf("Enter your adress\n");
     fgets(account->adress,USERACCOUNT_ADRESS_LENGTH,stdin);
+    if(strlen(account->adress)<USERACCOUNT_LASTNAME_LENGTH)
+        account->adress[strlen(account->adress) - 1] = '\0';
     videBuffer();
     CLEAR();
 
@@ -90,6 +96,8 @@ void saisieUtilisateur(UserAccount * account)
     {
         printf("Enter your mail\n");
         fgets(account->mail,USERACCOUNT_MAIL_LENGTH,stdin);
+        if(strlen(account->mail)<USERACCOUNT_MAIL_LENGTH)
+            account->mail[strlen(account->mail) - 1] = '\0';
         videBuffer();
     }while(!verifMail(account->mail,strlen(account->mail)));
     CLEAR();
