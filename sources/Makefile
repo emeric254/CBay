@@ -1,35 +1,35 @@
-# compilateur
+# compiler
 CC=gcc
-# argument(s) compilateur
+# compiler argument(s)
 CFLAGS=-W -Wall
 
-# fichiers nécessaires pour le client (dans l'ordre de dépendance)
+# necessary file for client (in dependency order)
 CLIENTSOURCES=structures.c interfaceClient.c client.c mainClient.c
-#  fichier nécessaires pour le serveur (dans l'ordre de dépendance)
+#  necessary file for server (in dependency order)
 SERVERSOURCES=structures.c serveur.c mainServeur.c
-# les deux executables
+# both executables
 EXEC=client serveur
 
-# on produit la liste des '.o' depuis celle des '.c'
+# produces list of '.o' then all '.c'
 CLIENTOBJECT=$(CLIENTSOURCES:.c=.o)
 SERVEROBJECT=$(SERVERSOURCES:.c=.o)
 
 #
 all: $(EXEC)
 
-# le client
+# the client
 client: $(CLIENTOBJECT)
 		$(CC) -o $@ $^ $(LDFLAGS)
 
-# le serveur
+# the server
 serveur: $(SERVEROBJECT)
 		$(CC) -o $@ $^ $(LDFLAGS)
 
-# pour créer chaque '.o' depuis son '.c'
+# create each '.o' from it's '.c'
 %.o: %.c
 		$(CC) -o $@ -c $< $(CFLAGS)
 
-# nettoyages
+# cleanse
 clean:
 		rm -rf *.o
 
