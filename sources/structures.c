@@ -70,22 +70,29 @@ void saisieUtilisateur(UserAccount * account)
     }while(validInput);
 
     CLEAR();
+
     printf("Enter your name\n");
-    fgets(account->name,sizeof(account->name),stdin);
-    if(strlen(account->name))
+    fgets(account->name,USERACCOUNT_NAME_LENGTH,stdin);
+    videBuffer();
     CLEAR();
+
     printf("Enter your lastname\n");
-    fgets(account->lastname,sizeof(account->lastname),stdin);
+    fgets(account->lastname,USERACCOUNT_LASTNAME_LENGTH,stdin);
+    videBuffer();
     CLEAR();
+
     printf("Enter your adress\n");
-    fgets(account->adress,sizeof(account->adress),stdin);
+    fgets(account->adress,USERACCOUNT_ADRESS_LENGTH,stdin);
+    videBuffer();
+    CLEAR();
+
     do
     {
-        CLEAR();
         printf("Enter your mail\n");
-        fgets(account->mail,sizeof(account->mail),stdin);
+        fgets(account->mail,USERACCOUNT_MAIL_LENGTH,stdin);
+        videBuffer();
     }while(!verifMail(account->mail,strlen(account->mail)));
-
+    CLEAR();
 
 }
 
@@ -100,18 +107,25 @@ void saisieVente(ObjectBid * bid)
         exit(ERREUR_POINTEUR);
     }
 
-    CLEAR();
     printf("Enter the bid name\n");
-    fgets(bid->name,sizeof(bid->name),stdin);
+    fgets(bid->name,OBJECTBID_NAME_LENGTH,stdin);
+    videBuffer();
     CLEAR();
+
     printf("Enter the bid base price\n");
     fscanf(stdin,"%f",&(bid->basePrice));
+    videBuffer();
     CLEAR();
+
     printf("Enter the bid description\n");
-    fgets(bid->description,sizeof(bid->description),stdin);
+    fgets(bid->description,OBJECTBID_DESCRIPTION_LENGTH,stdin);
+    videBuffer();
     CLEAR();
+
     printf("Enter the bid adress\n");
-    fgets(bid->adress,sizeof(bid->adress),stdin);
+    fgets(bid->adress,OBJECTBID_ADRESS_LENGTH,stdin);
+    videBuffer();
+    CLEAR();
 }
 
 
@@ -135,6 +149,8 @@ int verifMail(char *mail, int taille)
     return (arobase == 1)? TRUE : FALSE;
 }
 
+/*
+*/
 int accSave (UserAccount user)
 {
     FILE* f;
@@ -145,6 +161,8 @@ int accSave (UserAccount user)
     return TRUE;
 }
 
+/*
+*/
 int accLoad (UserAccount *user)
 {
     FILE* f;
@@ -155,6 +173,8 @@ int accLoad (UserAccount *user)
     return TRUE;
 }
 
+/*
+*/
 int objSave (ObjectBid obj)
 {
     FILE* f;
@@ -165,6 +185,8 @@ int objSave (ObjectBid obj)
     return TRUE;
 }
 
+/*
+*/
 int objLoad (ObjectBid *obj)
 {
     FILE* f;
