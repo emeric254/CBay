@@ -14,7 +14,7 @@ REQUEST
 
 
 /**********************************************************************/
-New user account creation
+New user account 
 —————————————————————————
 
 PUT <user-entity>; BEEP/0.1a
@@ -39,7 +39,7 @@ CONNECT [login];[password]; BEEP/0.1a
 
 
 /**********************************************************************/
-New bid creation
+New bid
 ————————————————
 
 
