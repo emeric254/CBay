@@ -73,22 +73,22 @@ void saisieUtilisateur(UserAccount * account)
 
     printf("Enter your name\n");
     fgets(account->name,USERACCOUNT_NAME_LENGTH,stdin);
-    if(strlen(account->name)<USERACCOUNT_NAME_LENGTH)
-        account->name[strlen(account->name) - 1] = '\0';
+    if(strlen(account->name)<USERACCOUNT_NAME_LENGTH-1)
+        account->name[strlen(account->name)] = '\0';
     videBuffer();
     CLEAR();
 
     printf("Enter your lastname\n");
     fgets(account->lastname,USERACCOUNT_LASTNAME_LENGTH,stdin);
-    if(strlen(account->lastname)<USERACCOUNT_LASTNAME_LENGTH)
-        account->lastname[strlen(account->lastname) - 1] = '\0';
+    if(strlen(account->lastname)<USERACCOUNT_LASTNAME_LENGTH-1)
+        account->lastname[strlen(account->lastname)] = '\0';
     videBuffer();
     CLEAR();
 
     printf("Enter your adress\n");
     fgets(account->adress,USERACCOUNT_ADRESS_LENGTH,stdin);
-    if(strlen(account->adress)<USERACCOUNT_LASTNAME_LENGTH)
-        account->adress[strlen(account->adress) - 1] = '\0';
+    if(strlen(account->adress)<USERACCOUNT_LASTNAME_LENGTH-1)
+        account->adress[strlen(account->adress)] = '\0';
     videBuffer();
     CLEAR();
 
@@ -96,8 +96,8 @@ void saisieUtilisateur(UserAccount * account)
     {
         printf("Enter your mail\n");
         fgets(account->mail,USERACCOUNT_MAIL_LENGTH,stdin);
-        if(strlen(account->mail)<USERACCOUNT_MAIL_LENGTH)
-            account->mail[strlen(account->mail) - 1] = '\0';
+        if(strlen(account->mail)<USERACCOUNT_MAIL_LENGTH-1)
+            account->mail[strlen(account->mail)] = '\0';
         videBuffer();
     }while(!verifMail(account->mail,strlen(account->mail)));
     CLEAR();
@@ -117,6 +117,8 @@ void saisieVente(ObjectBid * bid)
 
     printf("Enter the bid name\n");
     fgets(bid->name,OBJECTBID_NAME_LENGTH,stdin);
+    if(strlen(bid->name)<OBJECTBID_NAME_LENGTH-1)
+        bid->adress[strlen(bid->name)] = '\0';
     videBuffer();
     CLEAR();
 
@@ -127,11 +129,15 @@ void saisieVente(ObjectBid * bid)
 
     printf("Enter the bid description\n");
     fgets(bid->description,OBJECTBID_DESCRIPTION_LENGTH,stdin);
+    if(strlen(bid->description)<OBJECTBID_DESCRIPTION_LENGTH-1)
+        bid->description[strlen(bid->description)] = '\0';
     videBuffer();
     CLEAR();
 
     printf("Enter the bid adress\n");
     fgets(bid->adress,OBJECTBID_ADRESS_LENGTH,stdin);
+    if(strlen(bid->adress)<OBJECTBID_ADRESS_LENGTH-1)
+        bid->adress[strlen(bid->adress)] = '\0';
     videBuffer();
     CLEAR();
 }
