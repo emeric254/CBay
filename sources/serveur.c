@@ -37,18 +37,11 @@ int debutTampon;
 int finTampon;
 int finConnexion = FALSE;
 
-/* Initialisation.
- * Creation du serveur.
- */
-int Initialisation() {
-    return InitialisationAvecService(PORT_SERVEUR);
-}
 
-/* Initialisation.
- * Creation du serveur en precisant le service ou numero de port.
- * renvoie 1 si ca c'est bien passe 0 sinon
+/* Init.
+ * 
  */
-int InitialisationAvecService(char *service) {
+int Init(char *service) {
     int n;
     const int on = 1;
     struct addrinfo hints, *res, *ressave;
@@ -107,8 +100,11 @@ int InitialisationAvecService(char *service) {
     return 1;
 }
 
-/* Attends qu'un client se connecte */
-int AttenteClient() {
+
+/*
+ *
+*/
+int connectWait() {
     struct sockaddr *clientAddr;
     char machine[NI_MAXHOST];
 
@@ -133,6 +129,7 @@ int AttenteClient() {
 
     return 1;
 }
+
 
 /* Recoit un message envoye par le serveur */
 char *Reception() {
