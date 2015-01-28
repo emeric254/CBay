@@ -54,21 +54,12 @@ void Terminaison();
 
 // ----------------------------------------------------
 
-/* ex 8.b
+
+/*
+ * 
 */
 size_t file_length(char *filename);
 
-/* ex 8.c
-*/
-int envoyerContenuFichierTexte(char *nomFichier);
-
-/* ex 11.a
-*/
-int envoyerContenuFichierBinaire(char *nomFichier);
-
-/* autres
-*/
-int testExtension(char *nomFichier, char *extension);
 
 
 /*
@@ -81,6 +72,17 @@ int sendStatusLine(int statusCode);
  *
 */
 int sendHeaderField();
+
+
+/*
+
+int envoyerContenuFichierTexte(char *nomFichier);
+
+int envoyerContenuFichierBinaire(char *nomFichier);
+
+int testExtension(char *nomFichier, char *extension);
+
+*/
 
 
 #endif

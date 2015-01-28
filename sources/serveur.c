@@ -278,21 +278,8 @@ void Terminaison() {
 // ------------------------------------------------------------
 
 
-/* ex 8.a
- * Utilisation de pointeur de pointeur puisque l'on s'amuse avec le pointeur ;)
+/*
 */
-int extraitFichier(char *requete, char **nomFichier, size_t *maxNomFichier){
-    free(*nomFichier); //
-    if(sscanf(requete,"GET /%ms HTTP",nomFichier)!=1) // alloue automatiquement
-    {
-        fprintf(ERROROUTPUT,"erreur requete invalide : extraitFichier(%s)\n",requete);
-        return 0;
-    }
-    *maxNomFichier = strlen(*nomFichier); // longeur du nom du fichier
-    return 1;
-}
-
-
 size_t file_length(char *filename){
     int length = -1;
     FILE * file = fopen(filename,"r");
@@ -306,6 +293,85 @@ size_t file_length(char *filename){
     return length; // -1 if unknown file, 0 if empty, otherwise it return the file length
 }
 
+
+/*
+*/
+int sendStatusLine(int statusCode){
+    int retour=0;
+    char statusLine[STATUS_LINE_LENGTH+1];
+    switch(statusCode)
+    {
+        case STATUS_CODE_OK:
+            strcpy(statusLine, "STATUS_CODE_OK");
+            break;
+        case STATUS_CODE_CREATED:
+            strcpy(statusLine, "STATUS_CODE_CREATED");
+            break;
+        case STATUS_CODE_BAD_REQUEST:
+            strcpy(statusLine, "STATUS_CODE_BAD_REQUEST");
+            break;
+        case STATUS_CODE_NOT_CREATED:
+            strcpy(statusLine, "STATUS_CODE_NOT_CREATED");
+            break;
+        case STATUS_CODE_CONFLICT:
+            strcpy(statusLine, "STATUS_CODE_CONFLICT");
+            break;
+        case STATUS_CODE_FORBIDDEN:
+            strcpy(statusLine, "STATUS_CODE_FORBIDDEN");
+            break;
+        default:    // equivalent to : case STATUS_CODE_INTERNAL_SERVER_ERROR:
+            strcpy(statusLine, "STATUS_CODE_INTERNAL_SERVER_ERROR");
+            break;
+    }
+    statusLine[2] = ' ';
+    switch(statusCode)
+    {
+        case STATUS_CODE_OK:
+            strcpy(&statusLine[3], REASON_PHRASE_OK);
+            break;
+        case STATUS_CODE_CREATED:
+            strcpy(&statusLine[3], REASON_PHRASE_CREATED);
+            break;
+        case STATUS_CODE_BAD_REQUEST:
+            strcpy(&statusLine[3], REASON_PHRASE_BAD_REQUEST);
+            break;
+        case STATUS_CODE_NOT_CREATED:
+            strcpy(&statusLine[3], REASON_PHRASE_NOT_CREATED);
+            break;
+        case STATUS_CODE_CONFLICT:
+            strcpy(&statusLine[3], REASON_PHRASE_CONFLICT);
+            break;
+        case STATUS_CODE_FORBIDDEN:
+            strcpy(&statusLine[3], REASON_PHRASE_FORBIDDEN);
+            break;
+        default:    // equivalent to : case STATUS_CODE_INTERNAL_SERVER_ERROR:
+            strcpy(&statusLine[3], REASON_PHRASE_INTERNAL_SERVER_ERROR);
+            break;
+    }
+    statusLine[15] = '\n';
+    statusLine[16] = '\0';
+    return retour;
+}
+
+
+/*
+*/
+int sendHeaderField(){
+    int retour=0;
+    char headerField [RESPONSE_HEADER_LENGTH+1];
+    strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
+    // ici mettre le {Content-length}
+    headerField[31] = ';';
+    strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
+    // ici mettre le {Content-type}
+    headerField[62] = ';';
+    headerField[63] = '\n';
+    headerField[64] = '\0';
+    return retour;
+}
+
+
+/*
 
 int envoyerContenuFichierTexte(char *nomFichier){
     FILE * fichier = NULL;
@@ -398,75 +464,4 @@ int testExtension(char *nomFichier, char *extension){
     return ( len_fic > ( len_ext + 1 ) ) ? ( ! strcmp( &nomFichier[len_fic - len_ext], extension ) ) : 0;
 }
 
-
-int sendStatusLine(int statusCode){
-    int retour=0;
-    char statusLine[STATUS_LINE_LENGTH+1];
-    switch(statusCode)
-    {
-        case STATUS_CODE_OK:
-            strcpy(statusLine, "STATUS_CODE_OK");
-            break;
-        case STATUS_CODE_CREATED:
-            strcpy(statusLine, "STATUS_CODE_CREATED");
-            break;
-        case STATUS_CODE_BAD_REQUEST:
-            strcpy(statusLine, "STATUS_CODE_BAD_REQUEST");
-            break;
-        case STATUS_CODE_NOT_CREATED:
-            strcpy(statusLine, "STATUS_CODE_NOT_CREATED");
-            break;
-        case STATUS_CODE_CONFLICT:
-            strcpy(statusLine, "STATUS_CODE_CONFLICT");
-            break;
-        case STATUS_CODE_FORBIDDEN:
-            strcpy(statusLine, "STATUS_CODE_FORBIDDEN");
-            break;
-        default:    // equivalent to : case STATUS_CODE_INTERNAL_SERVER_ERROR:
-            strcpy(statusLine, "STATUS_CODE_INTERNAL_SERVER_ERROR");
-            break;
-    }
-    statusLine[2] = ' ';
-    switch(statusCode)
-    {
-        case STATUS_CODE_OK:
-            strcpy(&statusLine[3], REASON_PHRASE_OK);
-            break;
-        case STATUS_CODE_CREATED:
-            strcpy(&statusLine[3], REASON_PHRASE_CREATED);
-            break;
-        case STATUS_CODE_BAD_REQUEST:
-            strcpy(&statusLine[3], REASON_PHRASE_BAD_REQUEST);
-            break;
-        case STATUS_CODE_NOT_CREATED:
-            strcpy(&statusLine[3], REASON_PHRASE_NOT_CREATED);
-            break;
-        case STATUS_CODE_CONFLICT:
-            strcpy(&statusLine[3], REASON_PHRASE_CONFLICT);
-            break;
-        case STATUS_CODE_FORBIDDEN:
-            strcpy(&statusLine[3], REASON_PHRASE_FORBIDDEN);
-            break;
-        default:    // equivalent to : case STATUS_CODE_INTERNAL_SERVER_ERROR:
-            strcpy(&statusLine[3], REASON_PHRASE_INTERNAL_SERVER_ERROR);
-            break;
-    }
-    statusLine[15] = '\n';
-    statusLine[16] = '\0';
-    return retour;
-}
-
-
-int sendHeaderField(){
-    int retour=0;
-    char headerField [RESPONSE_HEADER_LENGTH+1];
-    strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
-    // ici mettre le {Content-length}
-    headerField[31] = ';';
-    strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
-    // ici mettre le {Content-type}
-    headerField[62] = ';';
-    headerField[63] = '\n';
-    headerField[64] = '\0';
-    return retour;
-}
+*/
