@@ -293,17 +293,17 @@ int extraitFichier(char *requete, char **nomFichier, size_t *maxNomFichier){
 }
 
 
-size_t longueur_fichier(char *nomFichier){
-    int longeur = -1;
-    FILE * fichier = fopen(nomFichier,"r");
-    if (fichier!=NULL)
+size_t file_length(char *filename){
+    int length = -1;
+    FILE * file = fopen(filename,"r");
+    if (file!=NULL)
     {
-        fseek(fichier,0,SEEK_END); // on se place a la fin du fichier
-        longeur = ftell(fichier); // on regarde ou on est pour connaitre la taille du fichier
-        fclose(fichier);
+        fseek(file,0,SEEK_END);
+        length = ftell(file);
+        fclose(file);
     }
-    fprintf(ERROROUTPUT,"fichier inexistant : longueur_fichier(%s)\n",nomFichier);
-    return longeur; // -1 si inexistant, 0 si vide, sinon X
+    fprintf(ERROROUTPUT,"error unknown file : (%s)\n",filename);
+    return length; // -1 if unknown file, 0 if empty, otherwise it return the file length
 }
 
 

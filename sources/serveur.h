@@ -54,13 +54,9 @@ void Terminaison();
 
 // ----------------------------------------------------
 
-/* ex 8.a
-*/
-int extraitFichier(char *requete, char **nomFichier, size_t *maxNomFichier) ;
-
 /* ex 8.b
 */
-size_t longueur_fichier(char *nomFichier);
+size_t file_length(char *filename);
 
 /* ex 8.c
 */
