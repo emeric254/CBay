@@ -5,7 +5,7 @@
 /* Init.
  * 
  */
-int Init(char *service);
+int Init(char *port);
 
 
 /* connectait.
