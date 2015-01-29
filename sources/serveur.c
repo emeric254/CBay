@@ -76,7 +76,7 @@ int Init(char *port) {
         setsockopt(listenSocket, SOL_SOCKET, SO_REUSEPORT, &on, sizeof(on));
 #endif
         if (bind(listenSocket, res->ai_addr, res->ai_addrlen) == 0)
-            break;          /* success */
+            break;          /* SUCESSs */
 
         close(listenSocket);    /* bind error, close and try next one */
     } while ( (res = res->ai_next) != NULL);

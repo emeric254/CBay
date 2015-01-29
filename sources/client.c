@@ -43,7 +43,7 @@ int finConnexion = FALSE;
 int Initialisation(char *machine) {
     int n;
     struct addrinfo hints, *res, *ressave;
-    char *service = PORT_SERVEUR;
+    char *service = SERVER_PORT;
 
 #ifdef WIN32
     WSADATA wsaData;
@@ -73,7 +73,7 @@ int Initialisation(char *machine) {
             continue;   /* ignore this one */
 
         if ( ! connect(socketClient, res->ai_addr, res->ai_addrlen))
-            break;      /* success */
+            break;      /* SUCESSs */
 
         close(socketClient);    /* ignore this one */
     } while ( (res = res->ai_next) != NULL);
