@@ -10,7 +10,7 @@
 //
 #define TRUE 1
 #define FALSE 0
-#define LONGUEUR_TAMPON 4096
+#define BUFFER_LENGTH 4096
 #define ERROROUTPUT stderr
 
 //

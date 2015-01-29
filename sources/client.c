@@ -30,7 +30,7 @@
 int socketClient;
 
 /* le tampon de reception */
-char tamponClient[LONGUEUR_TAMPON];
+char tamponClient[BUFFER_LENGTH];
 int debutTampon;
 int finTampon;
 int finConnexion = FALSE;
@@ -95,7 +95,7 @@ int Initialisation(char *machine) {
 /* Recoit un message envoye par le serveur.
  */
 char *Reception() {
-    char message[LONGUEUR_TAMPON];
+    char message[BUFFER_LENGTH];
     int index = 0;
     int fini = FALSE;
     int retour = 0;
@@ -131,7 +131,7 @@ char *Reception() {
             /* il faut en lire plus */
             debutTampon = 0;
             //fprintf(ERROROUTPUT, "recv\n");
-            retour = recv(socketClient, tamponClient, LONGUEUR_TAMPON, 0);
+            retour = recv(socketClient, tamponClient, BUFFER_LENGTH, 0);
             //fprintf(ERROROUTPUT, "retour : %d\n", retour);
             if (retour < 0) {
                 perror("Reception, erreur de recv.");

@@ -29,7 +29,7 @@
 int listenSocket;
 socklen_t adressLength;
 int mainSocket;
-char clientBuffer[LONGUEUR_TAMPON];
+char clientBuffer[BUFFER_LENGTH];
 int bufferStart;
 int bufferEnd;
 int connectEnd = FALSE;
@@ -128,7 +128,7 @@ int connectWait() {
 
 /* Recoit un message envoye par le serveur */
 char *Reception() {
-    char message[LONGUEUR_TAMPON];
+    char message[BUFFER_LENGTH];
     int index = 0;
     int fini = FALSE;
     int retour = 0;
@@ -164,7 +164,7 @@ char *Reception() {
             /* il faut en lire plus */
             bufferStart = 0;
             //fprintf(ERROROUTPUT, "recv\n");
-            retour = recv(mainSocket, clientBuffer, LONGUEUR_TAMPON, 0);
+            retour = recv(mainSocket, clientBuffer, BUFFER_LENGTH, 0);
             //fprintf(ERROROUTPUT, "retour : %d\n", retour);
             if (retour < 0) {
                 perror("Reception, erreur de recv.");
@@ -394,7 +394,7 @@ int envoyerContenuFichierTexte(char *nomFichier){
 
 int envoyerReponse200HTML(char *nomFichier){
     int retour=0;
-    char content [LONGUEUR_TAMPON];
+    char content [BUFFER_LENGTH];
     sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
     if((retour = Emission(content)))
         retour = envoyerContenuFichierTexte(nomFichier);
@@ -409,7 +409,7 @@ int envoyerContenuFichierBinaire(char *nomFichier){
     int retour = 0;
 //    int longeur = longueur_fichier(nomFichier);
     int taille_lue = 0;
-    char ptr[LONGUEUR_TAMPON];
+    char ptr[BUFFER_LENGTH];
 
     fichier = fopen(nomFichier,"r");
 
@@ -420,9 +420,9 @@ int envoyerContenuFichierBinaire(char *nomFichier){
     }
 
     do{
-        taille_lue = fread(ptr, 1, LONGUEUR_TAMPON, fichier);
+        taille_lue = fread(ptr, 1, BUFFER_LENGTH, fichier);
         if(taille_lue>0)
-            if(!EmissionBinaire(ptr,LONGUEUR_TAMPON))
+            if(!EmissionBinaire(ptr,BUFFER_LENGTH))
             {
                 fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
                 retour ++;
@@ -437,7 +437,7 @@ int envoyerContenuFichierBinaire(char *nomFichier){
 
 int envoyerReponse200JPG(char *nomFichier){
     int retour=0;
-    char content [LONGUEUR_TAMPON];
+    char content [BUFFER_LENGTH];
     sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/jpg; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
     if((retour = Emission(content)))
         retour = envoyerContenuFichierBinaire(nomFichier);
