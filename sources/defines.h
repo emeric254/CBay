@@ -10,12 +10,12 @@
 //
 #define TRUE 1
 #define FALSE 0
-#define LONGUEUR_TAMPON 4096
+#define BUFFER_LENGTH 4096
 #define ERROROUTPUT stderr
 
 //
-#define PORT_SERVEUR "25000"
-#define ADR_SERVEUR "127.0.0.1"
+#define SERVER_PORT "25000"
+#define SERVER_ADRESS "127.0.0.1"
 
 
 //
@@ -67,14 +67,14 @@
 
 
 // code de retours application
-#define SUCCES 0
-#define ERREUR_OUVERTURE -1
-#define ERREUR_LECTURE -2
-#define ERREUR_ECRITURE -3
-#define ERREUR_LECTURE_BUFF -4
-#define ERREUR_OUVERTURE_BUFF -5
-#define ERREUR_USER -6
-#define ERREUR_POINTEUR -6
+#define SUCESS 0
+#define ERROR_OUVERTURE -1
+#define ERROR_LECTURE -2
+#define ERROR_ECRITURE -3
+#define ERROR_LECTURE_BUFF -4
+#define ERROR_OUVERTURE_BUFF -5
+#define ERROR_USER -6
+#define ERROR_POINTEUR -6
 
 // ObjectBid structure member length
 #define OBJECTBID_NAME_LENGTH 96
@@ -90,14 +90,14 @@
 
 // valeurs des choix dans les menus
 // commun
-#define CHOIX_MENU_QUITTER 0
+#define MENU_CHOICE_QUIT 0
 // menu accueil
-#define CHOIX_MENU_ACCUEIL_CONNEXION 1
-#define CHOIX_MENU_ACCUEIL_CREATIONCOMPTE 2
-#define CHOIX_MENU_ACCUEIL_ANONYME 3
+#define MENU_CHOICE_MAIN_CONNECTION 1
+#define MENU_CHOICE_MAIN_ACCOUNT_CREATION 2
+#define MENU_CHOICE_MAIN_ANONYMOUS 3
 // menu principal
-#define CHOIX_MENU_PRINCIPAL_LISTE 1
-#define CHOIX_MENU_PRINCIPAL_RECHERCHE 2
+#define MENU_CHOICE_MAIN_LIST 1
+#define MENU_CHOICE_MAIN_SEARCH 2
 
 
 

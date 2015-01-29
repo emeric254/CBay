@@ -39,7 +39,7 @@ void saisieUtilisateur(UserAccount * account)
     if(account == NULL)
     {
         fprintf(ERROROUTPUT,"null pointer");
-        exit(ERREUR_POINTEUR);
+        exit(ERROR_POINTEUR);
     }
 
     do
@@ -112,7 +112,7 @@ void saisieVente(ObjectBid * bid)
     if(bid == NULL)
     {
         fprintf(ERROROUTPUT,"null pointer");
-        exit(ERREUR_POINTEUR);
+        exit(ERROR_POINTEUR);
     }
 
     printf("Enter the bid name\n");
@@ -150,7 +150,7 @@ int verifMail(char *mail, int taille)
     if(mail == NULL)
     {
         fprintf(ERROROUTPUT,"null pointer");
-        exit(ERREUR_POINTEUR);
+        exit(ERROR_POINTEUR);
     }
     int i = 0;
     int arobase = 0 ;
@@ -169,7 +169,7 @@ int accSave (UserAccount user)
 {
     FILE* f;
     if((f=fopen(ACC_FILE,"ab"))==NULL)
-        return(ERREUR_OUVERTURE);
+        return(ERROR_OUVERTURE);
     fwrite(&user,sizeof(UserAccount),1,f);
     fclose(f);
     return TRUE;
@@ -181,7 +181,7 @@ int accLoad (UserAccount *user)
 {
     FILE* f;
     if((f=fopen(ACC_FILE,"rb"))==NULL)
-        return(ERREUR_OUVERTURE);
+        return(ERROR_OUVERTURE);
     fread(&user,sizeof(UserAccount),1,f);
     fclose(f);
     return TRUE;
@@ -193,7 +193,7 @@ int objSave (ObjectBid obj)
 {
     FILE* f;
     if((f=fopen(OBJ_FILE,"rb"))==NULL)
-        return(ERREUR_OUVERTURE);
+        return(ERROR_OUVERTURE);
     fread(&obj,sizeof(ObjectBid),1,f);
     fclose(f);
     return TRUE;
@@ -205,7 +205,7 @@ int objLoad (ObjectBid *obj)
 {
     FILE* f;
     if((f=fopen(ACC_FILE,"rb"))==NULL)
-        return(ERREUR_OUVERTURE);
+        return(ERROR_OUVERTURE);
     fread(&obj,sizeof(ObjectBid),1,f);
     fclose(f);
     return TRUE;

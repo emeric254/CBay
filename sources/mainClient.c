@@ -16,7 +16,7 @@ int main(void)
     CLEAR();
 
     // début de la boucle "interface"
-    while ( CHOIX_MENU_QUITTER != ( choixMenu = menuAccueil() ) )
+    while ( MENU_CHOICE_QUIT != ( choixMenu = menuAccueil() ) )
     {
         CLEAR();
 
@@ -25,12 +25,12 @@ int main(void)
 
         switch(choixMenu)
         {
-            case CHOIX_MENU_ACCUEIL_CONNEXION:
+            case MENU_CHOICE_MAIN_CONNECTION:
                 // pour l'instant afficher ca
                 printf("\t\t\tBienvenue sur le menu de connexion\n");
 
                 /*
-                while(CHOIX_MENU_QUITTER != (choixMenu = menuConnexion()))
+                while(MENU_CHOICE_QUIT != (choixMenu = menuConnexion()))
                 {
                     CLEAR();
 
@@ -39,7 +39,7 @@ int main(void)
 
                     switch(choixMenu)
                     {
-                        case CHOIX_MENU_QUITTER:
+                        case MENU_CHOICE_QUIT:
                             // rien à faire car retour demandé
                             break;
 
@@ -52,12 +52,12 @@ int main(void)
                 */
                 break;
 
-            case CHOIX_MENU_ACCUEIL_CREATIONCOMPTE:
+            case MENU_CHOICE_MAIN_ACCOUNT_CREATION:
                 // pour l'instant afficher ca
                 printf("\t\t\tBienvenue sur l'utilitaire de création de compte\n");
 
                 /*
-                while(CHOIX_MENU_QUITTER != (choixMenu = menuCreationCompte()))
+                while(MENU_CHOICE_QUIT != (choixMenu = menuCreationCompte()))
                 {
                     CLEAR();
 
@@ -66,7 +66,7 @@ int main(void)
 
                     switch(choixMenu)
                     {
-                        case CHOIX_MENU_QUITTER:
+                        case MENU_CHOICE_QUIT:
                             // rien à faire car retour demandé
                             break;
 
@@ -79,8 +79,8 @@ int main(void)
                 */
                 break;
 
-            case CHOIX_MENU_ACCUEIL_ANONYME:
-                while(CHOIX_MENU_QUITTER != (choixMenu = menuPrincipal()))
+            case MENU_CHOICE_MAIN_ANONYMOUS:
+                while(MENU_CHOICE_QUIT != (choixMenu = menuPrincipal()))
                 {
                     CLEAR();
 
@@ -89,15 +89,15 @@ int main(void)
 
                     switch(choixMenu)
                     {
-                        case CHOIX_MENU_QUITTER:
+                        case MENU_CHOICE_QUIT:
                             // rien à faire car retour demandé
                             break;
 
-                        case CHOIX_MENU_PRINCIPAL_LISTE:
+                        case MENU_CHOICE_MAIN_LIST:
                             printf("\n\t\t --- WIP >> liste\n\n");
                             break;
 
-                        case CHOIX_MENU_PRINCIPAL_RECHERCHE:
+                        case MENU_CHOICE_MAIN_SEARCH:
                             printf("\n\t\t --- WIP >> recherche\n\n");
                             break;
 
@@ -134,7 +134,7 @@ int main() {
 
     fprintf(stdout,"mainClient !\n");
 
-    if(!InitialisationAvecService(ADR_SERVEUR, PORT_SERVEUR))
+    if(!InitialisationAvecService(SERVER_ADRESS, SERVER_PORT))
     {
         fprintf(stderr,"Erreur d'initialisation !");
         return 1;

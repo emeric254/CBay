@@ -26,29 +26,19 @@
 /* Variables cachees */
 
 /* le socket d'ecoute */
-int socketEcoute;
-/* longueur de l'adresse */
-socklen_t longeurAdr;
-/* le socket de service */
-int socketService;
-/* le tampon de reception */
-char tamponClient[LONGUEUR_TAMPON];
-int debutTampon;
-int finTampon;
-int finConnexion = FALSE;
+int listenSocket;
+socklen_t adressLength;
+int mainSocket;
+char clientBuffer[BUFFER_LENGTH];
+int bufferStart;
+int bufferEnd;
+int connectEnd = FALSE;
 
-/* Initialisation.
- * Creation du serveur.
- */
-int Initialisation() {
-    return InitialisationAvecService(PORT_SERVEUR);
-}
 
-/* Initialisation.
- * Creation du serveur en precisant le service ou numero de port.
- * renvoie 1 si ca c'est bien passe 0 sinon
+/* Init.
+ * 
  */
-int InitialisationAvecService(char *service) {
+int Init(char *port) {
     int n;
     const int on = 1;
     struct addrinfo hints, *res, *ressave;
@@ -57,7 +47,7 @@ int InitialisationAvecService(char *service) {
         WSADATA wsaData;
         if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR)
         {
-            fprintf(ERROROUTPUT, "WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
+            fprintf(ERROROUTPUT, "WSAStartup() failed, error : %d\n", WSAGetLastError()) ;
             WSACleanup();
             exit(1);
         }
@@ -70,55 +60,56 @@ int InitialisationAvecService(char *service) {
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
 
-    if ( (n = getaddrinfo(NULL, service, &hints, &res)) != 0)  {
-            fprintf(ERROROUTPUT, "Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
+    if ( (n = getaddrinfo(NULL, port, &hints, &res)) != 0)  {
+            fprintf(ERROROUTPUT, "getaddrinfo() failed, error : %s", gai_strerror(n));
             return 0;
     }
     ressave = res;
 
     do {
-        socketEcoute = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
-        if (socketEcoute < 0)
+        listenSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+        if (listenSocket < 0)
             continue;       /* error, try next one */
 
-        setsockopt(socketEcoute, SOL_SOCKET, SO_REUSEADDR, (char*)&on, sizeof(on));
+        setsockopt(listenSocket, SOL_SOCKET, SO_REUSEADDR, (char*)&on, sizeof(on));
 #ifdef BSD
-        setsockopt(socketEcoute, SOL_SOCKET, SO_REUSEPORT, &on, sizeof(on));
+        setsockopt(listenSocket, SOL_SOCKET, SO_REUSEPORT, &on, sizeof(on));
 #endif
-        if (bind(socketEcoute, res->ai_addr, res->ai_addrlen) == 0)
-            break;          /* success */
+        if (bind(listenSocket, res->ai_addr, res->ai_addrlen) == 0)
+            break;          /* SUCESSs */
 
-        close(socketEcoute);    /* bind error, close and try next one */
+        close(listenSocket);    /* bind error, close and try next one */
     } while ( (res = res->ai_next) != NULL);
 
     if (res == NULL) {
-            perror("Initialisation, erreur de bind.");
+            perror("bind error");
             return 0;
     }
 
-    /* conserve la longueur de l'addresse */
-    longeurAdr = res->ai_addrlen;
+    adressLength = res->ai_addrlen;
 
     freeaddrinfo(ressave);
-    /* attends au max 4 clients */
-    listen(socketEcoute, 4);
-    printf("Creation du serveur reussie. (port : %s)\n",service);
+    listen(listenSocket, 4);
+    printf("Init sucess\n");
 
     return 1;
 }
 
-/* Attends qu'un client se connecte */
-int AttenteClient() {
+
+/*
+ *
+*/
+int connectWait() {
     struct sockaddr *clientAddr;
     char machine[NI_MAXHOST];
 
-    clientAddr = (struct sockaddr*) malloc(longeurAdr);
-    socketService = accept(socketEcoute, clientAddr, &longeurAdr);
-    if (socketService == -1) {
+    clientAddr = (struct sockaddr*) malloc(adressLength);
+    mainSocket = accept(listenSocket, clientAddr, &adressLength);
+    if (mainSocket == -1) {
         perror("AttenteClient, erreur de accept.");
         return 0;
     }
-    if(getnameinfo(clientAddr, longeurAdr, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
+    if(getnameinfo(clientAddr, adressLength, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
         printf("Client sur la machine d'adresse %s connecte.\n", machine);
     } else {
         printf("Client anonyme connecte.\n");
@@ -127,40 +118,41 @@ int AttenteClient() {
     /*
      * Reinit buffer
      */
-    debutTampon = 0;
-    finTampon = 0;
-    finConnexion = FALSE;
+    bufferStart = 0;
+    bufferEnd = 0;
+    connectEnd = FALSE;
 
     return 1;
 }
 
+
 /* Recoit un message envoye par le serveur */
 char *Reception() {
-    char message[LONGUEUR_TAMPON];
+    char message[BUFFER_LENGTH];
     int index = 0;
     int fini = FALSE;
     int retour = 0;
     int trouve = FALSE;
 
-    if(finConnexion) {
+    if(connectEnd) {
         return NULL;
     }
 
     while(!fini) {
         /* on cherche dans le tampon courant */
-        while((finTampon > debutTampon) && (!trouve)) {
+        while((bufferEnd > bufferStart) && (!trouve)) {
             //fprintf(ERROROUTPUT, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
-            //      tamponClient[debutTampon], tamponClient[debutTampon], index, debutTampon);
-            if (tamponClient[debutTampon]=='\n')
+            //      clientBuffer[bufferStart], clientBuffer[bufferStart], index, bufferStart);
+            if (clientBuffer[bufferStart]=='\n')
                 trouve = TRUE;
             else
-                message[index++] = tamponClient[debutTampon++];
+                message[index++] = clientBuffer[bufferStart++];
         }
         /* on a trouve ? */
         if (trouve) {
             message[index++] = '\n';
             message[index] = '\0';
-            debutTampon++;
+            bufferStart++;
             fini = TRUE;
             //fprintf(ERROROUTPUT, "trouve\n");
 #ifdef WIN32
@@ -170,16 +162,16 @@ char *Reception() {
 #endif
         } else {
             /* il faut en lire plus */
-            debutTampon = 0;
+            bufferStart = 0;
             //fprintf(ERROROUTPUT, "recv\n");
-            retour = recv(socketService, tamponClient, LONGUEUR_TAMPON, 0);
+            retour = recv(mainSocket, clientBuffer, BUFFER_LENGTH, 0);
             //fprintf(ERROROUTPUT, "retour : %d\n", retour);
             if (retour < 0) {
                 perror("Reception, erreur de recv.");
                 return NULL;
             } else if(retour == 0) {
                 fprintf(ERROROUTPUT, "Reception, le client a ferme la connexion.\n");
-                finConnexion = TRUE;
+                connectEnd = TRUE;
                 // on n'en recevra pas plus, on renvoie ce qu'on avait ou null sinon
                 if(index > 0) {
                     message[index++] = '\n';
@@ -196,7 +188,7 @@ char *Reception() {
                 /*
                  * on a recu "retour" octets
                  */
-                finTampon = retour;
+                bufferEnd = retour;
             }
         }
     }
@@ -212,7 +204,7 @@ int Emission(char *message) {
         fprintf(ERROROUTPUT, "Emission, Le message n'est pas termine par \\n.\n");
     }
     taille = strlen(message);
-    if (send(socketService, message, taille,0) == -1) {
+    if (send(mainSocket, message, taille,0) == -1) {
         perror("Emission, probleme lors du send.");
         return 0;
     }
@@ -226,16 +218,16 @@ int ReceptionBinaire(char *donnees, size_t tailleMax) {
     int retour = 0;
     /* on commence par recopier tout ce qui reste dans le tampon
      */
-    while((finTampon > debutTampon) && (dejaRecu < tailleMax)) {
-        donnees[dejaRecu] = tamponClient[debutTampon];
+    while((bufferEnd > bufferStart) && (dejaRecu < tailleMax)) {
+        donnees[dejaRecu] = clientBuffer[bufferStart];
         dejaRecu++;
-        debutTampon++;
+        bufferStart++;
     }
     /* si on n'est pas arrive au max
      * on essaie de recevoir plus de donnees
      */
     if(dejaRecu < tailleMax) {
-        retour = recv(socketService, donnees + dejaRecu, tailleMax - dejaRecu, 0);
+        retour = recv(mainSocket, donnees + dejaRecu, tailleMax - dejaRecu, 0);
         if(retour < 0) {
             perror("ReceptionBinaire, erreur de recv.");
             return -1;
@@ -256,7 +248,7 @@ int ReceptionBinaire(char *donnees, size_t tailleMax) {
 /* Envoie des donnees au client en precisant leur taille */
 int EmissionBinaire(char *donnees, size_t taille) {
     int retour = 0;
-    retour = send(socketService, donnees, taille, 0);
+    retour = send(mainSocket, donnees, taille, 0);
     if(retour == -1) {
         perror("Emission, probleme lors du send.");
         return -1;
@@ -267,138 +259,35 @@ int EmissionBinaire(char *donnees, size_t taille) {
 
 /* Ferme la connexion avec le client */
 void TerminaisonClient() {
-    close(socketService);
+    close(mainSocket);
 }
 
 /* Arrete le serveur */
 void Terminaison() {
-    close(socketEcoute);
+    close(listenSocket);
 }
 
 // ------------------------------------------------------------
 
 
-/* ex 8.a
- * Utilisation de pointeur de pointeur puisque l'on s'amuse avec le pointeur ;)
+/*
 */
-int extraitFichier(char *requete, char **nomFichier, size_t *maxNomFichier){
-    free(*nomFichier); //
-    if(sscanf(requete,"GET /%ms HTTP",nomFichier)!=1) // alloue automatiquement
+size_t file_length(char *filename){
+    int length = -1;
+    FILE * file = fopen(filename,"r");
+    if (file!=NULL)
     {
-        fprintf(ERROROUTPUT,"erreur requete invalide : extraitFichier(%s)\n",requete);
-        return 0;
+        fseek(file,0,SEEK_END);
+        length = ftell(file);
+        fclose(file);
     }
-    *maxNomFichier = strlen(*nomFichier); // longeur du nom du fichier
-    return 1;
+    fprintf(ERROROUTPUT,"error unknown file : (%s)\n",filename);
+    return length; // -1 if unknown file, 0 if empty, otherwise it return the file length
 }
 
 
-size_t longueur_fichier(char *nomFichier){
-    int longeur = -1;
-    FILE * fichier = fopen(nomFichier,"r");
-    if (fichier!=NULL)
-    {
-        fseek(fichier,0,SEEK_END); // on se place a la fin du fichier
-        longeur = ftell(fichier); // on regarde ou on est pour connaitre la taille du fichier
-        fclose(fichier);
-    }
-    fprintf(ERROROUTPUT,"fichier inexistant : longueur_fichier(%s)\n",nomFichier);
-    return longeur; // -1 si inexistant, 0 si vide, sinon X
-}
-
-
-int envoyerContenuFichierTexte(char *nomFichier){
-    FILE * fichier = NULL;
-    int retour = 0;
-    int longeur = longueur_fichier(nomFichier);
-    char data[longeur]; // au pire c'est un fichier en 1 seule ligne donc de la longeur du fichier !
-
-    fichier = fopen(nomFichier,"r");
-
-    if(fichier == NULL)
-    {
-        fprintf(ERROROUTPUT,"erreur ouverture fichier : envoiContenuFichierTexte(%s)\n",nomFichier);
-        return 0;
-    }
-
-    while(fgets(data, longeur, fichier)!=NULL) // lire une ligne
-        if(!EmissionBinaire(data,strlen(data))) // l'envoyer
-        {
-            fprintf(ERROROUTPUT,"erreur envoi : envoiContenuFichierTexte(%s)\n",nomFichier);
-            retour ++;
-        }
-
-    fclose(fichier);// fermeture fichier
-
-    return !retour;
-}
-
-
-int envoyerReponse200HTML(char *nomFichier){
-    int retour=0;
-    char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierTexte(nomFichier);
-    if(!retour)
-        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse200HTML(%s)\n",nomFichier);
-    return retour;
-}
-
-
-int envoyerContenuFichierBinaire(char *nomFichier){
-    FILE * fichier = NULL;
-    int retour = 0;
-//    int longeur = longueur_fichier(nomFichier);
-    int taille_lue = 0;
-    char ptr[LONGUEUR_TAMPON];
-
-    fichier = fopen(nomFichier,"r");
-
-    if(fichier == NULL)
-    {
-        fprintf(ERROROUTPUT,"erreur ouverture fichier : envoyerContenuFichierBinaire(%s)\n",nomFichier);
-        return 0;
-    }
-
-    do{
-        taille_lue = fread(ptr, 1, LONGUEUR_TAMPON, fichier);
-        if(taille_lue>0)
-            if(!EmissionBinaire(ptr,LONGUEUR_TAMPON))
-            {
-                fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
-                retour ++;
-            }
-    }while(taille_lue>0);
-
-    fclose(fichier);// fermeture fichier
-
-    return !retour;
-}
-
-
-int envoyerReponse200JPG(char *nomFichier){
-    int retour=0;
-    char content [LONGUEUR_TAMPON];
-    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/jpg; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierBinaire(nomFichier);
-    return retour;
-}
-
-
-// verifie l'extension/le suffixe d'un fichier
-int testExtension(char *nomFichier, char *extension){
-    // ternaire qui renvoi 1 si extension en fin de nomFichier == extension sinon 0
-
-    // ca evite de calculer plusieurs fois les longeurs des chaines :
-    int len_fic = strlen(nomFichier);
-    int len_ext = strlen(extension);
-
-    return ( len_fic > ( len_ext + 1 ) ) ? ( ! strcmp( &nomFichier[len_fic - len_ext], extension ) ) : 0;
-}
-
-
+/*
+*/
 int sendStatusLine(int statusCode){
     int retour=0;
     char statusLine[STATUS_LINE_LENGTH+1];
@@ -457,6 +346,8 @@ int sendStatusLine(int statusCode){
 }
 
 
+/*
+*/
 int sendHeaderField(){
     int retour=0;
     char headerField [RESPONSE_HEADER_LENGTH+1];
@@ -470,3 +361,99 @@ int sendHeaderField(){
     headerField[64] = '\0';
     return retour;
 }
+
+
+/*
+
+int envoyerContenuFichierTexte(char *nomFichier){
+    FILE * fichier = NULL;
+    int retour = 0;
+    int longeur = longueur_fichier(nomFichier);
+    char data[longeur]; // au pire c'est un fichier en 1 seule ligne donc de la longeur du fichier !
+
+    fichier = fopen(nomFichier,"r");
+
+    if(fichier == NULL)
+    {
+        fprintf(ERROROUTPUT,"erreur ouverture fichier : envoiContenuFichierTexte(%s)\n",nomFichier);
+        return 0;
+    }
+
+    while(fgets(data, longeur, fichier)!=NULL) // lire une ligne
+        if(!EmissionBinaire(data,strlen(data))) // l'envoyer
+        {
+            fprintf(ERROROUTPUT,"erreur envoi : envoiContenuFichierTexte(%s)\n",nomFichier);
+            retour ++;
+        }
+
+    fclose(fichier);// fermeture fichier
+
+    return !retour;
+}
+
+
+int envoyerReponse200HTML(char *nomFichier){
+    int retour=0;
+    char content [BUFFER_LENGTH];
+    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
+        retour = envoyerContenuFichierTexte(nomFichier);
+    if(!retour)
+        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse200HTML(%s)\n",nomFichier);
+    return retour;
+}
+
+
+int envoyerContenuFichierBinaire(char *nomFichier){
+    FILE * fichier = NULL;
+    int retour = 0;
+//    int longeur = longueur_fichier(nomFichier);
+    int taille_lue = 0;
+    char ptr[BUFFER_LENGTH];
+
+    fichier = fopen(nomFichier,"r");
+
+    if(fichier == NULL)
+    {
+        fprintf(ERROROUTPUT,"erreur ouverture fichier : envoyerContenuFichierBinaire(%s)\n",nomFichier);
+        return 0;
+    }
+
+    do{
+        taille_lue = fread(ptr, 1, BUFFER_LENGTH, fichier);
+        if(taille_lue>0)
+            if(!EmissionBinaire(ptr,BUFFER_LENGTH))
+            {
+                fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
+                retour ++;
+            }
+    }while(taille_lue>0);
+
+    fclose(fichier);// fermeture fichier
+
+    return !retour;
+}
+
+
+int envoyerReponse200JPG(char *nomFichier){
+    int retour=0;
+    char content [BUFFER_LENGTH];
+    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/jpg; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
+    if((retour = Emission(content)))
+        retour = envoyerContenuFichierBinaire(nomFichier);
+    return retour;
+}
+
+
+// verifie l'extension/le suffixe d'un fichier
+int testExtension(char *nomFichier, char *extension){
+    // ternaire qui renvoi 1 si extension en fin de nomFichier == extension sinon 0
+
+    // ca evite de calculer plusieurs fois les longeurs des chaines :
+    int len_fic = strlen(nomFichier);
+    int len_ext = strlen(extension);
+
+    return ( len_fic > ( len_ext + 1 ) ) ? ( ! strcmp( &nomFichier[len_fic - len_ext], extension ) ) : 0;
+}
+
+*/
