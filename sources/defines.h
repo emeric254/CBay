@@ -66,15 +66,16 @@
 #define ACCOUNT_LABEL_USER "User, limited to bought things"
 
 
-// code de retours application
+// application return codes
 #define SUCESS 0
-#define ERROR_OUVERTURE -1
-#define ERROR_LECTURE -2
-#define ERROR_ECRITURE -3
-#define ERROR_LECTURE_BUFF -4
-#define ERROR_OUVERTURE_BUFF -5
-#define ERROR_USER -6
-#define ERROR_POINTEUR -6
+#define ERROR_OPENING -1
+#define ERROR_READING -2
+#define ERROR_WRITING -3
+#define ERROR_READING_BUFF -4
+#define ERROR_OPENING_BUFF -5
+#define ERROR_WRITING_BUFF -5
+#define ERROR_USER -7
+#define ERROR_POINTER -8
 
 // ObjectBid structure member length
 #define OBJECTBID_NAME_LENGTH 96
@@ -88,14 +89,14 @@
 #define USERACCOUNT_MAIL_LENGTH 80
 
 
-// valeurs des choix dans les menus
-// commun
+// menu choices
+// common
 #define MENU_CHOICE_QUIT 0
-// menu accueil
+// welcome menu
 #define MENU_CHOICE_MAIN_CONNECTION 1
 #define MENU_CHOICE_MAIN_ACCOUNT_CREATION 2
 #define MENU_CHOICE_MAIN_ANONYMOUS 3
-// menu principal
+// main menu
 #define MENU_CHOICE_MAIN_LIST 1
 #define MENU_CHOICE_MAIN_SEARCH 2
 
