@@ -254,10 +254,13 @@ int sendConnect(char* login, char* password)
     msg[length++] = '\n';
     msg[length] = '\0';
     
-    //@TODO bon jusqu'ici, apres c'est a voir !
-    if(strstr(msg, "\n") == NULL) {
-        fprintf(ERROROUTPUT, "Emission, Le message n'est pas termine par \\n.\n");
-    }
+    //@TODO bon jusqu'ici, apres c'est a voir :
+
+// inutile ?
+//    if(strstr(msg, "\n") == NULL) {
+//        fprintf(ERROROUTPUT, "sendGet error, massage is not terminated properly.\n");
+//    }
+
     if ( send(clientSocket, msg, length,0) == -1 )
     {
         perror("sendGet error.");
@@ -269,9 +272,53 @@ int sendConnect(char* login, char* password)
 
 /*
 */
-int splitStatusLine(char *statusLine, int statusCode, char* statusMessage)
+int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
 {
-	return 0;
+	if(!strncmp(statusLine,"STATUS_CODE_OK",2))
+	{
+		*statusCode = STATUS_CODE_OK;
+		strncpy(statusMessage,REASON_PHRASE_OK,12);
+	}
+	else if(!strncmp(statusLine,"STATUS_CODE_CREATED",2))
+	{
+		*statusCode = STATUS_CODE_CREATED;
+		strncpy(statusMessage,REASON_PHRASE_CREATED,12);
+	}
+	else if(!strncmp(statusLine,"STATUS_CODE_BAD_REQUEST",2))
+	{
+		*statusCode = STATUS_CODE_BAD_REQUEST;
+		strncpy(statusMessage,REASON_PHRASE_BAD_REQUEST,12);
+	}
+	else if(!strncmp(statusLine,"STATUS_CODE_NOT_CREATED",2))
+	{
+		*statusCode = STATUS_CODE_NOT_CREATED;
+		strncpy(statusMessage,REASON_PHRASE_NOT_CREATED,12);
+	}
+	else if(!strncmp(statusLine,"STATUS_CODE_INTERNAL_SERVER_ERROR",2))
+	{
+		*statusCode = STATUS_CODE_INTERNAL_SERVER_ERROR;
+		strncpy(statusMessage,REASON_PHRASE_INTERNAL_SERVER_ERROR,12);
+	}
+	else if(!strncmp(statusLine,"STATUS_CODE_CONFLICT",2))
+	{
+		*statusCode = STATUS_CODE_CONFLICT;
+		strncpy(statusMessage,REASON_PHRASE_CONFLICT,12);
+	}
+	else if(!strncmp(statusLine,"STATUS_CODE_FORBIDDEN",2))
+	{
+		*statusCode = STATUS_CODE_FORBIDDEN;
+		strncpy(statusMessage,REASON_PHRASE_FORBIDDEN,12);
+	}
+	else
+	{
+		if(statusLine[0]=='-')
+			*statusCode = 0 - statusLine[1] - '0';
+		else
+			*statusCode = 10 * (statusLine[0] - '0') + statusLine[1] - '0';
+		strncpy(statusMessage,&statusLine[3],12);
+		return FALSE;
+	}
+	return TRUE;
 }
 
 

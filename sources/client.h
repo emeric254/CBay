@@ -46,7 +46,7 @@ int sendConnect(char* login, char* password);
 
 /*
 */
-int splitStatusLine(char *statusLine, int statusCode, char* statusMessage);
+int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage);
 
 
 /*

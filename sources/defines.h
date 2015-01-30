@@ -52,7 +52,7 @@
 // reason phrases
 #define REASON_PHRASE_BAD_REQUEST "Bad Request"
 #define REASON_PHRASE_NOT_CREATED "Not Created"
-#define REASON_PHRASE_INTERNAL_SERVER_ERROR "Internal Server Error"
+#define REASON_PHRASE_INTERNAL_SERVER_ERROR "Server Error"
 #define REASON_PHRASE_CONFLICT "Conflict"
 #define REASON_PHRASE_FORBIDDEN "Forbidden"
 
