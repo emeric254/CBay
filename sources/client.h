@@ -51,7 +51,7 @@ int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage);
 
 /*
 */
-int splitResponseHeader(char *responseHeaderField, int contentLength, char* contentType);
+int splitResponseHeader(char *responseHeaderField, int* contentLength, char* contentType);
 
 
 /* Ferme la connexion.

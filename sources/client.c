@@ -324,8 +324,24 @@ int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
 
 /*
 */
-int splitResponseHeader(char *responseHeaderField, int contentLength, char* contentType)
+int splitResponseHeader(char *responseHeaderField, int* contentLength, char* contentType)
 {
+	int i = 0;
+	int multiplicator = 1;
+	
+	for(i=0;i<15;i++)
+		multiplicator *= 10;
+		
+	*contentLength = 0;
+	
+	for(i=16;i<16+15;i++)
+	{
+		*contentLength += multiplicator * (responseHeaderField[i] - '0');
+		multiplicator /= 10;
+	}
+	
+	strncpy(contentType,&responseHeaderField[46],16);
+	
 	return 0;
 }
 
