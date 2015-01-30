@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -19,21 +18,15 @@
     #include <strings.h>
 #endif
 
-
 #include "defines.h"
 #include "client.h"
 
 
-/* Variable(s) privée(s) */
-
-/* le socket client */
 int socketClient;
-
-/* le tampon de reception */
-char tamponClient[BUFFER_LENGTH];
-int debutTampon;
-int finTampon;
-int finConnexion = FALSE;
+char clientBuffer[BUFFER_LENGTH];
+int bufferStart;
+int bufferEnd;
+int connectEnd = FALSE;
 
 
 /* Initialisation.
@@ -85,7 +78,7 @@ int Initialisation(char *machine) {
 
     freeaddrinfo(ressave);
 
-    finConnexion = FALSE;
+    connectEnd = FALSE;
 
     printf("Connexion avec le serveur reussie.\n");
 
@@ -101,25 +94,25 @@ char *Reception() {
     int retour = 0;
     int trouve = FALSE;
 
-    if(finConnexion) {
+    if(connectEnd) {
         return NULL;
     }
 
     while(!fini) {
         /* on cherche dans le tampon courant */
-        while((finTampon > debutTampon) && (!trouve)) {
+        while((bufferEnd > bufferStart) && (!trouve)) {
             //fprintf(ERROROUTPUT, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
-            //                  tamponClient[debutTampon], tamponClient[debutTampon], index, debutTampon);
-            if (tamponClient[debutTampon]=='\n')
+            //                  clientBuffer[bufferStart], clientBuffer[bufferStart], index, bufferStart);
+            if (clientBuffer[bufferStart]=='\n')
                 trouve = TRUE;
             else
-                message[index++] = tamponClient[debutTampon++];
+                message[index++] = clientBuffer[bufferStart++];
         }
         /* on a trouve ? */
         if (trouve) {
             message[index++] = '\n';
             message[index] = '\0';
-            debutTampon++;
+            bufferStart++;
             fini = TRUE;
             //fprintf(ERROROUTPUT, "trouve\n");
 #ifdef WIN32
@@ -129,16 +122,16 @@ char *Reception() {
 #endif
         } else {
             /* il faut en lire plus */
-            debutTampon = 0;
+            bufferStart = 0;
             //fprintf(ERROROUTPUT, "recv\n");
-            retour = recv(socketClient, tamponClient, BUFFER_LENGTH, 0);
+            retour = recv(socketClient, clientBuffer, BUFFER_LENGTH, 0);
             //fprintf(ERROROUTPUT, "retour : %d\n", retour);
             if (retour < 0) {
                 perror("Reception, erreur de recv.");
                 return NULL;
             } else if(retour == 0) {
                 fprintf(ERROROUTPUT, "Reception, le serveur a ferme la connexion.\n");
-                finConnexion = TRUE;
+                connectEnd = TRUE;
                 // on n'en recevra pas plus, on renvoie ce qu'on avait ou null sinon
                 if(index > 0) {
                     message[index++] = '\n';
@@ -155,7 +148,7 @@ char *Reception() {
                 /*
                  * on a recu "retour" octets
                  */
-                finTampon = retour;
+                bufferEnd = retour;
             }
         }
     }
@@ -181,15 +174,15 @@ int Emission(char *message) {
 
 /* Recoit des donnees envoyees par le serveur.
  */
-int ReceptionBinaire(char *donnees, size_t tailleMax) {
+int receiveBinary(char *donnees, size_t tailleMax) {
     size_t dejaRecu = 0;
     int retour = 0;
     /* on commence par recopier tout ce qui reste dans le tampon
      */
-    while((finTampon > debutTampon) && (dejaRecu < tailleMax)) {
-        donnees[dejaRecu] = tamponClient[debutTampon];
+    while((bufferEnd > bufferStart) && (dejaRecu < tailleMax)) {
+        donnees[dejaRecu] = clientBuffer[bufferStart];
         dejaRecu++;
-        debutTampon++;
+        bufferStart++;
     }
     /* si on n'est pas arrive au max
      * on essaie de recevoir plus de donnees
@@ -197,10 +190,10 @@ int ReceptionBinaire(char *donnees, size_t tailleMax) {
     if(dejaRecu < tailleMax) {
         retour = recv(socketClient, donnees + dejaRecu, tailleMax - dejaRecu, 0);
         if(retour < 0) {
-            perror("ReceptionBinaire, erreur de recv.");
+            perror("receiveBinary, erreur de recv.");
             return -1;
         } else if(retour == 0) {
-            fprintf(ERROROUTPUT, "ReceptionBinaire, le serveur a ferme la connexion.\n");
+            fprintf(ERROROUTPUT, "receiveBinary, le serveur a ferme la connexion.\n");
             return 0;
         } else {
             /*
@@ -215,7 +208,7 @@ int ReceptionBinaire(char *donnees, size_t tailleMax) {
 
 /* Envoie des donnees au serveur en precisant leur taille.
  */
-int EmissionBinaire(char *donnees, size_t taille) {
+int sendBinary(char *donnees, size_t taille) {
     int retour = 0;
     retour = send(socketClient, donnees, taille, 0);
     if(retour == -1) {

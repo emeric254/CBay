@@ -9,42 +9,38 @@
 
 int main(void)
 {
-    // variables
-    int choixMenu; // le choix fait par l'utilisateur
-
-    // on fais le ménage sur l'écran pour commencer
+    // vars
+    int menuChoice; // user choice var
+    int connected = FALSE;
+    int i = 0, j = 0;
+    
+    
     CLEAR();
 
-    // début de la boucle "interface"
-    while ( MENU_CHOICE_QUIT != ( choixMenu = welcomeMenu() ) )
+    while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
     {
         CLEAR();
-
-        // debug
-        printf("[%d]\n",choixMenu);
-
-        switch(choixMenu)
+        
+        switch(menuChoice)
         {
             case MENU_CHOICE_MAIN_CONNECTION:
-                // pour l'instant afficher ca
-                printf("\t\t\tConnection\n");
-
                 /*
-                while(MENU_CHOICE_QUIT != (choixMenu = menuConnexion()))
+                while(MENU_CHOICE_QUIT != (menuChoice = menuConnexion()))
                 {
                     CLEAR();
 
                     // debug
-                    printf("[%d]\n",choixMenu);
+                    printf("[%d]\n",menuChoice);
+					// -----
 
-                    switch(choixMenu)
+                    switch(menuChoice)
                     {
                         case MENU_CHOICE_QUIT:
                             // rien à faire car retour demandé
                             break;
 
                         default:
-                            printf("\n\t\t --- Please make a correct choice !\n\n");
+                            printf("\n\t --- Please make a correct choice !\n\n");
                             break;
                     }
                 }
@@ -53,25 +49,22 @@ int main(void)
                 break;
 
             case MENU_CHOICE_MAIN_ACCOUNT_CREATION:
-                // pour l'instant afficher ca
-                printf("\t\t\tAccount creation\n");
-
                 /*
-                while(MENU_CHOICE_QUIT != (choixMenu = menuCreationCompte()))
+                while(MENU_CHOICE_QUIT != (menuChoice = menuCreationCompte()))
                 {
                     CLEAR();
 
                     // debug
-                    printf("[%d]\n",choixMenu);
+                    printf("[%d]\n",menuChoice);
 
-                    switch(choixMenu)
+                    switch(menuChoice)
                     {
                         case MENU_CHOICE_QUIT:
                             // rien à faire car retour demandé
                             break;
 
                         default:
-                            printf("\n\t\t --- Please make a correct choice !\n\n");
+                            printf("\n\t --- Please make a correct choice !\n\n");
                             break;
                     }
                 }
@@ -80,29 +73,26 @@ int main(void)
                 break;
 
             case MENU_CHOICE_MAIN_ANONYMOUS:
-                while(MENU_CHOICE_QUIT != (choixMenu = mainMenu()))
+                while(MENU_CHOICE_QUIT != (menuChoice = mainMenu()))
                 {
                     CLEAR();
 
-                    // debug
-                    printf("[%d]\n",choixMenu);
-
-                    switch(choixMenu)
+                    switch(menuChoice)
                     {
                         case MENU_CHOICE_QUIT:
                             // rien à faire car retour demandé
                             break;
 
                         case MENU_CHOICE_MAIN_LIST:
-                            printf("\n\t\t --- WIP >> list\n\n");
+                            printf("\n\t --- WIP >> list\n\n");
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
-                            printf("\n\t\t --- WIP >> seach\n\n");
+                            printf("\n\t --- WIP >> seach\n\n");
                             break;
 
                         default:
-                            printf("\n\t\t --- Please make a correct choice !\n\n");
+                            printf("\n\t --- Please make a correct choice !\n\n");
                             break;
                     }
                 }
@@ -110,13 +100,13 @@ int main(void)
                 break;
 
             default:
-                printf("\n\t\t --- Please make a correct choice !\n\n");
+                printf("\n\t --- Please make a correct choice !\n\n");
                 break;
         }
     }
 
     CLEAR();
-    printf("\n\t\t Thank you to use BEEP !\n\n");
+    printf("\n\t Thank you to use BEEP !\n\n");
 
 /*
     printf("\npress a key to quit...\n");

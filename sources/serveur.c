@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <sys/types.h>
+#include <errno.h>
 
 #ifdef WIN32
     #include <winsock2.h>
@@ -17,15 +18,10 @@
     #include <strings.h>
 #endif
 
-#include <errno.h>
-
 #include "defines.h"
 #include "serveur.h"
 
 
-/* Variables cachees */
-
-/* le socket d'ecoute */
 int listenSocket;
 socklen_t adressLength;
 int mainSocket;
@@ -213,7 +209,7 @@ int Emission(char *message) {
 }
 
 /* Recoit des donnees envoyees par le client */
-int ReceptionBinaire(char *donnees, size_t tailleMax) {
+int receiveBinary(char *donnees, size_t tailleMax) {
     size_t dejaRecu = 0;
     int retour = 0;
     /* on commence par recopier tout ce qui reste dans le tampon
@@ -229,10 +225,10 @@ int ReceptionBinaire(char *donnees, size_t tailleMax) {
     if(dejaRecu < tailleMax) {
         retour = recv(mainSocket, donnees + dejaRecu, tailleMax - dejaRecu, 0);
         if(retour < 0) {
-            perror("ReceptionBinaire, erreur de recv.");
+            perror("receiveBinary, erreur de recv.");
             return -1;
         } else if(retour == 0) {
-            fprintf(ERROROUTPUT, "ReceptionBinaire, le client a ferme la connexion.\n");
+            fprintf(ERROROUTPUT, "receiveBinary, le client a ferme la connexion.\n");
             return 0;
         } else {
             /*
@@ -246,7 +242,7 @@ int ReceptionBinaire(char *donnees, size_t tailleMax) {
 }
 
 /* Envoie des donnees au client en precisant leur taille */
-int EmissionBinaire(char *donnees, size_t taille) {
+int sendBinary(char *donnees, size_t taille) {
     int retour = 0;
     retour = send(mainSocket, donnees, taille, 0);
     if(retour == -1) {
@@ -380,7 +376,7 @@ int envoyerContenuFichierTexte(char *nomFichier){
     }
 
     while(fgets(data, longeur, fichier)!=NULL) // lire une ligne
-        if(!EmissionBinaire(data,strlen(data))) // l'envoyer
+        if(!sendBinary(data,strlen(data))) // l'envoyer
         {
             fprintf(ERROROUTPUT,"erreur envoi : envoiContenuFichierTexte(%s)\n",nomFichier);
             retour ++;
@@ -422,7 +418,7 @@ int envoyerContenuFichierBinaire(char *nomFichier){
     do{
         taille_lue = fread(ptr, 1, BUFFER_LENGTH, fichier);
         if(taille_lue>0)
-            if(!EmissionBinaire(ptr,BUFFER_LENGTH))
+            if(!sendBinary(ptr,BUFFER_LENGTH))
             {
                 fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
                 retour ++;

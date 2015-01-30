@@ -32,14 +32,14 @@ int Emission(char *message);
  * renvoie le nombre d'octets reus, 0 si la connexion est ferme,
  * un nombre ngatif en cas d'erreur
  */
-int ReceptionBinaire(char *donnees, size_t tailleMax);
+int receiveBinary(char *donnees, size_t tailleMax);
 
 
 /* Envoie des donnes au client en prcisant leur taille.
  * renvoie le nombre d'octets envoys, 0 si la connexion est ferme,
  * un nombre ngatif en cas d'erreur
  */
-int EmissionBinaire(char *donnees, size_t taille);
+int sendBinary(char *donnees, size_t taille);
 
 
 /* Ferme la connexion avec le client.
