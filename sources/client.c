@@ -29,7 +29,7 @@ int bufferEnd;
 int connectEnd = FALSE;
 
 
-/* Initialisation.
+/* Init.
  * Connexion au serveur sur la machine donnee.
  * Utilisez localhost pour un fonctionnement local.
  */
@@ -157,7 +157,7 @@ char *Reception() {
 }
 
 
-/* Recoit des donnees envoyees par le serveur.
+/* receiveBinary.
  */
 int receiveBinary(char *donnees, size_t tailleMax) {
     size_t dejaRecu = 0;
@@ -192,7 +192,7 @@ int receiveBinary(char *donnees, size_t tailleMax) {
 }
 
 
-/* Envoie des donnees au serveur en precisant leur taille.
+/* sendBinary.
  */
 int sendBinary(char *donnees, size_t taille) {
     int retour = 0;
@@ -206,7 +206,7 @@ int sendBinary(char *donnees, size_t taille) {
 }
 
 
-/*
+/* sendGet.
 */
 int sendGet()
 {
@@ -214,7 +214,7 @@ int sendGet()
 }
 
 
-/*
+/* sendPut.
 */
 int sendPut()
 {
@@ -222,7 +222,7 @@ int sendPut()
 }
 
 
-/*
+/* sendDelete.
 */
 int sendDelete()
 {
@@ -230,7 +230,7 @@ int sendDelete()
 }
 
 
-/*
+/* sendConnect.
 */
 int sendConnect(char* login, char* password)
 {
@@ -270,7 +270,7 @@ int sendConnect(char* login, char* password)
 }
 
 
-/*
+/* splitStatusLine.
 */
 int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
 {
@@ -322,7 +322,7 @@ int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
 }
 
 
-/*
+/* splitResponseHeader.
 */
 int splitResponseHeader(char *responseHeaderField, int* contentLength, char* contentType)
 {
