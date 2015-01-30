@@ -2,18 +2,18 @@
 #define __INTERFACECLIENT_H__
 
 
-/* menuAccueil.
- * Affiche l'écran d'accueil.
- * retourne le choix de l'utilisateur.
+/* welcomeMenu.
+ * show welcome menu.
+ * return user choice.
  */
-int menuAccueil();
+int welcomeMenu();
 
 
-/* menuPrincipal.
- * Affiche le menu principal.
- * retourne le choix de l'utilisateur.
+/* mainMenu.
+ * show main menu.
+ * return user choice.
  */
-int menuPrincipal();
+int mainMenu();
 
 /* ... */
 

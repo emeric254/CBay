@@ -7,9 +7,9 @@
 #include "structures.h"
 
 
-/* menuAccueil
+/* welcomeMenu
  */
-int menuAccueil()
+int welcomeMenu()
 {
     fprintf(stdout, "\t\t\t\tBIENVENUE SUR BEEP\n\n\n");
     fprintf(stdout, "\t\t\t\t%d - Quitter\n", MENU_CHOICE_QUIT);
@@ -21,9 +21,9 @@ int menuAccueil()
 }
 
 
-/* menuPrincipal
+/* mainMenu
  */
-int menuPrincipal()
+int mainMenu()
 {
     fprintf(stdout, "\t\t\t\tBIENVENUE SUR BEEP\n\n\n");
     fprintf(stdout, "\t\t\t\t%d - Retour\n", MENU_CHOICE_QUIT);

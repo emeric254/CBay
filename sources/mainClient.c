@@ -16,7 +16,7 @@ int main(void)
     CLEAR();
 
     // début de la boucle "interface"
-    while ( MENU_CHOICE_QUIT != ( choixMenu = menuAccueil() ) )
+    while ( MENU_CHOICE_QUIT != ( choixMenu = welcomeMenu() ) )
     {
         CLEAR();
 
@@ -80,7 +80,7 @@ int main(void)
                 break;
 
             case MENU_CHOICE_MAIN_ANONYMOUS:
-                while(MENU_CHOICE_QUIT != (choixMenu = menuPrincipal()))
+                while(MENU_CHOICE_QUIT != (choixMenu = mainMenu()))
                 {
                     CLEAR();
 
