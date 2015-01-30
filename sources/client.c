@@ -22,7 +22,7 @@
 #include "client.h"
 
 
-int socketClient;
+int clientSocket;
 char clientBuffer[BUFFER_LENGTH];
 int bufferStart;
 int bufferEnd;
@@ -61,14 +61,14 @@ int Initialisation(char *machine) {
     ressave = res;
 
     do {
-        socketClient = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
-        if (socketClient < 0)
+        clientSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+        if (clientSocket < 0)
             continue;   /* ignore this one */
 
-        if ( ! connect(socketClient, res->ai_addr, res->ai_addrlen))
+        if ( ! connect(clientSocket, res->ai_addr, res->ai_addrlen))
             break;      /* SUCESSs */
 
-        close(socketClient);    /* ignore this one */
+        close(clientSocket);    /* ignore this one */
     } while ( (res = res->ai_next) != NULL);
 
     if (res == NULL) {
@@ -84,6 +84,7 @@ int Initialisation(char *machine) {
 
     return 1;
 }
+
 
 /* Recoit un message envoye par le serveur.
  */
@@ -124,7 +125,7 @@ char *Reception() {
             /* il faut en lire plus */
             bufferStart = 0;
             //fprintf(ERROROUTPUT, "recv\n");
-            retour = recv(socketClient, clientBuffer, BUFFER_LENGTH, 0);
+            retour = recv(clientSocket, clientBuffer, BUFFER_LENGTH, 0);
             //fprintf(ERROROUTPUT, "retour : %d\n", retour);
             if (retour < 0) {
                 perror("Reception, erreur de recv.");
@@ -155,22 +156,6 @@ char *Reception() {
     return NULL;
 }
 
-/* Envoie un message au serveur.
- * Attention, le message doit etre termine par \n
- */
-int Emission(char *message) {
-    int taille;
-    if(strstr(message, "\n") == NULL) {
-        fprintf(ERROROUTPUT, "Emission, Le message n'est pas termine par \\n.\n");
-    }
-    taille = strlen(message);
-    if (send(socketClient, message, taille,0) == -1) {
-        perror("Emission, probleme lors du send.");
-        return 0;
-    }
-    printf("Emission de %d caracteres.\n", taille+1);
-    return 1;
-}
 
 /* Recoit des donnees envoyees par le serveur.
  */
@@ -188,9 +173,9 @@ int receiveBinary(char *donnees, size_t tailleMax) {
      * on essaie de recevoir plus de donnees
      */
     if(dejaRecu < tailleMax) {
-        retour = recv(socketClient, donnees + dejaRecu, tailleMax - dejaRecu, 0);
+        retour = recv(clientSocket, donnees + dejaRecu, tailleMax - dejaRecu, 0);
         if(retour < 0) {
-            perror("receiveBinary, erreur de recv.");
+            perror("receiveBinary error.");
             return -1;
         } else if(retour == 0) {
             fprintf(ERROROUTPUT, "receiveBinary, le serveur a ferme la connexion.\n");
@@ -206,13 +191,14 @@ int receiveBinary(char *donnees, size_t tailleMax) {
     }
 }
 
+
 /* Envoie des donnees au serveur en precisant leur taille.
  */
 int sendBinary(char *donnees, size_t taille) {
     int retour = 0;
-    retour = send(socketClient, donnees, taille, 0);
+    retour = send(clientSocket, donnees, taille, 0);
     if(retour == -1) {
-        perror("Emission, probleme lors du send.");
+        perror("sendBinary error.");
         return -1;
     } else {
         return retour;
@@ -220,8 +206,85 @@ int sendBinary(char *donnees, size_t taille) {
 }
 
 
+/*
+*/
+int sendGet()
+{
+	return 0;
+}
+
+
+/*
+*/
+int sendPut()
+{
+	return 0;
+}
+
+
+/*
+*/
+int sendDelete()
+{
+	return 0;
+}
+
+
+/*
+*/
+int sendConnect(char* login, char* password)
+{
+    int length;
+    char msg[64+1];
+    
+    strcpy(msg,REQUEST_METHOD_CONNECT);
+    length = strlen(REQUEST_METHOD_CONNECT);
+    
+    msg[length++] = ' ';
+    
+    strncpy(&msg[length], login, USERACCOUNT_LOGIN_LENGTH);
+    length += (strlen(login) < USERACCOUNT_LOGIN_LENGTH)? strlen(login):USERACCOUNT_LOGIN_LENGTH;
+    
+    msg[length++] = ';';
+    
+    strncpy(&msg[length], password, USERACCOUNT_PASSWORD_LENGTH);
+    length += (strlen(password) < USERACCOUNT_PASSWORD_LENGTH)? strlen(password):USERACCOUNT_PASSWORD_LENGTH;
+    
+    msg[length++] = ';';
+    msg[length++] = '\n';
+    msg[length] = '\0';
+    
+    //@TODO bon jusqu'ici, apres c'est a voir !
+    if(strstr(msg, "\n") == NULL) {
+        fprintf(ERROROUTPUT, "Emission, Le message n'est pas termine par \\n.\n");
+    }
+    if ( send(clientSocket, msg, length,0) == -1 )
+    {
+        perror("sendGet error.");
+        return 0;
+    }
+    return 1;
+}
+
+
+/*
+*/
+int splitStatusLine(char *statusLine, int statusCode, char* statusMessage)
+{
+	return 0;
+}
+
+
+/*
+*/
+int splitResponseHeader(char *responseHeaderField, int contentLength, char* contentType)
+{
+	return 0;
+}
+
+
 /* Ferme la connexion.
  */
 void Terminaison() {
-    close(socketClient);
+    close(clientSocket);
 }

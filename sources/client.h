@@ -41,7 +41,7 @@ int sendDelete();
 
 /*
 */
-int sendConnect();
+int sendConnect(char* login, char* password);
 
 
 /*

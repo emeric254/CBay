@@ -13,8 +13,7 @@ int main(void)
     int menuChoice; // user choice var
     int connected = FALSE;
     int i = 0, j = 0;
-    
-    
+
     CLEAR();
 
     while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
