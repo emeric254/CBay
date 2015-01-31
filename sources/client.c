@@ -33,7 +33,7 @@ int connectEnd = FALSE;
  * Connexion au serveur sur la machine donnee.
  * Utilisez localhost pour un fonctionnement local.
  */
-int Initialisation(char *machine) {
+int Init(char *machine) {
     int n;
     struct addrinfo hints, *res, *ressave;
     char *service = SERVER_PORT;
