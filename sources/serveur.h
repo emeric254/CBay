@@ -8,7 +8,7 @@
 int Init(char *port);
 
 
-/* connectait.
+/* connectWait.
  *
  */
 int connectWait();
@@ -28,16 +28,14 @@ char *Reception();
 int Emission(char *message);
 
 
-/* Recoit des donnees envoyees par le client.
- * renvoie le nombre d'octets reus, 0 si la connexion est ferme,
- * un nombre ngatif en cas d'erreur
+/* receiveBinary.
+ *
  */
 int receiveBinary(char *donnees, size_t tailleMax);
 
 
-/* Envoie des donnes au client en prcisant leur taille.
- * renvoie le nombre d'octets envoys, 0 si la connexion est ferme,
- * un nombre ngatif en cas d'erreur
+/* sendBinary.
+ *
  */
 int sendBinary(char *donnees, size_t taille);
 
@@ -52,13 +50,13 @@ void TerminaisonClient();
 void Terminaison();
 
 
-/*
+/* sendStatusLine.
  *
 */
 int sendStatusLine(int statusCode);
 
 
-/*
+/* sendHeaderField
  *
 */
 int sendHeaderField(int size, int type);
