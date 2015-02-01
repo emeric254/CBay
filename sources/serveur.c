@@ -32,7 +32,6 @@ int connectEnd = FALSE;
 
 
 /* Init.
- * 
  */
 int Init(char *port) {
     int n;
@@ -92,8 +91,7 @@ int Init(char *port) {
 }
 
 
-/*
- *
+/* connectWait.
 */
 int connectWait() {
     struct sockaddr *clientAddr;
@@ -122,93 +120,8 @@ int connectWait() {
 }
 
 
-/* Recoit un message envoye par le serveur */
-char *Reception() {
-    char message[BUFFER_LENGTH];
-    int index = 0;
-    int fini = FALSE;
-    int retour = 0;
-    int trouve = FALSE;
-
-    if(connectEnd) {
-        return NULL;
-    }
-
-    while(!fini) {
-        /* on cherche dans le tampon courant */
-        while((bufferEnd > bufferStart) && (!trouve)) {
-            //fprintf(ERROROUTPUT, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
-            //      clientBuffer[bufferStart], clientBuffer[bufferStart], index, bufferStart);
-            if (clientBuffer[bufferStart]=='\n')
-                trouve = TRUE;
-            else
-                message[index++] = clientBuffer[bufferStart++];
-        }
-        /* on a trouve ? */
-        if (trouve) {
-            message[index++] = '\n';
-            message[index] = '\0';
-            bufferStart++;
-            fini = TRUE;
-            //fprintf(ERROROUTPUT, "trouve\n");
-#ifdef WIN32
-            return _strdup(message);
-#else
-            return strdup(message);
-#endif
-        } else {
-            /* il faut en lire plus */
-            bufferStart = 0;
-            //fprintf(ERROROUTPUT, "recv\n");
-            retour = recv(mainSocket, clientBuffer, BUFFER_LENGTH, 0);
-            //fprintf(ERROROUTPUT, "retour : %d\n", retour);
-            if (retour < 0) {
-                perror("Reception, erreur de recv.");
-                return NULL;
-            } else if(retour == 0) {
-                fprintf(ERROROUTPUT, "Reception, le client a ferme la connexion.\n");
-                connectEnd = TRUE;
-                // on n'en recevra pas plus, on renvoie ce qu'on avait ou null sinon
-                if(index > 0) {
-                    message[index++] = '\n';
-                    message[index] = '\0';
-#ifdef WIN32
-                    return _strdup(message);
-#else
-                    return strdup(message);
-#endif
-                } else {
-                    return NULL;
-                }
-            } else {
-                /*
-                 * on a recu "retour" octets
-                 */
-                bufferEnd = retour;
-            }
-        }
-    }
-    return NULL;
-}
-
-/* Envoie un message au client.
- * Attention, le message doit etre termine par \n
- */
-int Emission(char *message) {
-    int taille;
-    if(strstr(message, "\n") == NULL) {
-        fprintf(ERROROUTPUT, "Emission, Le message n'est pas termine par \\n.\n");
-    }
-    taille = strlen(message);
-    if (send(mainSocket, message, taille,0) == -1) {
-        perror("Emission, probleme lors du send.");
-        return 0;
-    }
-//  printf("Emission de %d caracteres.\n", taille+1);
-    return 1;
-}
-
-/* Recoit des donnees envoyees par le client */
+/* receiveBinary.
+*/
 int receiveBinary(char *donnees, size_t tailleMax) {
     size_t dejaRecu = 0;
     int retour = 0;
@@ -241,7 +154,9 @@ int receiveBinary(char *donnees, size_t tailleMax) {
     }
 }
 
-/* Envoie des donnees au client en precisant leur taille */
+
+/* sendBinary.
+*/
 int sendBinary(char *donnees, size_t taille) {
     int retour = 0;
     retour = send(mainSocket, donnees, taille, 0);
@@ -253,10 +168,12 @@ int sendBinary(char *donnees, size_t taille) {
     }
 }
 
+
 /* Ferme la connexion avec le client */
 void TerminaisonClient() {
     close(mainSocket);
 }
+
 
 /* Arrete le serveur */
 void Terminaison() {
@@ -266,7 +183,7 @@ void Terminaison() {
 // ------------------------------------------------------------
 
 
-/*
+/* file_length.
 */
 size_t file_length(char *filename){
     int length = -1;
@@ -282,7 +199,7 @@ size_t file_length(char *filename){
 }
 
 
-/*
+/* sendStatusLine.
 */
 int sendStatusLine(int statusCode){
     int retour=0;
@@ -338,11 +255,14 @@ int sendStatusLine(int statusCode){
     }
     statusLine[15] = '\n';
     statusLine[16] = '\0';
+
+    //@TODO send here !
+
     return retour;
 }
 
 
-/*
+/* sendHeaderField.
 */
 int sendHeaderField(){
     int retour=0;
@@ -355,38 +275,14 @@ int sendHeaderField(){
     headerField[62] = ';';
     headerField[63] = '\n';
     headerField[64] = '\0';
+
+    //@TODO send here !
+
     return retour;
 }
 
 
 /*
-
-int envoyerContenuFichierTexte(char *nomFichier){
-    FILE * fichier = NULL;
-    int retour = 0;
-    int longeur = longueur_fichier(nomFichier);
-    char data[longeur]; // au pire c'est un fichier en 1 seule ligne donc de la longeur du fichier !
-
-    fichier = fopen(nomFichier,"r");
-
-    if(fichier == NULL)
-    {
-        fprintf(ERROROUTPUT,"erreur ouverture fichier : envoiContenuFichierTexte(%s)\n",nomFichier);
-        return 0;
-    }
-
-    while(fgets(data, longeur, fichier)!=NULL) // lire une ligne
-        if(!sendBinary(data,strlen(data))) // l'envoyer
-        {
-            fprintf(ERROROUTPUT,"erreur envoi : envoiContenuFichierTexte(%s)\n",nomFichier);
-            retour ++;
-        }
-
-    fclose(fichier);// fermeture fichier
-
-    return !retour;
-}
-
 
 int envoyerReponse200HTML(char *nomFichier){
     int retour=0;
@@ -438,18 +334,6 @@ int envoyerReponse200JPG(char *nomFichier){
     if((retour = Emission(content)))
         retour = envoyerContenuFichierBinaire(nomFichier);
     return retour;
-}
-
-
-// verifie l'extension/le suffixe d'un fichier
-int testExtension(char *nomFichier, char *extension){
-    // ternaire qui renvoi 1 si extension en fin de nomFichier == extension sinon 0
-
-    // ca evite de calculer plusieurs fois les longeurs des chaines :
-    int len_fic = strlen(nomFichier);
-    int len_ext = strlen(extension);
-
-    return ( len_fic > ( len_ext + 1 ) ) ? ( ! strcmp( &nomFichier[len_fic - len_ext], extension ) ) : 0;
 }
 
 */
