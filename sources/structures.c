@@ -163,9 +163,9 @@ int verifMail(char *mail, int taille)
     return (arobase == 1)? TRUE : FALSE;
 }
 
-/*
+/* accSave.
 */
-int accSave (UserAccount user)
+int accSave(UserAccount user)
 {
     FILE* f;
     if((f=fopen(ACC_FILE,"ab"))==NULL)
@@ -175,9 +175,10 @@ int accSave (UserAccount user)
     return TRUE;
 }
 
-/*
+
+/* accLoad.
 */
-int accLoad (UserAccount *user)
+int accLoad(UserAccount *user)
 {
     FILE* f;
     if((f=fopen(ACC_FILE,"rb"))==NULL)
@@ -187,9 +188,10 @@ int accLoad (UserAccount *user)
     return TRUE;
 }
 
-/*
+
+/* objSave.
 */
-int objSave (ObjectBid obj)
+int objSave(ObjectBid obj)
 {
     FILE* f;
     if((f=fopen(OBJ_FILE,"rb"))==NULL)
@@ -199,9 +201,10 @@ int objSave (ObjectBid obj)
     return TRUE;
 }
 
-/*
+
+/* objLoad.
 */
-int objLoad (ObjectBid *obj)
+int objLoad(ObjectBid *obj)
 {
     FILE* f;
     if((f=fopen(ACC_FILE,"rb"))==NULL)
@@ -209,4 +212,20 @@ int objLoad (ObjectBid *obj)
     fread(&obj,sizeof(ObjectBid),1,f);
     fclose(f);
     return TRUE;
+}
+
+
+/* file_length.
+*/
+size_t file_length(char *filename){
+    int length = -1;
+    FILE * file = fopen(filename,"r");
+    if (file!=NULL)
+    {
+        fseek(file,0,SEEK_END);
+        length = ftell(file);
+        fclose(file);
+    }
+    fprintf(ERROROUTPUT,"error unknown file : (%s)\n",filename);
+    return length; // -1 if unknown file, 0 if empty, otherwise it return the file length
 }

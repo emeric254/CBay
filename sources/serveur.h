@@ -3,7 +3,7 @@
 
 
 /* Init.
- * 
+ *
  */
 int Init(char *port);
 
@@ -53,13 +53,6 @@ void Terminaison();
 
 
 /*
- * 
-*/
-size_t file_length(char *filename);
-
-
-
-/*
  *
 */
 int sendStatusLine(int statusCode);
@@ -68,7 +61,7 @@ int sendStatusLine(int statusCode);
 /*
  *
 */
-int sendHeaderField();
+int sendHeaderField(int size, int type);
 
 
 /*

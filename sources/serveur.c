@@ -183,22 +183,6 @@ void Terminaison() {
 // ------------------------------------------------------------
 
 
-/* file_length.
-*/
-size_t file_length(char *filename){
-    int length = -1;
-    FILE * file = fopen(filename,"r");
-    if (file!=NULL)
-    {
-        fseek(file,0,SEEK_END);
-        length = ftell(file);
-        fclose(file);
-    }
-    fprintf(ERROROUTPUT,"error unknown file : (%s)\n",filename);
-    return length; // -1 if unknown file, 0 if empty, otherwise it return the file length
-}
-
-
 /* sendStatusLine.
 */
 int sendStatusLine(int statusCode){
@@ -264,14 +248,18 @@ int sendStatusLine(int statusCode){
 
 /* sendHeaderField.
 */
-int sendHeaderField(){
+int sendHeaderField(int size, int type){
     int retour=0;
     char headerField [RESPONSE_HEADER_LENGTH+1];
     strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
-    // ici mettre le {Content-length}
+
+    //@TODO ici mettre le {Content-length}
+
     headerField[31] = ';';
     strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
-    // ici mettre le {Content-type}
+
+    //@TODO ici mettre le {Content-type}
+
     headerField[62] = ';';
     headerField[63] = '\n';
     headerField[64] = '\0';
@@ -283,18 +271,6 @@ int sendHeaderField(){
 
 
 /*
-
-int envoyerReponse200HTML(char *nomFichier){
-    int retour=0;
-    char content [BUFFER_LENGTH];
-    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/html; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierTexte(nomFichier);
-    if(!retour)
-        fprintf(ERROROUTPUT,"erreur envoi : envoyerReponse200HTML(%s)\n",nomFichier);
-    return retour;
-}
-
 
 int envoyerContenuFichierBinaire(char *nomFichier){
     FILE * fichier = NULL;

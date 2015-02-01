@@ -42,6 +42,7 @@ void videBuffer();
 */
 void basePrice(char *string);
 
+
 /* saisieChar.
  * saisie d'un caractere, elimine les '\n' et EOF
  * retourne un caractere
@@ -75,30 +76,40 @@ void saisieUtilisateur(UserAccount * account);
 */
 void saisieVente(ObjectBid * bid);
 
-/* accSave
+
+/* accSave.
  * Save account's informations into the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
 int accSave (UserAccount user);
 
-/* accLoad
+
+/* accLoad.
  * Load account's informations from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
 int accLoad (UserAccount *user);
 
-/* objSave
+
+/* objSave.
  * Save object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
 int objSave (ObjectBid obj);
 
 
-/* objLoad
+/* objLoad.
  * Load object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
 int objLoad (ObjectBid *obj);
+
+
+/* file_length.
+ *
+*/
+size_t file_length(char *filename);
+
 
 //
 
