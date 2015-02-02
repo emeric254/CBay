@@ -52,7 +52,7 @@ char saisieChar();
 
 /* verifMail.
  * verifie si la chaine 'mail' de taille 'taille' est une adresse mail correctement constituee
- * retourne TRUE ou FALSE
+ * return TRUE ou FALSE
 */
 int verifMail(char *mail, int taille);
 

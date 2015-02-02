@@ -172,7 +172,7 @@ int accSave(UserAccount user)
         return(ERROR_OPENING);
     fwrite(&user,sizeof(UserAccount),1,f);
     fclose(f);
-    return TRUE;
+    return SUCESS;
 }
 
 
@@ -185,7 +185,7 @@ int accLoad(UserAccount *user)
         return(ERROR_OPENING);
     fread(&user,sizeof(UserAccount),1,f);
     fclose(f);
-    return TRUE;
+    return SUCESS;
 }
 
 
@@ -198,7 +198,7 @@ int objSave(ObjectBid obj)
         return(ERROR_OPENING);
     fread(&obj,sizeof(ObjectBid),1,f);
     fclose(f);
-    return TRUE;
+    return SUCESS;
 }
 
 
@@ -211,7 +211,7 @@ int objLoad(ObjectBid *obj)
         return(ERROR_OPENING);
     fread(&obj,sizeof(ObjectBid),1,f);
     fclose(f);
-    return TRUE;
+    return SUCESS;
 }
 
 
