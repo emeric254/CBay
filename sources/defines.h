@@ -85,6 +85,9 @@
 #define ERROR_WRITING_BUFF -5
 #define ERROR_USER -7
 #define ERROR_POINTER -8
+#define ERROR_SENDING -9
+#define ERROR_RECEIVING -10
+#define ERROR_WRONG_TYPE -11
 
 
 // ObjectBid structure member length

@@ -122,7 +122,8 @@ int connectWait() {
 
 /* receiveBinary.
 */
-int receiveBinary(char *data, size_t size) {
+int receiveBinary(char *data, size_t size)
+{
     size_t dejaRecu = 0;
     int temp = 0;
     /* on commence par recopier tout ce qui reste dans le tampon
@@ -139,7 +140,7 @@ int receiveBinary(char *data, size_t size) {
         temp = recv(mainSocket, data + dejaRecu, size - dejaRecu, 0);
         if(temp < 0) {
             perror("receiveBinary error.");
-            return -1;
+            return ERROR_RECEIVING;
         } else if(temp == 0) {
             fprintf(ERROROUTPUT, "receiveBinary client disconnected.\n");
             return 0;
@@ -157,26 +158,43 @@ int receiveBinary(char *data, size_t size) {
 
 /* sendBinary.
 */
-int sendBinary(char *data, size_t size) {
+int sendBinary(char *data, size_t size)
+{
     int temp = 0;
     temp = send(mainSocket, data, size, 0);
     if(temp == -1) {
         perror("sendBinary error.");
-        return -1;
+        return ERROR_SENDING;
     } else {
         return temp;
     }
 }
 
 
+/* sendString.
+ *
+ */
+int sendString(char *string)
+{
+    int length = strlen(string);
+    if (send(mainSocket, string, length,0) == -1) {
+        perror("sendString error.");
+        return ERROR_SENDING;
+    }
+    return SUCESS;
+}
+
+
 /* Ferme la connexion avec le client */
-void TerminaisonClient() {
+void TerminaisonClient()
+{
     close(mainSocket);
 }
 
 
 /* Arrete le serveur */
-void Terminaison() {
+void Terminaison()
+{
     close(listenSocket);
 }
 
@@ -185,9 +203,10 @@ void Terminaison() {
 
 /* sendStatusLine.
 */
-int sendStatusLine(int statusCode){
-    int temp = TRUE;
+int sendStatusLine(int statusCode)
+{
     char statusLine[STATUS_LINE_LENGTH + 1];
+
     switch(statusCode)
     {
         case STATUS_CODE_OK:
@@ -212,7 +231,9 @@ int sendStatusLine(int statusCode){
             strcpy(statusLine, "STATUS_CODE_INTERNAL_SERVER_ERROR");
             break;
     }
+
     statusLine[2] = ' ';
+
     switch(statusCode)
     {
         case STATUS_CODE_OK:
@@ -237,21 +258,19 @@ int sendStatusLine(int statusCode){
             strcpy(&statusLine[3], REASON_PHRASE_INTERNAL_SERVER_ERROR);
             break;
     }
+
     statusLine[15] = '\n';
     statusLine[16] = '\0';
 
-    if(temp == TRUE)
-        //@TODO send !
-        printf("send here headerField : %s",statusLine);
-
-    return temp;
+    return sendString(statusLine);;
 }
 
 
 /* sendHeaderField.
 */
-int sendHeaderField(int size, int type){
-    int temp = TRUE;
+int sendHeaderField(int size, int type)
+{
+    int temp = SUCESS;
     char headerField [RESPONSE_HEADER_LENGTH + 1];
 
     strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
@@ -271,7 +290,7 @@ int sendHeaderField(int size, int type){
             strcpy(&headerField[46],"CONTENT_TYPE_USERACCOUNT_NAME");
             break;
         default:
-            temp = FALSE;
+            temp = ERROR_WRONG_TYPE;
             break;
     }
 
@@ -279,9 +298,8 @@ int sendHeaderField(int size, int type){
     headerField[63] = '\n';
     headerField[64] = '\0';
 
-    if(temp == TRUE)
-        //@TODO send !
-        printf("send here headerField : %s",headerField);
+    if(temp == SUCESS)
+        temp = sendString(headerField);
 
     return temp;
 }
