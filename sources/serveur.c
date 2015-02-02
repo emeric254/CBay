@@ -122,32 +122,32 @@ int connectWait() {
 
 /* receiveBinary.
 */
-int receiveBinary(char *donnees, size_t tailleMax) {
+int receiveBinary(char *data, size_t size) {
     size_t dejaRecu = 0;
-    int retour = 0;
+    int temp = 0;
     /* on commence par recopier tout ce qui reste dans le tampon
      */
-    while((bufferEnd > bufferStart) && (dejaRecu < tailleMax)) {
-        donnees[dejaRecu] = clientBuffer[bufferStart];
+    while((bufferEnd > bufferStart) && (dejaRecu < size)) {
+        data[dejaRecu] = clientBuffer[bufferStart];
         dejaRecu++;
         bufferStart++;
     }
     /* si on n'est pas arrive au max
-     * on essaie de recevoir plus de donnees
+     * on essaie de recevoir plus de data
      */
-    if(dejaRecu < tailleMax) {
-        retour = recv(mainSocket, donnees + dejaRecu, tailleMax - dejaRecu, 0);
-        if(retour < 0) {
-            perror("receiveBinary, erreur de recv.");
+    if(dejaRecu < size) {
+        temp = recv(mainSocket, data + dejaRecu, size - dejaRecu, 0);
+        if(temp < 0) {
+            perror("receiveBinary error.");
             return -1;
-        } else if(retour == 0) {
-            fprintf(ERROROUTPUT, "receiveBinary, le client a ferme la connexion.\n");
+        } else if(temp == 0) {
+            fprintf(ERROROUTPUT, "receiveBinary client disconnected.\n");
             return 0;
         } else {
             /*
-             * on a recu "retour" octets en plus
+             * on a recu "temp" octets en plus
              */
-            return dejaRecu + retour;
+            return dejaRecu + temp;
         }
     } else {
         return dejaRecu;
@@ -157,14 +157,14 @@ int receiveBinary(char *donnees, size_t tailleMax) {
 
 /* sendBinary.
 */
-int sendBinary(char *donnees, size_t taille) {
-    int retour = 0;
-    retour = send(mainSocket, donnees, taille, 0);
-    if(retour == -1) {
-        perror("Emission, probleme lors du send.");
+int sendBinary(char *data, size_t size) {
+    int temp = 0;
+    temp = send(mainSocket, data, size, 0);
+    if(temp == -1) {
+        perror("sendBinary error.");
         return -1;
     } else {
-        return retour;
+        return temp;
     }
 }
 
@@ -186,7 +186,7 @@ void Terminaison() {
 /* sendStatusLine.
 */
 int sendStatusLine(int statusCode){
-    int retour=0;
+    int temp=0;
     char statusLine[STATUS_LINE_LENGTH+1];
     switch(statusCode)
     {
@@ -242,14 +242,14 @@ int sendStatusLine(int statusCode){
 
     //@TODO send here !
 
-    return retour;
+    return temp;
 }
 
 
 /* sendHeaderField.
 */
 int sendHeaderField(int size, int type){
-    int retour=0;
+    int temp=0;
     char headerField [RESPONSE_HEADER_LENGTH+1];
     strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
 
@@ -266,7 +266,47 @@ int sendHeaderField(int size, int type){
 
     //@TODO send here !
 
-    return retour;
+    return temp;
+}
+
+
+/* isGetRequest.
+ *
+*/
+int isGetRequest(char* data, size_t size)
+{
+    //@TODO not yet implemented
+    return FALSE;
+}
+
+
+/* isPutRequest.
+ *
+*/
+int isPutRequest(char* data, size_t size)
+{
+    //@TODO not yet implemented
+    return FALSE;
+}
+
+
+/* isConnectRequest.
+ *
+*/
+int isConnectRequest(char* data, size_t size)
+{
+    //@TODO not yet implemented
+    return FALSE;
+}
+
+
+/* isDeleteRequest.
+ *
+*/
+int isDeleteRequest(char* data, size_t size)
+{
+    //@TODO not yet implemented
+    return FALSE;
 }
 
 
@@ -274,7 +314,7 @@ int sendHeaderField(int size, int type){
 
 int envoyerContenuFichierBinaire(char *nomFichier){
     FILE * fichier = NULL;
-    int retour = 0;
+    int temp = 0;
 //    int longeur = longueur_fichier(nomFichier);
     int taille_lue = 0;
     char ptr[BUFFER_LENGTH];
@@ -293,23 +333,23 @@ int envoyerContenuFichierBinaire(char *nomFichier){
             if(!sendBinary(ptr,BUFFER_LENGTH))
             {
                 fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
-                retour ++;
+                temp ++;
             }
     }while(taille_lue>0);
 
     fclose(fichier);// fermeture fichier
 
-    return !retour;
+    return !temp;
 }
 
 
 int envoyerReponse200JPG(char *nomFichier){
-    int retour=0;
+    int temp=0;
     char content [BUFFER_LENGTH];
     sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/jpg; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((retour = Emission(content)))
-        retour = envoyerContenuFichierBinaire(nomFichier);
-    return retour;
+    if((temp = Emission(content)))
+        temp = envoyerContenuFichierBinaire(nomFichier);
+    return temp;
 }
 
 */

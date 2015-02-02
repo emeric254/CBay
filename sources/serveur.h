@@ -31,13 +31,13 @@ int Emission(char *message);
 /* receiveBinary.
  *
  */
-int receiveBinary(char *donnees, size_t tailleMax);
+int receiveBinary(char *data, size_t size);
 
 
 /* sendBinary.
  *
  */
-int sendBinary(char *donnees, size_t taille);
+int sendBinary(char *data, size_t size);
 
 
 /* Ferme la connexion avec le client.
@@ -60,6 +60,30 @@ int sendStatusLine(int statusCode);
  *
 */
 int sendHeaderField(int size, int type);
+
+
+/* isGetRequest.
+ *
+*/
+int isGetRequest(char* data, size_t size);
+
+
+/* isPutRequest.
+ *
+*/
+int isPutRequest(char* data, size_t size);
+
+
+/* isConnectRequest.
+ *
+*/
+int isConnectRequest(char* data, size_t size);
+
+
+/* isDeleteRequest.
+ *
+*/
+int isDeleteRequest(char* data, size_t size);
 
 
 /*
