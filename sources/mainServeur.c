@@ -11,6 +11,7 @@ int main()
     char *message = NULL;
     int length = 0;
     int end = FALSE;
+    int quit = FALSE;
 
     Init(SERVER_PORT);
 
@@ -26,40 +27,45 @@ int main()
                 printf("%s\n",message);
                 //@TODO work with the mesage !!
                 // is it a valid request ?
-                // or not ? >> ERROR_READING_BUFF
+                // if isGetRequest() ?
+                // ...etc...
+                // or not ? >> ERROR_READING_BUFF && send RESPONSE_INVALID_REQUEST && end = TRUE
             else
+            {
                 switch(length)
                 {
                     case ERROR_RECEIVING:
                         fprintf(ERROROUTPUT, "%s >> %d\n", ERROR_OUTPUT_LABEL, ERROR_RECEIVING);
+                        end = TRUE;
                         break;
                     case ERROR_EMPTY_BUFF:
                         // just nothing received ...
+                        // so continue with the client
                         break;
                     default:
                         fprintf(ERROROUTPUT, "%s >> %d\n", ERROR_OUTPUT_LABEL, ERROR_UNKNOWN);
+                        end = TRUE;
+                        quit = TRUE;
                         break;
                 }
+            }
+
+            // clean memory
+            free(message);
+            // safety !
+            message = NULL;
         }
 
         endClient();
 
-        //@TODO if (quit)
-        //{
-            //endServer();
-            //return SUCESS;
-        //}
+        if (quit == TRUE)
+        {
+            endServer();
+            return SUCESS;
+        }
     }
 
     /*
-
-    char *nomFichier = NULL;
-    size_t tailleNomFichier=0;
-    int retour = 0;
-
-    while(1)
-    {
-//////
         while(!fini) // on garde cette boucle au cas ou la requete "GET [...]" ne soit pas la premiere ligne envoyee par le client
         {
 /////
@@ -98,14 +104,7 @@ int main()
                     fini = 1;
                 }
             } else  fini = 1;
-
-            // nettoyage
-            free(message);
-            message = NULL;
-            free(nomFichier);
-            nomFichier = NULL;
         }
-    }
     */
 
     return ERROR_UNKNOWN;
