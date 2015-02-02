@@ -100,13 +100,13 @@ int connectWait() {
     clientAddr = (struct sockaddr*) malloc(adressLength);
     mainSocket = accept(listenSocket, clientAddr, &adressLength);
     if (mainSocket == -1) {
-        perror("AttenteClient, erreur de accept.");
+        perror("connectWait error.");
         return 0;
     }
     if(getnameinfo(clientAddr, adressLength, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
-        printf("Client sur la machine d'adresse %s connecte.\n", machine);
+        printf("new client conected: %s\n", machine);
     } else {
-        printf("Client anonyme connecte.\n");
+        printf("anonymous client connected.\n");
     }
     free(clientAddr);
     /*
@@ -187,7 +187,7 @@ void Terminaison() {
 */
 int sendStatusLine(int statusCode){
     int temp=0;
-    char statusLine[STATUS_LINE_LENGTH+1];
+    char statusLine[STATUS_LINE_LENGTH + 1];
     switch(statusCode)
     {
         case STATUS_CODE_OK:
@@ -250,10 +250,11 @@ int sendStatusLine(int statusCode){
 */
 int sendHeaderField(int size, int type){
     int temp=0;
-    char headerField [RESPONSE_HEADER_LENGTH+1];
+    char headerField [RESPONSE_HEADER_LENGTH + 1];
     strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
 
-    //@TODO ici mettre le {Content-length}
+    //@TODO ici mettre le {Content-length} == size
+    //sprintf(&headerfield[16],"%*d",size,15)
 
     headerField[31] = ';';
     strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
