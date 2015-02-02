@@ -4,7 +4,7 @@
 #include "defines.h"
 
 
-typedef struct ObjectBid
+typedef struct CONTENT_TYPE_OBJECTBID_NAME
 {
     long int id;
     char name[OBJECTBID_NAME_LENGTH];
@@ -16,10 +16,10 @@ typedef struct ObjectBid
     char adress[OBJECTBID_ADRESS_LENGTH];
     float  currentBidPrice;
     long int currentBidIdBuyer;
-} ObjectBid;
+} CONTENT_TYPE_OBJECTBID_NAME;
 
 
-typedef struct UserAccount
+typedef struct CONTENT_TYPE_USERACCOUNT_NAME
 {
     char type;
     long int id;
@@ -27,7 +27,7 @@ typedef struct UserAccount
     char lastname[USERACCOUNT_LASTNAME_LENGTH];
     char adress[USERACCOUNT_ADRESS_LENGTH];
     char mail[USERACCOUNT_MAIL_LENGTH];
-} UserAccount;
+} CONTENT_TYPE_USERACCOUNT_NAME;
 
 
 
@@ -62,7 +62,7 @@ int verifMail(char *mail, int taille);
  * sauf l'id !
  * modifi le UserAccount saisi
 */
-void saisieUtilisateur(UserAccount * account);
+void saisieUtilisateur(CONTENT_TYPE_USERACCOUNT_NAME * account);
 
 
 /* saisieVente.
@@ -74,35 +74,35 @@ void saisieUtilisateur(UserAccount * account);
  *      currentBidIdBuyer
  * modifie le ObjectBid saisi
 */
-void saisieVente(ObjectBid * bid);
+void saisieVente(CONTENT_TYPE_OBJECTBID_NAME * bid);
 
 
 /* accSave.
  * Save account's informations into the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int accSave (UserAccount user);
+int accSave (CONTENT_TYPE_USERACCOUNT_NAME user);
 
 
 /* accLoad.
  * Load account's informations from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int accLoad (UserAccount *user);
+int accLoad (CONTENT_TYPE_USERACCOUNT_NAME *user);
 
 
 /* objSave.
  * Save object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objSave (ObjectBid obj);
+int objSave (CONTENT_TYPE_OBJECTBID_NAME obj);
 
 
 /* objLoad.
  * Load object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objLoad (ObjectBid *obj);
+int objLoad (CONTENT_TYPE_OBJECTBID_NAME *obj);
 
 
 /* file_length.

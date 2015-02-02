@@ -28,6 +28,14 @@
 #define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE "Content-type: "
 
 
+// object types
+#define CONTENT_TYPE_OBJECTBID_ID 0
+#define CONTENT_TYPE_USERACCOUNT_ID 0
+
+#define CONTENT_TYPE_OBJECTBID_NAME ObjectBid
+#define CONTENT_TYPE_USERACCOUNT_NAME UserAccount
+
+
 //request methods
 #define REQUEST_METHOD_GET "GET"
 #define REQUEST_METHOD_PUT "PUT"
