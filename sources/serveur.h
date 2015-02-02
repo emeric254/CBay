@@ -40,14 +40,16 @@ int receiveBinary(char *data);
 int sendBinary(char *data, size_t size);
 
 
-/* Ferme la connexion avec le client.
- */
-void TerminaisonClient();
+/* endClient.
+ *
+*/
+void endClient();
 
 
-/* Arrete le serveur.
- */
-void Terminaison();
+/* endServer.
+ *
+*/
+void endServer();
 
 
 /* sendStatusLine.

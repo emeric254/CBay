@@ -12,6 +12,7 @@
 #define FALSE 0
 #define BUFFER_LENGTH 4096
 #define ERROROUTPUT stderr
+#define ERROR_OUTPUT_LABEL "[error]"
 
 //
 #define SERVER_PORT "25000"
@@ -82,12 +83,14 @@
 #define ERROR_WRITING -3
 #define ERROR_READING_BUFF -4
 #define ERROR_OPENING_BUFF -5
-#define ERROR_WRITING_BUFF -5
-#define ERROR_USER -7
-#define ERROR_POINTER -8
-#define ERROR_SENDING -9
-#define ERROR_RECEIVING -10
-#define ERROR_WRONG_TYPE -11
+#define ERROR_WRITING_BUFF -6
+#define ERROR_EMPTY_BUFF -7
+#define ERROR_USER -8
+#define ERROR_POINTER -9
+#define ERROR_SENDING -10
+#define ERROR_RECEIVING -11
+#define ERROR_WRONG_TYPE -12
+#define ERROR_UNKNOWN -99
 
 
 // ObjectBid structure member length

@@ -6,27 +6,63 @@
 #include "structures.h"
 #include "serveur.h"
 
-int main() {
-
-    /*
-
+int main()
+{
     char *message = NULL;
-    char *nomFichier = NULL;
-    size_t tailleNomFichier=0;
-    int retour = 0;
-    int fini = 0;
+    int length = 0;
+    int end = FALSE;
 
-    Initialisation();
+    Init(SERVER_PORT);
 
     while(1)
     {
-        AttenteClient();
-        fini = 0;
+        connectWait();
+        end = FALSE;
 
+        while (end == FALSE)
+        {
+            length = receiveBinary(message);
+            if (length > 0)
+                printf("%s\n",message);
+                //@TODO work with the mesage !!
+                // is it a valid request ?
+                // or not ? >> ERROR_READING_BUFF
+            else
+                switch(length)
+                {
+                    case ERROR_RECEIVING:
+                        fprintf(ERROROUTPUT, "%s >> %d\n", ERROR_OUTPUT_LABEL, ERROR_RECEIVING);
+                        break;
+                    case ERROR_EMPTY_BUFF:
+                        // just nothing received ...
+                        break;
+                    default:
+                        fprintf(ERROROUTPUT, "%s >> %d\n", ERROR_OUTPUT_LABEL, ERROR_UNKNOWN);
+                        break;
+                }
+        }
+
+        endClient();
+
+        //@TODO if (quit)
+        //{
+            //endServer();
+            //return SUCESS;
+        //}
+    }
+
+    /*
+
+    char *nomFichier = NULL;
+    size_t tailleNomFichier=0;
+    int retour = 0;
+
+    while(1)
+    {
+//////
         while(!fini) // on garde cette boucle au cas ou la requete "GET [...]" ne soit pas la premiere ligne envoyee par le client
         {
-            message = Reception();
-
+/////
             if(message != NULL)
             {
                 if(extraitFichier(message, &nomFichier, &tailleNomFichier))
@@ -69,10 +105,8 @@ int main() {
             free(nomFichier);
             nomFichier = NULL;
         }
-        TerminaisonClient();
     }
-
     */
 
-    return 0;
+    return ERROR_UNKNOWN;
 }

@@ -32,6 +32,7 @@ int connectEnd = FALSE;
 
 
 /* Init.
+ *
  */
 int Init(char *port) {
     int n;
@@ -92,6 +93,7 @@ int Init(char *port) {
 
 
 /* connectWait.
+ *
 */
 int connectWait() {
     struct sockaddr *clientAddr;
@@ -121,6 +123,7 @@ int connectWait() {
 
 
 /* receiveBinary.
+ *
 */
 int receiveBinary(char *data) {
     char localBuffer[BUFFER_LENGTH];
@@ -181,8 +184,13 @@ int receiveBinary(char *data) {
 #else
                     data = strdup(localBuffer);
 #endif
-                }
                 return index * sizeof(char); // == data size
+                }
+                else
+                {
+                    // nothing received
+                    return ERROR_EMPTY_BUFF;
+                }
             }
             else
             {
@@ -196,6 +204,7 @@ int receiveBinary(char *data) {
 
 
 /* sendBinary.
+ *
 */
 int sendBinary(char *data, size_t size)
 {
@@ -224,23 +233,26 @@ int sendString(char *string)
 }
 
 
-/* Ferme la connexion avec le client */
-void TerminaisonClient()
+/* endClient.
+ *
+*/
+void endClient()
 {
     close(mainSocket);
 }
 
 
-/* Arrete le serveur */
-void Terminaison()
+/* endServer.
+ *
+*/
+void endServer()
 {
     close(listenSocket);
 }
 
-// ------------------------------------------------------------
-
 
 /* sendStatusLine.
+ *
 */
 int sendStatusLine(int statusCode)
 {
@@ -306,6 +318,7 @@ int sendStatusLine(int statusCode)
 
 
 /* sendHeaderField.
+ *
 */
 int sendHeaderField(int size, int type)
 {
@@ -382,48 +395,3 @@ int isDeleteRequest(char* data, size_t size)
     //@TODO not yet implemented
     return FALSE;
 }
-
-
-/*
-
-int envoyerContenuFichierBinaire(char *nomFichier){
-    FILE * fichier = NULL;
-    int temp = 0;
-//    int longeur = longueur_fichier(nomFichier);
-    int taille_lue = 0;
-    char ptr[BUFFER_LENGTH];
-
-    fichier = fopen(nomFichier,"r");
-
-    if(fichier == NULL)
-    {
-        fprintf(ERROROUTPUT,"erreur ouverture fichier : envoyerContenuFichierBinaire(%s)\n",nomFichier);
-        return 0;
-    }
-
-    do{
-        taille_lue = fread(ptr, 1, BUFFER_LENGTH, fichier);
-        if(taille_lue>0)
-            if(!sendBinary(ptr,BUFFER_LENGTH))
-            {
-                fprintf(ERROROUTPUT,"erreur envoi : envoyerContenuFichierBinaire(%s)\n",nomFichier);
-                temp ++;
-            }
-    }while(taille_lue>0);
-
-    fclose(fichier);// fermeture fichier
-
-    return !temp;
-}
-
-
-int envoyerReponse200JPG(char *nomFichier){
-    int temp=0;
-    char content [BUFFER_LENGTH];
-    sprintf(content,"HTTP/1.1 200 OK\nContent-Type: text/jpg; charset=UTF-8\nContent-Length: %d\n\n",(int)longueur_fichier(nomFichier));
-    if((temp = Emission(content)))
-        temp = envoyerContenuFichierBinaire(nomFichier);
-    return temp;
-}
-
-*/
