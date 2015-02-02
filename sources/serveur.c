@@ -254,7 +254,7 @@ int sendHeaderField(int size, int type){
     strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
 
     //@TODO ici mettre le {Content-length} == size
-    //sprintf(&headerfield[16],"%*d",size,15)
+    sprintf(&headerField[16],"%*d",size,15);
 
     headerField[31] = ';';
     strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
