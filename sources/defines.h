@@ -28,10 +28,10 @@
 #define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE "Content-type: "
 
 
-// object types
+// object type ids
 #define CONTENT_TYPE_OBJECTBID_ID 0
-#define CONTENT_TYPE_USERACCOUNT_ID 0
-
+#define CONTENT_TYPE_USERACCOUNT_ID 1
+// object type names
 #define CONTENT_TYPE_OBJECTBID_NAME ObjectBid
 #define CONTENT_TYPE_USERACCOUNT_NAME UserAccount
 
@@ -64,6 +64,7 @@
 #define REASON_PHRASE_CONFLICT "Conflict"
 #define REASON_PHRASE_FORBIDDEN "Forbidden"
 
+
 // account types
 #define ACCOUNT_TYPE_ADMIN 'a'
 #define ACCOUNT_TYPE_VENDOR 'v'
@@ -85,10 +86,12 @@
 #define ERROR_USER -7
 #define ERROR_POINTER -8
 
+
 // ObjectBid structure member length
 #define OBJECTBID_NAME_LENGTH 96
 #define OBJECTBID_DESCRIPTION_LENGTH 320
 #define OBJECTBID_ADRESS_LENGTH 96
+
 
 // UserAccount structure member length
 #define USERACCOUNT_LOGIN_LENGTH 27

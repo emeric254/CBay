@@ -186,7 +186,7 @@ void Terminaison() {
 /* sendStatusLine.
 */
 int sendStatusLine(int statusCode){
-    int temp=0;
+    int temp = TRUE;
     char statusLine[STATUS_LINE_LENGTH + 1];
     switch(statusCode)
     {
@@ -240,7 +240,9 @@ int sendStatusLine(int statusCode){
     statusLine[15] = '\n';
     statusLine[16] = '\0';
 
-    //@TODO send here !
+    if(temp == TRUE)
+        //@TODO send !
+        printf("send here headerField : %s",statusLine);
 
     return temp;
 }
@@ -249,23 +251,37 @@ int sendStatusLine(int statusCode){
 /* sendHeaderField.
 */
 int sendHeaderField(int size, int type){
-    int temp=0;
+    int temp = TRUE;
     char headerField [RESPONSE_HEADER_LENGTH + 1];
+
     strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
 
-    //@TODO ici mettre le {Content-length} == size
     sprintf(&headerField[16],"%*d",size,15);
 
     headerField[31] = ';';
+
     strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
 
-    //@TODO ici mettre le {Content-type}
+    switch(type)
+    {
+        case CONTENT_TYPE_OBJECTBID_ID:
+            strcpy(&headerField[46],"CONTENT_TYPE_OBJECTBID_NAME");
+            break;
+        case CONTENT_TYPE_USERACCOUNT_ID:
+            strcpy(&headerField[46],"CONTENT_TYPE_USERACCOUNT_NAME");
+            break;
+        default:
+            temp = FALSE;
+            break;
+    }
 
     headerField[62] = ';';
     headerField[63] = '\n';
     headerField[64] = '\0';
 
-    //@TODO send here !
+    if(temp == TRUE)
+        //@TODO send !
+        printf("send here headerField : %s",headerField);
 
     return temp;
 }
