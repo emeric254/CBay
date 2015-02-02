@@ -122,37 +122,76 @@ int connectWait() {
 
 /* receiveBinary.
 */
-int receiveBinary(char *data, size_t size)
-{
-    size_t dejaRecu = 0;
-    int temp = 0;
-    /* on commence par recopier tout ce qui reste dans le tampon
-     */
-    while((bufferEnd > bufferStart) && (dejaRecu < size)) {
-        data[dejaRecu] = clientBuffer[bufferStart];
-        dejaRecu++;
-        bufferStart++;
-    }
-    /* si on n'est pas arrive au max
-     * on essaie de recevoir plus de data
-     */
-    if(dejaRecu < size) {
-        temp = recv(mainSocket, data + dejaRecu, size - dejaRecu, 0);
-        if(temp < 0) {
-            perror("receiveBinary error.");
-            return ERROR_RECEIVING;
-        } else if(temp == 0) {
-            fprintf(ERROROUTPUT, "receiveBinary client disconnected.\n");
-            return 0;
-        } else {
-            /*
-             * on a recu "temp" octets en plus
-             */
-            return dejaRecu + temp;
+int receiveBinary(char *data) {
+    char localBuffer[BUFFER_LENGTH];
+    int index = 0;
+    int received = 0;
+    int end = FALSE;
+    int find = FALSE;
+
+    if (connectEnd)
+        end = TRUE;
+
+    while (end == FALSE)
+    {
+        // copy all the received data in localBuffer and test if the end of data char is received
+        while ((bufferEnd > bufferStart) && (!find))
+        {
+            if (clientBuffer[bufferStart] == '\n')
+                find = TRUE; // end of data char received
+            else
+                localBuffer[index++] = clientBuffer[bufferStart++]; // copy data to localBuffer
         }
-    } else {
-        return dejaRecu;
+
+        /* end of data char find ? */
+        if (find)
+        {
+            localBuffer[index++] = '\n';
+            localBuffer[index] = '\0';
+            bufferStart++;
+            end = TRUE;
+
+#ifdef WIN32
+            data = _strdup(localBuffer);
+#else
+            data = strdup(localBuffer);
+#endif
+            return index*sizeof(char); // == data size
+        }
+        else // all data no yet 'received'
+        {
+            bufferStart = 0;
+            received = recv(mainSocket, clientBuffer, BUFFER_LENGTH, 0);
+
+            if (received < 0)
+            {
+                perror("receiveBinary error.");
+                end = TRUE;
+            }
+            else if (!received) // that's all
+            {
+                connectEnd = TRUE;
+
+                if (index > 0) // is there data in localBuffer ?
+                {
+                    localBuffer[index++] = '\n';
+                    localBuffer[index] = '\0';
+#ifdef WIN32
+                    data = _strdup(localBuffer);
+#else
+                    data = strdup(localBuffer);
+#endif
+                }
+                return index * sizeof(char); // == data size
+            }
+            else
+            {
+                // 'received' octets more received
+                bufferEnd = received;
+            }
+        }
     }
+    return ERROR_RECEIVING;
 }
 
 

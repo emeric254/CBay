@@ -31,7 +31,7 @@ int Emission(char *message);
 /* receiveBinary.
  *
  */
-int receiveBinary(char *data, size_t size);
+int receiveBinary(char *data);
 
 
 /* sendBinary.
