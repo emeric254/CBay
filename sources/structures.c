@@ -188,23 +188,6 @@ int accLoad(CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f)
  */
 int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *table, int size)
 {
-    /*
-    int i = 0;
-    int state;
-    FILE *f;
-
-    if ( ( f = fopen(ACC_FILE,"wb") ) == NULL )
-        return(ERROR_OPENING);
-
-    for(i=0; i<size; i++)
-    {
-        if ( (state = accSave(table[i], f)) != SUCESS)
-            return state;
-    }
-
-    fclose(f);
-    return SUCESS;
-    */
     FILE *f = fopen(ACC_FILE,"wb");
     if ( f == NULL )
         return(ERROR_OPENING);
@@ -223,9 +206,9 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
     CONTENT_TYPE_USERACCOUNT_NAME *temp;
     int nbr = 0;
     int state;
-    FILE *f;
+    FILE *f = fopen(ACC_FILE,"rb");
 
-    if ( ( f = fopen(ACC_FILE,"rb") ) == NULL )
+    if ( f == NULL )
         return(ERROR_OPENING);
 
     free(*table);
@@ -294,8 +277,6 @@ int objLoad(CONTENT_TYPE_OBJECTBID_NAME *obj, FILE* f)
 
 
 /* allObjSave.
- * Save a table of objects from the OBJ_FILE.
- * Integer return codes correspond to the operation's outcome.
  */
 int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *table, int size)
 {
@@ -310,18 +291,59 @@ int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *table, int size)
 
 
 /* allObjLoad.
- * Load a table of objects from the OBJ_FILE.
- * Integer return codes correspond to the operation's outcome.
  */
 int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **table, int *size)
 {
-    FILE* f;
-    if((f=fopen(OBJ_FILE,"rb"))==NULL)
+    CONTENT_TYPE_OBJECTBID_NAME *ptr = NULL;
+    CONTENT_TYPE_OBJECTBID_NAME *temp;
+    int nbr = 0;
+    int state;
+    FILE* f = fopen(OBJ_FILE,"rb") ;
+
+    if ( f == NULL )
         return(ERROR_OPENING);
 
-    //@TODO in wait of allAccLoad validation
+    free(*table);
+    *table=NULL;
 
+    temp = NULL;
+    temp = malloc(sizeof(CONTENT_TYPE_OBJECTBID_NAME));
+
+    if (temp == NULL)
+        return ERROR_POINTER;
+
+    while( ( state = objLoad(temp, f) ) == SUCESS)
+    {
+        nbr++; // one more object to load
+
+        ptr = *table; // save the actual content
+        // make a table which is bigger
+        *table = NULL;
+        *table = realloc(*table, nbr*sizeof(CONTENT_TYPE_OBJECTBID_NAME));
+
+        if (*table == NULL)
+        {
+            free(ptr);
+            return ERROR_POINTER;
+        }
+
+        // add the new element
+        (*table)[nbr-1] = *temp;
+
+        ptr = NULL;
+        temp = NULL;
+        temp = malloc(sizeof(CONTENT_TYPE_OBJECTBID_NAME));
+
+        if (temp == NULL)
+        {
+            free(*table);
+            return ERROR_POINTER;
+        }
+    }
+
+    free(temp);
     fclose(f);
+    *size = nbr;
     return SUCESS;
 }
 
