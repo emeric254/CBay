@@ -33,7 +33,7 @@ char saisieChar()
 
 /* saisieUtilisateur.
 */
-void saisieUtilisateur(UserAccount * account)
+void saisieUtilisateur(CONTENT_TYPE_USERACCOUNT_NAME * account)
 {
     int validInput = FALSE;
     if(account == NULL)
@@ -107,7 +107,7 @@ void saisieUtilisateur(UserAccount * account)
 
 /* saisieVente.
 */
-void saisieVente(ObjectBid * bid)
+void saisieVente(CONTENT_TYPE_OBJECTBID_NAME * bid)
 {
     if(bid == NULL)
     {
@@ -163,40 +163,101 @@ int verifMail(char *mail, int taille)
     return (arobase == 1)? TRUE : FALSE;
 }
 
+
 /* accSave.
 */
-int accSave(UserAccount user)
+int accSave(CONTENT_TYPE_USERACCOUNT_NAME user, FILE* f)
 {
-    FILE* f;
-    if((f=fopen(ACC_FILE,"ab"))==NULL)
-        return(ERROR_OPENING);
-    fwrite(&user,sizeof(UserAccount),1,f);
-    fclose(f);
+    //@TODO if fwrite SUCESS else ERROR_READING
+    fwrite(&user,sizeof(CONTENT_TYPE_USERACCOUNT_NAME),1,f);
     return SUCESS;
 }
 
 
 /* accLoad.
 */
-int accLoad(UserAccount *user)
+int accLoad(CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f)
 {
-    FILE* f;
-    if((f=fopen(ACC_FILE,"rb"))==NULL)
+    //@TODO if fread SUCESS else ERROR_READING
+    fread(&user,sizeof(CONTENT_TYPE_USERACCOUNT_NAME),1,f);
+    return SUCESS;
+}
+
+
+/* allAccSave.
+ */
+int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *user, int size)
+{
+    return SUCESS;
+}
+
+
+/* allAccLoad.
+ */
+int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
+{
+    CONTENT_TYPE_USERACCOUNT_NAME *ptr = NULL;
+    CONTENT_TYPE_USERACCOUNT_NAME *temp;
+    int nbr = 0;
+    int i = 0;
+    int state;
+    FILE *f;
+
+    if ( ( f = fopen(ACC_FILE,"rb") ) == NULL )
         return(ERROR_OPENING);
-    fread(&user,sizeof(UserAccount),1,f);
+
+    free(*table);
+    *table=NULL;
+
+    temp = NULL;
+    temp = malloc(sizeof(CONTENT_TYPE_USERACCOUNT_NAME));
+
+    if (temp == NULL)
+        return ERROR_POINTER;
+
+    while( ( state = accLoad(temp, f) ) == SUCESS)
+    {
+        nbr++; // one more account to load
+
+        ptr = *table; // save the actual content
+        // make a table which is bigger
+        *table = NULL;
+        *table = realloc(*table, nbr*sizeof(CONTENT_TYPE_USERACCOUNT_NAME));
+
+        if (*table == NULL)
+        {
+            free(ptr);
+            return ERROR_POINTER;
+        }
+
+        (*table)[nbr-1] = *temp;
+
+        ptr = NULL;
+        temp = NULL;
+        temp = malloc(sizeof(CONTENT_TYPE_USERACCOUNT_NAME));
+
+        if (temp == NULL)
+        {
+            free(*table);
+            return ERROR_POINTER;
+        }
+    }
+
+    free(temp);
     fclose(f);
+    *size = nbr;
     return SUCESS;
 }
 
 
 /* objSave.
 */
-int objSave(ObjectBid obj)
+int objSave(CONTENT_TYPE_OBJECTBID_NAME obj)
 {
     FILE* f;
     if((f=fopen(OBJ_FILE,"rb"))==NULL)
         return(ERROR_OPENING);
-    fread(&obj,sizeof(ObjectBid),1,f);
+    fread(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
     fclose(f);
     return SUCESS;
 }
@@ -204,12 +265,12 @@ int objSave(ObjectBid obj)
 
 /* objLoad.
 */
-int objLoad(ObjectBid *obj)
+int objLoad(CONTENT_TYPE_OBJECTBID_NAME *obj)
 {
     FILE* f;
     if((f=fopen(ACC_FILE,"rb"))==NULL)
         return(ERROR_OPENING);
-    fread(&obj,sizeof(ObjectBid),1,f);
+    fread(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
     fclose(f);
     return SUCESS;
 }
