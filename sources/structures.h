@@ -31,10 +31,10 @@ typedef struct CONTENT_TYPE_USERACCOUNT_NAME
 
 
 
-/* videBuffer.
- * vide le buffer
+/* clearBuffer.
+ * clear the buffer
 */
-void videBuffer();
+void clearBuffer();
 
 
 /* cleanCRString.
@@ -43,38 +43,38 @@ void videBuffer();
 void basePrice(char *string);
 
 
-/* saisieChar.
- * saisie d'un caractere, elimine les '\n' et EOF
- * retourne un caractere
+/* charInput.
+ * character input, delete '\n' and EOF symbols
+ * return a character
 */
-char saisieChar();
+char charInput();
 
 
-/* verifMail.
- * verifie si la chaine 'mail' de taille 'taille' est une adresse mail correctement constituee
- * return TRUE ou FALSE
+/* mailCheck.
+ * check if 'mail' string of 'length' length is a correct mail address
+ * return TRUE or FALSE
 */
-int verifMail(char *mail, int taille);
+int mailCheck(char *mail, int taille);
 
 
-/* saisieUtilisateur.
- * fais saisir a l'utilisateur un UserAccount,
- * sauf l'id !
- * modifi le UserAccount saisi
+/* userInput.
+ * ask user to enter informations to create an UserAccount,
+ * except the user id !
+ * modify the input UserAccount
 */
-void saisieUtilisateur(CONTENT_TYPE_USERACCOUNT_NAME * account);
+void userInput(CONTENT_TYPE_USERACCOUNT_NAME * account);
 
 
-/* saisieVente.
- * fais saisir a l'utilisateur un ObjectBid,
- * sauf les champs
+/* sellInput.
+ * ask the user for information to create an ObjectBid,
+ * except fields
  *      id
  *      idVendor
  *      currentBidPrice
  *      currentBidIdBuyer
- * modifie le ObjectBid saisi
+ * and modify the input ObjectBid
 */
-void saisieVente(CONTENT_TYPE_OBJECTBID_NAME * bid);
+void sellInput(CONTENT_TYPE_OBJECTBID_NAME * bid);
 
 
 /* accSave.

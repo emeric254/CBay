@@ -13,6 +13,7 @@ int main(void)
     int menuChoice; // user choice var
     int connected = FALSE;
     int i = 0, j = 0;
+    UserAccount user;
 
     CLEAR();
 
@@ -22,7 +23,11 @@ int main(void)
         
         switch(menuChoice)
         {
-            case MENU_CHOICE_MAIN_CONNECTION:
+            case MENU_CHOICE_CONNECTION:
+            	/* Ask for a username and a password */
+            	/* Send a connection request to the server */
+            	/* Treat the answer : either OK or NOT_CREATED */
+            	
                 /*
                 while(MENU_CHOICE_QUIT != (menuChoice = menuConnexion()))
                 {
@@ -47,7 +52,14 @@ int main(void)
                 */
                 break;
 
-            case MENU_CHOICE_MAIN_ACCOUNT_CREATION:
+            case MENU_CHOICE_ACCOUNT_CREATION:
+            	/* Create an account => use userInput */
+            	/* Send the new account to the server */
+            	/* If the answer is not CREATED, resend it */
+        		/* After 3 fail send, stop and display an error (type to define) */
+        		/* At any moment, user can stop the procedure */
+            	
+            	
                 /*
                 while(MENU_CHOICE_QUIT != (menuChoice = menuCreationCompte()))
                 {
@@ -71,7 +83,7 @@ int main(void)
                 */
                 break;
 
-            case MENU_CHOICE_MAIN_ANONYMOUS:
+            case MENU_CHOICE_ANONYMOUS:
                 while(MENU_CHOICE_QUIT != (menuChoice = mainMenu()))
                 {
                     CLEAR();
@@ -83,10 +95,12 @@ int main(void)
                             break;
 
                         case MENU_CHOICE_MAIN_LIST:
+                        	// List available objects
                             printf("\n\t --- WIP >> list\n\n");
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
+                        	// Searche for a particular object
                             printf("\n\t --- WIP >> seach\n\n");
                             break;
 
@@ -104,6 +118,7 @@ int main(void)
         }
     }
 
+	/* Exit procedure */
     CLEAR();
     printf("\n\t Thank you to use BEEP !\n\n");
 
