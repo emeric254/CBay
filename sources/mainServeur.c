@@ -24,26 +24,45 @@ int main()
         {
             length = receiveBinary(message);
             if (length > 0)
+            {
                 printf("%s\n",message);
-                //@TODO work with the mesage !!
-                // is it a valid request ?
-                // if isGetRequest() ?
-                // ...etc...
-                // or not ? >> ERROR_READING_BUFF && send RESPONSE_INVALID_REQUEST && end = TRUE
+                if(isConnectRequest(message, length) == TRUE)
+                {
+                    // work with this Connect request
+                }
+                else if(isDeleteRequest(message, length) == TRUE)
+                {
+                    // work with this Delete request
+                }
+                else if(isGetRequest(message, length) == TRUE)
+                {
+                    // work with this Get request
+                }
+                else if(isPutRequest(message, length) == TRUE)
+                {
+                    // work with this Put request
+                }
+                else
+                {
+                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                    sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                    // end = TRUE; // end communication with the client, 'cause it's a bad guy
+                }
+            }
             else
             {
                 switch(length)
                 {
+                    case ERROR_EMPTY_BUFF: // == 0
+                        // just nothing received ...
+                        // so continue to communicate with the client
+                        break;
                     case ERROR_RECEIVING:
                         fprintf(ERROROUTPUT, "%s >> %d\n", ERROR_OUTPUT_LABEL, ERROR_RECEIVING);
                         end = TRUE;
                         break;
-                    case ERROR_EMPTY_BUFF:
-                        // just nothing received ...
-                        // so continue with the client
-                        break;
                     default:
-                        fprintf(ERROROUTPUT, "%s >> %d\n", ERROR_OUTPUT_LABEL, ERROR_UNKNOWN);
+                        fprintf(ERROROUTPUT, "%s >> %d >> %d\n", ERROR_OUTPUT_LABEL, ERROR_UNKNOWN, length);
                         end = TRUE;
                         quit = TRUE;
                         break;

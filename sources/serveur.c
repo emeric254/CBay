@@ -360,7 +360,7 @@ int sendHeaderField(int size, int type)
 /* isGetRequest.
  *
 */
-int isGetRequest(char* data, size_t size)
+int isGetRequest(char* data, int size)
 {
     //@TODO not yet implemented
     return FALSE;
@@ -370,7 +370,7 @@ int isGetRequest(char* data, size_t size)
 /* isPutRequest.
  *
 */
-int isPutRequest(char* data, size_t size)
+int isPutRequest(char* data, int size)
 {
     //@TODO not yet implemented
     return FALSE;
@@ -380,7 +380,7 @@ int isPutRequest(char* data, size_t size)
 /* isConnectRequest.
  *
 */
-int isConnectRequest(char* data, size_t size)
+int isConnectRequest(char* data, int size)
 {
     //@TODO not yet implemented
     return FALSE;
@@ -390,7 +390,7 @@ int isConnectRequest(char* data, size_t size)
 /* isDeleteRequest.
  *
 */
-int isDeleteRequest(char* data, size_t size)
+int isDeleteRequest(char* data, int size)
 {
     //@TODO not yet implemented
     return FALSE;
