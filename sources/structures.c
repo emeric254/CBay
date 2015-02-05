@@ -188,6 +188,7 @@ int accLoad(CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f)
  */
 int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *table, int size)
 {
+    /*
     int i = 0;
     int state;
     FILE *f;
@@ -201,6 +202,14 @@ int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *table, int size)
             return state;
     }
 
+    fclose(f);
+    return SUCESS;
+    */
+    FILE *f = fopen(ACC_FILE,"wb");
+    if ( f == NULL )
+        return(ERROR_OPENING);
+    //@TODO if fwrite SUCESS else ERROR_READING
+    fwrite(table,sizeof(CONTENT_TYPE_USERACCOUNT_NAME),size,f);
     fclose(f);
     return SUCESS;
 }
@@ -243,6 +252,7 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
             return ERROR_POINTER;
         }
 
+        // add the new element
         (*table)[nbr-1] = *temp;
 
         ptr = NULL;
@@ -265,28 +275,54 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
 
 /* objSave.
 */
-int objSave(CONTENT_TYPE_OBJECTBID_NAME obj)
+int objSave(CONTENT_TYPE_OBJECTBID_NAME obj, FILE* f)
 {
-    FILE* f;
-    if((f=fopen(OBJ_FILE,"rb"))==NULL)
-        return(ERROR_OPENING);
-    fread(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
-    fclose(f);
+    fwrite(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
     return SUCESS;
 }
 
 
 /* objLoad.
 */
-int objLoad(CONTENT_TYPE_OBJECTBID_NAME *obj)
+int objLoad(CONTENT_TYPE_OBJECTBID_NAME *obj, FILE* f)
 {
-    FILE* f;
-    if((f=fopen(ACC_FILE,"rb"))==NULL)
-        return(ERROR_OPENING);
     fread(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
+    return SUCESS;
+}
+
+
+/* allObjSave.
+ * Save a table of objects from the OBJ_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *table, int size)
+{
+    FILE *f = fopen(OBJ_FILE,"wb");
+    if ( f == NULL )
+        return(ERROR_OPENING);
+    //@TODO if fwrite SUCESS else ERROR_READING
+    fwrite(table,sizeof(CONTENT_TYPE_OBJECTBID_NAME),size,f);
     fclose(f);
     return SUCESS;
 }
+
+
+/* allObjLoad.
+ * Load a table of objects from the OBJ_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **table, int *size)
+{
+    FILE* f;
+    if((f=fopen(OBJ_FILE,"rb"))==NULL)
+        return(ERROR_OPENING);
+
+    //@TODO in wait of allAccLoad validation
+
+    fclose(f);
+    return SUCESS;
+}
+
 
 
 /* file_length.

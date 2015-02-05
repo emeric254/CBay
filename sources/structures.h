@@ -90,6 +90,7 @@ int accSave (CONTENT_TYPE_USERACCOUNT_NAME user, FILE* f);
  */
 int accLoad (CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f);
 
+
 /* allAccSave.
  * Save a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
@@ -108,14 +109,28 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **user, int *size);
  * Save object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objSave (CONTENT_TYPE_OBJECTBID_NAME obj);
+int objSave (CONTENT_TYPE_OBJECTBID_NAME obj, FILE* f);
 
 
 /* objLoad.
  * Load object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objLoad (CONTENT_TYPE_OBJECTBID_NAME *obj);
+int objLoad (CONTENT_TYPE_OBJECTBID_NAME *obj, FILE* f);
+
+
+/* allObjSave.
+ * Save a table of objects from the OBJ_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *user, int size);
+
+
+/* allObjLoad.
+ * Load a table of objects from the OBJ_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **user, int *size);
 
 
 /* file_length.
