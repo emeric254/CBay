@@ -207,16 +207,15 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
     int nbr = 0;
     int state;
     FILE *f = fopen(ACC_FILE,"rb");
-
     if ( f == NULL )
         return(ERROR_OPENING);
 
+    // clean the actual table
     free(*table);
     *table=NULL;
-
+    // create a space for a new element
     temp = NULL;
     temp = malloc(sizeof(CONTENT_TYPE_USERACCOUNT_NAME));
-
     if (temp == NULL)
         return ERROR_POINTER;
 
@@ -249,9 +248,9 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
         }
     }
 
-    free(temp);
-    fclose(f);
-    *size = nbr;
+    free(temp); // clean the unused space
+    fclose(f); // close the file
+    *size = nbr; // write the size of the table on the output var
     return SUCESS;
 }
 
@@ -294,21 +293,22 @@ int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *table, int size)
  */
 int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **table, int *size)
 {
+    // the function allAccLoad works the same way
+
     CONTENT_TYPE_OBJECTBID_NAME *ptr = NULL;
     CONTENT_TYPE_OBJECTBID_NAME *temp;
     int nbr = 0;
     int state;
     FILE* f = fopen(OBJ_FILE,"rb") ;
-
     if ( f == NULL )
         return(ERROR_OPENING);
 
+    // clean the actual table
     free(*table);
     *table=NULL;
-
+    // create a space for a new element
     temp = NULL;
     temp = malloc(sizeof(CONTENT_TYPE_OBJECTBID_NAME));
-
     if (temp == NULL)
         return ERROR_POINTER;
 
@@ -341,9 +341,9 @@ int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **table, int *size)
         }
     }
 
-    free(temp);
-    fclose(f);
-    *size = nbr;
+    free(temp); // clean the unused space
+    fclose(f); // close the file
+    *size = nbr; // write the size of the table on the output var
     return SUCESS;
 }
 
