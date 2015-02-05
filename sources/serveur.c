@@ -364,7 +364,10 @@ int isGetRequest(char* data, int size)
 {
     // REQUEST_METHOD_GET
     if (size >= 6)
-        if ( (!strncmp(data,REQUEST_METHOD_GET,3)) && (data[3] == ' ') && (data[size-1] == '\n') && (data[size-2] == ';') )
+        if ( (!strncmp(data,REQUEST_METHOD_GET,strlen(REQUEST_METHOD_GET)))
+            && (data[strlen(REQUEST_METHOD_GET)] == ' ')
+            && (data[size-1] == '\n')
+            && (data[size-2] == ';') )
             return TRUE;
     return FALSE;
 }
@@ -377,7 +380,10 @@ int isPutRequest(char* data, int size)
 {
     // REQUEST_METHOD_PUT
     if (size >= 6)
-        if ( (!strncmp(data,REQUEST_METHOD_PUT,3)) && (data[3] == ' ') && (data[size-1] == '\n') && (data[size-2] == ';') )
+        if ( (!strncmp(data,REQUEST_METHOD_PUT,strlen(REQUEST_METHOD_PUT)))
+            && (data[strlen(REQUEST_METHOD_PUT)] == ' ')
+            && (data[size-1] == '\n')
+            && (data[size-2] == ';') )
             return TRUE;
     return FALSE;
 }
@@ -388,7 +394,13 @@ int isPutRequest(char* data, int size)
 */
 int isConnectRequest(char* data, int size)
 {
-    //@TODO not yet implemented
+    // REQUEST_METHOD_CONNECT
+    if (size >= 6)
+        if ( (!strncmp(data,REQUEST_METHOD_CONNECT,strlen(REQUEST_METHOD_CONNECT)))
+            && (data[strlen(REQUEST_METHOD_CONNECT)] == ' ')
+            && (data[size-1] == '\n')
+            && (data[size-2] == ';') )
+            return TRUE;
     return FALSE;
 }
 
