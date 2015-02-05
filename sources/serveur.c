@@ -362,7 +362,10 @@ int sendHeaderField(int size, int type)
 */
 int isGetRequest(char* data, int size)
 {
-    //@TODO not yet implemented
+    // REQUEST_METHOD_GET
+    if (size >= 6)
+        if ( (!strncmp(data,REQUEST_METHOD_GET,3)) && (data[3] == ' ') && (data[size-1] == '\n') && (data[size-2] == ';') )
+            return TRUE;
     return FALSE;
 }
 
@@ -372,7 +375,10 @@ int isGetRequest(char* data, int size)
 */
 int isPutRequest(char* data, int size)
 {
-    //@TODO not yet implemented
+    // REQUEST_METHOD_PUT
+    if (size >= 6)
+        if ( (!strncmp(data,REQUEST_METHOD_PUT,3)) && (data[3] == ' ') && (data[size-1] == '\n') && (data[size-2] == ';') )
+            return TRUE;
     return FALSE;
 }
 
