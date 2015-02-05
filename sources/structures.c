@@ -186,8 +186,22 @@ int accLoad(CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f)
 
 /* allAccSave.
  */
-int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *user, int size)
+int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *table, int size)
 {
+    int i = 0;
+    int state;
+    FILE *f;
+
+    if ( ( f = fopen(ACC_FILE,"wb") ) == NULL )
+        return(ERROR_OPENING);
+
+    for(i=0; i<size; i++)
+    {
+        if ( (state = accSave(table[i], f)) != SUCESS)
+            return state;
+    }
+
+    fclose(f);
     return SUCESS;
 }
 
@@ -199,7 +213,6 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
     CONTENT_TYPE_USERACCOUNT_NAME *ptr = NULL;
     CONTENT_TYPE_USERACCOUNT_NAME *temp;
     int nbr = 0;
-    int i = 0;
     int state;
     FILE *f;
 
