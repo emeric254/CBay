@@ -168,7 +168,7 @@ int verifMail(char *mail, int taille)
 */
 int accSave(CONTENT_TYPE_USERACCOUNT_NAME user, FILE* f)
 {
-    //@TODO if fwrite SUCESS else ERROR_READING
+    //@TODO if fwrite SUCESS else ERROR_WRITING
     fwrite(&user,sizeof(CONTENT_TYPE_USERACCOUNT_NAME),1,f);
     return SUCESS;
 }
@@ -277,6 +277,7 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
 */
 int objSave(CONTENT_TYPE_OBJECTBID_NAME obj, FILE* f)
 {
+    //@TODO if fwrite SUCESS else ERROR_WRITING
     fwrite(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
     return SUCESS;
 }
@@ -286,6 +287,7 @@ int objSave(CONTENT_TYPE_OBJECTBID_NAME obj, FILE* f)
 */
 int objLoad(CONTENT_TYPE_OBJECTBID_NAME *obj, FILE* f)
 {
+    //@TODO if fread SUCESS else ERROR_READING
     fread(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
     return SUCESS;
 }
@@ -300,7 +302,7 @@ int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *table, int size)
     FILE *f = fopen(OBJ_FILE,"wb");
     if ( f == NULL )
         return(ERROR_OPENING);
-    //@TODO if fwrite SUCESS else ERROR_READING
+    //@TODO if fwrite SUCESS else ERROR_WRITING
     fwrite(table,sizeof(CONTENT_TYPE_OBJECTBID_NAME),size,f);
     fclose(f);
     return SUCESS;
