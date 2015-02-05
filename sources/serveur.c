@@ -395,9 +395,10 @@ int isPutRequest(char* data, int size)
 int isConnectRequest(char* data, int size)
 {
     // REQUEST_METHOD_CONNECT
-    if (size >= 6)
+    if (size == 64)
         if ( (!strncmp(data,REQUEST_METHOD_CONNECT,strlen(REQUEST_METHOD_CONNECT)))
             && (data[strlen(REQUEST_METHOD_CONNECT)] == ' ')
+            && (data[35] == ';')
             && (data[size-1] == '\n')
             && (data[size-2] == ';') )
             return TRUE;
@@ -410,6 +411,12 @@ int isConnectRequest(char* data, int size)
 */
 int isDeleteRequest(char* data, int size)
 {
-    //@TODO not yet implemented
+    // REQUEST_METHOD_DELETE
+    if (size >= 9)
+        if ( (!strncmp(data,REQUEST_METHOD_DELETE,strlen(REQUEST_METHOD_DELETE)))
+            && (data[strlen(REQUEST_METHOD_DELETE)] == ' ')
+            && (data[size-1] == '\n')
+            && (data[size-2] == ';') )
+            return TRUE;
     return FALSE;
 }
