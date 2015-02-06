@@ -427,6 +427,13 @@ int isDeleteRequest(char* request, int size)
 */
 int splitGetRequest(char* request, int size, char* data, int* sizeData)
 {
+    data = NULL;
+    *sizeData = 0;
+    if (size > 6)
+    {
+        data = &request[4];
+        *sizeData = size - 4 - 2;
+    }
     return SUCESS;
 }
 
@@ -436,7 +443,14 @@ int splitGetRequest(char* request, int size, char* data, int* sizeData)
 */
 int splitPutRequest(char* request, int size, char* data, int* sizeData)
 {
-    return ERROR_EMPTY_BUFF;
+    data = NULL;
+    *sizeData = 0;
+    if (size > 9)
+    {
+        data = &request[7];
+        *sizeData = size - 7 - 2;
+    }
+    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }
 
 
@@ -445,7 +459,16 @@ int splitPutRequest(char* request, int size, char* data, int* sizeData)
 */
 int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword)
 {
-    return ERROR_EMPTY_BUFF;
+    login = NULL;
+    password = NULL;
+    *sizeLogin = 0;
+    *sizePassword = 0;
+    if (size == 64)
+    {
+        login = &request[8];
+        password = &request[36];
+    }
+    return (*sizeLogin == 0 || *sizePassword == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }
 
 
@@ -454,5 +477,12 @@ int splitConnectRequest(char* request, int size, char* login, char* password, in
 */
 int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
 {
-    return ERROR_EMPTY_BUFF;
+    data = NULL;
+    *sizeData = 0;
+    if (size > 6)
+    {
+        data = &request[4];
+        *sizeData = size - 4 - 2;
+    }
+    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }
