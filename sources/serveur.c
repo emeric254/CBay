@@ -466,7 +466,9 @@ int splitConnectRequest(char* request, int size, char* login, char* password, in
     if (size == 64)
     {
         login = &request[8];
-        password = &request[36];
+        password = &request[8+USERACCOUNT_LOGIN_LENGTH];
+        sizeLogin = (strlen(login)>USERACCOUNT_LOGIN_LENGTH)?USERACCOUNT_LOGIN_LENGTH:strlen(login);
+        sizePassword = (strlen(password)>USERACCOUNT_PASSWORD_LENGTH)?USERACCOUNT_PASSWORD_LENGTH:strlen(password);
     }
     return (*sizeLogin == 0 || *sizePassword == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }
