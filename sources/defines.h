@@ -70,6 +70,7 @@
 #define ACCOUNT_TYPE_ADMIN 'a'
 #define ACCOUNT_TYPE_VENDOR 'v'
 #define ACCOUNT_TYPE_USER 'u'
+#define ACCOUNT_TYPE_UNKNOW 'z'
 // account labels
 #define ACCOUNT_LABEL_ADMIN "Admin, become a god ;) "
 #define ACCOUNT_LABEL_VENDOR "Vendor, limited to sell things"

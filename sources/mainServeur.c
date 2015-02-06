@@ -10,9 +10,36 @@ int main()
 {
     char *message = NULL;
     int length = 0;
+
     int end = FALSE;
     int quit = FALSE;
     int connected = FALSE;
+
+    int state = SUCESS;
+
+    char * ptrLogin = NULL;
+    int sizeLogin = 0;
+    char * ptrPassword = NULL;
+    int sizePasword = 0;
+
+    char accountType = ACCOUNT_TYPE_UNKNOW;
+
+    char login[USERACCOUNT_LOGIN_LENGTH];
+    char password[USERACCOUNT_PASSWORD_LENGTH];
+
+    CONTENT_TYPE_OBJECTBID_NAME * objects = NULL;
+    int nbrObjects = 0;
+    CONTENT_TYPE_OBJECTBID_NAME * ptrObject = NULL;
+
+    CONTENT_TYPE_USERACCOUNT_NAME * accounts = NULL;
+    int nbrAccount = 0;
+    CONTENT_TYPE_USERACCOUNT_NAME * ptrAccount = NULL;
+
+    if((state = allObjLoad(&objects, &nbrObjects)) != SUCESS)
+        return state;
+
+    if((state = allAccLoad(&accounts, &nbrAccount)) != SUCESS)
+        return state;
 
     Init(SERVER_PORT);
 
@@ -29,20 +56,48 @@ int main()
                 printf("%s\n",message);
                 if(isConnectRequest(message, length) == TRUE)
                 {
+
                     // work with this Connect request
-                    // connected = TRUE;
+                    if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCESS)
+                        return state;
+                    strncpy(login,ptrLogin,sizeLogin);
+                    strncpy(password,ptrPassword,sizePasword);
+                    // if pseudo && login in one of account >> then connected = TRUE;
                 }
                 else if(isDeleteRequest(message, length) == TRUE)
                 {
-                    // work with this Delete request
+                    if(connected == TRUE)
+                    {
+                        // work with this Delete request
+                    }
+                    else
+                    {
+                        fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                        sendStatusLine(STATUS_CODE_FORBIDDEN);
+                    }
                 }
                 else if(isGetRequest(message, length) == TRUE)
                 {
-                    // work with this Get request
+                    if(connected == TRUE && accountType == ACCOUNT_TYPE_ADMIN)
+                    {
+                        // work with this Get account request
+                    }
+                    else
+                    {
+                        // work with this Get object request
+                    }
                 }
                 else if(isPutRequest(message, length) == TRUE)
                 {
-                    // work with this Put request
+                    if(connected == TRUE)
+                    {
+                        // work with this Put request
+                    }
+                    else
+                    {
+                        fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                        sendStatusLine(STATUS_CODE_FORBIDDEN);
+                    }
                 }
                 else
                 {
@@ -81,6 +136,8 @@ int main()
 
         if (quit == TRUE)
         {
+            free(objects);
+            free(accounts);
             endServer();
             return SUCESS;
         }
