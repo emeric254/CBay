@@ -206,6 +206,8 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
     CONTENT_TYPE_USERACCOUNT_NAME *temp;
     int nbr = 0;
     int state;
+
+    // open the file
     FILE *f = fopen(ACC_FILE,"rb");
     if ( f == NULL )
         return(ERROR_OPENING);
@@ -213,12 +215,14 @@ int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
     // clean the actual table
     free(*table);
     *table=NULL;
+
     // create a space for a new element
     temp = NULL;
     temp = malloc(sizeof(CONTENT_TYPE_USERACCOUNT_NAME));
     if (temp == NULL)
         return ERROR_POINTER;
 
+    // while elements can be readed
     while( ( state = accLoad(temp, f) ) == SUCESS)
     {
         nbr++; // one more account to load
@@ -299,6 +303,8 @@ int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **table, int *size)
     CONTENT_TYPE_OBJECTBID_NAME *temp;
     int nbr = 0;
     int state;
+
+    // open the file
     FILE* f = fopen(OBJ_FILE,"rb") ;
     if ( f == NULL )
         return(ERROR_OPENING);
@@ -306,12 +312,14 @@ int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **table, int *size)
     // clean the actual table
     free(*table);
     *table=NULL;
+
     // create a space for a new element
     temp = NULL;
     temp = malloc(sizeof(CONTENT_TYPE_OBJECTBID_NAME));
     if (temp == NULL)
         return ERROR_POINTER;
 
+    // while elements can be readed
     while( ( state = objLoad(temp, f) ) == SUCESS)
     {
         nbr++; // one more object to load
