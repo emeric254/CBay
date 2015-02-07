@@ -62,7 +62,7 @@ int mailCheck(char *mail, int taille);
  * except the user id !
  * modify the input UserAccount
 */
-void userInput(CONTENT_TYPE_USERACCOUNT_NAME * account);
+void userInput(UserAccount * account);
 
 
 /* sellInput.
@@ -74,63 +74,63 @@ void userInput(CONTENT_TYPE_USERACCOUNT_NAME * account);
  *      currentBidIdBuyer
  * and modify the input ObjectBid
 */
-void sellInput(CONTENT_TYPE_OBJECTBID_NAME * bid);
+void sellInput(ObjectBid * bid);
 
 
 /* accSave.
  * Save account's informations into the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int accSave (CONTENT_TYPE_USERACCOUNT_NAME user, FILE* f);
+int accSave (UserAccount user, FILE* f);
 
 
 /* accLoad.
  * Load account's informations from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int accLoad (CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f);
+int accLoad (UserAccount *user, FILE* f);
 
 
 /* allAccSave.
  * Save a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *user, int size);
+int allAccSave (UserAccount *user, int size);
 
 
 /* allAccLoad.
  * Load a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **user, int *size);
+int allAccLoad (UserAccount **user, int *size);
 
 
 /* objSave.
  * Save object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objSave (CONTENT_TYPE_OBJECTBID_NAME obj, FILE* f);
+int objSave (ObjectBid obj, FILE* f);
 
 
 /* objLoad.
  * Load object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objLoad (CONTENT_TYPE_OBJECTBID_NAME *obj, FILE* f);
+int objLoad (ObjectBid *obj, FILE* f);
 
 
 /* allObjSave.
  * Save a table of objects from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *user, int size);
+int allObjSave (UserAccount *user, int size);
 
 
 /* allObjLoad.
  * Load a table of objects from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **user, int *size);
+int allObjLoad (UserAccount **user, int *size);
 
 
 /* file_length.
