@@ -47,7 +47,7 @@ int connectionInput (char* login, char* password)
 	fprintf(stdout,"\t\t\t\tPassword : ");
 	fgets(password,26,stdin);
 	
-	/* Clean all the \n and EOF possibly being in the login and password strings */
+	/* Clean all the \n and \r possibly being in the login and password strings */
 	cleanCRString(login);
 	cleanCRString(password);
 	

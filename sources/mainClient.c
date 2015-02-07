@@ -39,6 +39,7 @@ int main(void)
             	
             	/* Extract the status code and the reason phrase from the answer */
             	
+            	
             	/* Treat the answer : either OK or NOT_CREATED */
             	if (statusCode == STATUS_CODE_OK)
             	{
@@ -54,29 +55,9 @@ int main(void)
             		/* Error */
             	}
             	
-                /*
-                while(MENU_CHOICE_QUIT != (menuChoice = menuConnexion()))
-                {
-                    CLEAR();
-
-                    // debug
-                    printf("[%d]\n",menuChoice);
-					// -----
-
-                    switch(menuChoice)
-                    {
-                        case MENU_CHOICE_QUIT:
-                            // rien à faire car retour demandé
-                            break;
-
-                        default:
-                            printf("\n\t --- Please make a correct choice !\n\n");
-                            break;
-                    }
-                }
                 CLEAR();
-                */
                 break;
+                /* After connection => to the main menu */
 
             case MENU_CHOICE_ACCOUNT_CREATION:
             	/* Create an account */
@@ -85,10 +66,10 @@ int main(void)
             	while (statusCode == STATUS_CODE_NOT_CREATED && i < 3)
             	{
 		        	/* Send the new account to the server */
-		        	sendPut();
+		        	sendPut(); /* Need to be written */
 		        	
 		        	/* Get the answer */
-		        	
+		        	response=ReceiveBinary();
 		        	
 		        	/* Extract the status code and the reason phrase from the answer */
 		        	
@@ -101,32 +82,10 @@ int main(void)
         		{
         			/* Error */
         		}
-        		
-        		/* At any moment, user can stop the procedure (implement later) */
             	
-            	
-                /*
-                while(MENU_CHOICE_QUIT != (menuChoice = menuCreationCompte()))
-                {
-                    CLEAR();
-
-                    // debug
-                    printf("[%d]\n",menuChoice);
-
-                    switch(menuChoice)
-                    {
-                        case MENU_CHOICE_QUIT:
-                            // rien à faire car retour demandé
-                            break;
-
-                        default:
-                            printf("\n\t --- Please make a correct choice !\n\n");
-                            break;
-                    }
-                }
-                CLEAR();
-                */
+				CLEAR();
                 break;
+                /* After the account creation => to the welcome menu */
 
             case MENU_CHOICE_ANONYMOUS:
                 while(MENU_CHOICE_QUIT != (menuChoice = mainMenu()))
@@ -156,6 +115,7 @@ int main(void)
                 }
                 CLEAR();
                 break;
+                /* To the main menu */
 
             default:
                 printf("\n\t --- Please make a correct choice !\n\n");
@@ -176,6 +136,32 @@ int main(void)
     return 0;
 }
 
+/*while(MENU_CHOICE_QUIT != (menuChoice = mainMenu()))
+{
+    CLEAR();
+
+    switch(menuChoice)
+    {
+        case MENU_CHOICE_QUIT:
+            // rien à faire car retour demandé
+            break;
+
+        case MENU_CHOICE_MAIN_LIST:
+        	// List available objects
+            printf("\n\t --- WIP >> list\n\n");
+            break;
+
+        case MENU_CHOICE_MAIN_SEARCH:
+        	// Searche for a particular object
+            printf("\n\t --- WIP >> seach\n\n");
+            break;
+
+        default:
+            printf("\n\t --- Please make a correct choice !\n\n");
+            break;
+    }
+}
+CLEAR();*/
 
 /*
 int main() {
