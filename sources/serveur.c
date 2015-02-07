@@ -360,14 +360,14 @@ int sendHeaderField(int size, int type)
 /* isGetRequest.
  *
 */
-int isGetRequest(char* data, int size)
+int isGetRequest(char* request, int size)
 {
     // REQUEST_METHOD_GET
     if (size >= 6)
-        if ( (!strncmp(data,REQUEST_METHOD_GET,strlen(REQUEST_METHOD_GET)))
-            && (data[strlen(REQUEST_METHOD_GET)] == ' ')
-            && (data[size-1] == '\n')
-            && (data[size-2] == ';') )
+        if ( (!strncmp(request,REQUEST_METHOD_GET,strlen(REQUEST_METHOD_GET)))
+            && (request[strlen(REQUEST_METHOD_GET)] == ' ')
+            && (request[size-1] == '\n')
+            && (request[size-2] == ';') )
             return TRUE;
     return FALSE;
 }
@@ -376,14 +376,14 @@ int isGetRequest(char* data, int size)
 /* isPutRequest.
  *
 */
-int isPutRequest(char* data, int size)
+int isPutRequest(char* request, int size)
 {
     // REQUEST_METHOD_PUT
     if (size >= 6)
-        if ( (!strncmp(data,REQUEST_METHOD_PUT,strlen(REQUEST_METHOD_PUT)))
-            && (data[strlen(REQUEST_METHOD_PUT)] == ' ')
-            && (data[size-1] == '\n')
-            && (data[size-2] == ';') )
+        if ( (!strncmp(request,REQUEST_METHOD_PUT,strlen(REQUEST_METHOD_PUT)))
+            && (request[strlen(REQUEST_METHOD_PUT)] == ' ')
+            && (request[size-1] == '\n')
+            && (request[size-2] == ';') )
             return TRUE;
     return FALSE;
 }
@@ -392,15 +392,15 @@ int isPutRequest(char* data, int size)
 /* isConnectRequest.
  *
 */
-int isConnectRequest(char* data, int size)
+int isConnectRequest(char* request, int size)
 {
     // REQUEST_METHOD_CONNECT
     if (size == 64)
-        if ( (!strncmp(data,REQUEST_METHOD_CONNECT,strlen(REQUEST_METHOD_CONNECT)))
-            && (data[strlen(REQUEST_METHOD_CONNECT)] == ' ')
-            && (data[35] == ';')
-            && (data[size-1] == '\n')
-            && (data[size-2] == ';') )
+        if ( (!strncmp(request,REQUEST_METHOD_CONNECT,strlen(REQUEST_METHOD_CONNECT)))
+            && (request[strlen(REQUEST_METHOD_CONNECT)] == ' ')
+            && (request[35] == ';')
+            && (request[size-1] == '\n')
+            && (request[size-2] == ';') )
             return TRUE;
     return FALSE;
 }
@@ -409,14 +409,82 @@ int isConnectRequest(char* data, int size)
 /* isDeleteRequest.
  *
 */
-int isDeleteRequest(char* data, int size)
+int isDeleteRequest(char* request, int size)
 {
     // REQUEST_METHOD_DELETE
     if (size >= 9)
-        if ( (!strncmp(data,REQUEST_METHOD_DELETE,strlen(REQUEST_METHOD_DELETE)))
-            && (data[strlen(REQUEST_METHOD_DELETE)] == ' ')
-            && (data[size-1] == '\n')
-            && (data[size-2] == ';') )
+        if ( (!strncmp(request,REQUEST_METHOD_DELETE,strlen(REQUEST_METHOD_DELETE)))
+            && (request[strlen(REQUEST_METHOD_DELETE)] == ' ')
+            && (request[size-1] == '\n')
+            && (request[size-2] == ';') )
             return TRUE;
     return FALSE;
+}
+
+
+/* splitGetRequest.
+ *
+*/
+int splitGetRequest(char* request, int size, char* data, int* sizeData)
+{
+    data = NULL;
+    *sizeData = 0;
+    if (size > 6)
+    {
+        data = &request[4];
+        *sizeData = size - 4 - 2;
+    }
+    return SUCESS;
+}
+
+
+/* splitPutRequest.
+ *
+*/
+int splitPutRequest(char* request, int size, char* data, int* sizeData)
+{
+    data = NULL;
+    *sizeData = 0;
+    if (size > 9)
+    {
+        data = &request[7];
+        *sizeData = size - 7 - 2;
+    }
+    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
+}
+
+
+/* splitConnectRequest.
+ *
+*/
+int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword)
+{
+    login = NULL;
+    password = NULL;
+    *sizeLogin = 0;
+    *sizePassword = 0;
+    if (size == 64)
+    {
+        login = &request[8];
+        password = &request[8+USERACCOUNT_LOGIN_LENGTH];
+        sizeLogin = (strlen(login)>USERACCOUNT_LOGIN_LENGTH)?USERACCOUNT_LOGIN_LENGTH:strlen(login);
+        sizePassword = (strlen(password)>USERACCOUNT_PASSWORD_LENGTH)?USERACCOUNT_PASSWORD_LENGTH:strlen(password);
+    }
+    return (*sizeLogin == 0 || *sizePassword == 0) ? ERROR_EMPTY_BUFF : SUCESS;
+}
+
+
+/* splitDeleteRequest.
+ *
+*/
+int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
+{
+    data = NULL;
+    *sizeData = 0;
+    if (size > 6)
+    {
+        data = &request[4];
+        *sizeData = size - 4 - 2;
+    }
+    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }

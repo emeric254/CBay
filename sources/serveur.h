@@ -67,26 +67,49 @@ int sendHeaderField(int size, int type);
 /* isGetRequest.
  *
 */
-int isGetRequest(char* data, int size);
+int isGetRequest(char* request, int size);
 
 
 /* isPutRequest.
  *
 */
-int isPutRequest(char* data, int size);
+int isPutRequest(char* request, int size);
 
 
 /* isConnectRequest.
  *
 */
-int isConnectRequest(char* data, int size);
+int isConnectRequest(char* request, int size);
 
 
 /* isDeleteRequest.
  *
 */
-int isDeleteRequest(char* data, int size);
+int isDeleteRequest(char* request, int size);
 
+
+/* splitGetRequest.
+ *
+*/
+int splitGetRequest(char* request, int size, char* data, int* sizeData);
+
+
+/* splitPutRequest.
+ *
+*/
+int splitPutRequest(char* request, int size, char* data, int* sizeData);
+
+
+/* splitConnectRequest.
+ *
+*/
+int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword);
+
+
+/* splitDeleteRequest.
+ *
+*/
+int splitDeleteRequest(char* request, int size, char* data, int* sizeData);
 
 /*
 

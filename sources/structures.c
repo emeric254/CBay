@@ -33,7 +33,11 @@ char charInput()
 
 /* userInput.
 */
+<<<<<<< HEAD
 void userInput(UserAccount * account)
+=======
+void saisieUtilisateur(CONTENT_TYPE_USERACCOUNT_NAME * account)
+>>>>>>> fed6366c9e3586aa61d8a44c24b39887819dc063
 {
     int validInput = FALSE;
     if(account == NULL)
@@ -107,7 +111,11 @@ void userInput(UserAccount * account)
 
 /* sellInput.
 */
+<<<<<<< HEAD
 void sellInput(ObjectBid * bid)
+=======
+void saisieVente(CONTENT_TYPE_OBJECTBID_NAME * bid)
+>>>>>>> fed6366c9e3586aa61d8a44c24b39887819dc063
 {
     if(bid == NULL)
     {
@@ -163,56 +171,198 @@ int mailCheck(char *mail, int taille)
     return (arobase == 1)? TRUE : FALSE;
 }
 
+
 /* accSave.
 */
-int accSave(UserAccount user)
+int accSave(CONTENT_TYPE_USERACCOUNT_NAME user, FILE* f)
 {
-    FILE* f;
-    if((f=fopen(ACC_FILE,"ab"))==NULL)
-        return(ERROR_OPENING);
-    fwrite(&user,sizeof(UserAccount),1,f);
-    fclose(f);
+    //@TODO if fwrite SUCESS else ERROR_WRITING
+    fwrite(&user,sizeof(CONTENT_TYPE_USERACCOUNT_NAME),1,f);
     return SUCESS;
 }
 
 
 /* accLoad.
 */
-int accLoad(UserAccount *user)
+int accLoad(CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f)
 {
-    FILE* f;
-    if((f=fopen(ACC_FILE,"rb"))==NULL)
+    //@TODO if fread SUCESS else ERROR_READING
+    fread(&user,sizeof(CONTENT_TYPE_USERACCOUNT_NAME),1,f);
+    return SUCESS;
+}
+
+
+/* allAccSave.
+ */
+int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *table, int size)
+{
+    FILE *f = fopen(ACC_FILE,"wb");
+    if ( f == NULL )
         return(ERROR_OPENING);
-    fread(&user,sizeof(UserAccount),1,f);
+    //@TODO if fwrite SUCESS else ERROR_READING
+    fwrite(table,sizeof(CONTENT_TYPE_USERACCOUNT_NAME),size,f);
     fclose(f);
+    return SUCESS;
+}
+
+
+/* allAccLoad.
+ */
+int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **table, int * size)
+{
+    CONTENT_TYPE_USERACCOUNT_NAME *ptr = NULL;
+    CONTENT_TYPE_USERACCOUNT_NAME *temp;
+    int nbr = 0;
+    int state;
+
+    // open the file
+    FILE *f = fopen(ACC_FILE,"rb");
+    if ( f == NULL )
+        return(ERROR_OPENING);
+
+    // clean the actual table
+    free(*table);
+    *table=NULL;
+
+    // create a space for a new element
+    temp = NULL;
+    temp = malloc(sizeof(CONTENT_TYPE_USERACCOUNT_NAME));
+    if (temp == NULL)
+        return ERROR_POINTER;
+
+    // while elements can be readed
+    while( ( state = accLoad(temp, f) ) == SUCESS)
+    {
+        nbr++; // one more account to load
+
+        ptr = *table; // save the actual content
+        // make a table which is bigger
+        *table = NULL;
+        *table = realloc(*table, nbr*sizeof(CONTENT_TYPE_USERACCOUNT_NAME));
+
+        if (*table == NULL)
+        {
+            free(ptr);
+            return ERROR_POINTER;
+        }
+
+        // add the new element
+        (*table)[nbr-1] = *temp;
+
+        ptr = NULL;
+        temp = NULL;
+        temp = malloc(sizeof(CONTENT_TYPE_USERACCOUNT_NAME));
+
+        if (temp == NULL)
+        {
+            free(*table);
+            return ERROR_POINTER;
+        }
+    }
+
+    free(temp); // clean the unused space
+    fclose(f); // close the file
+    *size = nbr; // write the size of the table on the output var
     return SUCESS;
 }
 
 
 /* objSave.
 */
-int objSave(ObjectBid obj)
+int objSave(CONTENT_TYPE_OBJECTBID_NAME obj, FILE* f)
 {
-    FILE* f;
-    if((f=fopen(OBJ_FILE,"rb"))==NULL)
-        return(ERROR_OPENING);
-    fread(&obj,sizeof(ObjectBid),1,f);
-    fclose(f);
+    //@TODO if fwrite SUCESS else ERROR_WRITING
+    fwrite(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
     return SUCESS;
 }
 
 
 /* objLoad.
 */
-int objLoad(ObjectBid *obj)
+int objLoad(CONTENT_TYPE_OBJECTBID_NAME *obj, FILE* f)
 {
-    FILE* f;
-    if((f=fopen(ACC_FILE,"rb"))==NULL)
+    //@TODO if fread SUCESS else ERROR_READING
+    fread(&obj,sizeof(CONTENT_TYPE_OBJECTBID_NAME),1,f);
+    return SUCESS;
+}
+
+
+/* allObjSave.
+ */
+int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *table, int size)
+{
+    FILE *f = fopen(OBJ_FILE,"wb");
+    if ( f == NULL )
         return(ERROR_OPENING);
-    fread(&obj,sizeof(ObjectBid),1,f);
+    //@TODO if fwrite SUCESS else ERROR_WRITING
+    fwrite(table,sizeof(CONTENT_TYPE_OBJECTBID_NAME),size,f);
     fclose(f);
     return SUCESS;
 }
+
+
+/* allObjLoad.
+ */
+int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **table, int *size)
+{
+    // the function allAccLoad works the same way
+
+    CONTENT_TYPE_OBJECTBID_NAME *ptr = NULL;
+    CONTENT_TYPE_OBJECTBID_NAME *temp;
+    int nbr = 0;
+    int state;
+
+    // open the file
+    FILE* f = fopen(OBJ_FILE,"rb") ;
+    if ( f == NULL )
+        return(ERROR_OPENING);
+
+    // clean the actual table
+    free(*table);
+    *table=NULL;
+
+    // create a space for a new element
+    temp = NULL;
+    temp = malloc(sizeof(CONTENT_TYPE_OBJECTBID_NAME));
+    if (temp == NULL)
+        return ERROR_POINTER;
+
+    // while elements can be readed
+    while( ( state = objLoad(temp, f) ) == SUCESS)
+    {
+        nbr++; // one more object to load
+
+        ptr = *table; // save the actual content
+        // make a table which is bigger
+        *table = NULL;
+        *table = realloc(*table, nbr*sizeof(CONTENT_TYPE_OBJECTBID_NAME));
+
+        if (*table == NULL)
+        {
+            free(ptr);
+            return ERROR_POINTER;
+        }
+
+        // add the new element
+        (*table)[nbr-1] = *temp;
+
+        ptr = NULL;
+        temp = NULL;
+        temp = malloc(sizeof(CONTENT_TYPE_OBJECTBID_NAME));
+
+        if (temp == NULL)
+        {
+            free(*table);
+            return ERROR_POINTER;
+        }
+    }
+
+    free(temp); // clean the unused space
+    fclose(f); // close the file
+    *size = nbr; // write the size of the table on the output var
+    return SUCESS;
+}
+
 
 
 /* file_length.

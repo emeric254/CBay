@@ -81,28 +81,56 @@ void sellInput(CONTENT_TYPE_OBJECTBID_NAME * bid);
  * Save account's informations into the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int accSave (CONTENT_TYPE_USERACCOUNT_NAME user);
+int accSave (CONTENT_TYPE_USERACCOUNT_NAME user, FILE* f);
 
 
 /* accLoad.
  * Load account's informations from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int accLoad (CONTENT_TYPE_USERACCOUNT_NAME *user);
+int accLoad (CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f);
+
+
+/* allAccSave.
+ * Save a table of accounts from the ACC_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *user, int size);
+
+
+/* allAccLoad.
+ * Load a table of accounts from the ACC_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **user, int *size);
 
 
 /* objSave.
  * Save object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objSave (CONTENT_TYPE_OBJECTBID_NAME obj);
+int objSave (CONTENT_TYPE_OBJECTBID_NAME obj, FILE* f);
 
 
 /* objLoad.
  * Load object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objLoad (CONTENT_TYPE_OBJECTBID_NAME *obj);
+int objLoad (CONTENT_TYPE_OBJECTBID_NAME *obj, FILE* f);
+
+
+/* allObjSave.
+ * Save a table of objects from the OBJ_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *user, int size);
+
+
+/* allObjLoad.
+ * Load a table of objects from the OBJ_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **user, int *size);
 
 
 /* file_length.
