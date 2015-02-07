@@ -40,7 +40,7 @@ void clearBuffer();
 /* cleanCRString.
  * clean a string from all carriage return ('\n' & '\r)
 */
-void basePrice(char *string);
+void cleanCRString(char *string);
 
 
 /* charInput.

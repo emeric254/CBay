@@ -15,6 +15,12 @@ int welcomeMenu();
  */
 int mainMenu();
 
+/* connectionInput.
+ * asks the user for a login and a password and gets their answer.
+ * return a login and a password.
+ */
+int connectionInput (char* login, char* password);
+
 /* ... */
 
 #endif

@@ -32,3 +32,26 @@ int mainMenu()
 //    videBuffer();
     return saisieChar() - '0';
 }
+
+/* connectionInput
+ */
+int connectionInput (char* login, char* password)
+{
+	/* Clean the screen */
+	CLEAR();
+	
+	/* Get the login and the password */
+	fprintf(stdout,"\t\t\t\tPlease enter your login and your password\n");
+	fprintf(stdout,"\t\t\t\tLogin : ");
+	fgets(login,27,stdin);	
+	fprintf(stdout,"\t\t\t\tPassword : ");
+	fgets(password,26,stdin);
+	
+	/* Clean all the \n and EOF possibly being in the login and password strings */
+	cleanCRString(login);
+	cleanCRString(password);
+	
+	return SUCESS;
+}
+
+

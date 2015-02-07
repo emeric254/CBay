@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "defines.h"
 #include "structures.h"
@@ -13,7 +14,10 @@ int main(void)
     int menuChoice; // user choice var
     int connected = FALSE;
     int i = 0, j = 0;
+    int statusCode;
     UserAccount user;
+    char *response=NULL;
+    char login[27], password[26];
 
     CLEAR();
 
@@ -24,9 +28,31 @@ int main(void)
         switch(menuChoice)
         {
             case MENU_CHOICE_CONNECTION:
-            	/* Ask for a username and a password */
+            	/* Ask for a login and a password */
+            	connectionInput(login,password);
+            	
             	/* Send a connection request to the server */
+            	sendConnect(login,password);
+            	
+            	/* Get the answer */
+            	response=receiveBinary();
+            	
+            	/* Extract the status code and the reason phrase from the answer */
+            	
             	/* Treat the answer : either OK or NOT_CREATED */
+            	if (statusCode == STATUS_CODE_OK)
+            	{
+            		/* Connection granted */
+            		
+            	}
+            	else if (statusCode == STATUS_CODE_NOT_CREATED)
+            	{
+            		/* Connection denied */
+            	}
+            	else
+            	{
+            		/* Error */
+            	}
             	
                 /*
                 while(MENU_CHOICE_QUIT != (menuChoice = menuConnexion()))
@@ -53,11 +79,30 @@ int main(void)
                 break;
 
             case MENU_CHOICE_ACCOUNT_CREATION:
-            	/* Create an account => use userInput */
-            	/* Send the new account to the server */
-            	/* If the answer is not CREATED, resend it */
+            	/* Create an account */
+            	userInput();
+            	
+            	while (statusCode == STATUS_CODE_NOT_CREATED && i < 3)
+            	{
+		        	/* Send the new account to the server */
+		        	sendPut();
+		        	
+		        	/* Get the answer */
+		        	
+		        	
+		        	/* Extract the status code and the reason phrase from the answer */
+		        	
+		        	
+		        	/* If the answer is not CREATED, resend it */
+		        }
+		    		
         		/* After 3 fail send, stop and display an error (type to define) */
-        		/* At any moment, user can stop the procedure */
+        		if (statusCode == STATUS_CODE_NOT_CREATED && i == 3)
+        		{
+        			/* Error */
+        		}
+        		
+        		/* At any moment, user can stop the procedure (implement later) */
             	
             	
                 /*
