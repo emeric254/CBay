@@ -4,7 +4,7 @@
 #include "defines.h"
 
 
-typedef struct CONTENT_TYPE_OBJECTBID_NAME
+typedef struct ObjectBid
 {
     long int id;
     char name[OBJECTBID_NAME_LENGTH];
@@ -16,10 +16,10 @@ typedef struct CONTENT_TYPE_OBJECTBID_NAME
     char adress[OBJECTBID_ADRESS_LENGTH];
     float  currentBidPrice;
     long int currentBidIdBuyer;
-} CONTENT_TYPE_OBJECTBID_NAME;
+} ObjectBid;
 
 
-typedef struct CONTENT_TYPE_USERACCOUNT_NAME
+typedef struct UserAccount
 {
     char type;
     long int id;
@@ -27,7 +27,7 @@ typedef struct CONTENT_TYPE_USERACCOUNT_NAME
     char lastname[USERACCOUNT_LASTNAME_LENGTH];
     char adress[USERACCOUNT_ADRESS_LENGTH];
     char mail[USERACCOUNT_MAIL_LENGTH];
-} CONTENT_TYPE_USERACCOUNT_NAME;
+} UserAccount;
 
 
 
@@ -62,7 +62,7 @@ int verifMail(char *mail, int taille);
  * sauf l'id !
  * modifi le UserAccount saisi
 */
-void saisieUtilisateur(CONTENT_TYPE_USERACCOUNT_NAME * account);
+void saisieUtilisateur(UserAccount * account);
 
 
 /* saisieVente.
@@ -74,63 +74,63 @@ void saisieUtilisateur(CONTENT_TYPE_USERACCOUNT_NAME * account);
  *      currentBidIdBuyer
  * modifie le ObjectBid saisi
 */
-void saisieVente(CONTENT_TYPE_OBJECTBID_NAME * bid);
+void saisieVente(ObjectBid * bid);
 
 
 /* accSave.
  * Save account's informations into the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int accSave (CONTENT_TYPE_USERACCOUNT_NAME user, FILE* f);
+int accSave (UserAccount user, FILE* f);
 
 
 /* accLoad.
  * Load account's informations from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int accLoad (CONTENT_TYPE_USERACCOUNT_NAME *user, FILE* f);
+int accLoad (UserAccount *user, FILE* f);
 
 
 /* allAccSave.
  * Save a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allAccSave (CONTENT_TYPE_USERACCOUNT_NAME *user, int size);
+int allAccSave (UserAccount *user, int size);
 
 
 /* allAccLoad.
  * Load a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allAccLoad (CONTENT_TYPE_USERACCOUNT_NAME **user, int *size);
+int allAccLoad (UserAccount **user, int *size);
 
 
 /* objSave.
  * Save object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objSave (CONTENT_TYPE_OBJECTBID_NAME obj, FILE* f);
+int objSave (ObjectBid obj, FILE* f);
 
 
 /* objLoad.
  * Load object's informations into the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int objLoad (CONTENT_TYPE_OBJECTBID_NAME *obj, FILE* f);
+int objLoad (ObjectBid *obj, FILE* f);
 
 
 /* allObjSave.
  * Save a table of objects from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allObjSave (CONTENT_TYPE_OBJECTBID_NAME *user, int size);
+int allObjSave (ObjectBid *user, int size);
 
 
 /* allObjLoad.
  * Load a table of objects from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allObjLoad (CONTENT_TYPE_OBJECTBID_NAME **user, int *size);
+int allObjLoad (ObjectBid **user, int *size);
 
 
 /* file_length.

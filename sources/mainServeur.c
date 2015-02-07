@@ -27,13 +27,13 @@ int main()
     char login[USERACCOUNT_LOGIN_LENGTH];
     char password[USERACCOUNT_PASSWORD_LENGTH];
 
-    CONTENT_TYPE_OBJECTBID_NAME * objects = NULL;
+    ObjectBid * objects = NULL;
     int nbrObjects = 0;
-    CONTENT_TYPE_OBJECTBID_NAME * ptrObject = NULL;
+    ObjectBid * ptrObject = NULL;
 
-    CONTENT_TYPE_USERACCOUNT_NAME * accounts = NULL;
+    UserAccount * accounts = NULL;
     int nbrAccount = 0;
-    CONTENT_TYPE_USERACCOUNT_NAME * ptrAccount = NULL;
+    UserAccount * ptrAccount = NULL;
 
     if((state = allObjLoad(&objects, &nbrObjects)) != SUCESS)
         return state;

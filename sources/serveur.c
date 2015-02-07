@@ -336,10 +336,10 @@ int sendHeaderField(int size, int type)
     switch(type)
     {
         case CONTENT_TYPE_OBJECTBID_ID:
-            strcpy(&headerField[46],"CONTENT_TYPE_OBJECTBID_NAME");
+            strcpy(&headerField[46],"ObjectBid");
             break;
         case CONTENT_TYPE_USERACCOUNT_ID:
-            strcpy(&headerField[46],"CONTENT_TYPE_USERACCOUNT_NAME");
+            strcpy(&headerField[46],"UserAccount");
             break;
         default:
             temp = ERROR_WRONG_TYPE;

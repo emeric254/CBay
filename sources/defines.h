@@ -32,9 +32,6 @@
 // object type ids
 #define CONTENT_TYPE_OBJECTBID_ID 0
 #define CONTENT_TYPE_USERACCOUNT_ID 1
-// object type names
-#define CONTENT_TYPE_OBJECTBID_NAME ObjectBid
-#define CONTENT_TYPE_USERACCOUNT_NAME UserAccount
 
 
 //request methods
