@@ -102,7 +102,7 @@ int accLoad (UserAccount *user, FILE* f);
  * test if an user's account is in the table or not.
  * return TRUE if it's contain (ids matching), return FALSE otherwise.
  */
-int userInTable (UserAccount *obj, UserAccount *table, int size);
+int userInTable (UserAccount *user, UserAccount *table, int size);
 
 
 /* allAccSave.
@@ -127,7 +127,7 @@ int objSave (ObjectBid obj, FILE* f);
 
 
 /* objLoad.
- * Load object's informations into the OBJ_FILE.
+ * Load object's informations from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
 int objLoad (ObjectBid *obj, FILE* f);
@@ -152,6 +152,13 @@ int allObjSave (ObjectBid *table, int size);
  * Integer return codes correspond to the operation's outcome.
  */
 int allObjLoad (ObjectBid **table, int *size);
+
+
+/* idsLoad.
+ * Load ids's informations from the IDS_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int idsLoad (ConfidentialIDS *ids, FILE *f);
 
 
 /* allIDSLoad.

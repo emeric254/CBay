@@ -186,9 +186,17 @@ int accLoad(UserAccount *user, FILE* f)
 
 /* userInTable.
  */
-int userInTable (UserAccount *obj, UserAccount *table, int size)
+int userInTable (UserAccount *user, UserAccount *table, int size)
 {
-    return TRUE;
+    int i = 0;
+    int find = FALSE;
+    while(find == FALSE && i < size)
+    {
+        if ( user->id == table[i].id )
+            find = TRUE;
+        i++;
+    }
+    return find;
 }
 
 
@@ -200,7 +208,7 @@ int allAccSave (UserAccount *table, int size)
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCESS else ERROR_READING
-    fwrite(table,sizeof(UserAccount),size,f);
+    fwrite(table, sizeof(UserAccount), (size_t)size, f);
     fclose(f);
     return SUCESS;
 }
@@ -291,7 +299,15 @@ int objLoad(ObjectBid *obj, FILE* f)
  */
 int objInTable (ObjectBid *obj, ObjectBid *table, int size)
 {
-    return TRUE;
+    int i = 0;
+    int find = FALSE;
+    while(find == FALSE && i < size)
+    {
+        if ( obj->id == table[i].id )
+            find = TRUE;
+        i++;
+    }
+    return find;
 }
 
 
@@ -303,7 +319,7 @@ int allObjSave (ObjectBid *table, int size)
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCESS else ERROR_WRITING
-    fwrite(table,sizeof(ObjectBid),size,f);
+    fwrite(table, sizeof(ObjectBid), (size_t)size, f);
     fclose(f);
     return SUCESS;
 }
@@ -372,6 +388,16 @@ int allObjLoad (ObjectBid **table, int *size)
 }
 
 
+/* idsLoad.
+ */
+int idsLoad (ConfidentialIDS *ids, FILE *f)
+{
+    //@TODO if fread SUCESS else ERROR_READING
+    fread(&ids,sizeof(ConfidentialIDS),1,f);
+    return SUCESS;
+}
+
+
 /* allIDSLoad.
  */
 int allIDSLoad (ConfidentialIDS **table, int *size)
@@ -400,7 +426,7 @@ int allIDSLoad (ConfidentialIDS **table, int *size)
         return ERROR_POINTER;
 
     // while elements can be readed
-    while( ( state = objLoad(temp, f) ) == SUCESS)
+    while( ( state = idsLoad(temp, f) ) == SUCESS)
     {
         nbr++; // one more object to load
 
@@ -444,7 +470,7 @@ int allIDSSave (ConfidentialIDS **table, int *size)
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCESS else ERROR_WRITING
-    fwrite(table,sizeof(ConfidentialIDS),size,f);
+    fwrite(table, sizeof(ConfidentialIDS), (size_t)size, f);
     fclose(f);
     return SUCESS;
 }
@@ -458,8 +484,11 @@ int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_
     int find = FALSE;
     while(find == FALSE && i < size)
     {
+        if ( !strcmp(login,table[i].login) && !strcmp(password,table[i].password) )
+            find = TRUE;
+        i++;
     }
-    return FALSE;
+    return find;
 }
 
 

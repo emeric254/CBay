@@ -35,6 +35,9 @@ int main()
     int nbrAccount = 0;
     UserAccount * ptrAccount = NULL;
 
+    ConfidentialIDS * ids = NULL;
+    int nbrIDS = 0;
+
     if((state = allObjLoad(&objects, &nbrObjects)) != SUCESS)
         return state;
 
@@ -63,7 +66,12 @@ int main()
                         strncpy(login,ptrLogin,sizeLogin);
                         strncpy(password,ptrPassword,sizePasword);
                         // if pseudo && login in one of account >> then connected = TRUE;
+                        if ( idsInTable(login, password, ids, nbrIDS) == TRUE )
+                        {
+                            // send : user connected !
+                        }
                     }
+                    // else { /* already connected ! */}
                 }
                 else if(isDeleteRequest(message, length) == TRUE)
                 {
