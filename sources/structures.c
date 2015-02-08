@@ -186,7 +186,7 @@ int accLoad(UserAccount *user, FILE* f)
 
 /* userInTable.
  */
-int userInTable (UserAccount *user, UserAccount *table, int size)
+int userInTable (UserAccount *user, UserAccount *table, int size, long int *id)
 {
     int i = 0;
     int find = FALSE;
@@ -196,6 +196,8 @@ int userInTable (UserAccount *user, UserAccount *table, int size)
             find = TRUE;
         i++;
     }
+    if (id != NULL)
+        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
     return find;
 }
 
@@ -297,7 +299,7 @@ int objLoad(ObjectBid *obj, FILE* f)
 
 /* objInTable.
  */
-int objInTable (ObjectBid *obj, ObjectBid *table, int size)
+int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id)
 {
     int i = 0;
     int find = FALSE;
@@ -307,6 +309,8 @@ int objInTable (ObjectBid *obj, ObjectBid *table, int size)
             find = TRUE;
         i++;
     }
+    if (id != NULL)
+        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
     return find;
 }
 
@@ -478,7 +482,7 @@ int allIDSSave (ConfidentialIDS **table, int *size)
 
 /* idsInTable.
  */
-int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size)
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id)
 {
     int i = 0;
     int find = FALSE;
@@ -488,6 +492,8 @@ int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_
             find = TRUE;
         i++;
     }
+    if (id != NULL)
+        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
     return find;
 }
 

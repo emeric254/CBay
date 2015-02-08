@@ -99,10 +99,10 @@ int accLoad (UserAccount *user, FILE* f);
 
 
 /* userInTable.
- * test if an user's account is in the table or not.
+ * test if an user's account is in the table or not, and return its id or not.
  * return TRUE if it's contain (ids matching), return FALSE otherwise.
  */
-int userInTable (UserAccount *user, UserAccount *table, int size);
+int userInTable (UserAccount *user, UserAccount *table, int size, long int *id);
 
 
 /* allAccSave.
@@ -134,10 +134,10 @@ int objLoad (ObjectBid *obj, FILE* f);
 
 
 /* objInTable.
- * test if an object is in the table or not.
+ * test if an object is in the table or not, and return its id or not.
  * return TRUE if it's contain (ids matching), return FALSE otherwise.
  */
-int objInTable (ObjectBid *obj, ObjectBid *table, int size);
+int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id);
 
 
 /* allObjSave.
@@ -176,10 +176,10 @@ int allIDSSave (ConfidentialIDS **table, int *size);
 
 
 /* idsInTable.
- * test if ids are in the IDS table.
+ * test if ids are in the IDS table, and return its id or not.
  * return TRUE if it's contain (ids matching), return FALSE otherwise.
  */
-int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size);
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id);
 
 
 /* file_length.
