@@ -94,13 +94,23 @@ int main()
                 }
                 else if(isGetRequest(message, length) == TRUE)
                 {
-                    if(connected == TRUE && accountType == ACCOUNT_TYPE_ADMIN)
+                    if(connected == TRUE)
                     {
-                        // work with this Get account request
+                        // work with this Get request as ?
+                        // test type of data
+                        // is inTables ?
+                        /*
+                        if (accountType == ACCOUNT_TYPE_ADMIN)
+                        else if (accountType == ACCOUNT_TYPE_VENDOR)
+                        else if (accountType == ACCOUNT_TYPE_USER)
+                        else // server fail !
+                        */
                     }
                     else
                     {
-                        // work with this Get object request
+                        // work with this Get request as anonymous
+                        // test type of data
+                        // is inTables ?
                     }
                 }
                 else if(isPutRequest(message, length) == TRUE)
@@ -108,6 +118,9 @@ int main()
                     if(connected == TRUE)
                     {
                         // work with this Put request
+                        // test type of data
+                        // is new or alredy inTables ?
+                        // so creation or update
                     }
                     else
                     {
@@ -119,7 +132,7 @@ int main()
                 {
                     fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
                     sendStatusLine(STATUS_CODE_BAD_REQUEST);
-                    // end = TRUE; // end communication with the client, 'cause it's a bad guy
+                    // end = TRUE; // end communication with the client, 'cause it's a bad guy : he send wrong request
                 }
             }
             else
