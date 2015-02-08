@@ -26,6 +26,7 @@ int main()
 
     char login[USERACCOUNT_LOGIN_LENGTH];
     char password[USERACCOUNT_PASSWORD_LENGTH];
+    long int id = -1;
 
     ObjectBid * objects = NULL;
     int nbrObjects = 0;
@@ -66,9 +67,15 @@ int main()
                         strncpy(login,ptrLogin,sizeLogin);
                         strncpy(password,ptrPassword,sizePasword);
                         // if pseudo && login in one of account >> then connected = TRUE;
-                        if ( idsInTable(login, password, ids, nbrIDS) == TRUE )
+                        if ( idsInTable(login, password, ids, nbrIDS, &id) == TRUE )
                         {
-                            // send : user connected !
+                            // he sucess in connection
+                            sendStatusLine(STATUS_CODE_OK);
+                        }
+                        else
+                        {
+                            // wrong ids
+                            sendStatusLine(STATUS_CODE_FORBIDDEN);
                         }
                     }
                     // else { /* already connected ! */}
