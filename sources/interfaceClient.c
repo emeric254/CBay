@@ -47,11 +47,71 @@ int connectionInput (char* login, char* password)
 	fprintf(stdout,"\t\t\t\tPassword : ");
 	fgets(password,26,stdin);
 	
-	/* Clean all the \n and \r possibly being in the login and password strings */
+	/* Clean all the \n and \r possibly being in the login and password */
 	cleanCRString(login);
 	cleanCRString(password);
 	
 	return SUCESS;
 }
+
+/* displayResult
+ */
+int displayResult (int type, int code)
+{
+	/* Application codes */
+	if (type == APPLICATION)
+	{
+		/* Application error */
+		fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
+	}
+	/* Transmission codes */
+	else if (type == TRANSMISSION)
+	{
+		switch(code)
+		{
+			/* OK */
+			case STATUS_CODE_OK:
+				fprintf(stdout,"00 OK\n");
+				break;
+				
+			/* CREATED */
+			case STATUS_CODE_CREATED:
+				fprintf(stdout,"01 CREATED\n");
+				break;
+				
+			/* BAD REQUEST */
+			case STATUS_CODE_BAD_REQUEST:
+				fprintf(stdout,"-1 BAD REQUEST\n");
+				fprintf(stdout,"The sent request doesn't match properly the pattern.\n");
+				break;
+				
+			/* NOT CREATED */
+			case STATUS_CODE_NOT_CREATED:
+				fprintf(stdout,"-2 NOT CREATED\n");
+				fprintf(stdout,"The account or object you are asking for doesn't seem to exist\n");
+				break;
+				
+			/* INTERNAL SERVER ERROR */
+			case STATUS_CODE_INTERNAL_SERVER_ERROR:
+				fprintf(stdout,"-3 INTERNAL SERVER ERROR\n");
+				break;
+				
+			/* CONFLICT */
+			case STATUS_CODE_CONFLICT:
+				fprintf(stdout,"-4 CONFLICT\n");
+				break;
+				
+			/* FORBIDDEN */
+			case STATUS_CODE_FORBIDDEN:
+				fprintf(stdout,"-5 FORBIDDEN\n");
+				break;
+				
+			/* Default case */
+			default :
+				fprintf(stdout,"Unknown error\n");
+		}
+	}
+}
+
 
 

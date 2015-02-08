@@ -21,6 +21,10 @@ int mainMenu();
  */
 int connectionInput (char* login, char* password);
 
-/* ... */
+/* displayResult.
+ * display the result of an operation a code and a type.
+ * returns nothing.
+ */
+int displayResult (int type, int code);
 
 #endif

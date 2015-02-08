@@ -53,6 +53,17 @@ int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage);
 */
 int splitResponseHeader(char *responseHeaderField, int* contentLength, char* contentType);
 
+/* accountCreation.
+ * Asks the user for some informations and create a new UserAccount then send it
+ * to the server.
+*/
+int accountCreation ();
+
+/* connection.
+ * Asks the user for a login and a password and try to connect to the server.
+ * Return the result.
+*/
+int connection();
 
 /* Ferme la connexion.
  */

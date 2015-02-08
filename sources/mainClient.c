@@ -14,13 +14,13 @@ int main(void)
     int menuChoice; // user choice var
     int connected = FALSE;
     int i = 0, j = 0;
-    int statusCode;
+    int result;
     UserAccount user;
-    char *response=NULL;
     char login[27], password[26];
 
     CLEAR();
 
+	/* The Welcome Menu : Connection and Account Creation */
     while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
     {
         CLEAR();
@@ -28,66 +28,54 @@ int main(void)
         switch(menuChoice)
         {
             case MENU_CHOICE_CONNECTION:
-            	/* Ask for a login and a password */
-            	connectionInput(login,password);
+            
+            	/* Connect to the server */
+            	result=connection();
             	
-            	/* Send a connection request to the server */
-            	sendConnect(login,password);
-            	
-            	/* Get the answer */
-            	response=receiveBinary();
-            	
-            	/* Extract the status code and the reason phrase from the answer */
-            	
-            	
-            	/* Treat the answer : either OK or NOT_CREATED */
-            	if (statusCode == STATUS_CODE_OK)
-            	{
-            		/* Connection granted */
-            		
-            	}
-            	else if (statusCode == STATUS_CODE_NOT_CREATED)
-            	{
-            		/* Connection denied */
-            	}
-            	else
-            	{
-            		/* Error */
-            	}
+            	/* The Main Menu choices : Back to the welcome menu, list
+            	 * the available objects or search for objects */
+                while((MENU_CHOICE_QUIT != (menuChoice = mainMenu())) && (result==SUCCESS))
+                {
+                    CLEAR();
+
+                    switch(menuChoice)
+                    {
+                        case MENU_CHOICE_QUIT:
+                            /* nothing to do, Go Back asked */
+                            break;
+
+                        case MENU_CHOICE_MAIN_LIST:
+                        	/* List available objects */
+                            printf("\n\t --- WIP >> list\n\n");
+                            break;
+
+                        case MENU_CHOICE_MAIN_SEARCH:
+                        	/* Searche for a particular object */
+                            printf("\n\t --- WIP >> seach\n\n");
+                            break;
+
+                        default:
+                            printf("\n\t --- Please make a correct choice !\n\n");
+                            break;
+                    }
+                }
             	
                 CLEAR();
                 break;
-                /* After connection => to the main menu */
 
             case MENU_CHOICE_ACCOUNT_CREATION:
+            	
             	/* Create an account */
-            	userInput();
+				accountCreation();
             	
-            	while (statusCode == STATUS_CODE_NOT_CREATED && i < 3)
-            	{
-		        	/* Send the new account to the server */
-		        	sendPut(); /* Need to be written */
-		        	
-		        	/* Get the answer */
-		        	response=ReceiveBinary();
-		        	
-		        	/* Extract the status code and the reason phrase from the answer */
-		        	
-		        	
-		        	/* If the answer is not CREATED, resend it */
-		        }
-		    		
-        		/* After 3 fail send, stop and display an error (type to define) */
-        		if (statusCode == STATUS_CODE_NOT_CREATED && i == 3)
-        		{
-        			/* Error */
-        		}
-            	
+            	/* Return to the welcome menu */
 				CLEAR();
                 break;
-                /* After the account creation => to the welcome menu */
 
             case MENU_CHOICE_ANONYMOUS:
+            
+            	/* The Main Menu choices : Back to the welcome menu, list
+            	 * the available objects or search for objects */
                 while(MENU_CHOICE_QUIT != (menuChoice = mainMenu()))
                 {
                     CLEAR();
@@ -95,16 +83,16 @@ int main(void)
                     switch(menuChoice)
                     {
                         case MENU_CHOICE_QUIT:
-                            // rien à faire car retour demandé
+                            /* nothing to do, Go Back asked */
                             break;
 
                         case MENU_CHOICE_MAIN_LIST:
-                        	// List available objects
+                        	/* List available objects */
                             printf("\n\t --- WIP >> list\n\n");
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
-                        	// Searche for a particular object
+                        	/* Searche for a particular object */
                             printf("\n\t --- WIP >> seach\n\n");
                             break;
 
@@ -115,7 +103,6 @@ int main(void)
                 }
                 CLEAR();
                 break;
-                /* To the main menu */
 
             default:
                 printf("\n\t --- Please make a correct choice !\n\n");
@@ -136,32 +123,6 @@ int main(void)
     return 0;
 }
 
-/*while(MENU_CHOICE_QUIT != (menuChoice = mainMenu()))
-{
-    CLEAR();
-
-    switch(menuChoice)
-    {
-        case MENU_CHOICE_QUIT:
-            // rien à faire car retour demandé
-            break;
-
-        case MENU_CHOICE_MAIN_LIST:
-        	// List available objects
-            printf("\n\t --- WIP >> list\n\n");
-            break;
-
-        case MENU_CHOICE_MAIN_SEARCH:
-        	// Searche for a particular object
-            printf("\n\t --- WIP >> seach\n\n");
-            break;
-
-        default:
-            printf("\n\t --- Please make a correct choice !\n\n");
-            break;
-    }
-}
-CLEAR();*/
 
 /*
 int main() {

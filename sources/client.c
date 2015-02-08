@@ -345,6 +345,89 @@ int splitResponseHeader(char *responseHeaderField, int* contentLength, char* con
 	return 0;
 }
 
+/* accountCreation.
+*/
+int accountCreation()
+{
+	int statusCode;
+	char * response=NULL
+	char * reasonPhrase=NULL;
+	
+	/* Get the informations about the new account */
+	userInput();
+	
+	/* Try to send the request.
+	 * If the answer is not CREATED, resend it */
+	i=0;
+	while (statusCode != STATUS_CODE_CREATED && i < 3)
+	{
+    	/* Send the new account to the server */
+    	sendPut(); /* @TODO */
+    	
+    	/* Get the answer */
+    	response=ReceiveBinary();
+    	
+    	/* Extract the status code and the reason phrase from the answer */
+    	splitStatusLine(response,statusCode,reasonPhrase);
+    }
+		
+	/* After 3 fail send, stop and display an error (type to define) */
+	if (statusCode == STATUS_CODE_NOT_CREATED && i == 3)
+	{
+		displayResult(STATUS_CODE_NOT_CREATED);
+	}
+	
+	/* Else, the account is created => display the result */
+	else
+	{
+		displayResult(STATUS_CODE_CREATED);
+	}
+	
+	return 0;
+}
+
+/* connection.
+*/
+int connection ()
+{
+	/* Ask for a login and a password */
+	connectionInput(login,password);
+	
+	/* Try to send the request.
+	 * If the answer is NOT_CREATED, resend it */
+	i=0;
+	while (statusCode == STATUS_CODE_NOT_CREATED && i < 3)
+	{
+    	/* Send a connection request to the server */
+    	sendConnect(login,password);
+    	
+    	/* Get the answer's status line */
+    	response=receiveBinary();
+    	
+    	/* Extract the status code and the reason phrase from the answer */
+    	splitStatusLine(response,statusCode,reasonPhrase);
+	}
+	/* Treat the answer : either OK or NOT_CREATED */
+	if (statusCode == STATUS_CODE_OK)
+	{
+		/* Connection granted */
+		displayResult(STATUS_CODE_OK);
+		return SUCCESS;
+	}
+	else if (statusCode == STATUS_CODE_NOT_CREATED)
+	{
+		/* Connection denied */
+		displayResult(STATUS_CODE_NOT_CREATED);
+		return CONNECTION_DENIED;
+	}
+	else
+	{
+		/* Error */
+		displayResult(ERROR_UNKNOWN);
+		return ERROR_UNKNOWN;
+	}
+}
+
 
 /* Ferme la connexion.
  */
