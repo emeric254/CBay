@@ -56,13 +56,14 @@ int main()
                 printf("%s\n",message);
                 if(isConnectRequest(message, length) == TRUE)
                 {
-
-                    // work with this Connect request
-                    if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCESS)
-                        return state;
-                    strncpy(login,ptrLogin,sizeLogin);
-                    strncpy(password,ptrPassword,sizePasword);
-                    // if pseudo && login in one of account >> then connected = TRUE;
+                    if(connected != TRUE) // not already connected
+                    {
+                        if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCESS)
+                            return state;
+                        strncpy(login,ptrLogin,sizeLogin);
+                        strncpy(password,ptrPassword,sizePasword);
+                        // if pseudo && login in one of account >> then connected = TRUE;
+                    }
                 }
                 else if(isDeleteRequest(message, length) == TRUE)
                 {

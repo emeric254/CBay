@@ -6,6 +6,7 @@
 // Save files
 #define ACC_FILE "accounts.txt"
 #define OBJ_FILE "objects.txt"
+#define IDS_FILE "ids.txt"
 
 //
 #define TRUE 1

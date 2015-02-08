@@ -30,6 +30,13 @@ typedef struct UserAccount
 } UserAccount;
 
 
+typedef struct ConfidentialIDS
+{
+    long int id;
+    char login[USERACCOUNT_LOGIN_LENGTH];
+    char password[USERACCOUNT_PASSWORD_LENGTH];
+} ConfidentialIDS;
+
 
 /* cleanBuffer.
  * vide le buffer
@@ -91,18 +98,25 @@ int accSave (UserAccount user, FILE* f);
 int accLoad (UserAccount *user, FILE* f);
 
 
+/* userInTable.
+ * test if an user's account is in the table or not.
+ * return TRUE if it's contain (ids matching), return FALSE otherwise.
+ */
+int userInTable (UserAccount *obj, UserAccount *table, int size);
+
+
 /* allAccSave.
  * Save a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allAccSave (UserAccount *user, int size);
+int allAccSave (UserAccount *table, int size);
 
 
 /* allAccLoad.
  * Load a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allAccLoad (UserAccount **user, int *size);
+int allAccLoad (UserAccount **table, int *size);
 
 
 /* objSave.
@@ -119,18 +133,46 @@ int objSave (ObjectBid obj, FILE* f);
 int objLoad (ObjectBid *obj, FILE* f);
 
 
+/* objInTable.
+ * test if an object is in the table or not.
+ * return TRUE if it's contain (ids matching), return FALSE otherwise.
+ */
+int objInTable (ObjectBid *obj, ObjectBid *table, int size);
+
+
 /* allObjSave.
  * Save a table of objects from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allObjSave (ObjectBid *user, int size);
+int allObjSave (ObjectBid *table, int size);
 
 
 /* allObjLoad.
  * Load a table of objects from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allObjLoad (ObjectBid **user, int *size);
+int allObjLoad (ObjectBid **table, int *size);
+
+
+/* allIDSLoad.
+ * Load a table of IDS from the IDS_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allIDSLoad (ConfidentialIDS **table, int *size);
+
+
+/* allIDSLoad.
+ * Save a table of IDS to the IDS_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allIDSSave (ConfidentialIDS **table, int *size);
+
+
+/* idsInTable.
+ * test if ids are in the IDS table.
+ * return TRUE if it's contain (ids matching), return FALSE otherwise.
+ */
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size);
 
 
 /* file_length.

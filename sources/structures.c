@@ -184,6 +184,14 @@ int accLoad(UserAccount *user, FILE* f)
 }
 
 
+/* userInTable.
+ */
+int userInTable (UserAccount *obj, UserAccount *table, int size)
+{
+    return TRUE;
+}
+
+
 /* allAccSave.
  */
 int allAccSave (UserAccount *table, int size)
@@ -279,6 +287,14 @@ int objLoad(ObjectBid *obj, FILE* f)
 }
 
 
+/* objInTable.
+ */
+int objInTable (ObjectBid *obj, ObjectBid *table, int size)
+{
+    return TRUE;
+}
+
+
 /* allObjSave.
  */
 int allObjSave (ObjectBid *table, int size)
@@ -355,6 +371,96 @@ int allObjLoad (ObjectBid **table, int *size)
     return SUCESS;
 }
 
+
+/* allIDSLoad.
+ */
+int allIDSLoad (ConfidentialIDS **table, int *size)
+{
+
+    // the function allAccLoad works the same way
+
+    ConfidentialIDS *ptr = NULL;
+    ConfidentialIDS *temp;
+    int nbr = 0;
+    int state;
+
+    // open the file
+    FILE* f = fopen(IDS_FILE,"rb") ;
+    if ( f == NULL )
+        return(ERROR_OPENING);
+
+    // clean the actual table
+    free(*table);
+    *table=NULL;
+
+    // create a space for a new element
+    temp = NULL;
+    temp = malloc(sizeof(ConfidentialIDS));
+    if (temp == NULL)
+        return ERROR_POINTER;
+
+    // while elements can be readed
+    while( ( state = objLoad(temp, f) ) == SUCESS)
+    {
+        nbr++; // one more object to load
+
+        ptr = *table; // save the actual content
+        // make a table which is bigger
+        *table = NULL;
+        *table = realloc(*table, nbr*sizeof(ConfidentialIDS));
+
+        if (*table == NULL)
+        {
+            free(ptr);
+            return ERROR_POINTER;
+        }
+
+        // add the new element
+        (*table)[nbr-1] = *temp;
+
+        ptr = NULL;
+        temp = NULL;
+        temp = malloc(sizeof(ConfidentialIDS));
+
+        if (temp == NULL)
+        {
+            free(*table);
+            return ERROR_POINTER;
+        }
+    }
+
+    free(temp); // clean the unused space
+    fclose(f); // close the file
+    *size = nbr; // write the size of the table on the output var
+    return SUCESS;
+}
+
+
+/* allIDSLoad.
+ */
+int allIDSSave (ConfidentialIDS **table, int *size)
+{
+    FILE *f = fopen(IDS_FILE,"wb");
+    if ( f == NULL )
+        return(ERROR_OPENING);
+    //@TODO if fwrite SUCESS else ERROR_WRITING
+    fwrite(table,sizeof(ConfidentialIDS),size,f);
+    fclose(f);
+    return SUCESS;
+}
+
+
+/* idsInTable.
+ */
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size)
+{
+    int i = 0;
+    int find = FALSE;
+    while(find == FALSE && i < size)
+    {
+    }
+    return FALSE;
+}
 
 
 /* file_length.
