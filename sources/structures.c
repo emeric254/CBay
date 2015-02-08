@@ -5,9 +5,9 @@
 #include "structures.h"
 
 
-/* videBuffer.
+/* cleanBuffer.
 */
-void videBuffer()
+void cleanBuffer()
 {
     char buffer = fgetc(stdin);
     while(buffer != '\n' && buffer != EOF)
@@ -17,9 +17,9 @@ void videBuffer()
 }
 
 
-/* saisieChar
+/* getAChar
  */
-char saisieChar()
+char getAChar()
 {
     char temp = fgetc(stdin);
     while(temp == '\n' || temp == EOF)
@@ -31,11 +31,11 @@ char saisieChar()
 }
 
 
-/* saisieUtilisateur.
+/* userInputUserAccount.
 */
-void saisieUtilisateur(UserAccount * account)
+void userInputUserAccount(UserAccount * account)
 {
-    int validInput = FALSE;
+    int goodInput = FALSE;
     if(account == NULL)
     {
         fprintf(ERROROUTPUT,"null pointer");
@@ -49,25 +49,25 @@ void saisieUtilisateur(UserAccount * account)
         printf("%c - %s\n",ACCOUNT_TYPE_ADMIN,ACCOUNT_LABEL_ADMIN);
         printf("%c - %s\n",ACCOUNT_TYPE_VENDOR,ACCOUNT_LABEL_VENDOR);
         printf("%c - %s\n",ACCOUNT_TYPE_USER,ACCOUNT_LABEL_USER);
-        account->type = saisieChar();
+        account->type = getAChar();
         CLEAR();
         switch(account->type)
         {
             case ACCOUNT_TYPE_ADMIN:
-                validInput = TRUE;
+                goodInput = TRUE;
                 break;
             case ACCOUNT_TYPE_VENDOR:
-                validInput = TRUE;
+                goodInput = TRUE;
                 break;
             case ACCOUNT_TYPE_USER:
-                validInput = TRUE;
+                goodInput = TRUE;
                 break;
             default:
-                validInput = FALSE;
+                goodInput = FALSE;
                 printf("Input error, please make a correct choice !\n");
                 break;
         }
-    }while(validInput);
+    }while(goodInput);
 
     CLEAR();
 
@@ -75,21 +75,21 @@ void saisieUtilisateur(UserAccount * account)
     fgets(account->name,USERACCOUNT_NAME_LENGTH,stdin);
     if(strlen(account->name)<USERACCOUNT_NAME_LENGTH-1)
         account->name[strlen(account->name)] = '\0';
-    videBuffer();
+    cleanBuffer();
     CLEAR();
 
     printf("Enter your lastname\n");
     fgets(account->lastname,USERACCOUNT_LASTNAME_LENGTH,stdin);
     if(strlen(account->lastname)<USERACCOUNT_LASTNAME_LENGTH-1)
         account->lastname[strlen(account->lastname)] = '\0';
-    videBuffer();
+    cleanBuffer();
     CLEAR();
 
     printf("Enter your adress\n");
     fgets(account->adress,USERACCOUNT_ADRESS_LENGTH,stdin);
     if(strlen(account->adress)<USERACCOUNT_LASTNAME_LENGTH-1)
         account->adress[strlen(account->adress)] = '\0';
-    videBuffer();
+    cleanBuffer();
     CLEAR();
 
     do
@@ -98,16 +98,16 @@ void saisieUtilisateur(UserAccount * account)
         fgets(account->mail,USERACCOUNT_MAIL_LENGTH,stdin);
         if(strlen(account->mail)<USERACCOUNT_MAIL_LENGTH-1)
             account->mail[strlen(account->mail)] = '\0';
-        videBuffer();
-    }while(!verifMail(account->mail,strlen(account->mail)));
+        cleanBuffer();
+    }while(!validMail(account->mail,strlen(account->mail)));
     CLEAR();
 
 }
 
 
-/* saisieVente.
+/* userInputObjectBid.
 */
-void saisieVente(ObjectBid * bid)
+void userInputObjectBid(ObjectBid * bid)
 {
     if(bid == NULL)
     {
@@ -119,33 +119,33 @@ void saisieVente(ObjectBid * bid)
     fgets(bid->name,OBJECTBID_NAME_LENGTH,stdin);
     if(strlen(bid->name)<OBJECTBID_NAME_LENGTH-1)
         bid->adress[strlen(bid->name)] = '\0';
-    videBuffer();
+    cleanBuffer();
     CLEAR();
 
     printf("Enter the bid base price\n");
     fscanf(stdin,"%f",&(bid->basePrice));
-    videBuffer();
+    cleanBuffer();
     CLEAR();
 
     printf("Enter the bid description\n");
     fgets(bid->description,OBJECTBID_DESCRIPTION_LENGTH,stdin);
     if(strlen(bid->description)<OBJECTBID_DESCRIPTION_LENGTH-1)
         bid->description[strlen(bid->description)] = '\0';
-    videBuffer();
+    cleanBuffer();
     CLEAR();
 
     printf("Enter the bid adress\n");
     fgets(bid->adress,OBJECTBID_ADRESS_LENGTH,stdin);
     if(strlen(bid->adress)<OBJECTBID_ADRESS_LENGTH-1)
         bid->adress[strlen(bid->adress)] = '\0';
-    videBuffer();
+    cleanBuffer();
     CLEAR();
 }
 
 
-/* verifMail.
+/* validMail.
 */
-int verifMail(char *mail, int taille)
+int validMail(char *mail, int taille)
 {
     if(mail == NULL)
     {
@@ -154,11 +154,11 @@ int verifMail(char *mail, int taille)
     }
     int i = 0;
     int arobase = 0 ;
-    // test '@'
+    // count how many '@'
     for(i=0;i<taille;i++)
         if((mail[i] = '@'))
             arobase ++;
-    //
+    //only one '@' in a valide mail adress
 
     return (arobase == 1)? TRUE : FALSE;
 }

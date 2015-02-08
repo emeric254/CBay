@@ -31,10 +31,10 @@ typedef struct UserAccount
 
 
 
-/* videBuffer.
+/* cleanBuffer.
  * vide le buffer
 */
-void videBuffer();
+void cleanBuffer();
 
 
 /* cleanCRString.
@@ -43,29 +43,29 @@ void videBuffer();
 void basePrice(char *string);
 
 
-/* saisieChar.
+/* getAChar.
  * saisie d'un caractere, elimine les '\n' et EOF
  * retourne un caractere
 */
-char saisieChar();
+char getAChar();
 
 
-/* verifMail.
+/* validMail.
  * verifie si la chaine 'mail' de taille 'taille' est une adresse mail correctement constituee
  * return TRUE ou FALSE
 */
-int verifMail(char *mail, int taille);
+int validMail(char *mail, int taille);
 
 
-/* saisieUtilisateur.
+/* userInputUserAccount.
  * fais saisir a l'utilisateur un UserAccount,
  * sauf l'id !
  * modifi le UserAccount saisi
 */
-void saisieUtilisateur(UserAccount * account);
+void userInputUserAccount(UserAccount * account);
 
 
-/* saisieVente.
+/* userInputObjectBid.
  * fais saisir a l'utilisateur un ObjectBid,
  * sauf les champs
  *      id
@@ -74,7 +74,7 @@ void saisieUtilisateur(UserAccount * account);
  *      currentBidIdBuyer
  * modifie le ObjectBid saisi
 */
-void saisieVente(ObjectBid * bid);
+void userInputObjectBid(ObjectBid * bid);
 
 
 /* accSave.

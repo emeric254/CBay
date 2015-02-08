@@ -19,7 +19,7 @@ int main(void)
     while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
     {
         CLEAR();
-        
+
         switch(menuChoice)
         {
             case MENU_CHOICE_MAIN_CONNECTION:
@@ -30,7 +30,7 @@ int main(void)
 
                     // debug
                     printf("[%d]\n",menuChoice);
-					// -----
+                    // -----
 
                     switch(menuChoice)
                     {
@@ -109,7 +109,7 @@ int main(void)
 
 /*
     printf("\npress a key to quit...\n");
-    videBuffer();
+    cleanBuffer();
     fgetc(stdin); // équivaut à une pause
 */
 
