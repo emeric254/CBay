@@ -24,19 +24,44 @@ int receiveBinary(char *donnees, size_t tailleMax);
 int sendBinary(char *donnees, size_t taille);
 
 
-/* sendGet.
+/* sendGetObjectBid.
 */
-int sendGet();
+int sendGetObjectBid(ObjectBid *bid);
 
 
-/* sendPut.
+/* sendGetAllObjectBid.
 */
-int sendPut();
+int sendGetAllObjectBid();
 
 
-/* sendDelete.
+/* sendGetUserAccount.
 */
-int sendDelete();
+int sendGetUserAccount(UserAccount *user);
+
+
+/* sendGetAllUserAccount.
+*/
+int sendGetAllUserAccount();
+
+
+/* sendPutObjectBid.
+*/
+int sendPutObjectBid(ObjectBid *bid);
+
+
+/* sendPutUserAccount.
+*/
+int sendPutUserAccount(UserAccount *user);
+
+
+/* sendDeleteObjectBid.
+*/
+int sendDeleteObjectBid(ObjectBid *bid);
+
+
+/* sendDeleteUserAccount.
+*/
+int sendDeleteUserAccount(UserAccount *user);
 
 
 /* sendConnect.

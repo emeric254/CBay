@@ -31,11 +31,11 @@ char charInput()
 }
 
 
-/* userInput.
+/* userInputUserAccount.
 */
-void userInput(UserAccount * account)
+void userInputUserAccount(UserAccount * account)
 {
-    int validInput = FALSE;
+    int goodInput = FALSE;
     if(account == NULL)
     {
         fprintf(ERROROUTPUT,"null pointer");
@@ -54,20 +54,20 @@ void userInput(UserAccount * account)
         switch(account->type)
         {
             case ACCOUNT_TYPE_ADMIN:
-                validInput = TRUE;
+                goodInput = TRUE;
                 break;
             case ACCOUNT_TYPE_VENDOR:
-                validInput = TRUE;
+                goodInput = TRUE;
                 break;
             case ACCOUNT_TYPE_USER:
-                validInput = TRUE;
+                goodInput = TRUE;
                 break;
             default:
-                validInput = FALSE;
+                goodInput = FALSE;
                 printf("Input error, please make a correct choice !\n");
                 break;
         }
-    }while(validInput);
+    }while(goodInput);
 
     CLEAR();
 
@@ -105,9 +105,9 @@ void userInput(UserAccount * account)
 }
 
 
-/* sellInput.
+/* userInputObjectBid.
 */
-void sellInput(ObjectBid * bid)
+void userInputObjectBid(ObjectBid * bid)
 {
     if(bid == NULL)
     {
@@ -154,11 +154,11 @@ int mailCheck(char *mail, int taille)
     }
     int i = 0;
     int arobase = 0 ;
-    // test '@'
+    // count how many '@'
     for(i=0;i<taille;i++)
         if((mail[i] = '@'))
             arobase ++;
-    //
+    //only one '@' in a valide mail adress
 
     return (arobase == 1)? TRUE : FALSE;
 }
@@ -184,6 +184,24 @@ int accLoad(UserAccount *user, FILE* f)
 }
 
 
+/* userInTable.
+ */
+int userInTable (UserAccount *user, UserAccount *table, int size, long int *id)
+{
+    int i = 0;
+    int find = FALSE;
+    while(find == FALSE && i < size)
+    {
+        if ( user->id == table[i].id )
+            find = TRUE;
+        i++;
+    }
+    if (id != NULL)
+        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+    return find;
+}
+
+
 /* allAccSave.
  */
 int allAccSave (UserAccount *table, int size)
@@ -192,7 +210,7 @@ int allAccSave (UserAccount *table, int size)
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCESS else ERROR_READING
-    fwrite(table,sizeof(UserAccount),size,f);
+    fwrite(table, sizeof(UserAccount), (size_t)size, f);
     fclose(f);
     return SUCESS;
 }
@@ -279,6 +297,24 @@ int objLoad(ObjectBid *obj, FILE* f)
 }
 
 
+/* objInTable.
+ */
+int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id)
+{
+    int i = 0;
+    int find = FALSE;
+    while(find == FALSE && i < size)
+    {
+        if ( obj->id == table[i].id )
+            find = TRUE;
+        i++;
+    }
+    if (id != NULL)
+        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+    return find;
+}
+
+
 /* allObjSave.
  */
 int allObjSave (ObjectBid *table, int size)
@@ -287,7 +323,7 @@ int allObjSave (ObjectBid *table, int size)
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCESS else ERROR_WRITING
-    fwrite(table,sizeof(ObjectBid),size,f);
+    fwrite(table, sizeof(ObjectBid), (size_t)size, f);
     fclose(f);
     return SUCESS;
 }
@@ -355,6 +391,111 @@ int allObjLoad (ObjectBid **table, int *size)
     return SUCESS;
 }
 
+
+/* idsLoad.
+ */
+int idsLoad (ConfidentialIDS *ids, FILE *f)
+{
+    //@TODO if fread SUCESS else ERROR_READING
+    fread(&ids,sizeof(ConfidentialIDS),1,f);
+    return SUCESS;
+}
+
+
+/* allIDSLoad.
+ */
+int allIDSLoad (ConfidentialIDS **table, int *size)
+{
+
+    // the function allAccLoad works the same way
+
+    ConfidentialIDS *ptr = NULL;
+    ConfidentialIDS *temp;
+    int nbr = 0;
+    int state;
+
+    // open the file
+    FILE* f = fopen(IDS_FILE,"rb") ;
+    if ( f == NULL )
+        return(ERROR_OPENING);
+
+    // clean the actual table
+    free(*table);
+    *table=NULL;
+
+    // create a space for a new element
+    temp = NULL;
+    temp = malloc(sizeof(ConfidentialIDS));
+    if (temp == NULL)
+        return ERROR_POINTER;
+
+    // while elements can be readed
+    while( ( state = idsLoad(temp, f) ) == SUCESS)
+    {
+        nbr++; // one more object to load
+
+        ptr = *table; // save the actual content
+        // make a table which is bigger
+        *table = NULL;
+        *table = realloc(*table, nbr*sizeof(ConfidentialIDS));
+
+        if (*table == NULL)
+        {
+            free(ptr);
+            return ERROR_POINTER;
+        }
+
+        // add the new element
+        (*table)[nbr-1] = *temp;
+
+        ptr = NULL;
+        temp = NULL;
+        temp = malloc(sizeof(ConfidentialIDS));
+
+        if (temp == NULL)
+        {
+            free(*table);
+            return ERROR_POINTER;
+        }
+    }
+
+    free(temp); // clean the unused space
+    fclose(f); // close the file
+    *size = nbr; // write the size of the table on the output var
+    return SUCESS;
+}
+
+
+/* allIDSLoad.
+ */
+int allIDSSave (ConfidentialIDS **table, int *size)
+{
+    FILE *f = fopen(IDS_FILE,"wb");
+    if ( f == NULL )
+        return(ERROR_OPENING);
+    //@TODO if fwrite SUCESS else ERROR_WRITING
+    fwrite(table, sizeof(ConfidentialIDS), (size_t)size, f);
+    fclose(f);
+    return SUCESS;
+}
+
+
+/* idsInTable.
+ */
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id)
+{
+    int i = 0;
+    int find = FALSE;
+    while(find == FALSE && i < size)
+    {
+        if ( !strcmp(login,table[i].login) && !strcmp(password,table[i].password) )
+            find = TRUE;
+        i++;
+    }
+    if (id != NULL)
+        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+    return find;
+}
 
 
 /* file_length.

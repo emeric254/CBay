@@ -10,9 +10,40 @@ int main()
 {
     char *message = NULL;
     int length = 0;
+
     int end = FALSE;
     int quit = FALSE;
     int connected = FALSE;
+
+    int state = SUCESS;
+
+    char * ptrLogin = NULL;
+    int sizeLogin = 0;
+    char * ptrPassword = NULL;
+    int sizePasword = 0;
+
+    char accountType = ACCOUNT_TYPE_UNKNOW;
+
+    char login[USERACCOUNT_LOGIN_LENGTH];
+    char password[USERACCOUNT_PASSWORD_LENGTH];
+    long int id = -1;
+
+    ObjectBid * objects = NULL;
+    int nbrObjects = 0;
+    ObjectBid * ptrObject = NULL;
+
+    UserAccount * accounts = NULL;
+    int nbrAccount = 0;
+    UserAccount * ptrAccount = NULL;
+
+    ConfidentialIDS * ids = NULL;
+    int nbrIDS = 0;
+
+    if((state = allObjLoad(&objects, &nbrObjects)) != SUCESS)
+        return state;
+
+    if((state = allAccLoad(&accounts, &nbrAccount)) != SUCESS)
+        return state;
 
     Init(SERVER_PORT);
 
@@ -29,26 +60,79 @@ int main()
                 printf("%s\n",message);
                 if(isConnectRequest(message, length) == TRUE)
                 {
-                    // work with this Connect request
-                    // connected = TRUE;
+                    if(connected != TRUE) // not already connected
+                    {
+                        if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCESS)
+                            return state;
+                        strncpy(login,ptrLogin,sizeLogin);
+                        strncpy(password,ptrPassword,sizePasword);
+                        // if pseudo && login in one of account >> then connected = TRUE;
+                        if ( idsInTable(login, password, ids, nbrIDS, &id) == TRUE )
+                        {
+                            // he sucess in connection
+                            sendStatusLine(STATUS_CODE_OK);
+                        }
+                        else
+                        {
+                            // wrong ids
+                            sendStatusLine(STATUS_CODE_FORBIDDEN);
+                        }
+                    }
+                    // else { /* already connected ! */}
                 }
                 else if(isDeleteRequest(message, length) == TRUE)
                 {
-                    // work with this Delete request
+                    if(connected == TRUE)
+                    {
+                        // work with this Delete request
+                    }
+                    else
+                    {
+                        fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                        sendStatusLine(STATUS_CODE_FORBIDDEN);
+                    }
                 }
                 else if(isGetRequest(message, length) == TRUE)
                 {
-                    // work with this Get request
+                    if(connected == TRUE)
+                    {
+                        // work with this Get request as ?
+                        // test type of data
+                        // is inTables ?
+                        /*
+                        if (accountType == ACCOUNT_TYPE_ADMIN)
+                        else if (accountType == ACCOUNT_TYPE_VENDOR)
+                        else if (accountType == ACCOUNT_TYPE_USER)
+                        else // server fail !
+                        */
+                    }
+                    else
+                    {
+                        // work with this Get request as anonymous
+                        // test type of data
+                        // is inTables ?
+                    }
                 }
                 else if(isPutRequest(message, length) == TRUE)
                 {
-                    // work with this Put request
+                    if(connected == TRUE)
+                    {
+                        // work with this Put request
+                        // test type of data
+                        // is new or alredy inTables ?
+                        // so creation or update
+                    }
+                    else
+                    {
+                        fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                        sendStatusLine(STATUS_CODE_FORBIDDEN);
+                    }
                 }
                 else
                 {
                     fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
                     sendStatusLine(STATUS_CODE_BAD_REQUEST);
-                    // end = TRUE; // end communication with the client, 'cause it's a bad guy
+                    // end = TRUE; // end communication with the client, 'cause it's a bad guy : he send wrong request
                 }
             }
             else
@@ -81,6 +165,8 @@ int main()
 
         if (quit == TRUE)
         {
+            free(objects);
+            free(accounts);
             endServer();
             return SUCESS;
         }

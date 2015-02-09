@@ -18,7 +18,7 @@
     #include <strings.h>
 #endif
 
-#include "defines.h"
+#include "structures.h"
 #include "client.h"
 
 
@@ -206,27 +206,71 @@ int sendBinary(char *donnees, size_t taille) {
 }
 
 
-/* sendGet.
+/* sendGetObjectBid.
 */
-int sendGet()
+int sendGetObjectBid(ObjectBid *bid)
 {
-	return 0;
+    char data [6+sizeof(ObjectBid)+1];
+    strcpy(data, REQUEST_METHOD_GET);
+    data[strlen(REQUEST_METHOD_GET)]=' ';
+    //@TODO not finished here
+    return SUCESS;
 }
 
 
-/* sendPut.
+/* sendGetAllObjectBid.
 */
-int sendPut()
+int sendGetAllObjectBid()
 {
-	return 0;
+    return SUCESS;
 }
 
 
-/* sendDelete.
+/* sendGetUserAccount.
 */
-int sendDelete()
+int sendGetUserAccount(UserAccount *user)
 {
-	return 0;
+    return SUCESS;
+}
+
+
+/* sendGetAllUserAccount.
+*/
+int sendGetAllUserAccount()
+{
+    return SUCESS;
+}
+
+
+/* sendPutObjectBid.
+*/
+int sendPutObjectBid(ObjectBid *bid)
+{
+    return SUCESS;
+}
+
+
+/* sendPutUserAccount.
+*/
+int sendPutUserAccount(UserAccount *user)
+{
+    return SUCESS;
+}
+
+
+/* sendDeleteObjectBid.
+*/
+int sendDeleteObjectBid(ObjectBid *bid)
+{
+    return SUCESS;
+}
+
+
+/* sendDeleteUserAccount.
+*/
+int sendDeleteUserAccount(UserAccount *user)
+{
+    return SUCESS;
 }
 
 
@@ -236,24 +280,24 @@ int sendConnect(char* login, char* password)
 {
     int length;
     char msg[64+1];
-    
+
     strcpy(msg,REQUEST_METHOD_CONNECT);
     length = strlen(REQUEST_METHOD_CONNECT);
-    
+
     msg[length++] = ' ';
-    
+
     strncpy(&msg[length], login, USERACCOUNT_LOGIN_LENGTH);
     length += (strlen(login) < USERACCOUNT_LOGIN_LENGTH)? strlen(login):USERACCOUNT_LOGIN_LENGTH;
-    
+
     msg[length++] = ';';
-    
+
     strncpy(&msg[length], password, USERACCOUNT_PASSWORD_LENGTH);
     length += (strlen(password) < USERACCOUNT_PASSWORD_LENGTH)? strlen(password):USERACCOUNT_PASSWORD_LENGTH;
-    
+
     msg[length++] = ';';
     msg[length++] = '\n';
     msg[length] = '\0';
-    
+
     //@TODO bon jusqu'ici, apres c'est a voir :
 
 // inutile ?
@@ -274,51 +318,51 @@ int sendConnect(char* login, char* password)
 */
 int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
 {
-	if(!strncmp(statusLine,"STATUS_CODE_OK",2))
-	{
-		*statusCode = STATUS_CODE_OK;
-		strncpy(statusMessage,REASON_PHRASE_OK,12);
-	}
-	else if(!strncmp(statusLine,"STATUS_CODE_CREATED",2))
-	{
-		*statusCode = STATUS_CODE_CREATED;
-		strncpy(statusMessage,REASON_PHRASE_CREATED,12);
-	}
-	else if(!strncmp(statusLine,"STATUS_CODE_BAD_REQUEST",2))
-	{
-		*statusCode = STATUS_CODE_BAD_REQUEST;
-		strncpy(statusMessage,REASON_PHRASE_BAD_REQUEST,12);
-	}
-	else if(!strncmp(statusLine,"STATUS_CODE_NOT_CREATED",2))
-	{
-		*statusCode = STATUS_CODE_NOT_CREATED;
-		strncpy(statusMessage,REASON_PHRASE_NOT_CREATED,12);
-	}
-	else if(!strncmp(statusLine,"STATUS_CODE_INTERNAL_SERVER_ERROR",2))
-	{
-		*statusCode = STATUS_CODE_INTERNAL_SERVER_ERROR;
-		strncpy(statusMessage,REASON_PHRASE_INTERNAL_SERVER_ERROR,12);
-	}
-	else if(!strncmp(statusLine,"STATUS_CODE_CONFLICT",2))
-	{
-		*statusCode = STATUS_CODE_CONFLICT;
-		strncpy(statusMessage,REASON_PHRASE_CONFLICT,12);
-	}
-	else if(!strncmp(statusLine,"STATUS_CODE_FORBIDDEN",2))
-	{
-		*statusCode = STATUS_CODE_FORBIDDEN;
-		strncpy(statusMessage,REASON_PHRASE_FORBIDDEN,12);
-	}
-	else
-	{
-		if(statusLine[0]=='-')
-			*statusCode = 0 - statusLine[1] - '0';
-		else
-			*statusCode = 10 * (statusLine[0] - '0') + statusLine[1] - '0';
-		strncpy(statusMessage,&statusLine[3],12);
-		return FALSE;
-	}
-	return TRUE;
+    if(!strncmp(statusLine,"STATUS_CODE_OK",2))
+    {
+        *statusCode = STATUS_CODE_OK;
+        strncpy(statusMessage,REASON_PHRASE_OK,12);
+    }
+    else if(!strncmp(statusLine,"STATUS_CODE_CREATED",2))
+    {
+        *statusCode = STATUS_CODE_CREATED;
+        strncpy(statusMessage,REASON_PHRASE_CREATED,12);
+    }
+    else if(!strncmp(statusLine,"STATUS_CODE_BAD_REQUEST",2))
+    {
+        *statusCode = STATUS_CODE_BAD_REQUEST;
+        strncpy(statusMessage,REASON_PHRASE_BAD_REQUEST,12);
+    }
+    else if(!strncmp(statusLine,"STATUS_CODE_NOT_CREATED",2))
+    {
+        *statusCode = STATUS_CODE_NOT_CREATED;
+        strncpy(statusMessage,REASON_PHRASE_NOT_CREATED,12);
+    }
+    else if(!strncmp(statusLine,"STATUS_CODE_INTERNAL_SERVER_ERROR",2))
+    {
+        *statusCode = STATUS_CODE_INTERNAL_SERVER_ERROR;
+        strncpy(statusMessage,REASON_PHRASE_INTERNAL_SERVER_ERROR,12);
+    }
+    else if(!strncmp(statusLine,"STATUS_CODE_CONFLICT",2))
+    {
+        *statusCode = STATUS_CODE_CONFLICT;
+        strncpy(statusMessage,REASON_PHRASE_CONFLICT,12);
+    }
+    else if(!strncmp(statusLine,"STATUS_CODE_FORBIDDEN",2))
+    {
+        *statusCode = STATUS_CODE_FORBIDDEN;
+        strncpy(statusMessage,REASON_PHRASE_FORBIDDEN,12);
+    }
+    else
+    {
+        if(statusLine[0]=='-')
+            *statusCode = 0 - statusLine[1] - '0';
+        else
+            *statusCode = 10 * (statusLine[0] - '0') + statusLine[1] - '0';
+        strncpy(statusMessage,&statusLine[3],12);
+        return FALSE;
+    }
+    return TRUE;
 }
 
 
@@ -326,23 +370,23 @@ int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
 */
 int splitResponseHeader(char *responseHeaderField, int* contentLength, char* contentType)
 {
-	int i = 0;
-	int multiplicator = 1;
-	
-	for(i=0;i<15;i++)
-		multiplicator *= 10;
-		
-	*contentLength = 0;
-	
-	for(i=16;i<16+15;i++)
-	{
-		*contentLength += multiplicator * (responseHeaderField[i] - '0');
-		multiplicator /= 10;
-	}
-	
-	strncpy(contentType,&responseHeaderField[46],16);
-	
-	return 0;
+    int i = 0;
+    int multiplicator = 1;
+
+    for(i=0;i<15;i++)
+        multiplicator *= 10;
+
+    *contentLength = 0;
+
+    for(i=16;i<16+15;i++)
+    {
+        *contentLength += multiplicator * (responseHeaderField[i] - '0');
+        multiplicator /= 10;
+    }
+
+    strncpy(contentType,&responseHeaderField[46],16);
+
+    return 0;
 }
 
 /* accountCreation.

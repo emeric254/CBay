@@ -20,24 +20,23 @@ int main(void)
 
     CLEAR();
 
-	/* The Welcome Menu : Connection and Account Creation */
+    /* The Welcome Menu : Connection and Account Creation */
     while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
     {
         CLEAR();
-        
+
         switch(menuChoice)
         {
             case MENU_CHOICE_CONNECTION:
-            
-            	/* Connect to the server */
-            	result=connection();
-            	
-            	/* The Main Menu choices : Back to the welcome menu, list
-            	 * the available objects or search for objects */
+
+                /* Connect to the server */
+                result=connection();
+
+                /* The Main Menu choices : Back to the welcome menu, list
+                 * the available objects or search for objects */
                 while((MENU_CHOICE_QUIT != (menuChoice = mainMenu())) && (result==SUCCESS))
                 {
                     CLEAR();
-
                     switch(menuChoice)
                     {
                         case MENU_CHOICE_QUIT:
@@ -45,12 +44,12 @@ int main(void)
                             break;
 
                         case MENU_CHOICE_MAIN_LIST:
-                        	/* List available objects */
+                            /* List available objects */
                             printf("\n\t --- WIP >> list\n\n");
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
-                        	/* Searche for a particular object */
+                            /* Searche for a particular object */
                             printf("\n\t --- WIP >> seach\n\n");
                             break;
 
@@ -59,23 +58,23 @@ int main(void)
                             break;
                     }
                 }
-            	
+
                 CLEAR();
                 break;
 
             case MENU_CHOICE_ACCOUNT_CREATION:
-            	
-            	/* Create an account */
-				accountCreation();
-            	
-            	/* Return to the welcome menu */
-				CLEAR();
+
+                /* Create an account */
+                accountCreation();
+
+                /* Return to the welcome menu */
+                CLEAR();
                 break;
 
             case MENU_CHOICE_ANONYMOUS:
-            
-            	/* The Main Menu choices : Back to the welcome menu, list
-            	 * the available objects or search for objects */
+
+                /* The Main Menu choices : Back to the welcome menu, list
+                 * the available objects or search for objects */
                 while(MENU_CHOICE_QUIT != (menuChoice = mainMenu()))
                 {
                     CLEAR();
@@ -87,12 +86,12 @@ int main(void)
                             break;
 
                         case MENU_CHOICE_MAIN_LIST:
-                        	/* List available objects */
+                            /* List available objects */
                             printf("\n\t --- WIP >> list\n\n");
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
-                        	/* Searche for a particular object */
+                            /* Searche for a particular object */
                             printf("\n\t --- WIP >> seach\n\n");
                             break;
 
@@ -110,13 +109,13 @@ int main(void)
         }
     }
 
-	/* Exit procedure */
+    /* Exit procedure */
     CLEAR();
     printf("\n\t Thank you to use BEEP !\n\n");
 
 /*
     printf("\npress a key to quit...\n");
-    videBuffer();
+    cleanBuffer();
     fgetc(stdin); // équivaut à une pause
 */
 
