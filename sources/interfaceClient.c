@@ -12,9 +12,9 @@ int welcomeMenu()
 {
     fprintf(stdout, "\t\t\t\tWELCOME ON BEEP\n\n\n");
     fprintf(stdout, "\t\t\t\t%d - Quit\n", MENU_CHOICE_QUIT);
-    fprintf(stdout, "\t\t\t\t%d - Connection\n", MENU_CHOICE_MAIN_CONNECTION);
-    fprintf(stdout, "\t\t\t\t%d - Account creation\n", MENU_CHOICE_MAIN_ACCOUNT_CREATION);
-    fprintf(stdout, "\t\t\t\t%d - Continue anonymously\n", MENU_CHOICE_MAIN_ANONYMOUS);
+    fprintf(stdout, "\t\t\t\t%d - Connection\n", MENU_CHOICE_CONNECTION);
+    fprintf(stdout, "\t\t\t\t%d - Account creation\n", MENU_CHOICE_ACCOUNT_CREATION);
+    fprintf(stdout, "\t\t\t\t%d - Continue anonymously\n", MENU_CHOICE_ANONYMOUS);
 //    cleanBuffer();
     return charInput() - '0';
 }
@@ -55,16 +55,17 @@ int connectionInput (char* login, char* password)
 
 /* displayResult
  */
-int displayResult (int type, int code)
+void displayResult (int code)
 {
-    /* Application codes */
-    if (type == APPLICATION)
+
+    /* Application codes (from -10 to -99) */
+    if (code < SUCESS)
     {
         /* Application error */
         fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
     }
     /* Transmission codes */
-    else if (type == TRANSMISSION)
+    else
     {
         switch(code)
         {
@@ -108,6 +109,7 @@ int displayResult (int type, int code)
             /* Default case */
             default :
                 fprintf(stdout,"Unknown error\n");
+                break;
         }
     }
 }

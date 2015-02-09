@@ -414,18 +414,9 @@ int accountCreation()
     	/* Extract the status code and the reason phrase from the answer */
     	splitStatusLine(response,statusCode,reasonPhrase);
     }
-		
-	/* After 3 fail send, stop and display an error (type to define) */
-	if (statusCode == STATUS_CODE_NOT_CREATED && i == 3)
-	{
-		displayResult(STATUS_CODE_NOT_CREATED);
-	}
 	
-	/* Else, the account is created => display the result */
-	else
-	{
-		displayResult(STATUS_CODE_CREATED);
-	}
+	/* Display the result */
+	displayResult(statusCode);
 	
 	return 0;
 }
@@ -451,27 +442,41 @@ int connection ()
     	/* Extract the status code and the reason phrase from the answer */
     	splitStatusLine(response,statusCode,reasonPhrase);
 	}
-	/* Treat the answer : either OK or NOT_CREATED */
-	if (statusCode == STATUS_CODE_OK)
-	{
-		/* Connection granted */
-		displayResult(STATUS_CODE_OK);
-		return SUCCESS;
-	}
-	else if (statusCode == STATUS_CODE_NOT_CREATED)
-	{
-		/* Connection denied */
-		displayResult(STATUS_CODE_NOT_CREATED);
-		return CONNECTION_DENIED;
-	}
-	else
-	{
-		/* Error */
-		displayResult(ERROR_UNKNOWN);
-		return ERROR_UNKNOWN;
-	}
+	
+	/* Display the result */
+	displayResult(statusCode);
 }
 
+/* listObjects
+*/
+int listObjects ()
+{
+	/* Send the request, 3 try */
+	while (statusCode != STATUS_CODE_OK && i < 3)
+	{
+		/* Send the request */
+		sendGet();
+    	
+    	/* Get the answer's status line */
+    	response=receiveBinary();
+    	
+    	/* Extract the status code and the reason phrase from the answer */
+    	splitStatusLine(response,statusCode,reasonPhrase);
+	}
+	
+	/* Display the result of the request */
+	displayResult();
+	
+	/* If the list is here, display it */
+	displayList();
+}
+
+/* searchObject
+*/
+int searchObject ()
+{
+
+}
 
 /* Ferme la connexion.
  */
