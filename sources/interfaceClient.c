@@ -58,14 +58,14 @@ int connectionInput (char* login, char* password)
  */
 int displayResult (int type, int code)
 {
-	/* Application codes */
-	if (type == APPLICATION)
+	/* Application codes (from -10 to -99) */
+	if (code < SUCCESS)
 	{
 		/* Application error */
 		fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
 	}
 	/* Transmission codes */
-	else if (type == TRANSMISSION)
+	else
 	{
 		switch(code)
 		{

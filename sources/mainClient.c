@@ -32,7 +32,7 @@ int main(void)
             	/* Connect to the server */
             	result=connection();
             	
-            	/* The Main Menu choices : Back to the welcome menu, list
+            	/* The Main Menu choices : go back to the welcome menu, list
             	 * the available objects or search for objects */
                 while((MENU_CHOICE_QUIT != (menuChoice = mainMenu())) && (result==SUCCESS))
                 {
@@ -46,12 +46,12 @@ int main(void)
 
                         case MENU_CHOICE_MAIN_LIST:
                         	/* List available objects */
-                            printf("\n\t --- WIP >> list\n\n");
+                        	listObjects();
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
                         	/* Searche for a particular object */
-                            printf("\n\t --- WIP >> seach\n\n");
+                        	searchObject();
                             break;
 
                         default:
@@ -88,12 +88,12 @@ int main(void)
 
                         case MENU_CHOICE_MAIN_LIST:
                         	/* List available objects */
-                            printf("\n\t --- WIP >> list\n\n");
+                        	listObjects();
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
                         	/* Searche for a particular object */
-                            printf("\n\t --- WIP >> seach\n\n");
+                        	searchObject();
                             break;
 
                         default:

@@ -1,6 +1,7 @@
 #ifndef __INTERFACECLIENT_H__
 #define __INTERFACECLIENT_H__
 
+#include "structures.h"
 
 /* welcomeMenu.
  * show welcome menu.
@@ -22,9 +23,15 @@ int mainMenu();
 int connectionInput (char* login, char* password);
 
 /* displayResult.
- * display the result of an operation a code and a type.
+ * display the result of an operation from a code.
  * returns nothing.
  */
-int displayResult (int type, int code);
+int displayResult (int code);
+
+/* displayList.
+ * display the list of available objects.
+ * returns nothing.
+ */
+int displayList (ObjectBid * list);
 
 #endif
