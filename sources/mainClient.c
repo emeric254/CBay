@@ -16,7 +16,8 @@ int main(void)
     int i = 0, j = 0;
     int result;
     UserAccount user;
-    char login[27], password[26];
+    char login[USERACCOUNT_LOGIN_LENGTH], password[USERACCOUNT_PASSWORD_LENGTH];
+    ObjectBid* list=NULL;
 
     CLEAR();
 
@@ -46,12 +47,14 @@ int main(void)
                         case MENU_CHOICE_MAIN_LIST:
 
                             /* List available objects */
-                            listObjects();
+                            listObjects(&list);
+                            /* @TODO */
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
                             /* Searche for a particular object */
-                            searchObject();
+                            searchObject(list);
+                            /* @TODO */
                             break;
 
                         default:
@@ -88,12 +91,12 @@ int main(void)
 
                         case MENU_CHOICE_MAIN_LIST:
                             /* List available objects */
-                            listObjects();
+                            listObjects(&list);
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
                             /* Searche for a particular object */
-                            searchObject();
+                            searchObject(list);
                             break;
 
                         default:

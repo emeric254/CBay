@@ -42,13 +42,30 @@ int connectionInput (char* login, char* password)
     /* Get the login and the password */
     fprintf(stdout,"\t\t\t\tPlease enter your login and your password\n");
     fprintf(stdout,"\t\t\t\tLogin : ");
-    fgets(login,27,stdin);
+    fgets(login,USERACCOUNT_LOGIN_LENGTH,stdin);
     fprintf(stdout,"\t\t\t\tPassword : ");
-    fgets(password,26,stdin);
+    fgets(password,USERACCOUNT_PASSWORD_LENGTH,stdin);
 
     /* Clean all the \n and \r possibly being in the login and password */
     cleanCRString(login);
     cleanCRString(password);
+
+    return SUCESS;
+}
+
+/* searchInput
+ */
+int searchInput (char* name)
+{
+    /* Clean the screen */
+    CLEAR();
+
+    /* Get the name */
+    fprintf(stdout,"\t\t\t\tPlease enter the name of the object you're seeking\n");
+    fgets(name,OBJECTBID_NAME_LENGTH,stdin);
+
+    /* Clean all the \n and \r possibly being in the name */
+    cleanCRString(name);
 
     return SUCESS;
 }
@@ -114,5 +131,31 @@ void displayResult (int code)
     }
 }
 
+/* displayObject
+*/
+void displayObject (ObjectBid obj)
+{
+	/* @TODO */
+}
+
+/* displayList.
+*/
+void displayList (ObjectBid * list)
+{
+	int i;
+
+	/* if the search didn't gave anything */
+	if (list==NULL)
+	{
+		fprintf(stdout,"Sorry, no object answer to your request.\n");
+	}
+	
+	/* Else print the results */
+	else
+	{
+		for (i=0;/* @TODO list's length */;i++)
+			displayObject(list[i]);
+	}
+}
 
 
