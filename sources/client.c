@@ -261,7 +261,7 @@ int sendConnect(char* login, char* password)
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESSs;
+    return SUCESS;
 }
 
 
