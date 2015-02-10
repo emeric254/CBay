@@ -15,7 +15,7 @@ int main()
     int quit = FALSE; // want to end client connection
     int connected = FALSE; // client connection state
 
-    int state = SUCESS; // represents return statement
+    int state = SUCCESS; // represents return statement
 
     char * ptrLogin = NULL; //
     int sizeLogin = 0; // its length
@@ -40,11 +40,11 @@ int main()
     int nbrIDS = 0; // number of IDS
 
     // table of objects loading
-    if((state = allObjLoad(&objects, &nbrObjects)) != SUCESS)
+    if((state = allObjLoad(&objects, &nbrObjects)) != SUCCESS)
         return state;
 
     // table of accounts loading
-    if((state = allAccLoad(&accounts, &nbrAccount)) != SUCESS)
+    if((state = allAccLoad(&accounts, &nbrAccount)) != SUCCESS)
         return state;
 
     // init server
@@ -66,7 +66,7 @@ int main()
                 {
                     if(connected != TRUE) // not already connected
                     {
-                        if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCESS)
+                        if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCCESS)
                             return state;
                         strncpy(login,ptrLogin,sizeLogin);
                         strncpy(password,ptrPassword,sizePasword);
@@ -174,7 +174,7 @@ int main()
             free(objects);
             free(accounts);
             endServer();
-            return SUCESS;
+            return SUCCESS;
         }
     }
 

@@ -30,7 +30,7 @@ int main(void)
 
                 /* The Main Menu choices : go back to the welcome menu, list
                  * the available objects or search for objects */
-                while((MENU_CHOICE_QUIT != (menuChoice = mainMenu())) && (result==SUCESS))
+                while((MENU_CHOICE_QUIT != (menuChoice = mainMenu())) && (result==SUCCESS))
                 {
                     CLEAR();
 

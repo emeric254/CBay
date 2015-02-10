@@ -50,7 +50,7 @@ int connectionInput (char* login, char* password)
 //    cleanCRString(login);
 //    cleanCRString(password);
 
-    return SUCESS;
+    return SUCCESS;
 }
 
 /* searchInput
@@ -67,7 +67,7 @@ int searchInput (char* name)
     /* Clean all the \n and \r possibly being in the name */
 //    cleanCRString(name);
 
-    return SUCESS;
+    return SUCCESS;
 }
 
 /* displayResult
@@ -76,18 +76,18 @@ void displayResult (int code)
 {
 
     /* Application codes (from -10 to -99) */
-    if (code < SUCESS)
+    if (code < SUCCESS)
     {
         /* Application error */
         switch(code)
         {
-        	case ERROR_NO_LIST:
-        		fprintf(stdout,"No list available. Ask for one before doing this again.\n");
-        		break;
-        		
-        	default:
-		        fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
-		        break;
+            case ERROR_NO_LIST:
+                fprintf(stdout,"No list available. Ask for one before doing this again.\n");
+                break;
+
+            default:
+                fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
+                break;
         }
     }
     /* Transmission codes */

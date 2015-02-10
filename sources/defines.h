@@ -76,7 +76,7 @@
 
 
 // application return codes
-#define SUCESS -10
+#define SUCCESS -10
 #define ERROR_OPENING -11
 #define ERROR_READING -12
 #define ERROR_WRITING -13

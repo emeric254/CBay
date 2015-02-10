@@ -67,7 +67,7 @@ int Init(char *machine) {
             continue;   /* ignore this one */
 
         if ( ! connect(clientSocket, res->ai_addr, res->ai_addrlen))
-            break;      /* SUCESSs */
+            break;      /* SUCCESSs */
 
         close(clientSocket);    /* ignore this one */
     } while ( (res = res->ai_next) != NULL);
@@ -232,7 +232,7 @@ int sendGetObjectBid(ObjectBid *object)
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -255,7 +255,7 @@ int sendGetAllObjectBid()
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -284,7 +284,7 @@ int sendPutObjectBid(ObjectBid *object)
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -313,7 +313,7 @@ int sendDeleteObjectBid(ObjectBid *object)
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -342,7 +342,7 @@ int sendGetUserAccount(UserAccount *account)
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -371,7 +371,7 @@ int sendPutUserAccount(UserAccount *account)
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -400,7 +400,7 @@ int sendDeleteUserAccount(UserAccount *account)
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -433,7 +433,7 @@ int sendConnect(char* login, char* password)
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -537,7 +537,7 @@ int accountCreation()
 
         /* Extract the status code and the reason phrase from the answer */
         splitStatusLine(response,&statusCode,reasonPhrase);
-        
+
         i++;
     }
 
@@ -573,17 +573,17 @@ int connection ()
 
         /* Extract the status code and the reason phrase from the answer */
         splitStatusLine(response,&statusCode,reasonPhrase);
-        
+
         i++;
     }
 
     /* Display the result */
     displayResult(statusCode);
-    
+
     if (statusCode == STATUS_CODE_OK)
-	    return SUCCESS;
-	else
-		return CONNECTION_DENIED;
+        return SUCCESS;
+    else
+        return CONNECTION_DENIED;
 }
 
 /* listObjects
@@ -607,7 +607,7 @@ int listObjects (ObjectBid ** list)
 
         /* Extract the status code and the reason phrase from the answer */
         splitStatusLine(statLine,&statusCode,reasonPhrase);
-        
+
         i++;
     }
 
@@ -619,13 +619,13 @@ int listObjects (ObjectBid ** list)
     {
         receiveBinary((char*)list,10*sizeof(ObjectBid));
 
-		/* If the list is here, display it */
-		displayList(*list);
-    
-    	return SUCCESS;
+        /* If the list is here, display it */
+        displayList(*list);
+
+        return SUCCESS;
     }
     else
-    	return ERROR_RECEIVING;
+        return ERROR_RECEIVING;
 }
 
 /* searchObject
@@ -654,7 +654,7 @@ int searchObject (ObjectBid * list)
 
     /* Display the result */
     displayList(search);
-    
+
     return SUCCESS;
 }
 

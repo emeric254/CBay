@@ -168,9 +168,9 @@ int mailCheck(char *mail, int taille)
 */
 int accSave(UserAccount user, FILE* f)
 {
-    //@TODO if fwrite SUCESS else ERROR_WRITING
+    //@TODO if fwrite SUCCESS else ERROR_WRITING
     fwrite(&user,sizeof(UserAccount),1,f);
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -178,9 +178,9 @@ int accSave(UserAccount user, FILE* f)
 */
 int accLoad(UserAccount *user, FILE* f)
 {
-    //@TODO if fread SUCESS else ERROR_READING
+    //@TODO if fread SUCCESS else ERROR_READING
     fread(&user,sizeof(UserAccount),1,f);
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -209,10 +209,10 @@ int allAccSave (UserAccount *table, int size)
     FILE *f = fopen(ACC_FILE,"wb");
     if ( f == NULL )
         return(ERROR_OPENING);
-    //@TODO if fwrite SUCESS else ERROR_READING
+    //@TODO if fwrite SUCCESS else ERROR_READING
     fwrite(table, sizeof(UserAccount), (size_t)size, f);
     fclose(f);
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -241,7 +241,7 @@ int allAccLoad (UserAccount **table, int * size)
         return ERROR_POINTER;
 
     // while elements can be readed
-    while( ( state = accLoad(temp, f) ) == SUCESS)
+    while( ( state = accLoad(temp, f) ) == SUCCESS)
     {
         nbr++; // one more account to load
 
@@ -273,7 +273,7 @@ int allAccLoad (UserAccount **table, int * size)
     free(temp); // clean the unused space
     fclose(f); // close the file
     *size = nbr; // write the size of the table on the output var
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -281,9 +281,9 @@ int allAccLoad (UserAccount **table, int * size)
 */
 int objSave(ObjectBid obj, FILE* f)
 {
-    //@TODO if fwrite SUCESS else ERROR_WRITING
+    //@TODO if fwrite SUCCESS else ERROR_WRITING
     fwrite(&obj,sizeof(ObjectBid),1,f);
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -291,9 +291,9 @@ int objSave(ObjectBid obj, FILE* f)
 */
 int objLoad(ObjectBid *obj, FILE* f)
 {
-    //@TODO if fread SUCESS else ERROR_READING
+    //@TODO if fread SUCCESS else ERROR_READING
     fread(&obj,sizeof(ObjectBid),1,f);
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -322,10 +322,10 @@ int allObjSave (ObjectBid *table, int size)
     FILE *f = fopen(OBJ_FILE,"wb");
     if ( f == NULL )
         return(ERROR_OPENING);
-    //@TODO if fwrite SUCESS else ERROR_WRITING
+    //@TODO if fwrite SUCCESS else ERROR_WRITING
     fwrite(table, sizeof(ObjectBid), (size_t)size, f);
     fclose(f);
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -356,7 +356,7 @@ int allObjLoad (ObjectBid **table, int *size)
         return ERROR_POINTER;
 
     // while elements can be readed
-    while( ( state = objLoad(temp, f) ) == SUCESS)
+    while( ( state = objLoad(temp, f) ) == SUCCESS)
     {
         nbr++; // one more object to load
 
@@ -388,7 +388,7 @@ int allObjLoad (ObjectBid **table, int *size)
     free(temp); // clean the unused space
     fclose(f); // close the file
     *size = nbr; // write the size of the table on the output var
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -396,9 +396,9 @@ int allObjLoad (ObjectBid **table, int *size)
  */
 int idsLoad (ConfidentialIDS *ids, FILE *f)
 {
-    //@TODO if fread SUCESS else ERROR_READING
+    //@TODO if fread SUCCESS else ERROR_READING
     fread(&ids,sizeof(ConfidentialIDS),1,f);
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -430,7 +430,7 @@ int allIDSLoad (ConfidentialIDS **table, int *size)
         return ERROR_POINTER;
 
     // while elements can be readed
-    while( ( state = idsLoad(temp, f) ) == SUCESS)
+    while( ( state = idsLoad(temp, f) ) == SUCCESS)
     {
         nbr++; // one more object to load
 
@@ -462,7 +462,7 @@ int allIDSLoad (ConfidentialIDS **table, int *size)
     free(temp); // clean the unused space
     fclose(f); // close the file
     *size = nbr; // write the size of the table on the output var
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -473,10 +473,10 @@ int allIDSSave (ConfidentialIDS **table, int *size)
     FILE *f = fopen(IDS_FILE,"wb");
     if ( f == NULL )
         return(ERROR_OPENING);
-    //@TODO if fwrite SUCESS else ERROR_WRITING
+    //@TODO if fwrite SUCCESS else ERROR_WRITING
     fwrite(table, sizeof(ConfidentialIDS), (size_t)size, f);
     fclose(f);
-    return SUCESS;
+    return SUCCESS;
 }
 
 

@@ -73,7 +73,7 @@ int Init(char *port)
         setsockopt(listenSocket, SOL_SOCKET, SO_REUSEPORT, &on, sizeof(on));
 #endif
         if (bind(listenSocket, res->ai_addr, res->ai_addrlen) == 0)
-            break;          /* SUCESSs */
+            break;          /* SUCCESSs */
 
         close(listenSocket);    /* bind error, close and try next one */
     } while ( (res = res->ai_next) != NULL);
@@ -89,7 +89,7 @@ int Init(char *port)
     listen(listenSocket, 4);
     printf("Init sucess\n");
 
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -120,7 +120,7 @@ int connectWait()
     bufferEnd = 0;
     connectEnd = FALSE;
 
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -235,7 +235,7 @@ int sendString(char *string)
         perror("sendString error.");
         return ERROR_SENDING;
     }
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -330,7 +330,7 @@ int sendStatusLine(int statusCode)
 */
 int sendHeaderField(int size, int type)
 {
-    int temp = SUCESS; // state of this function
+    int temp = SUCCESS; // state of this function
     char headerField [RESPONSE_HEADER_LENGTH + 1]; // message
 
     strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH); // copy into the message the Size title
@@ -360,7 +360,7 @@ int sendHeaderField(int size, int type)
     headerField[64] = '\0'; // end of the message
 
 
-    if(temp == SUCESS) // if correctly made > try to send it
+    if(temp == SUCCESS) // if correctly made > try to send it
         temp = sendString(headerField); // send this message, it's composed of characters (valid char array)
 
     return temp; // is it correctly made and send ?
@@ -453,7 +453,7 @@ int splitGetRequest(char* request, int size, char* data, int* sizeData)
     *sizeData = size - 4 - 2; // size of the PDU = size of the message - size of known parts ('GET' + ' ' + ';' + '\n')
     data = strndup(&request[4], *sizeData); // PDU start here, so clone it
 
-    return SUCESS;
+    return SUCCESS;
 }
 
 
@@ -477,7 +477,7 @@ int splitPutRequest(char* request, int size, char* data, int* sizeData)
     *sizeData = size - 4 - 2;
     data = strndup(&request[4], *sizeData);
 
-    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS; // no data <==> size == 0, so error due to empty PDU
+    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCCESS; // no data <==> size == 0, so error due to empty PDU
     //there is no way to execute a put request without data
 }
 
@@ -506,7 +506,7 @@ int splitConnectRequest(char* request, int size, char* login, char* password, in
     *sizeLogin = (strlen(login)>USERACCOUNT_LOGIN_LENGTH)?USERACCOUNT_LOGIN_LENGTH:strlen(login);
     *sizePassword = (strlen(password)>USERACCOUNT_PASSWORD_LENGTH)?USERACCOUNT_PASSWORD_LENGTH:strlen(password);
 
-    return (*sizeLogin == 0 || *sizePassword == 0) ? ERROR_EMPTY_BUFF : SUCESS;
+    return (*sizeLogin == 0 || *sizePassword == 0) ? ERROR_EMPTY_BUFF : SUCCESS;
 }
 
 
@@ -528,5 +528,5 @@ int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
     *sizeData = size - 7 - 2;
     data = strndup(&request[7], *sizeData);
 
-    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
+    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCCESS;
 }
