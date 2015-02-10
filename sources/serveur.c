@@ -450,8 +450,8 @@ int splitGetRequest(char* request, int size, char* data, int* sizeData)
         return ERROR_READING;
     }
 
-    data = strdup(&request[4]); // PDU start here, so clone it
     *sizeData = size - 4 - 2; // size of the PDU = size of the message - size of known parts ('GET' + ' ' + ';' + '\n')
+    data = strndup(&request[4], *sizeData); // PDU start here, so clone it
 
     return SUCESS;
 }
@@ -462,17 +462,23 @@ int splitGetRequest(char* request, int size, char* data, int* sizeData)
 */
 int splitPutRequest(char* request, int size, char* data, int* sizeData)
 {
+    // work the same way
+
     free(data);
     data = NULL;
 
     *sizeData = 0;
 
-    if (size > 9)
+    if (size <= 9 || size > 9 + (sizeof(ObjectBid)>sizeof(UserAccount))?sizeof(ObjectBid):sizeof(UserAccount))
     {
-        data = &request[7];
-        *sizeData = size - 7 - 2;
+        return ERROR_READING;
     }
-    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
+
+    *sizeData = size - 7 - 2;
+    data = strndup(&request[7], *sizeData);
+
+    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS; // no data <==> size == 0, so error due to empty PDU
+    //there is no way to execute a put request without data
 }
 
 
