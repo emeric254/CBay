@@ -64,10 +64,6 @@ char getAChar();
 int mailCheck(char *mail, int taille);
 
 
-/* userInputUserAccount.
- * fais saisir a l'utilisateur un UserAccount,
- * sauf l'id !
- * modifi le UserAccount saisi
 /* userInput.
  * ask user to enter informations to create an UserAccount,
  * except the user id !
