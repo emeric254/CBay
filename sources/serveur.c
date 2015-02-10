@@ -487,17 +487,25 @@ int splitPutRequest(char* request, int size, char* data, int* sizeData)
 */
 int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword)
 {
+    free(login);
+    free(password);
     login = NULL;
     password = NULL;
+
     *sizeLogin = 0;
     *sizePassword = 0;
-    if (size == 64)
+
+    if (size != 64)
     {
-        login = &request[8];
-        password = &request[8+USERACCOUNT_LOGIN_LENGTH];
-        sizeLogin = (strlen(login)>USERACCOUNT_LOGIN_LENGTH)?USERACCOUNT_LOGIN_LENGTH:strlen(login);
-        sizePassword = (strlen(password)>USERACCOUNT_PASSWORD_LENGTH)?USERACCOUNT_PASSWORD_LENGTH:strlen(password);
+        return ERROR_READING;
     }
+
+    login = strndup(&request[8], USERACCOUNT_LOGIN_LENGTH);
+    password = strndup(&request[8+USERACCOUNT_LOGIN_LENGTH], USERACCOUNT_PASSWORD_LENGTH);
+
+    *sizeLogin = (strlen(login)>USERACCOUNT_LOGIN_LENGTH)?USERACCOUNT_LOGIN_LENGTH:strlen(login);
+    *sizePassword = (strlen(password)>USERACCOUNT_PASSWORD_LENGTH)?USERACCOUNT_PASSWORD_LENGTH:strlen(password);
+
     return (*sizeLogin == 0 || *sizePassword == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }
 
@@ -507,8 +515,11 @@ int splitConnectRequest(char* request, int size, char* login, char* password, in
 */
 int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
 {
+    free(data);
     data = NULL;
+
     *sizeData = 0;
+
     if (size > 6)
     {
         data = &request[4];
