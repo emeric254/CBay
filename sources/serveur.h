@@ -1,125 +1,179 @@
 #ifndef __SERVEUR_H__
 #define __SERVEUR_H__
 
+/** \file serveur.h
+ * \brief .........
+ * This file provide some usual function for a server like \Init , \connectWait , \endClient , \endServer , \sendString or \sendBinary and \receiveBinary
+ * It also contains some other derivated functions to test and play with received requests
+ * plus response making functions like \sendStatusLine and \sendHeaderField .
+*/
 
-/* Init.
+
+/** \fn int Init(char *port)
+ * \brief initialise the server
+ * \param port is the port which will be used by the server
+ * \return status code of this operation.
  *
  */
 int Init(char *port);
 
 
-/* connectWait.
+/** \fn int connectWait()
+ * \brief wait for a client to connect, and then open the connection with him
+ * \return status code of this operation.
  *
  */
 int connectWait();
 
 
-/* Recoit un message envoye par le client.
- * retourne le message ou NULL en cas d'erreur.
- * Note : il faut liberer la memoire apres traitement.
- */
-char *Reception();
-
-
-/* Envoie un message au client.
- * Attention, le message doit etre termine par \n
- * renvoie 1 si a c'est bien pass 0 sinon
- */
-int Emission(char *message);
-
-
-/* receiveBinary.
+/** receiveBinary.
+ * \brief
+ * \param
+ * \return
  *
  */
 int receiveBinary(char *data);
 
 
-/* sendBinary.
+/** sendBinary.
+ * \brief
+ * \param
+ * \return
  *
  */
 int sendBinary(char *data, size_t size);
 
 
-/* endClient.
+/** sendString.
+ * \brief
+ * \param
+ * \return
+ *
+ */
+int sendString(char *data);
+
+
+/** endClient.
+ * \brief
  *
 */
 void endClient();
 
 
-/* endServer.
+/** endServer.
+ * \brief
  *
 */
 void endServer();
 
 
-/* sendStatusLine.
+/** sendStatusLine.
+ * \brief
+ * \param
+ * \return
  *
 */
 int sendStatusLine(int statusCode);
 
 
-/* sendHeaderField
+/** sendHeaderField
+ * \brief
+ * \param
+ * \param
+ * \return
  *
 */
 int sendHeaderField(int size, int type);
 
 
-/* isGetRequest.
+/** isGetRequest.
+ * \brief
+ * \param
+ * \param
+ * \return
  *
 */
 int isGetRequest(char* request, int size);
 
 
-/* isPutRequest.
+/** isPutRequest.
+ * \brief
+ * \param
+ * \param
+ * \return
  *
 */
 int isPutRequest(char* request, int size);
 
 
-/* isConnectRequest.
+/** isConnectRequest.
+ * \brief
+ * \param
+ * \param
+ * \return
  *
 */
 int isConnectRequest(char* request, int size);
 
 
-/* isDeleteRequest.
+/** isDeleteRequest.
+ * \brief
+ * \param
+ * \param
+ * \return
  *
 */
 int isDeleteRequest(char* request, int size);
 
 
-/* splitGetRequest.
+/** splitGetRequest.
+ * \brief
+ * \param
+ * \param
+ * \param
+ * \param
+ * \return
  *
 */
 int splitGetRequest(char* request, int size, char* data, int* sizeData);
 
 
-/* splitPutRequest.
+/** splitPutRequest.
+ * \brief
+ * \param
+ * \param
+ * \param
+ * \param
+ * \return
  *
 */
 int splitPutRequest(char* request, int size, char* data, int* sizeData);
 
 
-/* splitConnectRequest.
+/** splitConnectRequest.
+ * \brief
+ * \param
+ * \param
+ * \param
+ * \param
+ * \param
+ * \param
+ * \return
  *
 */
 int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword);
 
 
-/* splitDeleteRequest.
+/** splitDeleteRequest.
+ * \brief
+ * \param
+ * \param
+ * \param
+ * \param
+ * \return
  *
 */
 int splitDeleteRequest(char* request, int size, char* data, int* sizeData);
-
-/*
-
-int envoyerContenuFichierTexte(char *nomFichier);
-
-int envoyerContenuFichierBinaire(char *nomFichier);
-
-int testExtension(char *nomFichier, char *extension);
-
-*/
 
 
 #endif

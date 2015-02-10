@@ -18,7 +18,7 @@
     #include <strings.h>
 #endif
 
-#include "defines.h"
+#include "structures.h"
 #include "serveur.h"
 
 
@@ -34,7 +34,8 @@ int connectEnd = FALSE;
 /* Init.
  *
  */
-int Init(char *port) {
+int Init(char *port)
+{
     int n;
     const int on = 1;
     struct addrinfo hints, *res, *ressave;
@@ -58,7 +59,7 @@ int Init(char *port) {
 
     if ( (n = getaddrinfo(NULL, port, &hints, &res)) != 0)  {
             fprintf(ERROROUTPUT, "getaddrinfo() failed, error : %s", gai_strerror(n));
-            return 0;
+            return ERROR_UNKNOWN;
     }
     ressave = res;
 
@@ -79,7 +80,7 @@ int Init(char *port) {
 
     if (res == NULL) {
             perror("bind error");
-            return 0;
+            return ERROR_UNKNOWN;
     }
 
     adressLength = res->ai_addrlen;
@@ -88,14 +89,15 @@ int Init(char *port) {
     listen(listenSocket, 4);
     printf("Init sucess\n");
 
-    return 1;
+    return SUCESS;
 }
 
 
 /* connectWait.
  *
 */
-int connectWait() {
+int connectWait()
+{
     struct sockaddr *clientAddr;
     char machine[NI_MAXHOST];
 
@@ -103,7 +105,7 @@ int connectWait() {
     mainSocket = accept(listenSocket, clientAddr, &adressLength);
     if (mainSocket == -1) {
         perror("connectWait error.");
-        return 0;
+        return ERROR_UNKNOWN;
     }
     if(getnameinfo(clientAddr, adressLength, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
         printf("new client conected: %s\n", machine);
@@ -118,14 +120,18 @@ int connectWait() {
     bufferEnd = 0;
     connectEnd = FALSE;
 
-    return 1;
+    return SUCESS;
 }
 
 
 /* receiveBinary.
  *
 */
-int receiveBinary(char *data) {
+int receiveBinary(char *data)
+{
+    free(data);
+    data=NULL;
+
     char localBuffer[BUFFER_LENGTH];
     int index = 0;
     int received = 0;
@@ -261,7 +267,7 @@ int sendStatusLine(int statusCode)
     switch(statusCode)
     {
         case STATUS_CODE_OK:
-            strcpy(statusLine, "STATUS_CODE_OK");
+            strcpy(statusLine, "STATUS_CODE_OK");     // <<-- `"STATUS_CODE"` convert `STATUS_CODE` into a char array, and `strcpy` copy it into the message
             break;
         case STATUS_CODE_CREATED:
             strcpy(statusLine, "STATUS_CODE_CREATED");
@@ -283,12 +289,12 @@ int sendStatusLine(int statusCode)
             break;
     }
 
-    statusLine[2] = ' ';
+    statusLine[2] = ' '; // space between status code and reason phrase
 
     switch(statusCode)
     {
         case STATUS_CODE_OK:
-            strcpy(&statusLine[3], REASON_PHRASE_OK);
+            strcpy(&statusLine[3], REASON_PHRASE_OK); // copy the reason phrase into the message
             break;
         case STATUS_CODE_CREATED:
             strcpy(&statusLine[3], REASON_PHRASE_CREATED);
@@ -310,12 +316,12 @@ int sendStatusLine(int statusCode)
             break;
     }
 
-    statusLine[15] = '\n';
+    statusLine[15] = '\n'; // end of the line
 
-    statusLine[16] = '\0'; // on le garde ?
+    statusLine[16] = '\0'; // end of this message
 
 
-    return sendString(statusLine);;
+    return sendString(statusLine); // send this message, it's composed of characters (valid char array)
 }
 
 
@@ -324,40 +330,40 @@ int sendStatusLine(int statusCode)
 */
 int sendHeaderField(int size, int type)
 {
-    int temp = SUCESS;
-    char headerField [RESPONSE_HEADER_LENGTH + 1];
+    int temp = SUCESS; // state of this function
+    char headerField [RESPONSE_HEADER_LENGTH + 1]; // message
 
-    strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
+    strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH); // copy into the message the Size title
 
-    sprintf(&headerField[16],"%*d",size,15);
+    sprintf(&headerField[16],"%*d",size,15); // write `size` into the message, but with 15 chars maximum
 
-    headerField[31] = ';';
+    headerField[31] = ';'; // delimiter
 
-    strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
+    strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE); // copy into the message the Content title
 
     switch(type)
     {
         case CONTENT_TYPE_OBJECTBID_ID:
-            strcpy(&headerField[46],"ObjectBid");
+            strcpy(&headerField[46], "ObjectBid");
             break;
         case CONTENT_TYPE_USERACCOUNT_ID:
-            strcpy(&headerField[46],"UserAccount");
+            strcpy(&headerField[46], "UserAccount");
             break;
         default:
             temp = ERROR_WRONG_TYPE;
             break;
     }
 
-    headerField[62] = ';';
-    headerField[63] = '\n';
+    headerField[62] = ';'; // delimiter
+    headerField[63] = '\n'; // end of the line
 
-    headerField[64] = '\0'; // on le garde ?
+    headerField[64] = '\0'; // end of the message
 
 
-    if(temp == SUCESS)
-        temp = sendString(headerField);
+    if(temp == SUCESS) // if correctly made > try to send it
+        temp = sendString(headerField); // send this message, it's composed of characters (valid char array)
 
-    return temp;
+    return temp; // is it correctly made and send ?
 }
 
 
@@ -431,13 +437,22 @@ int isDeleteRequest(char* request, int size)
 */
 int splitGetRequest(char* request, int size, char* data, int* sizeData)
 {
+    free(data);
     data = NULL;
+
     *sizeData = 0;
-    if (size > 6)
+
+    if (size <= 6 || size > 6 + (sizeof(ObjectBid)>sizeof(UserAccount))?sizeof(ObjectBid):sizeof(UserAccount))
     {
-        data = &request[4];
-        *sizeData = size - 4 - 2;
+        // too small message
+        // or too long message
+        // so it's wrong
+        return ERROR_READING;
     }
+
+    *sizeData = size - 4 - 2; // size of the PDU = size of the message - size of known parts ('GET' + ' ' + ';' + '\n')
+    data = strndup(&request[4], *sizeData); // PDU start here, so clone it
+
     return SUCESS;
 }
 
@@ -447,14 +462,23 @@ int splitGetRequest(char* request, int size, char* data, int* sizeData)
 */
 int splitPutRequest(char* request, int size, char* data, int* sizeData)
 {
+    // work the same way
+
+    free(data);
     data = NULL;
+
     *sizeData = 0;
-    if (size > 9)
+
+    if (size <= 6 || size > 6 + (sizeof(ObjectBid)>sizeof(UserAccount))?sizeof(ObjectBid):sizeof(UserAccount))
     {
-        data = &request[7];
-        *sizeData = size - 7 - 2;
+        return ERROR_READING;
     }
-    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
+
+    *sizeData = size - 4 - 2;
+    data = strndup(&request[4], *sizeData);
+
+    return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS; // no data <==> size == 0, so error due to empty PDU
+    //there is no way to execute a put request without data
 }
 
 
@@ -463,17 +487,25 @@ int splitPutRequest(char* request, int size, char* data, int* sizeData)
 */
 int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword)
 {
+    free(login);
+    free(password);
     login = NULL;
     password = NULL;
+
     *sizeLogin = 0;
     *sizePassword = 0;
-    if (size == 64)
+
+    if (size != 64)
     {
-        login = &request[8];
-        password = &request[8+USERACCOUNT_LOGIN_LENGTH];
-        sizeLogin = (strlen(login)>USERACCOUNT_LOGIN_LENGTH)?USERACCOUNT_LOGIN_LENGTH:strlen(login);
-        sizePassword = (strlen(password)>USERACCOUNT_PASSWORD_LENGTH)?USERACCOUNT_PASSWORD_LENGTH:strlen(password);
+        return ERROR_READING;
     }
+
+    login = strndup(&request[8], USERACCOUNT_LOGIN_LENGTH);
+    password = strndup(&request[8+USERACCOUNT_LOGIN_LENGTH], USERACCOUNT_PASSWORD_LENGTH);
+
+    *sizeLogin = (strlen(login)>USERACCOUNT_LOGIN_LENGTH)?USERACCOUNT_LOGIN_LENGTH:strlen(login);
+    *sizePassword = (strlen(password)>USERACCOUNT_PASSWORD_LENGTH)?USERACCOUNT_PASSWORD_LENGTH:strlen(password);
+
     return (*sizeLogin == 0 || *sizePassword == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }
 
@@ -483,12 +515,18 @@ int splitConnectRequest(char* request, int size, char* login, char* password, in
 */
 int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
 {
+    free(data);
     data = NULL;
+
     *sizeData = 0;
-    if (size > 6)
+
+    if (size <= 9 || size > 9 + (sizeof(ObjectBid)>sizeof(UserAccount))?sizeof(ObjectBid):sizeof(UserAccount))
     {
-        data = &request[4];
-        *sizeData = size - 4 - 2;
+        return ERROR_READING;
     }
+
+    *sizeData = size - 7 - 2;
+    data = strndup(&request[7], *sizeData);
+
     return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }
