@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-#include "defines.h"
 #include "structures.h"
 #include "interfaceClient.h"
 #include "client.h"
@@ -13,29 +13,48 @@ int main(void)
     int menuChoice; // user choice var
     int connected = FALSE;
     int i = 0, j = 0;
+    int result;
+    UserAccount user;
+    char login[USERACCOUNT_LOGIN_LENGTH], password[USERACCOUNT_PASSWORD_LENGTH];
+    ObjectBid* list=NULL;
 
     CLEAR();
 
+    /* The Welcome Menu : Connection and Account Creation */
     while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
     {
         CLEAR();
 
         switch(menuChoice)
         {
-            case MENU_CHOICE_MAIN_CONNECTION:
-                /*
-                while(MENU_CHOICE_QUIT != (menuChoice = menuConnexion()))
+            case MENU_CHOICE_CONNECTION:
+
+                /* Connect to the server */
+                result=connection();
+
+                /* The Main Menu choices : go back to the welcome menu, list
+                 * the available objects or search for objects */
+                while((MENU_CHOICE_QUIT != (menuChoice = mainMenu())) && (result==SUCESS))
                 {
                     CLEAR();
-
-                    // debug
-                    printf("[%d]\n",menuChoice);
-                    // -----
 
                     switch(menuChoice)
                     {
                         case MENU_CHOICE_QUIT:
-                            // rien à faire car retour demandé
+                            /* nothing to do, Go Back asked */
+                            break;
+
+                        case MENU_CHOICE_MAIN_LIST:
+
+                            /* List available objects */
+                            listObjects(&list);
+                            /* @TODO */
+                            break;
+
+                        case MENU_CHOICE_MAIN_SEARCH:
+                            /* Searche for a particular object */
+                            searchObject(list);
+                            /* @TODO */
                             break;
 
                         default:
@@ -43,35 +62,23 @@ int main(void)
                             break;
                     }
                 }
+
                 CLEAR();
-                */
                 break;
 
-            case MENU_CHOICE_MAIN_ACCOUNT_CREATION:
-                /*
-                while(MENU_CHOICE_QUIT != (menuChoice = menuCreationCompte()))
-                {
-                    CLEAR();
+            case MENU_CHOICE_ACCOUNT_CREATION:
 
-                    // debug
-                    printf("[%d]\n",menuChoice);
+                /* Create an account */
+                accountCreation();
 
-                    switch(menuChoice)
-                    {
-                        case MENU_CHOICE_QUIT:
-                            // rien à faire car retour demandé
-                            break;
-
-                        default:
-                            printf("\n\t --- Please make a correct choice !\n\n");
-                            break;
-                    }
-                }
+                /* Return to the welcome menu */
                 CLEAR();
-                */
                 break;
 
-            case MENU_CHOICE_MAIN_ANONYMOUS:
+            case MENU_CHOICE_ANONYMOUS:
+
+                /* The Main Menu choices : Back to the welcome menu, list
+                 * the available objects or search for objects */
                 while(MENU_CHOICE_QUIT != (menuChoice = mainMenu()))
                 {
                     CLEAR();
@@ -79,15 +86,17 @@ int main(void)
                     switch(menuChoice)
                     {
                         case MENU_CHOICE_QUIT:
-                            // rien à faire car retour demandé
+                            /* nothing to do, Go Back asked */
                             break;
 
                         case MENU_CHOICE_MAIN_LIST:
-                            printf("\n\t --- WIP >> list\n\n");
+                            /* List available objects */
+                            listObjects(&list);
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
-                            printf("\n\t --- WIP >> seach\n\n");
+                            /* Searche for a particular object */
+                            searchObject(list);
                             break;
 
                         default:
@@ -104,6 +113,7 @@ int main(void)
         }
     }
 
+    /* Exit procedure */
     CLEAR();
     printf("\n\t Thank you to use BEEP !\n\n");
 
