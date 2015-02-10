@@ -24,37 +24,68 @@ int receiveBinary(char *donnees, size_t tailleMax);
 int sendBinary(char *donnees, size_t taille);
 
 
-/* sendGet.
+/* sendGetObjectBid.
+ *
 */
-int sendGet();
+int sendGetObjectBid(ObjectBid *object);
 
 
-/* sendPut.
+/* sendGetAllObjectBid.
+ *
 */
-int sendPut();
+int sendGetAllObjectBid();
 
 
-/* sendDelete.
+/* sendPutObjectBid.
+ *
 */
-int sendDelete();
+int sendPutObjectBid(ObjectBid *object);
+
+
+/* sendDeleteObjectBid.
+ *
+*/
+int sendDeleteObjectBid(ObjectBid *object);
+
+
+/* sendGetUserAccount.
+ *
+*/
+int sendGetUserAccount(UserAccount *account);
+
+
+/* sendPutUserAccount.
+ *
+*/
+int sendPutUserAccount(UserAccount *account);
+
+
+/* sendDeleteUserAccount.
+ *
+*/
+int sendDeleteUserAccount(UserAccount *account);
 
 
 /* sendConnect.
+ *
 */
 int sendConnect(char* login, char* password);
 
 
 /* splitStatusLine.
+ *
 */
 int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage);
 
 
 /* splitResponseHeader.
+ *
 */
 int splitResponseHeader(char *responseHeaderField, int* contentLength, char* contentType);
 
 
 /* Ferme la connexion.
+ *
  */
 void Terminaison();
 

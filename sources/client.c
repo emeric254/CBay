@@ -18,7 +18,7 @@
     #include <strings.h>
 #endif
 
-#include "defines.h"
+#include "structures.h"
 #include "client.h"
 
 
@@ -206,27 +206,122 @@ int sendBinary(char *donnees, size_t taille) {
 }
 
 
-/* sendGet.
+/* sendGetObjectBid.
 */
-int sendGet()
+int sendGetObjectBid(ObjectBid *object)
 {
     return 0;
 }
 
 
-/* sendPut.
+/* sendGetAllObjectBid.
 */
-int sendPut()
+int sendGetAllObjectBid()
 {
     return 0;
 }
 
 
-/* sendDelete.
+/* sendPutObjectBid.
 */
-int sendDelete()
+int sendPutObjectBid(ObjectBid *object)
 {
     return 0;
+}
+
+
+/* sendDeleteObjectBid.
+*/
+int sendDeleteObjectBid(ObjectBid *object)
+{
+    return 0;
+}
+
+
+/* sendGetUserAccount.
+*/
+int sendGetUserAccount(UserAccount *account)
+{
+    int length = 6 + sizeof(UserAccount);
+    int i = 0;
+    char msg[length+1];
+
+    strcpy(msg,REQUEST_METHOD_GET);
+    msg[strlen(REQUEST_METHOD_GET )] = ' ';
+
+    for ( i = 4 ; i < length ; i++ )
+    {
+        msg[i] = ((char*)account)[i];
+    }
+
+    msg[length-2] = ';';
+    msg[length-1] = '\n';
+    msg[length] = '\0';
+
+    if ( send(clientSocket, msg, length, 0) == -1 )
+    {
+        perror("sendGet error.");
+        return ERROR_SENDING;
+    }
+    return SUCESS;
+}
+
+
+/* sendPutUserAccount.
+*/
+int sendPutUserAccount(UserAccount *account)
+{
+    int length = 6 + sizeof(UserAccount);
+    int i = 0;
+    char msg[length+1];
+
+    strcpy(msg,REQUEST_METHOD_PUT);
+    msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
+
+    for ( i = 4 ; i < length ; i++ )
+    {
+        msg[i] = ((char*)account)[i];
+    }
+
+    msg[length-2] = ';';
+    msg[length-1] = '\n';
+    msg[length] = '\0';
+
+    if ( send(clientSocket, msg, length, 0) == -1 )
+    {
+        perror("sendGet error.");
+        return ERROR_SENDING;
+    }
+    return SUCESS;
+}
+
+
+/* sendDeleteUserAccount.
+*/
+int sendDeleteUserAccount(UserAccount *account)
+{
+    int length = 9 + sizeof(UserAccount);
+    int i = 0;
+    char msg[length+1];
+
+    strcpy(msg,REQUEST_METHOD_DELETE);
+    msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
+
+    for ( i = 7 ; i < length ; i++ )
+    {
+        msg[i] = ((char*)account)[i];
+    }
+
+    msg[length-2] = ';';
+    msg[length-1] = '\n';
+    msg[length] = '\0';
+
+    if ( send(clientSocket, msg, length, 0) == -1 )
+    {
+        perror("sendGet error.");
+        return ERROR_SENDING;
+    }
+    return SUCESS;
 }
 
 
@@ -253,8 +348,6 @@ int sendConnect(char* login, char* password)
     msg[length++] = ';';
     msg[length++] = '\n';
     msg[length] = '\0';
-
-    //@TODO bon jusqu'ici, apres c'est a voir :
 
     if ( send(clientSocket, msg, length,0) == -1 )
     {
