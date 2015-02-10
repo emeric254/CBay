@@ -6,6 +6,7 @@
 // Save files
 #define ACC_FILE "accounts.txt"
 #define OBJ_FILE "objects.txt"
+#define IDS_FILE "ids.txt"
 
 //
 #define TRUE 1
@@ -32,9 +33,6 @@
 // object type ids
 #define CONTENT_TYPE_OBJECTBID_ID 0
 #define CONTENT_TYPE_USERACCOUNT_ID 1
-// object type names
-#define CONTENT_TYPE_OBJECTBID_NAME ObjectBid
-#define CONTENT_TYPE_USERACCOUNT_NAME UserAccount
 
 
 //request methods
@@ -70,6 +68,7 @@
 #define ACCOUNT_TYPE_ADMIN 'a'
 #define ACCOUNT_TYPE_VENDOR 'v'
 #define ACCOUNT_TYPE_USER 'u'
+#define ACCOUNT_TYPE_UNKNOW 'z'
 // account labels
 #define ACCOUNT_LABEL_ADMIN "Admin, become a god ;) "
 #define ACCOUNT_LABEL_VENDOR "Vendor, limited to sell things"
