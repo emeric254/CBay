@@ -182,6 +182,24 @@ int allIDSSave (ConfidentialIDS **table, int *size);
 int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id);
 
 
+/* isObjectBid.
+ *
+ */
+int isObjectBid (int size);
+
+
+/* isObjectBidTable.
+ *
+ */
+int isObjectBidTable (int size);
+
+
+/* isAccountUser.
+ *
+ */
+int isAccountUser (int size);
+
+
 /* file_length.
  *
 */

@@ -512,3 +512,30 @@ size_t file_length(char *filename){
     fprintf(ERROROUTPUT,"error unknown file : (%s)\n",filename);
     return length; // -1 if unknown file, 0 if empty, otherwise it return the file length
 }
+
+
+/* isObjectBid.
+ *
+ */
+int isObjectBid (int size)
+{
+    return (size == sizeof(ObjectBid)) ? TRUE : FALSE;
+}
+
+
+/* isObjectBidTable.
+ *
+ */
+int isObjectBidTable (int size)
+{
+    return ( (size % sizeof(ObjectBid)) == 0) ? TRUE : FALSE;
+}
+
+
+/* isAccountUser.
+ *
+ */
+int isAccountUser (int size)
+{
+    return (size == sizeof(UserAccount)) ? TRUE : FALSE;
+}
