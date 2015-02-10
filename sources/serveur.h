@@ -88,9 +88,9 @@ int sendHeaderField(int size, int type);
 
 
 /** \fn int isGetRequest(char* request, int size)
- * \brief
- * \param
- * \param
+ * \brief test if a message is a GET request
+ * \param request message to test
+ * \param size size of this messsage
  * \return status code for this operation.
  *
 */
@@ -98,9 +98,9 @@ int isGetRequest(char* request, int size);
 
 
 /** \fn int isPutRequest(char* request, int size)
- * \brief
- * \param
- * \param
+ * \brief test if a message is a PUT request
+ * \param request message to test
+ * \param size size of this messsage
  * \return status code for this operation.
  *
 */
@@ -108,9 +108,9 @@ int isPutRequest(char* request, int size);
 
 
 /** \fn int isConnectRequest(char* request, int size)
- * \brief
- * \param
- * \param
+ * \brief test if a message is a CONNECT request
+ * \param request message to test
+ * \param size size of this messsage
  * \return status code for this operation.
  *
 */
@@ -118,9 +118,9 @@ int isConnectRequest(char* request, int size);
 
 
 /** \fn int isDeleteRequest(char* request, int size)
- * \brief
- * \param
- * \param
+ * \brief test if a message is a DELETE request
+ * \param request message to test
+ * \param size size of this messsage
  * \return status code for this operation.
  *
 */
@@ -128,11 +128,11 @@ int isDeleteRequest(char* request, int size);
 
 
 /** \fn int splitGetRequest(char* request, int size, char* data, int* sizeData)
- * \brief
- * \param
- * \param
- * \param
- * \param
+ * \brief split a GET request to find and output the PDU
+ * \param request the message which is a GET request
+ * \param size size of this message
+ * \param data output data extracted from this GET request
+ * \param sizeData size of the output data
  * \return status code for this operation.
  *
 */
@@ -140,41 +140,41 @@ int splitGetRequest(char* request, int size, char* data, int* sizeData);
 
 
 /** \fn int splitPutRequest(char* request, int size, char* data, int* sizeData)
- * \brief
- * \param
- * \param
- * \param
- * \param
+ * \brief split a PUT request to find and output the PDU
+ * \param request the message which is a PUT request
+ * \param size size of this message
+ * \param data output data extracted from this PUT request
+ * \param sizeData size of the output data
  * \return status code for this operation.
  *
 */
-int splitPutRequest(char* request, int size, char* data, int* sizeData);
+int splitPutRequest(char * request, int size, char * data, int * sizeData);
 
 
 /** \fn int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword)
- * \brief
- * \param
- * \param
- * \param
- * \param
- * \param
- * \param
+ * \brief split a CONNECT request to find and output the login and the password
+ * \param request the message which is a DELETE request
+ * \param size size of this message
+ * \param login login extracted from this CONNECT request
+ * \param password password  extracted from this CONNECT request
+ * \param sizeLogin length of the login
+ * \param sizePassword length of the password
  * \return status code for this operation.
  *
 */
-int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword);
+int splitConnectRequest(char * request, int size, char * login, char * password, int * sizeLogin, int * sizePassword);
 
 
 /** \fn int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
- * \brief
- * \param
- * \param
- * \param
- * \param
+ * \brief split a DELETE request to find and output the PDU
+ * \param request the message which is a DELETE request
+ * \param size size of this message
+ * \param data output data extracted from this DELETE request
+ * \param sizeData size of the output data
  * \return status code for this operation.
  *
 */
-int splitDeleteRequest(char* request, int size, char* data, int* sizeData);
+int splitDeleteRequest(char * request, int size, char * data, int * sizeData);
 
 
 #endif
