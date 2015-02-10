@@ -8,45 +8,49 @@
 
 int main()
 {
-    char *message = NULL;
-    int length = 0;
+    char *message = NULL; // message received from a client
+    int length = 0; // its length
 
-    int end = FALSE;
-    int quit = FALSE;
-    int connected = FALSE;
+    int end = FALSE; // server end
+    int quit = FALSE; // want to end client connection
+    int connected = FALSE; // client connection state
 
-    int state = SUCESS;
+    int state = SUCESS; // represents return statement
 
-    char * ptrLogin = NULL;
-    int sizeLogin = 0;
-    char * ptrPassword = NULL;
-    int sizePasword = 0;
+    char * ptrLogin = NULL; //
+    int sizeLogin = 0; // its length
+    char * ptrPassword = NULL; //
+    int sizePasword = 0; // its length
 
-    char accountType = ACCOUNT_TYPE_UNKNOW;
+    char accountType = ACCOUNT_TYPE_UNKNOW; // client account type
 
-    char login[USERACCOUNT_LOGIN_LENGTH];
-    char password[USERACCOUNT_PASSWORD_LENGTH];
-    long int id = -1;
+    char login[USERACCOUNT_LOGIN_LENGTH]; // client login
+    char password[USERACCOUNT_PASSWORD_LENGTH]; // client password
+    long int id = -1; // client's id
 
-    ObjectBid * objects = NULL;
-    int nbrObjects = 0;
-    ObjectBid * ptrObject = NULL;
+    ObjectBid * objects = NULL; // table of objects
+    int nbrObjects = 0; // number of objects
+    ObjectBid * ptrObject = NULL; // ptr to an object
 
-    UserAccount * accounts = NULL;
-    int nbrAccount = 0;
-    UserAccount * ptrAccount = NULL;
+    UserAccount * accounts = NULL; // table of accounts
+    int nbrAccount = 0; // number of accounts
+    UserAccount * ptrAccount = NULL; // ptr to an account
 
-    ConfidentialIDS * ids = NULL;
-    int nbrIDS = 0;
+    ConfidentialIDS * ids = NULL; // table of IDS
+    int nbrIDS = 0; // number of IDS
 
+    // table of objects loading
     if((state = allObjLoad(&objects, &nbrObjects)) != SUCESS)
         return state;
 
+    // table of accounts loading
     if((state = allAccLoad(&accounts, &nbrAccount)) != SUCESS)
         return state;
 
+    // init server
     Init(SERVER_PORT);
 
+    // working cycle
     while(1)
     {
         connectWait();
@@ -145,12 +149,12 @@ int main()
                         break;
                     case ERROR_RECEIVING:
                         fprintf(ERROROUTPUT, "%s >> %d\n", ERROR_OUTPUT_LABEL, ERROR_RECEIVING);
-                        end = TRUE;
+                        end = TRUE; // end client connection
                         break;
                     default:
                         fprintf(ERROROUTPUT, "%s >> %d >> %d\n", ERROR_OUTPUT_LABEL, ERROR_UNKNOWN, length);
-                        end = TRUE;
-                        quit = TRUE;
+                        end = TRUE; // end client connection
+                        quit = TRUE; // and quit the server
                         break;
                 }
             }
@@ -161,8 +165,10 @@ int main()
             message = NULL;
         }
 
+        // end client connection properly
         endClient();
 
+        // server will quit
         if (quit == TRUE)
         {
             free(objects);
@@ -172,5 +178,6 @@ int main()
         }
     }
 
+    // it's impossible breaking the working cycle to go here
     return ERROR_UNKNOWN;
 }
