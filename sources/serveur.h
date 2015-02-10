@@ -15,7 +15,7 @@
  * \return status code of this operation.
  *
  */
-int Init(char *port);
+int Init(char * port);
 
 
 /** \fn int connectWait()
@@ -26,131 +26,132 @@ int Init(char *port);
 int connectWait();
 
 
-/** receiveBinary.
- * \brief
- * \param
- * \return
+/** \fn int receiveBinary(char *data)
+ * \brief receive data from the client
+ * \param data is the received from the client
+ * \return status code for this operation.
  *
  */
-int receiveBinary(char *data);
+int receiveBinary(char * data);
 
 
-/** sendBinary.
- * \brief
- * \param
- * \return
+/** \fn int sendBinary(char * data, size_t size)
+ * \brief send binary data to the client
+ * \param data binary data to send to the client
+ * \param size data's size
+ * \return status code for this operation.
  *
  */
-int sendBinary(char *data, size_t size);
+int sendBinary(char * data, size_t size);
 
 
-/** sendString.
- * \brief
- * \param
- * \return
+/** \fn int sendString(char * data)
+ * \brief send a string to the client
+ * \param data string to send to the client
+ * \return status code for this operation.
  *
  */
-int sendString(char *data);
+int sendString(char * data);
 
 
-/** endClient.
- * \brief
+/** \fn void endClient()
+ * \brief close properly the connection with the client
  *
 */
 void endClient();
 
 
-/** endServer.
- * \brief
+/** \fn void endServer()
+ * \brief close properly the server process
  *
 */
 void endServer();
 
 
-/** sendStatusLine.
- * \brief
- * \param
- * \return
+/** \fn int sendStatusLine(int statusCode)
+ * \brief send a status line as described in the RFC
+ * \param statusCode the status code to send to the client the rigth status line
+ * \return status code for this operation.
  *
 */
 int sendStatusLine(int statusCode);
 
 
-/** sendHeaderField
- * \brief
- * \param
- * \param
- * \return
+/** \fn int sendHeaderField(int size, int type)
+ * \brief send header fileds as described in the RFC
+ * \param size size of the data which will be transfered
+ * \param type type of the data which will be transfered
+ * \return status code for this operation.
  *
 */
 int sendHeaderField(int size, int type);
 
 
-/** isGetRequest.
+/** \fn int isGetRequest(char* request, int size)
  * \brief
  * \param
  * \param
- * \return
+ * \return status code for this operation.
  *
 */
 int isGetRequest(char* request, int size);
 
 
-/** isPutRequest.
+/** \fn int isPutRequest(char* request, int size)
  * \brief
  * \param
  * \param
- * \return
+ * \return status code for this operation.
  *
 */
 int isPutRequest(char* request, int size);
 
 
-/** isConnectRequest.
+/** \fn int isConnectRequest(char* request, int size)
  * \brief
  * \param
  * \param
- * \return
+ * \return status code for this operation.
  *
 */
 int isConnectRequest(char* request, int size);
 
 
-/** isDeleteRequest.
+/** \fn int isDeleteRequest(char* request, int size)
  * \brief
  * \param
  * \param
- * \return
+ * \return status code for this operation.
  *
 */
 int isDeleteRequest(char* request, int size);
 
 
-/** splitGetRequest.
+/** \fn int splitGetRequest(char* request, int size, char* data, int* sizeData)
  * \brief
  * \param
  * \param
  * \param
  * \param
- * \return
+ * \return status code for this operation.
  *
 */
 int splitGetRequest(char* request, int size, char* data, int* sizeData);
 
 
-/** splitPutRequest.
+/** \fn int splitPutRequest(char* request, int size, char* data, int* sizeData)
  * \brief
  * \param
  * \param
  * \param
  * \param
- * \return
+ * \return status code for this operation.
  *
 */
 int splitPutRequest(char* request, int size, char* data, int* sizeData);
 
 
-/** splitConnectRequest.
+/** \fn int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword)
  * \brief
  * \param
  * \param
@@ -158,19 +159,19 @@ int splitPutRequest(char* request, int size, char* data, int* sizeData);
  * \param
  * \param
  * \param
- * \return
+ * \return status code for this operation.
  *
 */
 int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword);
 
 
-/** splitDeleteRequest.
+/** \fn int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
  * \brief
  * \param
  * \param
  * \param
  * \param
- * \return
+ * \return status code for this operation.
  *
 */
 int splitDeleteRequest(char* request, int size, char* data, int* sizeData);
