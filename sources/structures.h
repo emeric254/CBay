@@ -39,7 +39,7 @@ typedef struct ConfidentialIDS
 
 
 /* cleanBuffer.
- * vide le buffer
+ * clear the buffer
 */
 void cleanBuffer();
 
@@ -47,39 +47,39 @@ void cleanBuffer();
 /* cleanCRString.
  * clean a string from all carriage return ('\n' & '\r)
 */
-void basePrice(char *string);
+void cleanCRString(char *string);
 
 
 /* getAChar.
- * saisie d'un caractere, elimine les '\n' et EOF
- * retourne un caractere
+ * character input, delete '\n' and EOF symbols
+ * return a character
 */
 char getAChar();
 
 
 /* validMail.
- * verifie si la chaine 'mail' de taille 'taille' est une adresse mail correctement constituee
- * return TRUE ou FALSE
+ * check if 'mail' string of 'length' length is a correct mail address
+ * return TRUE or FALSE
 */
 int validMail(char *mail, int taille);
 
 
 /* userInputUserAccount.
- * fais saisir a l'utilisateur un UserAccount,
- * sauf l'id !
- * modifi le UserAccount saisi
+ * ask user to enter informations to create an UserAccount,
+ * except the user id !
+ * modify the input UserAccount
 */
 void userInputUserAccount(UserAccount * account);
 
 
 /* userInputObjectBid.
- * fais saisir a l'utilisateur un ObjectBid,
- * sauf les champs
- *      id
- *      idVendor
- *      currentBidPrice
- *      currentBidIdBuyer
- * modifie le ObjectBid saisi
+ * ask the user for information to create an ObjectBid,
+ * except fields
+ * id
+ * idVendor
+ * currentBidPrice
+ * currentBidIdBuyer
+ * and modify the input ObjectBid
 */
 void userInputObjectBid(ObjectBid * bid);
 
