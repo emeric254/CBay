@@ -469,13 +469,13 @@ int splitPutRequest(char* request, int size, char* data, int* sizeData)
 
     *sizeData = 0;
 
-    if (size <= 9 || size > 9 + (sizeof(ObjectBid)>sizeof(UserAccount))?sizeof(ObjectBid):sizeof(UserAccount))
+    if (size <= 6 || size > 6 + (sizeof(ObjectBid)>sizeof(UserAccount))?sizeof(ObjectBid):sizeof(UserAccount))
     {
         return ERROR_READING;
     }
 
-    *sizeData = size - 7 - 2;
-    data = strndup(&request[7], *sizeData);
+    *sizeData = size - 4 - 2;
+    data = strndup(&request[4], *sizeData);
 
     return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS; // no data <==> size == 0, so error due to empty PDU
     //there is no way to execute a put request without data
@@ -520,10 +520,13 @@ int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
 
     *sizeData = 0;
 
-    if (size > 6)
+    if (size <= 9 || size > 9 + (sizeof(ObjectBid)>sizeof(UserAccount))?sizeof(ObjectBid):sizeof(UserAccount))
     {
-        data = &request[4];
-        *sizeData = size - 4 - 2;
+        return ERROR_READING;
     }
+
+    *sizeData = size - 7 - 2;
+    data = strndup(&request[7], *sizeData);
+
     return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCESS;
 }
