@@ -57,14 +57,18 @@ void cleanCRString(char *string);
 char getAChar();
 
 
-/* validMail.
+/* mailCheck.
  * check if 'mail' string of 'length' length is a correct mail address
  * return TRUE or FALSE
 */
-int validMail(char *mail, int taille);
+int mailCheck(char *mail, int taille);
 
 
 /* userInputUserAccount.
+ * fais saisir a l'utilisateur un UserAccount,
+ * sauf l'id !
+ * modifi le UserAccount saisi
+/* userInput.
  * ask user to enter informations to create an UserAccount,
  * except the user id !
  * modify the input UserAccount
@@ -79,6 +83,14 @@ void userInputUserAccount(UserAccount * account);
  * idVendor
  * currentBidPrice
  * currentBidIdBuyer
+ * fais saisir a l'utilisateur un ObjectBid,
+ * sauf les champs
+ * ask the user for information to create an ObjectBid,
+ * except fields
+ *      id
+ *      idVendor
+ *      currentBidPrice
+ *      currentBidIdBuyer
  * and modify the input ObjectBid
 */
 void userInputObjectBid(ObjectBid * bid);

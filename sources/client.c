@@ -511,9 +511,135 @@ int splitResponseHeader(char *responseHeaderField, int* contentLength, char* con
     return 0;
 }
 
+/* accountCreation.
+*/
+int accountCreation()
+{
+    int statusCode;
+    char * response=NULL;
+    char * reasonPhrase=NULL;
+
+    /* Get the informations about the new account */
+    // userInputUserAccount();
+
+    /* Try to send the request.
+     * If the answer is not CREATED, resend it */
+    int i=0;
+    while (statusCode != STATUS_CODE_CREATED && i < 3)
+    {
+        /* Send the new account to the server */
+        // sendPutUserAccount(); /* @TODO */
+
+        /* Get the answer */
+        //response=ReceiveBinary();
+
+        /* Extract the status code and the reason phrase from the answer */
+        //splitStatusLine(response,statusCode,reasonPhrase);
+    }
+
+    /* Display the result */
+    displayResult(statusCode);
+
+    return 0;
+}
+
+/* connection.
+*/
+int connection ()
+{
+    int statusCode;
+    char * response=NULL;
+    char * reasonPhrase=NULL;
+
+    /* Ask for a login and a password */
+    // connectionInput(login,password);
+
+    /* Try to send the request.
+     * If the answer is NOT_CREATED, resend it */
+    int i=0;
+    while (statusCode == STATUS_CODE_NOT_CREATED && i < 3)
+    {
+        /* Send a connection request to the server */
+        // sendConnect(login,password);
+
+        /* Get the answer's status line */
+        // response=receiveBinary();
+
+        /* Extract the status code and the reason phrase from the answer */
+        splitStatusLine(response,statusCode,reasonPhrase);
+    }
+
+    /* Display the result */
+    displayResult(statusCode);
+}
+
+/* listObjects
+*/
+int listObjects (ObjectBid ** list)
+{
+    int statusCode;
+    int i = 0;
+    char * response=NULL;
+    char * reasonPhrase=NULL;
+
+    /* Send the request, 3 try */
+    while (statusCode != STATUS_CODE_OK && i < 3)
+    {
+        /* Send the request */
+        // sendGetAllObjectBid();
+
+        /* Get the answer's status line */
+        // response=receiveBinary();
+
+        /* Extract the status code and the reason phrase from the answer */
+        splitStatusLine(response,statusCode,reasonPhrase);
+    }
+
+    /* Display the result of the request */
+    displayResult();
+
+    /* If the answer is OK, extract the list */
+    if (statusCode == STATUS_CODE_OK)
+    {
+        /* @TODO */
+    }
+
+    /* If the list is here, display it */
+    displayList(*list);
+}
+
+/* searchObject
+*/
+int searchObject (ObjectBid * list)
+{
+    ObjectBid * search=NULL;
+    char* name=NULL;
+    int i=0;
+
+    /* If there is no list, display an error */
+    if (list==NULL)
+    {
+        displayResult(); /* @TODO to add a SEARCH_ERROR in defines.h and
+        then modify displayResult in interfaceClient.c */
+    }
+
+    /* Ask the user for an object name */
+    searchInput(name);
+
+    /* Search for the name of the object in the list */
+    while ( strcmp(name,list[i].name) != 0  /* && @TODO still has objects in list */)
+        i++;
+    if ( strcmp(name,list[i-1].name) ==0)
+        search = & list[i-1];
+
+    /* Display the result */
+    displayList(search);
+}
 
 /* Ferme la connexion.
  */
 void Terminaison() {
     close(clientSocket);
 }
+
+

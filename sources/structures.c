@@ -99,7 +99,7 @@ void userInputUserAccount(UserAccount * account)
         if(strlen(account->mail)<USERACCOUNT_MAIL_LENGTH-1)
             account->mail[strlen(account->mail)] = '\0';
         cleanBuffer();
-    }while(!validMail(account->mail,strlen(account->mail)));
+    }while(!mailCheck(account->mail,strlen(account->mail)));
     CLEAR();
 
 }
@@ -143,9 +143,9 @@ void userInputObjectBid(ObjectBid * bid)
 }
 
 
-/* validMail.
+/* mailCheck.
 */
-int validMail(char *mail, int taille)
+int mailCheck(char *mail, int taille)
 {
     if(mail == NULL)
     {
