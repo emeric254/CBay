@@ -4,7 +4,7 @@
 #include "defines.h"
 
 
-typedef struct CONTENT_TYPE_OBJECTBID_NAME
+typedef struct ObjectBid
 {
     long int id;
     char name[OBJECTBID_NAME_LENGTH];
@@ -16,10 +16,10 @@ typedef struct CONTENT_TYPE_OBJECTBID_NAME
     char adress[OBJECTBID_ADRESS_LENGTH];
     float  currentBidPrice;
     long int currentBidIdBuyer;
-} CONTENT_TYPE_OBJECTBID_NAME;
+} ObjectBid;
 
 
-typedef struct CONTENT_TYPE_USERACCOUNT_NAME
+typedef struct UserAccount
 {
     char type;
     long int id;
@@ -27,8 +27,15 @@ typedef struct CONTENT_TYPE_USERACCOUNT_NAME
     char lastname[USERACCOUNT_LASTNAME_LENGTH];
     char adress[USERACCOUNT_ADRESS_LENGTH];
     char mail[USERACCOUNT_MAIL_LENGTH];
-} CONTENT_TYPE_USERACCOUNT_NAME;
+} UserAccount;
 
+
+typedef struct ConfidentialIDS
+{
+    long int id;
+    char login[USERACCOUNT_LOGIN_LENGTH];
+    char password[USERACCOUNT_PASSWORD_LENGTH];
+} ConfidentialIDS;
 
 
 /* clearBuffer.
@@ -43,13 +50,6 @@ void clearBuffer();
 void cleanCRString(char *string);
 
 
-/* charInput.
- * character input, delete '\n' and EOF symbols
- * return a character
-*/
-char charInput();
-
-
 /* mailCheck.
  * check if 'mail' string of 'length' length is a correct mail address
  * return TRUE or FALSE
@@ -57,24 +57,31 @@ char charInput();
 int mailCheck(char *mail, int taille);
 
 
-/* userInput.
- * ask user to enter informations to create an UserAccount,
- * except the user id !
- * modify the input UserAccount
+/* getAChar.
+ * saisie d'un caractere, elimine les '\n' et EOF
+ * retourne un caractere
 */
-void userInput(UserAccount * account);
+char getAChar();
 
 
-/* sellInput.
- * ask the user for information to create an ObjectBid,
- * except fields
+/* userInputUserAccount.
+ * fais saisir a l'utilisateur un UserAccount,
+ * sauf l'id !
+ * modifi le UserAccount saisi
+*/
+void userInputUserAccount(UserAccount * account);
+
+
+/* userInputObjectBid.
+ * fais saisir a l'utilisateur un ObjectBid,
+ * sauf les champs
  *      id
  *      idVendor
  *      currentBidPrice
  *      currentBidIdBuyer
  * and modify the input ObjectBid
 */
-void sellInput(ObjectBid * bid);
+void userInputObjectBid(ObjectBid * bid);
 
 
 /* accSave.
@@ -91,18 +98,25 @@ int accSave (UserAccount user, FILE* f);
 int accLoad (UserAccount *user, FILE* f);
 
 
+/* userInTable.
+ * test if an user's account is in the table or not, and return its id or not.
+ * return TRUE if it's contain (ids matching), return FALSE otherwise.
+ */
+int userInTable (UserAccount *user, UserAccount *table, int size, long int *id);
+
+
 /* allAccSave.
  * Save a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allAccSave (UserAccount *user, int size);
+int allAccSave (UserAccount *table, int size);
 
 
 /* allAccLoad.
  * Load a table of accounts from the ACC_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allAccLoad (UserAccount **user, int *size);
+int allAccLoad (UserAccount **table, int *size);
 
 
 /* objSave.
@@ -113,24 +127,59 @@ int objSave (ObjectBid obj, FILE* f);
 
 
 /* objLoad.
- * Load object's informations into the OBJ_FILE.
+ * Load object's informations from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
 int objLoad (ObjectBid *obj, FILE* f);
+
+
+/* objInTable.
+ * test if an object is in the table or not, and return its id or not.
+ * return TRUE if it's contain (ids matching), return FALSE otherwise.
+ */
+int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id);
 
 
 /* allObjSave.
  * Save a table of objects from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allObjSave (UserAccount *user, int size);
+int allObjSave (ObjectBid *table, int size);
 
 
 /* allObjLoad.
  * Load a table of objects from the OBJ_FILE.
  * Integer return codes correspond to the operation's outcome.
  */
-int allObjLoad (UserAccount **user, int *size);
+int allObjLoad (ObjectBid **table, int *size);
+
+
+/* idsLoad.
+ * Load ids's informations from the IDS_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int idsLoad (ConfidentialIDS *ids, FILE *f);
+
+
+/* allIDSLoad.
+ * Load a table of IDS from the IDS_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allIDSLoad (ConfidentialIDS **table, int *size);
+
+
+/* allIDSLoad.
+ * Save a table of IDS to the IDS_FILE.
+ * Integer return codes correspond to the operation's outcome.
+ */
+int allIDSSave (ConfidentialIDS **table, int *size);
+
+
+/* idsInTable.
+ * test if ids are in the IDS table, and return its id or not.
+ * return TRUE if it's contain (ids matching), return FALSE otherwise.
+ */
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id);
 
 
 /* file_length.

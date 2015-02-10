@@ -311,7 +311,9 @@ int sendStatusLine(int statusCode)
     }
 
     statusLine[15] = '\n';
-    statusLine[16] = '\0';
+
+    statusLine[16] = '\0'; // on le garde ?
+
 
     return sendString(statusLine);;
 }
@@ -336,10 +338,10 @@ int sendHeaderField(int size, int type)
     switch(type)
     {
         case CONTENT_TYPE_OBJECTBID_ID:
-            strcpy(&headerField[46],"CONTENT_TYPE_OBJECTBID_NAME");
+            strcpy(&headerField[46],"ObjectBid");
             break;
         case CONTENT_TYPE_USERACCOUNT_ID:
-            strcpy(&headerField[46],"CONTENT_TYPE_USERACCOUNT_NAME");
+            strcpy(&headerField[46],"UserAccount");
             break;
         default:
             temp = ERROR_WRONG_TYPE;
@@ -348,7 +350,9 @@ int sendHeaderField(int size, int type)
 
     headerField[62] = ';';
     headerField[63] = '\n';
-    headerField[64] = '\0';
+
+    headerField[64] = '\0'; // on le garde ?
+
 
     if(temp == SUCESS)
         temp = sendString(headerField);
@@ -366,8 +370,8 @@ int isGetRequest(char* request, int size)
     if (size >= 6)
         if ( (!strncmp(request,REQUEST_METHOD_GET,strlen(REQUEST_METHOD_GET)))
             && (request[strlen(REQUEST_METHOD_GET)] == ' ')
-            && (request[size-1] == '\n')
-            && (request[size-2] == ';') )
+            && (request[size-2] == ';')
+            && (request[size-1] == '\n') )
             return TRUE;
     return FALSE;
 }
@@ -382,8 +386,8 @@ int isPutRequest(char* request, int size)
     if (size >= 6)
         if ( (!strncmp(request,REQUEST_METHOD_PUT,strlen(REQUEST_METHOD_PUT)))
             && (request[strlen(REQUEST_METHOD_PUT)] == ' ')
-            && (request[size-1] == '\n')
-            && (request[size-2] == ';') )
+            && (request[size-2] == ';')
+            && (request[size-1] == '\n') )
             return TRUE;
     return FALSE;
 }
@@ -399,8 +403,8 @@ int isConnectRequest(char* request, int size)
         if ( (!strncmp(request,REQUEST_METHOD_CONNECT,strlen(REQUEST_METHOD_CONNECT)))
             && (request[strlen(REQUEST_METHOD_CONNECT)] == ' ')
             && (request[35] == ';')
-            && (request[size-1] == '\n')
-            && (request[size-2] == ';') )
+            && (request[size-2] == ';')
+            && (request[size-1] == '\n') )
             return TRUE;
     return FALSE;
 }
@@ -415,8 +419,8 @@ int isDeleteRequest(char* request, int size)
     if (size >= 9)
         if ( (!strncmp(request,REQUEST_METHOD_DELETE,strlen(REQUEST_METHOD_DELETE)))
             && (request[strlen(REQUEST_METHOD_DELETE)] == ' ')
-            && (request[size-1] == '\n')
-            && (request[size-2] == ';') )
+            && (request[size-2] == ';')
+            && (request[size-1] == '\n') )
             return TRUE;
     return FALSE;
 }
