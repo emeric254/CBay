@@ -210,7 +210,28 @@ int sendBinary(char *donnees, size_t taille) {
 */
 int sendGetObjectBid(ObjectBid *object)
 {
-    return 0;
+    int length = 6 + sizeof(ObjectBid);
+    int i = 0;
+    char msg[length+1];
+
+    strcpy(msg,REQUEST_METHOD_GET);
+    msg[strlen(REQUEST_METHOD_GET )] = ' ';
+
+    for ( i = 4 ; i < length ; i++ )
+    {
+        msg[i] = ((char*)object)[i];
+    }
+
+    msg[length-2] = ';';
+    msg[length-1] = '\n';
+    msg[length] = '\0';
+
+    if ( send(clientSocket, msg, length, 0) == -1 )
+    {
+        perror("sendGet error.");
+        return ERROR_SENDING;
+    }
+    return SUCESS;
 }
 
 
@@ -218,7 +239,22 @@ int sendGetObjectBid(ObjectBid *object)
 */
 int sendGetAllObjectBid()
 {
-    return 0;
+    int length = 6 ;
+    char msg[length+1];
+
+    strcpy(msg,REQUEST_METHOD_GET);
+    msg[strlen(REQUEST_METHOD_GET )] = ' ';
+
+    msg[length-2] = ';';
+    msg[length-1] = '\n';
+    msg[length] = '\0';
+
+    if ( send(clientSocket, msg, length, 0) == -1 )
+    {
+        perror("sendGet error.");
+        return ERROR_SENDING;
+    }
+    return SUCESS;
 }
 
 
@@ -226,7 +262,28 @@ int sendGetAllObjectBid()
 */
 int sendPutObjectBid(ObjectBid *object)
 {
-    return 0;
+    int length = 6 + sizeof(ObjectBid);
+    int i = 0;
+    char msg[length+1];
+
+    strcpy(msg,REQUEST_METHOD_PUT);
+    msg[strlen(REQUEST_METHOD_PUT )] = ' ';
+
+    for ( i = 4 ; i < length ; i++ )
+    {
+        msg[i] = ((char*)object)[i];
+    }
+
+    msg[length-2] = ';';
+    msg[length-1] = '\n';
+    msg[length] = '\0';
+
+    if ( send(clientSocket, msg, length, 0) == -1 )
+    {
+        perror("sendGet error.");
+        return ERROR_SENDING;
+    }
+    return SUCESS;
 }
 
 
@@ -234,7 +291,28 @@ int sendPutObjectBid(ObjectBid *object)
 */
 int sendDeleteObjectBid(ObjectBid *object)
 {
-    return 0;
+    int length = 9 + sizeof(ObjectBid);
+    int i = 0;
+    char msg[length+1];
+
+    strcpy(msg,REQUEST_METHOD_DELETE);
+    msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
+
+    for ( i = 7 ; i < length ; i++ )
+    {
+        msg[i] = ((char*)object)[i];
+    }
+
+    msg[length-2] = ';';
+    msg[length-1] = '\n';
+    msg[length] = '\0';
+
+    if ( send(clientSocket, msg, length, 0) == -1 )
+    {
+        perror("sendGet error.");
+        return ERROR_SENDING;
+    }
+    return SUCESS;
 }
 
 
