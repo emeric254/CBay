@@ -18,7 +18,7 @@
     #include <strings.h>
 #endif
 
-#include "defines.h"
+#include "structures.h"
 #include "serveur.h"
 
 
@@ -34,7 +34,8 @@ int connectEnd = FALSE;
 /* Init.
  *
  */
-int Init(char *port) {
+int Init(char *port)
+{
     int n;
     const int on = 1;
     struct addrinfo hints, *res, *ressave;
@@ -95,7 +96,8 @@ int Init(char *port) {
 /* connectWait.
  *
 */
-int connectWait() {
+int connectWait()
+{
     struct sockaddr *clientAddr;
     char machine[NI_MAXHOST];
 
@@ -125,7 +127,11 @@ int connectWait() {
 /* receiveBinary.
  *
 */
-int receiveBinary(char *data) {
+int receiveBinary(char *data)
+{
+    free(data);
+    data=NULL;
+
     char localBuffer[BUFFER_LENGTH];
     int index = 0;
     int received = 0;
@@ -261,7 +267,7 @@ int sendStatusLine(int statusCode)
     switch(statusCode)
     {
         case STATUS_CODE_OK:
-            strcpy(statusLine, "STATUS_CODE_OK");
+            strcpy(statusLine, "STATUS_CODE_OK");     // <<-- `"STATUS_CODE"` convert `STATUS_CODE` into a char array, and `strcpy` copy it into the message
             break;
         case STATUS_CODE_CREATED:
             strcpy(statusLine, "STATUS_CODE_CREATED");
@@ -283,12 +289,12 @@ int sendStatusLine(int statusCode)
             break;
     }
 
-    statusLine[2] = ' ';
+    statusLine[2] = ' '; // space between status code and reason phrase
 
     switch(statusCode)
     {
         case STATUS_CODE_OK:
-            strcpy(&statusLine[3], REASON_PHRASE_OK);
+            strcpy(&statusLine[3], REASON_PHRASE_OK); // copy the reason phrase into the message
             break;
         case STATUS_CODE_CREATED:
             strcpy(&statusLine[3], REASON_PHRASE_CREATED);
@@ -310,12 +316,12 @@ int sendStatusLine(int statusCode)
             break;
     }
 
-    statusLine[15] = '\n';
+    statusLine[15] = '\n'; // end of the line
 
-    statusLine[16] = '\0'; // on le garde ?
+    statusLine[16] = '\0'; // end of this message
 
 
-    return sendString(statusLine);;
+    return sendString(statusLine); // send this message, it's composed of characters (valid char array)
 }
 
 
@@ -324,40 +330,40 @@ int sendStatusLine(int statusCode)
 */
 int sendHeaderField(int size, int type)
 {
-    int temp = SUCESS;
-    char headerField [RESPONSE_HEADER_LENGTH + 1];
+    int temp = SUCESS; // state of this function
+    char headerField [RESPONSE_HEADER_LENGTH + 1]; // message
 
-    strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH);
+    strcpy(headerField,RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH); // copy into the message the Size title
 
-    sprintf(&headerField[16],"%*d",size,15);
+    sprintf(&headerField[16],"%*d",size,15); // write `size` into the message, but with 15 chars maximum
 
-    headerField[31] = ';';
+    headerField[31] = ';'; // delimiter
 
-    strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE);
+    strcpy(&headerField[32],RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE); // copy into the message the Content title
 
     switch(type)
     {
         case CONTENT_TYPE_OBJECTBID_ID:
-            strcpy(&headerField[46],"ObjectBid");
+            strcpy(&headerField[46], "ObjectBid");
             break;
         case CONTENT_TYPE_USERACCOUNT_ID:
-            strcpy(&headerField[46],"UserAccount");
+            strcpy(&headerField[46], "UserAccount");
             break;
         default:
             temp = ERROR_WRONG_TYPE;
             break;
     }
 
-    headerField[62] = ';';
-    headerField[63] = '\n';
+    headerField[62] = ';'; // delimiter
+    headerField[63] = '\n'; // end of the line
 
-    headerField[64] = '\0'; // on le garde ?
+    headerField[64] = '\0'; // end of the message
 
 
-    if(temp == SUCESS)
-        temp = sendString(headerField);
+    if(temp == SUCESS) // if correctly made > try to send it
+        temp = sendString(headerField); // send this message, it's composed of characters (valid char array)
 
-    return temp;
+    return temp; // is it correctly made and send ?
 }
 
 
@@ -431,13 +437,22 @@ int isDeleteRequest(char* request, int size)
 */
 int splitGetRequest(char* request, int size, char* data, int* sizeData)
 {
+    free(data);
     data = NULL;
+
     *sizeData = 0;
-    if (size > 6)
+
+    if (size <= 6 || size > 6 + (sizeof(ObjectBid)>sizeof(UserAccount))?sizeof(ObjectBid):sizeof(UserAccount))
     {
-        data = &request[4];
-        *sizeData = size - 4 - 2;
+        // too small message
+        // or too long message
+        // so it's wrong
+        return ERROR_READING;
     }
+
+    data = strdup(&request[4]); // PDU start here, so clone it
+    *sizeData = size - 4 - 2; // size of the PDU = size of the message - size of known parts ('GET' + ' ' + ';' + '\n')
+
     return SUCESS;
 }
 
@@ -447,8 +462,11 @@ int splitGetRequest(char* request, int size, char* data, int* sizeData)
 */
 int splitPutRequest(char* request, int size, char* data, int* sizeData)
 {
+    free(data);
     data = NULL;
+
     *sizeData = 0;
+
     if (size > 9)
     {
         data = &request[7];
