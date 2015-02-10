@@ -5,9 +5,9 @@
 #include "structures.h"
 
 
-/* clearBuffer.
+/* cleanBuffer.
 */
-void clearBuffer()
+void cleanBuffer()
 {
     char buffer = fgetc(stdin);
     while(buffer != '\n' && buffer != EOF)
@@ -17,9 +17,9 @@ void clearBuffer()
 }
 
 
-/* charInput
+/* getAChar
  */
-char charInput()
+char getAChar()
 {
     char temp = fgetc(stdin);
     while(temp == '\n' || temp == EOF)
@@ -143,9 +143,9 @@ void userInputObjectBid(ObjectBid * bid)
 }
 
 
-/* mailCheck.
+/* validMail.
 */
-int mailCheck(char *mail, int taille)
+int validMail(char *mail, int taille)
 {
     if(mail == NULL)
     {
