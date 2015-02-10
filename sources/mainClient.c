@@ -11,11 +11,7 @@ int main(void)
 {
     // vars
     int menuChoice; // user choice var
-    int connected = FALSE;
-    int i = 0, j = 0;
     int result;
-    UserAccount user;
-    char login[USERACCOUNT_LOGIN_LENGTH], password[USERACCOUNT_PASSWORD_LENGTH];
     ObjectBid* list=NULL;
 
     CLEAR();

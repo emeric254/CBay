@@ -79,7 +79,16 @@ void displayResult (int code)
     if (code < SUCESS)
     {
         /* Application error */
-        fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
+        switch(code)
+        {
+        	case ERROR_NO_LIST:
+        		fprintf(stdout,"No list available. Ask for one before doing this again.\n");
+        		break;
+        		
+        	default:
+		        fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
+		        break;
+        }
     }
     /* Transmission codes */
     else
@@ -140,7 +149,7 @@ void displayObject (ObjectBid obj)
 
 /* displayList.
 */
-void displayList (ObjectBid * list)
+void displayList (ObjectBid * list, size_t listSize)
 {
     int i;
 
@@ -153,7 +162,7 @@ void displayList (ObjectBid * list)
     /* Else print the results */
     else
     {
-        for (i=0;/* @TODO list's length */;i++)
+        for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
             displayObject(list[i]);
     }
 }

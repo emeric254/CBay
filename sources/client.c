@@ -20,6 +20,7 @@
 
 #include "structures.h"
 #include "client.h"
+#include "interfaceClient.h"
 
 
 int clientSocket;
@@ -516,11 +517,12 @@ int splitResponseHeader(char *responseHeaderField, int* contentLength, char* con
 int accountCreation()
 {
     int statusCode;
-    char * response=NULL;
+    char response[STATUS_LINE_LENGTH];
     char * reasonPhrase=NULL;
+    UserAccount acc;
 
     /* Get the informations about the new account */
-    // userInputUserAccount();
+    userInputUserAccount(&acc);
 
     /* Try to send the request.
      * If the answer is not CREATED, resend it */
@@ -528,19 +530,21 @@ int accountCreation()
     while (statusCode != STATUS_CODE_CREATED && i < 3)
     {
         /* Send the new account to the server */
-        // sendPutUserAccount(); /* @TODO */
+        sendPutUserAccount(&acc);
 
         /* Get the answer */
-        //response=ReceiveBinary();
+        receiveBinary(response,STATUS_LINE_LENGTH);
 
         /* Extract the status code and the reason phrase from the answer */
-        //splitStatusLine(response,statusCode,reasonPhrase);
+        splitStatusLine(response,&statusCode,reasonPhrase);
+        
+        i++;
     }
 
     /* Display the result */
     displayResult(statusCode);
 
-    return 0;
+    return SUCCESS;
 }
 
 /* connection.
@@ -548,11 +552,13 @@ int accountCreation()
 int connection ()
 {
     int statusCode;
-    char * response=NULL;
+    char response[STATUS_LINE_LENGTH];
     char * reasonPhrase=NULL;
+    char login[USERACCOUNT_LOGIN_LENGTH];
+    char password[USERACCOUNT_PASSWORD_LENGTH];
 
     /* Ask for a login and a password */
-    // connectionInput(login,password);
+    connectionInput(login,password);
 
     /* Try to send the request.
      * If the answer is NOT_CREATED, resend it */
@@ -560,17 +566,24 @@ int connection ()
     while (statusCode == STATUS_CODE_NOT_CREATED && i < 3)
     {
         /* Send a connection request to the server */
-        // sendConnect(login,password);
+        sendConnect(login,password);
 
         /* Get the answer's status line */
-        // response=receiveBinary();
+        receiveBinary(response,STATUS_LINE_LENGTH);
 
         /* Extract the status code and the reason phrase from the answer */
-        splitStatusLine(response,statusCode,reasonPhrase);
+        splitStatusLine(response,&statusCode,reasonPhrase);
+        
+        i++;
     }
 
     /* Display the result */
     displayResult(statusCode);
+    
+    if (statusCode == STATUS_CODE_OK)
+	    return SUCCESS;
+	else
+		return CONNECTION_DENIED;
 }
 
 /* listObjects
@@ -579,33 +592,40 @@ int listObjects (ObjectBid ** list)
 {
     int statusCode;
     int i = 0;
-    char * response=NULL;
+    char statLine[STATUS_LINE_LENGTH];
+    char buffer[BUFFER_LENGTH];
     char * reasonPhrase=NULL;
 
     /* Send the request, 3 try */
     while (statusCode != STATUS_CODE_OK && i < 3)
     {
         /* Send the request */
-        // sendGetAllObjectBid();
+        sendGetAllObjectBid();
 
         /* Get the answer's status line */
-        // response=receiveBinary();
+        receiveBinary(statLine,STATUS_LINE_LENGTH);
 
         /* Extract the status code and the reason phrase from the answer */
-        splitStatusLine(response,statusCode,reasonPhrase);
+        splitStatusLine(statLine,&statusCode,reasonPhrase);
+        
+        i++;
     }
 
     /* Display the result of the request */
-    displayResult();
+    displayResult(statusCode);
 
     /* If the answer is OK, extract the list */
     if (statusCode == STATUS_CODE_OK)
     {
-        /* @TODO */
-    }
+        receiveBinary((char*)list,10*sizeof(ObjectBid));
 
-    /* If the list is here, display it */
-    displayList(*list);
+		/* If the list is here, display it */
+		displayList(*list);
+    
+    	return SUCCESS;
+    }
+    else
+    	return ERROR_RECEIVING;
 }
 
 /* searchObject
@@ -619,7 +639,7 @@ int searchObject (ObjectBid * list)
     /* If there is no list, display an error */
     if (list==NULL)
     {
-        displayResult(); /* @TODO to add a SEARCH_ERROR in defines.h and
+        displayResult(ERROR_NO_LIST); /* @TODO to add a ERROR_NO_LIST in defines.h and
         then modify displayResult in interfaceClient.c */
     }
 
@@ -627,13 +647,15 @@ int searchObject (ObjectBid * list)
     searchInput(name);
 
     /* Search for the name of the object in the list */
-    while ( strcmp(name,list[i].name) != 0  /* && @TODO still has objects in list */)
+    while ( strcmp(name,list[i].name) != 0  && i<(int)(listSize/sizeof(ObjectBid))
         i++;
     if ( strcmp(name,list[i-1].name) ==0)
         search = & list[i-1];
 
     /* Display the result */
     displayList(search);
+    
+    return SUCCESS;
 }
 
 /* Ferme la connexion.

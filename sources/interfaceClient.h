@@ -44,6 +44,6 @@ void displayObject (ObjectBid obj);
  * display the list of available objects.
  * returns nothing.
  */
-void displayList (ObjectBid * list);
+void displayList (ObjectBid * list, size_t listSize);
 
 #endif
