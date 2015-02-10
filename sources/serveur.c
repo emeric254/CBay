@@ -59,7 +59,7 @@ int Init(char *port)
 
     if ( (n = getaddrinfo(NULL, port, &hints, &res)) != 0)  {
             fprintf(ERROROUTPUT, "getaddrinfo() failed, error : %s", gai_strerror(n));
-            return 0;
+            return ERROR_UNKNOWN;
     }
     ressave = res;
 
@@ -80,7 +80,7 @@ int Init(char *port)
 
     if (res == NULL) {
             perror("bind error");
-            return 0;
+            return ERROR_UNKNOWN;
     }
 
     adressLength = res->ai_addrlen;
@@ -89,7 +89,7 @@ int Init(char *port)
     listen(listenSocket, 4);
     printf("Init sucess\n");
 
-    return 1;
+    return SUCESS;
 }
 
 
@@ -105,7 +105,7 @@ int connectWait()
     mainSocket = accept(listenSocket, clientAddr, &adressLength);
     if (mainSocket == -1) {
         perror("connectWait error.");
-        return 0;
+        return ERROR_UNKNOWN;
     }
     if(getnameinfo(clientAddr, adressLength, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
         printf("new client conected: %s\n", machine);
@@ -120,7 +120,7 @@ int connectWait()
     bufferEnd = 0;
     connectEnd = FALSE;
 
-    return 1;
+    return SUCESS;
 }
 
 
