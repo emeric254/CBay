@@ -155,7 +155,7 @@ void displayObject (ObjectBid obj)
 
 /* displayList.
 */
-void displayList (ObjectBid * list, size_t listSize)
+void displayList (ObjectBid * list, int listSize)
 {
     int i;
 
@@ -168,7 +168,7 @@ void displayList (ObjectBid * list, size_t listSize)
     /* Else print the results */
     else
     {
-        for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
+        for (i=0;i<listSize;i++)
         {
         	fprintf(stdout,"\t\tObject n°%d :\n",i+1);
             displayObject(list[i]);
@@ -191,7 +191,7 @@ int biddingInput(ObjectBid obj, float* price)
 	scanf("%f",price);
 	
 	/* Check the price */
-	while (*price < obj.currentBidPrice)
+	while (*price <= obj.currentBidPrice)
 	{
 		fprintf(stdout,"The price you entered is incorrect.\n"
 		"Please enter a price higher than the current bid : ");
@@ -200,5 +200,30 @@ int biddingInput(ObjectBid obj, float* price)
 	
 	return SUCCESS;
 }
+
+
+/* choseObjectInList
+*/
+int choseObjectInList(int * chosen, ObjectBid * list, int listSize)
+{
+	/* Display the list */
+	displayList(list,listSize);
+	
+	/* Get the object's number */
+	fprintf(stdout,"Please chose the number of the item you want to bid on : ");
+	scanf("%d",chosen);
+	*chosen -= 1;
+	
+	/* Verify that the number is correct */
+	while ((*chosen >= listSize) || (*chosen < 0))
+	{
+		fprintf(stdout,"Chose a number in the list please : ");
+		scanf("%d",chosen);
+		*chosen -= 1;
+	}
+	
+	return SUCCESS;
+}
+
 
 

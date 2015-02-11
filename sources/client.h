@@ -1,6 +1,15 @@
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
 
+/** \file client.h
+ * \brief This file provide some usual function for a BEEP client like \Init,
+ * \receiveBinary, \sendConnect, \listObjects, \searchObject, \bidObject,
+ * \connection, \accountCreation.
+ * It also contains fonction to send data using other methods than connect
+ * (typically GET, PUT and DELETE) or function to split and extract data from
+ * incoming answer from the server.
+ *
+ */
 
 /** \fn int Init(char *server)
  * \brief Connection to the server
@@ -10,13 +19,6 @@
  */
 int Init(char *server);
 
-
-/** \fn
- * \brief
- * \param
- * \return
- *
- */
 
 /** \fn int receiveBinary(char *donnees, size_t tailleMax)
  * \brief receive binary datas from the server and store them in a character array
@@ -135,7 +137,6 @@ int splitResponseHeader(char *responseHeaderField, int* contentLength, char* con
 /** \fn int accountCreation()
  * \brief Asks the user for some informations and create a new UserAccount then
  * send it to the server
- * \param
  * \return status code of this operation
  *
  */
@@ -144,7 +145,6 @@ int accountCreation ();
 
 /** \fn int connection()
  * \brief Asks the user for a login and a password and try to connect to the server 
- * \param
  * \return the result (SUCCESS or CONNECTION_DENIED)
  *
  */
@@ -153,34 +153,35 @@ int connection();
 
 /** \fn int listObjects(ObjectBid ** list, size_t* listSize)
  * \brief Take the list of all the available objects from the server and display it
- * \param list is the list of all the objects and listSize its size in bytes
+ * \param list is the list of all the objects and listSize its number of elements
  * \return status code of this operation
  *
  */
-int listObjects (ObjectBid ** list, size_t* listSize);
+int listObjects (ObjectBid ** list, int* listSize);
 
 
 /** \fn int searchObject(ObjectBid * list, size_t listSize)
  * \brief Search for an object into the list of the available ones.
- * \param list is the list of all the objects and listSize its size in bytes
+ * \param list is the list of all the objects and listSize its number of elements
  * \return status code of this operation
  *
  */
-int searchObject (ObjectBid * list, size_t listSize);
+int searchObject (ObjectBid * list, int listSize);
 
 
-/** \fn int bidObject(UserAccount client)
+/** \fn int bidObject(UserAccount client, ObjectBid ** list, int listSize)
  * \brief Asks the user for a bid and send it to the server. Display the result.
- * \param client is the connected user who want to bid for the object
+ * \param client is the connected user who want to bid for the object, list is
+ * the list of object the client will chose from and listSize the number of
+ * objects in the list
  * \return status code of this operation
  *
  */
-int bidObject (UserAccount client);
+int bidObject (UserAccount client, ObjectBid ** list, int listSize);
 
 
 /** \fn void Terminaison
  * \brief End the connection
- * \param
  * \return nothing
  *
  */

@@ -3,6 +3,14 @@
 
 #include "structures.h"
 
+/** \file interfaceClient.h
+ * \brief This file provide the main function to interact with the user like
+ * \displayResult, \displayObject or \mainMenu. Nearly all the user's input are
+ * taken with those functions. The only exception is for the account and the
+ * object creation.
+ *
+ */
+
 /** \fn int welcomeMenu()
  * \brief show welcome menu.
  * \return user choice.
@@ -54,11 +62,11 @@ void displayObject (ObjectBid obj);
 
 /** \fn void displayList(ObjectBid * list, size_t listSize)
  * \brief display the list of available objects.
- * \param list is the list to display and listSize its size in bytes
+ * \param list is the list to display and listSize its number of elements
  * \return nothing.
  *
  */
-void displayList (ObjectBid * list, size_t listSize);
+void displayList (ObjectBid * list, int listSize);
 
 /** \fn int biddingInput(ObjectBid obj, int * price)
  * \brief ask the user for a price for an object
@@ -67,5 +75,14 @@ void displayList (ObjectBid * list, size_t listSize);
  *
  */
 int biddingInput(ObjectBid obj, float * price);
+
+/** \fn int choseObjectInList(ObjectBid * chosen, ObjectBid * list);
+ * \brief display a list of object and ask to chose one to bid on
+ * \param chosen is the chosen object's number to bid in the list list of
+ * listSize elements
+ * \return the status code of this operation
+ *
+ */
+int choseObjectInList(int * chosen, ObjectBid * list, int listSize);
 
 #endif

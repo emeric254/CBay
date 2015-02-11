@@ -516,10 +516,11 @@ int connection ()
 
 /* listObjects
 */
-int listObjects (ObjectBid ** list, size_t* listSize)
+int listObjects (ObjectBid ** list, int* listSize)
 {
     int statusCode;
     int i = 0;
+    size_t size=0;;
     char statLine[STATUS_LINE_LENGTH];
     char headers[RESPONSE_HEADER_FIELD_LENGTH];
     char contentType[RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH];
@@ -552,7 +553,8 @@ int listObjects (ObjectBid ** list, size_t* listSize)
 		splitResponseHeader(headers,(int *)listSize,contentType);
 		
 		/* Get the list */
-        receiveBinary((char*)list,*listSize);
+        receiveBinary((char*)list,size);
+        *listSize=(int)(size/sizeof(ObjectBid));
 
         /* Display the list */
         displayList(*list,*listSize);
@@ -565,7 +567,7 @@ int listObjects (ObjectBid ** list, size_t* listSize)
 
 /* searchObject
 */
-int searchObject (ObjectBid * list, size_t listSize)
+int searchObject (ObjectBid * list, int listSize)
 {
     ObjectBid * result=NULL;
     char* name=NULL;
@@ -582,7 +584,7 @@ int searchObject (ObjectBid * list, size_t listSize)
     searchInput(name);
 
 	/* Search for the name of the object in the list */
-	for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
+	for (i=0;i<listSize;i++)
 	{
 		/* If the name of the current object match */
 		if (strcmp(name,list[i].name) == 0)
@@ -604,23 +606,25 @@ int searchObject (ObjectBid * list, size_t listSize)
 
 /* bidObject
 */
-int bidObject (UserAccount client)
+int bidObject (UserAccount client, ObjectBid ** list, int listSize)
 {
 	ObjectBid obj;
 	int i=0;
 	int statusCode;
+	int chosenObj=-1;
 	char statLine[STATUS_LINE_LENGTH];
 	char* reasonPhrase=NULL;
 	float price=0.0;
 	
 	/* How to know which object the client want to bid on ? */
+	choseObjectInList(&chosenObj,*list,listSize);
 	
 	/* Bid on the object */
-	biddingInput(obj,&price);
+	biddingInput(*list[chosenObj],&price);
 	
 	/* Modify the object's currentBidIdBuyer and currentBidPrice */
-	obj.currentBidIdBuyer=client.id;
-	obj.currentBidPrice=price;
+	list[chosenObj]->currentBidIdBuyer=client.id;
+	list[chosenObj]->currentBidPrice=price;
 	
 	/* Send the modification to the server, 3 try */
     while (statusCode != STATUS_CODE_OK && i < 3)
