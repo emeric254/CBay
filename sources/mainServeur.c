@@ -29,7 +29,7 @@ int main()
     long int id = -1; // client's id
 
 
-    char * ptrTemp = NULL; // temporary ptr to data
+//    char * ptrTemp = NULL; // temporary ptr to data
     char * ptrData = NULL; // ptr to data
     int sizeData = 0; // size of data
 
@@ -49,11 +49,13 @@ int main()
 
     // table of objects loading
     if((state = allObjLoad(&objects, &nbrObjects)) != SUCCESS)
-        return state;
+        if(state != ERROR_OPENING)
+            return state;
 
     // table of accounts loading
     if((state = allAccLoad(&accounts, &nbrAccount)) != SUCCESS)
-        return state;
+        if(state != ERROR_OPENING)
+            return state;
 
     // init server
     Init(SERVER_PORT);
@@ -115,6 +117,7 @@ int main()
                                     if(id == ptrAccount->id)
                                         end = TRUE;
                                     // save this new account table
+                                    sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
                                 {
@@ -132,11 +135,12 @@ int main()
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
-                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_LABEL_VENDOR && ptrObject->idVendor == id))
+                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_TYPE_VENDOR && ptrObject->idVendor == id))
                                 {
                                     // admin || vendor of this object
                                     //@TODO delete this object
                                     // save this new object table
+                                    sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
                                 {
@@ -172,19 +176,33 @@ int main()
                             }
                             else // non existant
                             {
-                                fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
-                                sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                                // renvoi le compte du user connected
+                                UserAccount temp;
+                                temp.id = id;
+
+                                if(userInTable(&temp, accounts, nbrAccount, ptrAccount) == TRUE)
+                                {
+                                    if((state = answerUserAccount(ptrAccount)) != SUCCESS)
+                                        fprintf(ERROROUTPUT,">>> %d\n", state);
+                                }
+                                else
+                                {
+                                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                                    sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                                }
                             }
                         }
                         else if(isObjectBid(sizeData) == TRUE)
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
-
+                                if((state = answerObjectBid(ptrObject)) != SUCCESS)
+                                    fprintf(ERROROUTPUT,">>> %d\n", state);
                             }
                             else if (FALSE) // search by name
                             {
-                                // return result
+                                if((state = answerObjectBid(ptrObject)) != SUCCESS)
+                                    fprintf(ERROROUTPUT,">>> %d\n", state);
                             }
                             else
                             {
@@ -216,6 +234,7 @@ int main()
                                     // admin || user can update his account
                                     //@TODO update this account
                                     allAccSave(accounts, nbrAccount);
+                                    sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
                                 {
@@ -228,11 +247,12 @@ int main()
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
-                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_LABEL_VENDOR && ptrObject->idVendor == id))
+                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_TYPE_VENDOR && id == ptrObject->idVendor))
                                 {
                                     // admin || vendor of this object
                                     //@TODO update this object
                                     allObjSave(objects, nbrObjects);
+                                    sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
                                 {
