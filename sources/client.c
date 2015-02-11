@@ -31,8 +31,6 @@ int connectEnd = FALSE;
 
 
 /* Init.
- * Connexion au serveur sur la machine donnee.
- * Utilisez localhost pour un fonctionnement local.
  */
 int Init(char *machine) {
     int n;
@@ -45,7 +43,7 @@ int Init(char *machine) {
     {
         fprintf(ERROROUTPUT,"WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
         WSACleanup();
-        exit(1);
+        exit(SUCCESS);
     }
     memset(&hints, 0, sizeof(struct addrinfo));
 #else
@@ -57,7 +55,7 @@ int Init(char *machine) {
     if ( (n = getaddrinfo(machine, service, &hints, &res)) )
     {
             fprintf(ERROROUTPUT, "Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
-            return 0;
+            return ERROR_UNKNOWN;
     }
     ressave = res;
 
@@ -74,7 +72,7 @@ int Init(char *machine) {
 
     if (res == NULL) {
             perror("Initialisation, erreur de connect.");
-            return 0;
+            return ERROR_UNKNOWN;
     }
 
     freeaddrinfo(ressave);
@@ -83,7 +81,7 @@ int Init(char *machine) {
 
     printf("Connexion avec le serveur reussie.\n");
 
-    return 1;
+    return SUCCESS;
 }
 
 
@@ -172,18 +170,12 @@ int sendGetAllObjectBid()
     int length = 6 ;
     char msg[length+1];
 
-	/* @DEBUG */printf("Jusque là tout va bien.\n");
-
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
-
-/* @DEBUG */printf("Jusque là tout va bien.\n");
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
     msg[length] = '\0';
-
-/* @DEBUG */printf("Jusque là tout va bien.\n");
 
     if ( send(clientSocket, msg, length, 0) == -1 )
     {
@@ -191,7 +183,6 @@ int sendGetAllObjectBid()
         return ERROR_SENDING;
     }
     
-    /* @DEBUG */printf("Ok pour le sendGetAllObjectBid\n");
     return SUCCESS;
 }
 

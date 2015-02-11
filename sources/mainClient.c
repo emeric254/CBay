@@ -17,6 +17,8 @@ int main(void)
 
     CLEAR();
 
+	Init(SERVER_ADRESS);
+
     /* The Welcome Menu : Connection and Account Creation */
     while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
     {
