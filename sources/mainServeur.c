@@ -118,6 +118,7 @@ int main()
                                     if(id == ptrAccount->id)
                                         end = TRUE;
                                     // save this new account table
+                                    sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
                                 {
@@ -140,6 +141,7 @@ int main()
                                     // admin || vendor of this object
                                     //@TODO delete this object
                                     // save this new object table
+                                    sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
                                 {
@@ -175,28 +177,33 @@ int main()
                             }
                             else // non existant
                             {
+                                // renvoi le compte du user connected
                                 UserAccount temp;
                                 temp.id = id;
+
                                 if(userInTable(&temp, accounts, nbrAccount, ptrAccount) == TRUE)
                                 {
+                                    if((state = answerUserAccount(ptrAccount)) != SUCCESS)
+                                        fprintf(ERROROUTPUT,">>> %d\n", state);
                                 }
                                 else
                                 {
                                     fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
                                     sendStatusLine(STATUS_CODE_BAD_REQUEST);
                                 }
-                                // renvoi le compte du user connected
                             }
                         }
                         else if(isObjectBid(sizeData) == TRUE)
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
-
+                                if((state = answerObjectBid(ptrObject)) != SUCCESS)
+                                    fprintf(ERROROUTPUT,">>> %d\n", state);
                             }
                             else if (FALSE) // search by name
                             {
-                                // return result
+                                if((state = answerObjectBid(ptrObject)) != SUCCESS)
+                                    fprintf(ERROROUTPUT,">>> %d\n", state);
                             }
                             else
                             {
@@ -228,6 +235,7 @@ int main()
                                     // admin || user can update his account
                                     //@TODO update this account
                                     allAccSave(accounts, nbrAccount);
+                                    sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
                                 {
@@ -245,6 +253,7 @@ int main()
                                     // admin || vendor of this object
                                     //@TODO update this object
                                     allObjSave(objects, nbrObjects);
+                                    sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
                                 {
