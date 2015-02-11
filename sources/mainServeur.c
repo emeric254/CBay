@@ -28,16 +28,24 @@ int main()
     char password[USERACCOUNT_PASSWORD_LENGTH]; // client password
     long int id = -1; // client's id
 
+
+    char * ptrTemp = NULL; // temporary ptr to data
+    char * ptrData = NULL; // ptr to data
+    int sizeData = 0; // size of data
+
+
     ObjectBid * objects = NULL; // table of objects
     int nbrObjects = 0; // number of objects
-    ObjectBid * ptrObject = NULL; // ptr to an object
+    ObjectBid * ptrObject = NULL; // current parsed object
 
     UserAccount * accounts = NULL; // table of accounts
     int nbrAccount = 0; // number of accounts
-    UserAccount * ptrAccount = NULL; // ptr to an account
+    UserAccount * ptrAccount = NULL; // current parsed account
 
     ConfidentialIDS * ids = NULL; // table of IDS
     int nbrIDS = 0; // number of IDS
+    ConfidentialIDS * ptrIDS = NULL; // current parsed IDS
+
 
     // table of objects loading
     if((state = allObjLoad(&objects, &nbrObjects)) != SUCCESS)
@@ -68,17 +76,21 @@ int main()
                     {
                         if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCCESS)
                             return state;
+
                         strncpy(login,ptrLogin,sizeLogin);
                         strncpy(password,ptrPassword,sizePasword);
+
                         // if pseudo && login in one of account >> then connected = TRUE;
-                        if ( idsInTable(login, password, ids, nbrIDS, &id) == TRUE )
+                        if ( idsInTable(login, password, ids, nbrIDS, ptrIDS) == TRUE )
                         {
                             // he sucess in connection
                             sendStatusLine(STATUS_CODE_OK);
+                            connected = TRUE;
                         }
                         else
                         {
                             // wrong ids
+                            fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
                             sendStatusLine(STATUS_CODE_FORBIDDEN);
                         }
                     }
@@ -89,8 +101,57 @@ int main()
                     if(connected == TRUE)
                     {
                         // work with this Delete request
+                        if ((state = splitDeleteRequest(message, length, ptrData, &sizeData)) != SUCCESS)
+                            return state;
+
+                        if(isAccountUser(sizeData) == TRUE)
+                        {
+                            if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
+                            {
+                                if(accountType == ACCOUNT_TYPE_ADMIN || id == ptrAccount->id)
+                                {
+                                    // admin || user can delete his account
+                                    //@TODO delete this account
+                                    if(id == ptrAccount->id)
+                                        end = TRUE;
+                                    // save this new account table
+                                }
+                                else
+                                {
+                                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                                    sendStatusLine(STATUS_CODE_FORBIDDEN);
+                                }
+                            }
+                            else // non existant
+                            {
+                                fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                                sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                            }
+                        }
+                        else if(isObjectBid(sizeData) == TRUE)
+                        {
+                            if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
+                            {
+                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_LABEL_VENDOR && ptrObject->idVendor == id))
+                                {
+                                    // admin || vendor of this object
+                                    //@TODO delete this object
+                                    // save this new object table
+                                }
+                                else
+                                {
+                                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                                    sendStatusLine(STATUS_CODE_FORBIDDEN);
+                                }
+                            }
+                            else // non existant
+                            {
+                                fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                                sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                            }
+                        }
                     }
-                    else
+                    else // not connected
                     {
                         fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
                         sendStatusLine(STATUS_CODE_FORBIDDEN);
@@ -100,21 +161,43 @@ int main()
                 {
                     if(connected == TRUE)
                     {
-                        // work with this Get request as ?
-                        // test type of data
-                        // is inTables ?
-                        /*
-                        if (accountType == ACCOUNT_TYPE_ADMIN)
-                        else if (accountType == ACCOUNT_TYPE_VENDOR)
-                        else if (accountType == ACCOUNT_TYPE_USER)
-                        else // server fail !
-                        */
+                        // work with this Get request
+                        if ((state = splitPutRequest(message, length, ptrData, &sizeData)) != SUCCESS)
+                            return state;
+                        if(isAccountUser(sizeData) == TRUE)
+                        {
+                            if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
+                            {
+                                // admin || user can update his account
+                            }
+                            else // non existant
+                            {
+                                fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                                sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                            }
+                        }
+                        else if(isObjectBid(sizeData) == TRUE)
+                        {
+                            if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
+                            {
+
+                            }
+                            else if (FALSE) // search by name
+                            {
+                                // return result
+                            }
+                            else
+                            {
+                                 // non existant
+                                fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                                sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                            }
+                        }
                     }
-                    else
+                    else // not connected
                     {
-                        // work with this Get request as anonymous
-                        // test type of data
-                        // is inTables ?
+                        fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                        sendStatusLine(STATUS_CODE_FORBIDDEN);
                     }
                 }
                 else if(isPutRequest(message, length) == TRUE)
@@ -122,11 +205,44 @@ int main()
                     if(connected == TRUE)
                     {
                         // work with this Put request
-                        // test type of data
-                        // is new or alredy inTables ?
-                        // so creation or update
+                        if ((state = splitPutRequest(message, length, ptrData, &sizeData)) != SUCCESS)
+                            return state;
+                        if(isAccountUser(sizeData) == TRUE)
+                        {
+                            if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
+                            {
+                                if(accountType == ACCOUNT_TYPE_ADMIN || id == ptrAccount->id)
+                                {
+                                    // admin || user can update his account
+                                    //@TODO update this account
+                                    allAccSave(accounts, nbrAccount);
+                                }
+                                else
+                                {
+                                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                                    sendStatusLine(STATUS_CODE_FORBIDDEN);
+                                }
+                            }
+                        }
+                        else if(isObjectBid(sizeData) == TRUE)
+                        {
+                            if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
+                            {
+                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_LABEL_VENDOR && ptrObject->idVendor == id))
+                                {
+                                    // admin || vendor of this object
+                                    //@TODO update this object
+                                    allObjSave(objects, nbrObjects);
+                                }
+                                else
+                                {
+                                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                                    sendStatusLine(STATUS_CODE_FORBIDDEN);
+                                }
+                            }
+                        }
                     }
-                    else
+                    else // not connected
                     {
                         fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
                         sendStatusLine(STATUS_CODE_FORBIDDEN);
@@ -167,6 +283,10 @@ int main()
 
         // end client connection properly
         endClient();
+
+        // erase saved data
+        strcpy(login,"");
+        strcpy(password,"");
 
         // server will quit
         if (quit == TRUE)

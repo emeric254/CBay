@@ -115,11 +115,11 @@ int accLoad (UserAccount * user, FILE * f);
  * \param user input pointer to an UserAccount var
  * \param table input table of UserAccount
  * \param size size of this table
- * \param id of the UserAccount id matching
+ * \param ptrUser pointer to the matching UserAccount
  * \return status code for this operation.
  * matching tests are made with ids.
 */
-int userInTable (UserAccount * user, UserAccount * table, int size, long int * id);
+int userInTable (UserAccount * user, UserAccount * table, int size, UserAccount * ptrUser);
 
 
 /** \fn int allAccSave (UserAccount *table, int size)
@@ -167,11 +167,11 @@ int objLoad (ObjectBid * obj, FILE * f);
  * \param obj input ObjectBid var pointer to test
  * \param table input ObjectBid table to search in
  * \param size size of this table
- * \param id matching ObjectBid id
+ * \param ptrObject pointer to the matching ObjectBid
  * \return status code for this operation.
  *
 */
-int objInTable (ObjectBid * obj, ObjectBid * table, int size, long int * id);
+int objInTable (ObjectBid * obj, ObjectBid * table, int size, ObjectBid * ptrObject);
 
 
 /** \fn int allObjSave (ObjectBid *table, int size)
@@ -230,11 +230,11 @@ int allIDSSave (ConfidentialIDS ** table, int * size);
  * \param password password string to test
  * \param table the input IDS table
  * \param size size of this table
- * \param id output ids of the matching login/password couple in the IDS table
+ * \param ptrIDS pointer to the matching IDS
  * \return status code for this operation.
  *
 */
-int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS * table, int size, long int * id);
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS * table, int size, ConfidentialIDS * ptrIDS);
 
 
 /** \fn int objLoad (ObjectBid *obj, FILE* f)

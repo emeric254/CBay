@@ -186,18 +186,20 @@ int accLoad(UserAccount *user, FILE* f)
 
 /* userInTable.
  */
-int userInTable (UserAccount *user, UserAccount *table, int size, long int *id)
+int userInTable (UserAccount *user, UserAccount *table, int size, UserAccount * ptrAccount)
 {
     int i = 0;
     int find = FALSE;
+
     while(find == FALSE && i < size)
     {
         if ( user->id == table[i].id )
             find = TRUE;
         i++;
     }
-    if (id != NULL)
-        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+
+    ptrAccount = (find) ? &table[i] : NULL ;
+
     return find;
 }
 
@@ -299,18 +301,20 @@ int objLoad(ObjectBid *obj, FILE* f)
 
 /* objInTable.
  */
-int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id)
+int objInTable (ObjectBid *obj, ObjectBid *table, int size, ObjectBid * ptrObject)
 {
     int i = 0;
     int find = FALSE;
+
     while(find == FALSE && i < size)
     {
         if ( obj->id == table[i].id )
             find = TRUE;
         i++;
     }
-    if (id != NULL)
-        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+
+    ptrObject = (find) ? &table[i] : NULL ;
+
     return find;
 }
 
@@ -488,35 +492,21 @@ int allIDSSave (ConfidentialIDS **table, int *size)
 
 /* idsInTable.
  */
-int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id)
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, ConfidentialIDS * ptrIDS)
 {
     int i = 0;
     int find = FALSE;
+
     while(find == FALSE && i < size)
     {
         if ( !strcmp(login,table[i].login) && !strcmp(password,table[i].password) )
             find = TRUE;
         i++;
     }
-    if (id != NULL)
-        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+
+    ptrIDS = (find) ? &table[i] : NULL ;
+
     return find;
-}
-
-
-/* file_length.
-*/
-size_t file_length(char *filename){
-    int length = -1;
-    FILE * file = fopen(filename,"r");
-    if (file!=NULL)
-    {
-        fseek(file,0,SEEK_END);
-        length = ftell(file);
-        fclose(file);
-    }
-    fprintf(ERROROUTPUT,"error unknown file : (%s)\n",filename);
-    return length; // -1 if unknown file, 0 if empty, otherwise it return the file length
 }
 
 
