@@ -49,14 +49,17 @@ int main()
 
     // table of objects loading
     if((state = allObjLoad(&objects, &nbrObjects)) != SUCCESS)
-        return state;
+        if(state != ERROR_OPENING)
+            return state;
 
     // table of accounts loading
     if((state = allAccLoad(&accounts, &nbrAccount)) != SUCCESS)
-        return state;
+        if(state != ERROR_OPENING)
+            return state;
 
     // init server
     Init(SERVER_PORT);
+    printf("salut salut \n");
 
     // working cycle
     while(1)
@@ -172,8 +175,17 @@ int main()
                             }
                             else // non existant
                             {
-                                fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
-                                sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                                UserAccount temp;
+                                temp.id = id;
+                                if(userInTable(&temp, accounts, nbrAccount, ptrAccount) == TRUE)
+                                {
+                                }
+                                else
+                                {
+                                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                                    sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                                }
+                                // renvoi le compte du user connected
                             }
                         }
                         else if(isObjectBid(sizeData) == TRUE)

@@ -107,7 +107,7 @@ int connectWait()
         perror("connectWait error.");
         return ERROR_UNKNOWN;
     }
-    
+
     if(getnameinfo(clientAddr, adressLength, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
         printf("new client conected: %s\n", machine);
     } else {
@@ -530,4 +530,48 @@ int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
     data = strndup(&request[7], *sizeData);
 
     return (*sizeData == 0) ? ERROR_EMPTY_BUFF : SUCCESS;
+}
+
+
+int answerUserAccount(UserAccount * account)
+{
+    if(account==NULL)
+        return ERROR_POINTER;
+
+    int state = sendStatusLine(STATUS_CODE_OK);
+    if (state == SUCCESS)
+        state = sendHeaderField(sizeof(UserAccount), CONTENT_TYPE_USERACCOUNT_ID);
+    if(state == SUCCESS)
+        state = ERROR_SENDING;
+    return SUCCESS;
+}
+
+
+int answerObjectBid(ObjectBid * object)
+{
+    if(object==NULL)
+        return ERROR_POINTER;
+
+    int state = sendStatusLine(STATUS_CODE_OK);
+    if (state == SUCCESS)
+        sendHeaderField(sizeof(ObjectBid), CONTENT_TYPE_OBJECTBID_ID);
+    if(state == SUCCESS)
+        state = ERROR_SENDING;
+
+    return SUCCESS;
+}
+
+
+int answerObjectBidTable(ObjectBid * objects, int nbrObjects)
+{
+    if(objects==NULL)
+        return ERROR_POINTER;
+
+    int state = sendStatusLine(STATUS_CODE_OK);
+    if (state == SUCCESS)
+        sendHeaderField(sizeof(ObjectBid)*nbrObjects, CONTENT_TYPE_OBJECTBID_ID);
+    if(state == SUCCESS)
+        state = ERROR_SENDING;
+
+    return SUCCESS;
 }

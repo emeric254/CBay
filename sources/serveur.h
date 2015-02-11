@@ -177,4 +177,32 @@ int splitConnectRequest(char * request, int size, char * login, char * password,
 int splitDeleteRequest(char * request, int size, char * data, int * sizeData);
 
 
+/** \fn int answerUserAccount(UserAccount * account)
+ * \brief send an UserAccount to the client
+ * \param account the UserAccount to send to the client
+ * \return status code for this operation.
+ *
+*/
+int answerUserAccount(UserAccount * account);
+
+
+/** \fn int answerObjectBid(ObjectBid * object)
+ * \brief send an ObjectBid to the client
+ * \param object the ObjectBid to send to the client
+ * \return status code for this operation.
+ *
+*/
+int answerObjectBid(ObjectBid * object);
+
+
+/** \fn int answerObjectBidTable(ObjectBid * objects, int nbrObjects)
+ * \brief send an ObjectBid table to the client
+ * \param objects the ObjectBid table to send to the client
+ * \param nbrObjects number of this objects
+ * \return status code for this operation.
+ *
+*/
+int answerObjectBidTable(ObjectBid * objects, int nbrObjects);
+
+
 #endif
