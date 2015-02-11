@@ -38,175 +38,238 @@ typedef struct ConfidentialIDS
 } ConfidentialIDS;
 
 
-/* cleanBuffer.
-* clear the buffer
+/** \fn void cleanBuffer()
+ * \brief clean the buffer
+ *
 */
 void cleanBuffer();
 
 
-/* cleanCRString.
-* clean a string from all carriage return ('\n' & '\r)
+/** \fn void cleanCRString(char * string)
+ * \brief remove Carriage Return from a string
+ * \param string string to clean
+ *
 */
-void cleanCRString(char *string);
+void cleanCRString(char * string);
 
 
-/* getAChar.
-* character input, delete '\n' and EOF symbols
-* return a character
+/** \fn char getAChar()
+ * \brief wait for a char input from the user
+ * \return char input by the user
+ *
 */
 char getAChar();
 
 
-/* mailCheck.
- * check if 'mail' string of 'length' length is a correct mail address
- * return TRUE or FALSE
+/** \fn int mailCheck(char *mail, int taille)
+ * \brief check if an input string is composed as a valid mail adress
+ * \param mail the input string to test
+ * \param length input string length
+ * \return status code for this operation.
+ *
 */
-int mailCheck(char *mail, int taille);
+int mailCheck(char * mail, int length);
 
 
-/* userInput.
- * ask user to enter informations to create an UserAccount,
- * except the user id !
- * modify the input UserAccount
+/** \fn void userInputUserAccount(UserAccount * account)
+ * \brief ask the user to input fields of a new UserAccount var except ids.
+ * \param account the output UserAccount
+ * \return status code for this operation.
+ *
 */
 void userInputUserAccount(UserAccount * account);
 
 
-/* userInputObjectBid.
-* ask the user for information to create an ObjectBid,
-* except fields
-* id
-* idVendor
-* currentBidPrice
-* currentBidIdBuyer
-* and modify the input ObjectBid
+/** \fn void userInputObjectBid(ObjectBid * bid)
+ * \brief ask the user to input fields of a new ObjectBid except ids' and currentBid vars.
+ * \param bid the output ObjectBid
+ * \return status code for this operation.
+ *
 */
 void userInputObjectBid(ObjectBid * bid);
 
 
-/* accSave.
- * Save account's informations into the ACC_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int accSave (UserAccount user, FILE* f);
-
-
-/* accLoad.
- * Load account's informations from the ACC_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int accLoad (UserAccount *user, FILE* f);
-
-
-/* userInTable.
- * test if an user's account is in the table or not, and return its id or not.
- * return TRUE if it's contain (ids matching), return FALSE otherwise.
- */
-int userInTable (UserAccount *user, UserAccount *table, int size, long int *id);
-
-
-/* allAccSave.
- * Save a table of accounts from the ACC_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int allAccSave (UserAccount *table, int size);
-
-
-/* allAccLoad.
- * Load a table of accounts from the ACC_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int allAccLoad (UserAccount **table, int *size);
-
-
-/* objSave.
- * Save object's informations into the OBJ_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int objSave (ObjectBid obj, FILE* f);
-
-
-/* objLoad.
- * Load object's informations from the OBJ_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int objLoad (ObjectBid *obj, FILE* f);
-
-
-/* objInTable.
- * test if an object is in the table or not, and return its id or not.
- * return TRUE if it's contain (ids matching), return FALSE otherwise.
- */
-int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id);
-
-
-/* allObjSave.
- * Save a table of objects from the OBJ_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int allObjSave (ObjectBid *table, int size);
-
-
-/* allObjLoad.
- * Load a table of objects from the OBJ_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int allObjLoad (ObjectBid **table, int *size);
-
-
-/* idsLoad.
- * Load ids's informations from the IDS_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int idsLoad (ConfidentialIDS *ids, FILE *f);
-
-
-/* allIDSLoad.
- * Load a table of IDS from the IDS_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int allIDSLoad (ConfidentialIDS **table, int *size);
-
-
-/* allIDSLoad.
- * Save a table of IDS to the IDS_FILE.
- * Integer return codes correspond to the operation's outcome.
- */
-int allIDSSave (ConfidentialIDS **table, int *size);
-
-
-/* idsInTable.
- * test if ids are in the IDS table, and return its id or not.
- * return TRUE if it's contain (ids matching), return FALSE otherwise.
- */
-int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id);
-
-
-/* isObjectBid.
+/** \fn int accSave (UserAccount user, FILE* f)
+ * \brief save account's informations into the ACC_FILE
+ * \param user user var to save
+ * \param f file descriptor to the output file (ACC_FILE)
+ * \return status code for this operation.
  *
- */
+*/
+int accSave (UserAccount user, FILE * f);
+
+
+/** \fn int accLoad (UserAccount *user, FILE* f)
+ * \brief load account's informations from the ACC_FILE
+ * \param user output user var
+ * \param f file descriptor to the input file (ACC_FILE)
+ * \return status code for this operation.
+ *
+*/
+int accLoad (UserAccount * user, FILE * f);
+
+
+/** \fn int userInTable (UserAccount *user, UserAccount *table, int size, long int *id)
+ * \brief test if an user's account is in the table or not, and output its id or not
+ * \param user input pointer to an UserAccount var
+ * \param table input table of UserAccount
+ * \param size size of this table
+ * \param id of the UserAccount id matching
+ * \return status code for this operation.
+ * matching tests are made with ids.
+*/
+int userInTable (UserAccount * user, UserAccount * table, int size, long int * id);
+
+
+/** \fn int allAccSave (UserAccount *table, int size)
+ * \brief save a table of UserAccount from the ACC_FILE
+ * \param table input table to save
+ * \param size size of this table
+ * \return status code for this operation.
+ *
+*/
+int allAccSave (UserAccount * table, int size);
+
+
+/** \fn int allAccLoad (UserAccount **table, int *size)
+ * \brief load a table of UserAccount from the ACC_FILE
+ * \param table output table which will be load
+ * \param size size of this table
+ * \return status code for this operation.
+ *
+*/
+int allAccLoad (UserAccount ** table, int * size);
+
+
+/** \fn int objSave (ObjectBid obj, FILE* f)
+ * \brief save object's informations into the OBJ_FILE
+ * \param obj an ObjectBid to save
+ * \param f file descriptor to the output file (OBJ_FILE)
+ * \return status code for this operation.
+ *
+*/
+int objSave (ObjectBid obj, FILE * f);
+
+
+/** \fn int objLoad (ObjectBid *obj, FILE* f)
+ * \brief load object's informations from the OBJ_FILE
+ * \param obj the ObjectBid loaded
+ * \param f file descriptor to the input file (OBJ_FILE)
+ * \return status code for this operation.
+ *
+*/
+int objLoad (ObjectBid * obj, FILE * f);
+
+
+/** \fn int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id)
+ * \brief test if a given ObjectBid is in an ObjectBid table
+ * \param obj input ObjectBid var pointer to test
+ * \param table input ObjectBid table to search in
+ * \param size size of this table
+ * \param id matching ObjectBid id
+ * \return status code for this operation.
+ *
+*/
+int objInTable (ObjectBid * obj, ObjectBid * table, int size, long int * id);
+
+
+/** \fn int allObjSave (ObjectBid *table, int size)
+ * \brief save a table of objects to the OBJ_FILE
+ * \param table input ObjectBid table to save
+ * \param size size of this table
+ * \return status code for this operation.
+ *
+*/
+int allObjSave (ObjectBid * table, int size);
+
+
+/** \fn int allObjLoad (ObjectBid **table, int *size)
+ * \brief load a table of objects from the OBJ_FILE
+ * \param table output ObjectBid table to load
+ * \param size output size of this table
+ * \return status code for this operation.
+ *
+*/
+int allObjLoad (ObjectBid ** table, int * size);
+
+
+/** \fn int idsLoad (ConfidentialIDS *ids, FILE *f)
+ * \brief load ids's informations from the IDS_FILE
+ * \param ids output IDS to load
+ * \param f file descriptor to the input file (IDS_FILE)
+ * \return status code for this operation.
+ *
+*/
+int idsLoad (ConfidentialIDS * ids, FILE * f);
+
+
+/** \fn int allIDSLoad (ConfidentialIDS **table, int *size)
+ * \brief load a table of IDS from the IDS_FILE
+ * \param table output IDS table to load
+ * \param size size of this table
+ * \return status code for this operation.
+ *
+*/
+int allIDSLoad (ConfidentialIDS ** table, int * size);
+
+
+/** \fn int allIDSSave (ConfidentialIDS **table, int *size)
+ * \brief save all the IDS table to the IDS_FILE
+ * \param table ptr to the IDS table to save
+ * \param size size of this table
+ * \return status code for this operation.
+ *
+*/
+int allIDSSave (ConfidentialIDS ** table, int * size);
+
+
+/** \fn int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id)
+ * \brief test if the given login and password are in the IDS table
+ * \param login login string to test
+ * \param password password string to test
+ * \param table the input IDS table
+ * \param size size of this table
+ * \param id output ids of the matching login/password couple in the IDS table
+ * \return status code for this operation.
+ *
+*/
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS * table, int size, long int * id);
+
+
+/** \fn int objLoad (ObjectBid *obj, FILE* f)
+ * \brief test if the data's size given match to an ObjectBid var size
+ * \param size data to test size
+ * \return status code for this operation.
+ *
+*/
 int isObjectBid (int size);
 
 
-/* isObjectBidTable.
+/** \fn int isObjectBidTable (int size)
+ * \brief test if the data's size given match to an ObjectBid table size
+ * \param size data to test size
+ * \return status code for this operation.
  *
- */
+*/
 int isObjectBidTable (int size);
 
 
-/* isAccountUser.
+/** \fn int isAccountUser (int size)
+ * \brief test if the data's size given match to an UserAccount var size
+ * \param size data to test size
+ * \return status code for this operation.
  *
- */
+*/
 int isAccountUser (int size);
 
 
-/* file_length.
+/** \fn size_t file_length(char *filename)
+ * \brief check and return size of a file which its filename or path is given
+ * \param filename file name or full path
+ * \return status size of this file.
  *
 */
-size_t file_length(char *filename);
-
-
-//
+size_t file_length(char * filename);
 
 
 #endif

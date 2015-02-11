@@ -145,7 +145,7 @@ void userInputObjectBid(ObjectBid * bid)
 
 /* mailCheck.
 */
-int mailCheck(char *mail, int taille)
+int mailCheck(char *mail, int length)
 {
     if(mail == NULL)
     {
@@ -155,7 +155,7 @@ int mailCheck(char *mail, int taille)
     int i = 0;
     int arobase = 0 ;
     // count how many '@'
-    for(i=0;i<taille;i++)
+    for(i=0;i<length;i++)
         if((mail[i] = '@'))
             arobase ++;
     //only one '@' in a valide mail adress
