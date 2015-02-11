@@ -132,7 +132,7 @@ int main()
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
-                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_LABEL_VENDOR && ptrObject->idVendor == id))
+                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_TYPE_VENDOR && ptrObject->idVendor == id))
                                 {
                                     // admin || vendor of this object
                                     //@TODO delete this object
@@ -228,7 +228,7 @@ int main()
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
-                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_LABEL_VENDOR && ptrObject->idVendor == id))
+                                if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_TYPE_VENDOR && id == ptrObject->idVendor))
                                 {
                                     // admin || vendor of this object
                                     //@TODO update this object
