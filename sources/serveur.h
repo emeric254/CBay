@@ -28,7 +28,7 @@ int connectWait();
 
 /** \fn int receiveBinary(char *data)
  * \brief receive data from the client
- * \param data is the received from the client
+ * \param data is the data received from the client
  * \return status code for this operation.
  *
  */

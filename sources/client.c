@@ -31,8 +31,6 @@ int connectEnd = FALSE;
 
 
 /* Init.
- * Connexion au serveur sur la machine donnee.
- * Utilisez localhost pour un fonctionnement local.
  */
 int Init(char *machine) {
     int n;
@@ -45,7 +43,7 @@ int Init(char *machine) {
     {
         fprintf(ERROROUTPUT,"WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
         WSACleanup();
-        exit(1);
+        exit(SUCCESS);
     }
     memset(&hints, 0, sizeof(struct addrinfo));
 #else
@@ -57,7 +55,7 @@ int Init(char *machine) {
     if ( (n = getaddrinfo(machine, service, &hints, &res)) )
     {
             fprintf(ERROROUTPUT, "Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
-            return 0;
+            return ERROR_UNKNOWN;
     }
     ressave = res;
 
@@ -74,7 +72,7 @@ int Init(char *machine) {
 
     if (res == NULL) {
             perror("Initialisation, erreur de connect.");
-            return 0;
+            return ERROR_UNKNOWN;
     }
 
     freeaddrinfo(ressave);
@@ -83,78 +81,7 @@ int Init(char *machine) {
 
     printf("Connexion avec le serveur reussie.\n");
 
-    return 1;
-}
-
-
-/* Recoit un message envoye par le serveur.
- */
-char *Reception() {
-    char message[BUFFER_LENGTH];
-    int index = 0;
-    int fini = FALSE;
-    int retour = 0;
-    int trouve = FALSE;
-
-    if(connectEnd) {
-        return NULL;
-    }
-
-    while(!fini) {
-        /* on cherche dans le tampon courant */
-        while((bufferEnd > bufferStart) && (!trouve)) {
-            //fprintf(ERROROUTPUT, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
-            //                  clientBuffer[bufferStart], clientBuffer[bufferStart], index, bufferStart);
-            if (clientBuffer[bufferStart]=='\n')
-                trouve = TRUE;
-            else
-                message[index++] = clientBuffer[bufferStart++];
-        }
-        /* on a trouve ? */
-        if (trouve) {
-            message[index++] = '\n';
-            message[index] = '\0';
-            bufferStart++;
-            fini = TRUE;
-            //fprintf(ERROROUTPUT, "trouve\n");
-#ifdef WIN32
-            return _strdup(message);
-#else
-            return strdup(message);
-#endif
-        } else {
-            /* il faut en lire plus */
-            bufferStart = 0;
-            //fprintf(ERROROUTPUT, "recv\n");
-            retour = recv(clientSocket, clientBuffer, BUFFER_LENGTH, 0);
-            //fprintf(ERROROUTPUT, "retour : %d\n", retour);
-            if (retour < 0) {
-                perror("Reception, erreur de recv.");
-                return NULL;
-            } else if(retour == 0) {
-                fprintf(ERROROUTPUT, "Reception, le serveur a ferme la connexion.\n");
-                connectEnd = TRUE;
-                // on n'en recevra pas plus, on renvoie ce qu'on avait ou null sinon
-                if(index > 0) {
-                    message[index++] = '\n';
-                    message[index] = '\0';
-#ifdef WIN32
-                    return _strdup(message);
-#else
-                    return strdup(message);
-#endif
-                } else {
-                    return NULL;
-                }
-            } else {
-                /*
-                 * on a recu "retour" octets
-                 */
-                bufferEnd = retour;
-            }
-        }
-    }
-    return NULL;
+    return SUCCESS;
 }
 
 
@@ -255,6 +182,7 @@ int sendGetAllObjectBid()
         perror("sendGet error.");
         return ERROR_SENDING;
     }
+    
     return SUCCESS;
 }
 
@@ -588,12 +516,13 @@ int connection ()
 
 /* listObjects
 */
-int listObjects (ObjectBid ** list)
+int listObjects (ObjectBid ** list, size_t* listSize)
 {
     int statusCode;
     int i = 0;
     char statLine[STATUS_LINE_LENGTH];
-    char buffer[BUFFER_LENGTH];
+    char headers[RESPONSE_HEADER_FIELD_LENGTH];
+    char contentType[RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH];
     char * reasonPhrase=NULL;
 
     /* Send the request, 3 try */
@@ -614,13 +543,19 @@ int listObjects (ObjectBid ** list)
     /* Display the result of the request */
     displayResult(statusCode);
 
-    /* If the answer is OK, extract the list */
     if (statusCode == STATUS_CODE_OK)
     {
-        receiveBinary((char*)list,10*sizeof(ObjectBid));
+		/* Get the header fields */
+		receiveBinary(headers,64);
+		
+		/* Extract the list size from the headers */
+		splitResponseHeader(headers,(int *)listSize,contentType);
+		
+		/* Get the list */
+        receiveBinary((char*)list,*listSize);
 
-        /* If the list is here, display it */
-        displayList(*list);
+        /* Display the list */
+        displayList(*list,*listSize);
 
         return SUCCESS;
     }
@@ -630,33 +565,87 @@ int listObjects (ObjectBid ** list)
 
 /* searchObject
 */
-int searchObject (ObjectBid * list)
+int searchObject (ObjectBid * list, size_t listSize)
 {
-    ObjectBid * search=NULL;
+    ObjectBid * result=NULL;
     char* name=NULL;
     int i=0;
+    int resultNumber=0;
 
     /* If there is no list, display an error */
     if (list==NULL)
     {
-        displayResult(ERROR_NO_LIST); /* @TODO to add a ERROR_NO_LIST in defines.h and
-        then modify displayResult in interfaceClient.c */
+        displayResult(ERROR_NO_LIST);
     }
 
     /* Ask the user for an object name */
     searchInput(name);
 
-    /* Search for the name of the object in the list */
-    while ( strcmp(name,list[i].name) != 0  && i<(int)(listSize/sizeof(ObjectBid))
-        i++;
-    if ( strcmp(name,list[i-1].name) ==0)
-        search = & list[i-1];
+	/* Search for the name of the object in the list */
+	for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
+	{
+		/* If the name of the current object match */
+		if (strcmp(name,list[i].name) == 0)
+		{
+			/* Extend the result list */
+			resultNumber++;
+			result=realloc(result,resultNumber*sizeof(ObjectBid));
+			
+			/* Add the current object to the result list */
+			result[resultNumber-1]=list[i];
+		}
+	}
 
     /* Display the result */
-    displayList(search);
+    displayList(result,resultNumber*sizeof(ObjectBid));
 
     return SUCCESS;
 }
+
+/* bidObject
+*/
+int bidObject (UserAccount client)
+{
+	ObjectBid obj;
+	int i=0;
+	int statusCode;
+	char statLine[STATUS_LINE_LENGTH];
+	char* reasonPhrase=NULL;
+	float price=0.0;
+	
+	/* How to know which object the client want to bid on ? */
+	
+	/* Bid on the object */
+	biddingInput(obj,&price);
+	
+	/* Modify the object's currentBidIdBuyer and currentBidPrice */
+	obj.currentBidIdBuyer=client.id;
+	obj.currentBidPrice=price;
+	
+	/* Send the modification to the server, 3 try */
+    while (statusCode != STATUS_CODE_OK && i < 3)
+    {
+        /* Send the request */
+        sendPutObjectBid(&obj);
+
+        /* Get the answer's status line */
+        receiveBinary(statLine,STATUS_LINE_LENGTH);
+
+        /* Extract the status code and the reason phrase from the answer */
+        splitStatusLine(statLine,&statusCode,reasonPhrase);
+
+        i++;
+    }
+    
+    /* Display the result */
+    displayResult(statusCode);
+
+    if (statusCode == STATUS_CODE_OK)
+        return SUCCESS;
+    else
+        return ERROR_BIDDING;
+}
+
 
 /* Ferme la connexion.
  */

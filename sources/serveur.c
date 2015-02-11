@@ -107,6 +107,7 @@ int connectWait()
         perror("connectWait error.");
         return ERROR_UNKNOWN;
     }
+    
     if(getnameinfo(clientAddr, adressLength, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
         printf("new client conected: %s\n", machine);
     } else {

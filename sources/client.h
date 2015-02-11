@@ -2,118 +2,186 @@
 #define __CLIENT_H__
 
 
-/* Init.
- * Connexion au serveur sur la machine donnee.
- * Utilisez localhost pour un fonctionnement local.
- * renvoie 1 si a c'est bien pass 0 sinon
+/** \fn int Init(char *server)
+ * \brief Connection to the server
+ * \param server is the server's adress
+ * \return SUCCESS or ERROR_UNKNOWN
+ *
  */
 int Init(char *server);
 
 
-/* receiveBinary.
- * renvoie le nombre d'octets reus, 0 si la connexion est ferme,
- * un nombre ngatif en cas d'erreur
+/** \fn
+ * \brief
+ * \param
+ * \return
+ *
+ */
+
+/** \fn int receiveBinary(char *donnees, size_t tailleMax)
+ * \brief receive binary datas from the server and store them in a character array
+ * \param donnees is an array in which we store the incoming data and tailleMax
+ * is the maximum character the function will stock in donnees
+ * \return the number of received bytes, 0 for a closed connection and
+ * a negative number in case of an error
+ *
  */
 int receiveBinary(char *donnees, size_t tailleMax);
 
 
-/* sendBinary.
- * renvoie le nombre d'octets envoys, 0 si la connexion est ferme,
- * un nombre ngatif en cas d'erreur
+/** \fn int sendBinary(char *donnees, size_t taille)
+ * \brief send to the server datas from a character array
+ * \param donnees is an array containing the data we will send and tailleMax is
+ * the maximum character the function will stock in donnees
+ * \return the number of sent bytes, 0 for a closed connection and
+ * a negative number in case of an error
+ *
  */
 int sendBinary(char *donnees, size_t taille);
 
 
-/* sendGetObjectBid.
+/** \fn int sendGetObjectBid(ObjectBid *object)
+ * \brief send a request to the server to get an object
+ * \param an object
+ * \return status code of this operation
  *
-*/
+ */
 int sendGetObjectBid(ObjectBid *object);
 
 
-/* sendGetAllObjectBid.
+/** \fn int sendGetAllObjectBid()
+ * \brief send a request to the server to get all the objects
+ * \param an object
+ * \return status code of this operation
  *
-*/
+ */
 int sendGetAllObjectBid();
 
 
-/* sendPutObjectBid.
+/** \fn int sendPutObjectBid(ObjectBid *object)
+ * \brief send a request to the server to store an object in it
+ * \param an object
+ * \return status code of this operation
  *
-*/
+ */
 int sendPutObjectBid(ObjectBid *object);
 
 
-/* sendDeleteObjectBid.
+/** \fn int sendDeleteObjectBid(ObjectBid *object)
+ * \brief send a request to the server to delete an object
+ * \param an object
+ * \return status code of this operation
  *
-*/
+ */
 int sendDeleteObjectBid(ObjectBid *object);
 
 
-/* sendGetUserAccount.
+/** \fn int sendGetUserAccount(UserAccount *account)
+ * \brief send a request to the server to get an user account
+ * \param an user account
+ * \return status code of this operation
  *
-*/
+ */
 int sendGetUserAccount(UserAccount *account);
 
 
-/* sendPutUserAccount.
+/** \fn int sendPutUserAccount(UserAccount *account)
+ * \brief send a request to the server to store an user account in it
+ * \param an user account
+ * \return status code of this operation
  *
-*/
+ */
 int sendPutUserAccount(UserAccount *account);
 
 
-/* sendDeleteUserAccount.
+/** \fn int sendDeleteUserAccount(UserAccount *account)
+ * \brief send a request to the server to delete an user account
+ * \param an user account
+ * \return status code of this operation
  *
-*/
+ */
 int sendDeleteUserAccount(UserAccount *account);
 
 
-/* sendConnect.
+/** \fn int sendConnect(char* login, char* password)
+ * \brief send a request to the server to connect an user to the CBay service
+ * \param a character array for the login and one for the password
+ * \return status code of this operation
  *
-*/
+ */
 int sendConnect(char* login, char* password);
 
 
-/* splitStatusLine.
+/** \fn splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
+ * \brief take a status line and cut it in a status code and a reason phrase
+ * \param the status line to cut, the status code and the statusMessage to extract
+ * \return status code of this operation
  *
-*/
+ */
 int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage);
 
 
-/* splitResponseHeader.
+/** \fn splitResponseHeader(char *responseHeaderField, int* contentLength, char* contentType)
+ * \brief take the response header fields and extract the value of fields
+ * content-length and content-type
+ * \param the responseHeaderField to cut and the contentLength and contentType to
+ * extract
+ * \return status code of this operation
  *
-*/
+ */
 int splitResponseHeader(char *responseHeaderField, int* contentLength, char* contentType);
 
-/* accountCreation.
- * Asks the user for some informations and create a new UserAccount then send it
- * to the server.
-*/
+
+/** \fn int accountCreation()
+ * \brief Asks the user for some informations and create a new UserAccount then
+ * send it to the server
+ * \param
+ * \return status code of this operation
+ *
+ */
 int accountCreation ();
 
-/* connection.
- * Asks the user for a login and a password and try to connect to the server.
- * Return the result (SUCCESS or CONNECTION_DENIED).
-*/
+
+/** \fn int connection()
+ * \brief Asks the user for a login and a password and try to connect to the server 
+ * \param
+ * \return the result (SUCCESS or CONNECTION_DENIED)
+ *
+ */
 int connection();
 
-/* listObjects.
- * Take the list of all the available objects from the server and display it.
- * Return the list.
-*/
-int listObjects (ObjectBid ** list);
 
-/* searchObject.
- * Search for an object into the list of the available ones.
- * Return the object found or nothing if the object doesn't appear in the list.
-*/
-int searchObject (ObjectBid * list);
+/** \fn int listObjects(ObjectBid ** list, size_t* listSize)
+ * \brief Take the list of all the available objects from the server and display it
+ * \param list is the list of all the objects and listSize its size in bytes
+ * \return status code of this operation
+ *
+ */
+int listObjects (ObjectBid ** list, size_t* listSize);
 
-/* bidObject.
- * Asks the user for a bid and send it to the server. Display the result.
- * Return the result.
-*/
-int bidObject ();
 
-/* Ferme la connexion.
+/** \fn int searchObject(ObjectBid * list, size_t listSize)
+ * \brief Search for an object into the list of the available ones.
+ * \param list is the list of all the objects and listSize its size in bytes
+ * \return status code of this operation
+ *
+ */
+int searchObject (ObjectBid * list, size_t listSize);
+
+
+/** \fn int bidObject(UserAccount client)
+ * \brief Asks the user for a bid and send it to the server. Display the result.
+ * \param client is the connected user who want to bid for the object
+ * \return status code of this operation
+ *
+ */
+int bidObject (UserAccount client);
+
+
+/** \fn void Terminaison
+ * \brief End the connection
+ * \param
+ * \return nothing
  *
  */
 void Terminaison();
