@@ -97,15 +97,15 @@ int connection();
 
 /* listObjects.
  * Take the list of all the available objects from the server and display it.
- * Return the list.
+ * Return the list and its size.
 */
-int listObjects (ObjectBid ** list);
+int listObjects (ObjectBid ** list, size_t* listSize);
 
 /* searchObject.
  * Search for an object into the list of the available ones.
  * Return the object found or nothing if the object doesn't appear in the list.
 */
-int searchObject (ObjectBid * list);
+int searchObject (ObjectBid * list, size_t listSize);
 
 /* bidObject.
  * Asks the user for a bid and send it to the server. Display the result.

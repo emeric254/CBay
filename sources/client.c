@@ -243,6 +243,8 @@ int sendGetAllObjectBid()
     int length = 6 ;
     char msg[length+1];
 
+	/* @DEBUG */printf("Jusque là tout va bien.\n");
+
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
@@ -255,6 +257,8 @@ int sendGetAllObjectBid()
         perror("sendGet error.");
         return ERROR_SENDING;
     }
+    
+    /* @DEBUG */printf("Ok pour le sendGetAllObjectBid\n");
     return SUCCESS;
 }
 
@@ -588,12 +592,13 @@ int connection ()
 
 /* listObjects
 */
-int listObjects (ObjectBid ** list)
+int listObjects (ObjectBid ** list, size_t* listSize)
 {
     int statusCode;
     int i = 0;
     char statLine[STATUS_LINE_LENGTH];
-    char buffer[BUFFER_LENGTH];
+    char headers[RESPONSE_HEADER_FIELD_LENGTH];
+    char contentType[RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH];
     char * reasonPhrase=NULL;
 
     /* Send the request, 3 try */
@@ -614,13 +619,19 @@ int listObjects (ObjectBid ** list)
     /* Display the result of the request */
     displayResult(statusCode);
 
-    /* If the answer is OK, extract the list */
     if (statusCode == STATUS_CODE_OK)
     {
-        receiveBinary((char*)list,10*sizeof(ObjectBid));
+		/* Get the header fields */
+		receiveBinary(headers,64);
+		
+		/* Extract the list size from the headers */
+		splitResponseHeader(headers,(int *)listSize,contentType);
+		
+		/* Get the list */
+        receiveBinary((char*)list,*listSize);
 
-        /* If the list is here, display it */
-        displayList(*list);
+        /* Display the list */
+        displayList(*list,*listSize);
 
         return SUCCESS;
     }
@@ -630,33 +641,50 @@ int listObjects (ObjectBid ** list)
 
 /* searchObject
 */
-int searchObject (ObjectBid * list)
+int searchObject (ObjectBid * list, size_t listSize)
 {
-    ObjectBid * search=NULL;
+    ObjectBid * result=NULL;
     char* name=NULL;
     int i=0;
+    int resultNumber=0;
 
     /* If there is no list, display an error */
     if (list==NULL)
     {
-        displayResult(ERROR_NO_LIST); /* @TODO to add a ERROR_NO_LIST in defines.h and
-        then modify displayResult in interfaceClient.c */
+        displayResult(ERROR_NO_LIST);
     }
 
     /* Ask the user for an object name */
     searchInput(name);
 
-    /* Search for the name of the object in the list */
-    while ( strcmp(name,list[i].name) != 0  && i<(int)(listSize/sizeof(ObjectBid))
-        i++;
-    if ( strcmp(name,list[i-1].name) ==0)
-        search = & list[i-1];
+	/* Search for the name of the object in the list */
+	for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
+	{
+		/* If the name of the current object match */
+		if (strcmp(name,list[i].name) == 0)
+		{
+			/* Extend the result list */
+			resultNumber++;
+			result=realloc(result,resultNumber*sizeof(ObjectBid));
+			
+			/* Add the current object to the result list */
+			result[resultNumber-1]=list[i];
+		}
+	}
 
     /* Display the result */
-    displayList(search);
+    displayList(result,resultNumber*sizeof(ObjectBid));
 
     return SUCCESS;
 }
+
+/* bidObject
+*/
+int bidObject ()
+{
+	return SUCCESS;
+}
+
 
 /* Ferme la connexion.
  */

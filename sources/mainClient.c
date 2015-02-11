@@ -12,6 +12,7 @@ int main(void)
     // vars
     int menuChoice; // user choice var
     int result;
+    size_t listSize=0;
     ObjectBid* list=NULL;
 
     CLEAR();
@@ -43,15 +44,19 @@ int main(void)
                         case MENU_CHOICE_MAIN_LIST:
 
                             /* List available objects */
-                            listObjects(&list);
+                            listObjects(&list,&listSize);
                             /* @TODO */
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
-                            /* Searche for a particular object */
-                            searchObject(list);
+                            /* Search for a particular object */
+                            searchObject(list,listSize);
                             /* @TODO */
                             break;
+                        
+                        case MENU_CHOICE_MAIN_BID:
+                        	fprintf(stdout,"WIP\n");
+                        	break;
 
                         default:
                             printf("\n\t --- Please make a correct choice !\n\n");
@@ -87,13 +92,17 @@ int main(void)
 
                         case MENU_CHOICE_MAIN_LIST:
                             /* List available objects */
-                            listObjects(&list);
+                            listObjects(&list,&listSize);
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
-                            /* Searche for a particular object */
-                            searchObject(list);
+                            /* Search for a particular object */
+                            searchObject(list,listSize);
                             break;
+                        
+                        case MENU_CHOICE_MAIN_BID:
+                        	fprintf(stdout,"WIP\n");
+                        	break;
 
                         default:
                             printf("\n\t --- Please make a correct choice !\n\n");

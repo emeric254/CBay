@@ -28,6 +28,7 @@ int mainMenu()
     fprintf(stdout, "\t\t\t\t%d - Go back\n", MENU_CHOICE_QUIT);
     fprintf(stdout, "\t\t\t\t%d - Object list\n", MENU_CHOICE_MAIN_LIST);
     fprintf(stdout, "\t\t\t\t%d - Search object(s)\n", MENU_CHOICE_MAIN_SEARCH);
+    fprintf(stdout, "\t\t\t\t%d - Bid for an object\n", MENU_CHOICE_MAIN_BID);
 //    cleanBuffer();
     return getAChar() - '0';
 }
@@ -144,7 +145,12 @@ void displayResult (int code)
 */
 void displayObject (ObjectBid obj)
 {
-    /* @TODO */
+	fprintf(stdout,"\t\tName : %s\n",obj.name);
+	fprintf(stdout,"\t\tDescription : %s\n",obj.description);
+	fprintf(stdout,"\t\tBase price : %f\n",obj.basePrice);
+	fprintf(stdout,"\t\tSell start time : %ld\n",obj.startTime);
+	fprintf(stdout,"\t\tSell end time : %ld\n",obj.endTime);
+	fprintf(stdout,"\t\tCurrent price : %f\n\n",obj.currentBidPrice);
 }
 
 /* displayList.
@@ -163,7 +169,10 @@ void displayList (ObjectBid * list, size_t listSize)
     else
     {
         for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
+        {
+        	fprintf(stdout,"\t\tObject n°%d :\n",i+1);
             displayObject(list[i]);
+        }
     }
 }
 

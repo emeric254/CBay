@@ -28,6 +28,8 @@
 // response header fields
 #define RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH "Content-length: "
 #define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE "Content-type: "
+#define RESPONSE_HEADER_FIELD_LENGTH 64
+#define RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH 16
 
 
 // object type ids
@@ -119,6 +121,7 @@
 // main menu
 #define MENU_CHOICE_MAIN_LIST 1
 #define MENU_CHOICE_MAIN_SEARCH 2
+#define MENU_CHOICE_MAIN_BID 3
 
 
 
