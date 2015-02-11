@@ -191,6 +191,9 @@ int userInTable (UserAccount *user, UserAccount *table, int size, UserAccount * 
     int i = 0;
     int find = FALSE;
 
+    if(ptrAccount != NULL)
+        ptrAccount = NULL;
+
     while(find == FALSE && i < size)
     {
         if ( user->id == table[i].id )
@@ -208,7 +211,7 @@ int userInTable (UserAccount *user, UserAccount *table, int size, UserAccount * 
  */
 int allAccSave (UserAccount *table, int size)
 {
-    FILE *f = fopen(ACC_FILE,"wb");
+    FILE *f = fopen(ACC_FILE,"w+");
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCCESS else ERROR_READING
@@ -228,7 +231,7 @@ int allAccLoad (UserAccount **table, int * size)
     int state;
 
     // open the file
-    FILE *f = fopen(ACC_FILE,"rb");
+    FILE *f = fopen(ACC_FILE,"r");
     if ( f == NULL )
         return(ERROR_OPENING);
 
@@ -306,6 +309,9 @@ int objInTable (ObjectBid *obj, ObjectBid *table, int size, ObjectBid * ptrObjec
     int i = 0;
     int find = FALSE;
 
+    if(ptrObject != NULL)
+        ptrObject = NULL;
+
     while(find == FALSE && i < size)
     {
         if ( obj->id == table[i].id )
@@ -323,7 +329,7 @@ int objInTable (ObjectBid *obj, ObjectBid *table, int size, ObjectBid * ptrObjec
  */
 int allObjSave (ObjectBid *table, int size)
 {
-    FILE *f = fopen(OBJ_FILE,"wb");
+    FILE *f = fopen(OBJ_FILE,"w+");
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCCESS else ERROR_WRITING
@@ -347,7 +353,7 @@ int allObjLoad (ObjectBid **table, int *size)
 /* @DEBUG */printf("0000\n");
 
     // open the file
-    FILE* f = fopen(OBJ_FILE,"rb") ;
+    FILE* f = fopen(OBJ_FILE,"r") ;
     if ( f == NULL )
         return(ERROR_OPENING);
 
@@ -425,7 +431,7 @@ int allIDSLoad (ConfidentialIDS **table, int *size)
     int state;
 
     // open the file
-    FILE* f = fopen(IDS_FILE,"rb") ;
+    FILE* f = fopen(IDS_FILE,"r") ;
     if ( f == NULL )
         return(ERROR_OPENING);
 
@@ -480,7 +486,7 @@ int allIDSLoad (ConfidentialIDS **table, int *size)
  */
 int allIDSSave (ConfidentialIDS **table, int *size)
 {
-    FILE *f = fopen(IDS_FILE,"wb");
+    FILE *f = fopen(IDS_FILE,"w+");
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCCESS else ERROR_WRITING
@@ -496,6 +502,9 @@ int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_
 {
     int i = 0;
     int find = FALSE;
+
+    if(ptrIDS != NULL)
+        ptrIDS = NULL;
 
     while(find == FALSE && i < size)
     {
