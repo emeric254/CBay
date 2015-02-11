@@ -145,7 +145,7 @@ void userInputObjectBid(ObjectBid * bid)
 
 /* mailCheck.
 */
-int mailCheck(char *mail, int taille)
+int mailCheck(char *mail, int length)
 {
     if(mail == NULL)
     {
@@ -155,7 +155,7 @@ int mailCheck(char *mail, int taille)
     int i = 0;
     int arobase = 0 ;
     // count how many '@'
-    for(i=0;i<taille;i++)
+    for(i=0;i<length;i++)
         if((mail[i] = '@'))
             arobase ++;
     //only one '@' in a valide mail adress
@@ -186,18 +186,23 @@ int accLoad(UserAccount *user, FILE* f)
 
 /* userInTable.
  */
-int userInTable (UserAccount *user, UserAccount *table, int size, long int *id)
+int userInTable (UserAccount *user, UserAccount *table, int size, UserAccount * ptrAccount)
 {
     int i = 0;
     int find = FALSE;
+
+    if(ptrAccount != NULL)
+        ptrAccount = NULL;
+
     while(find == FALSE && i < size)
     {
         if ( user->id == table[i].id )
             find = TRUE;
         i++;
     }
-    if (id != NULL)
-        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+
+    ptrAccount = (find) ? &table[i] : NULL ;
+
     return find;
 }
 
@@ -206,7 +211,7 @@ int userInTable (UserAccount *user, UserAccount *table, int size, long int *id)
  */
 int allAccSave (UserAccount *table, int size)
 {
-    FILE *f = fopen(ACC_FILE,"wb");
+    FILE *f = fopen(ACC_FILE,"w+");
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCCESS else ERROR_READING
@@ -226,7 +231,11 @@ int allAccLoad (UserAccount **table, int * size)
     int state;
 
     // open the file
+<<<<<<< HEAD
     FILE *f = fopen(ACC_FILE,"wb+");
+=======
+    FILE *f = fopen(ACC_FILE,"r");
+>>>>>>> 23b8cbf7198d60ed791e03eaca332b4af2d2eed7
     if ( f == NULL )
         return(ERROR_OPENING);
 
@@ -299,18 +308,23 @@ int objLoad(ObjectBid *obj, FILE* f)
 
 /* objInTable.
  */
-int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id)
+int objInTable (ObjectBid *obj, ObjectBid *table, int size, ObjectBid * ptrObject)
 {
     int i = 0;
     int find = FALSE;
+
+    if(ptrObject != NULL)
+        ptrObject = NULL;
+
     while(find == FALSE && i < size)
     {
         if ( obj->id == table[i].id )
             find = TRUE;
         i++;
     }
-    if (id != NULL)
-        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+
+    ptrObject = (find) ? &table[i] : NULL ;
+
     return find;
 }
 
@@ -319,7 +333,7 @@ int objInTable (ObjectBid *obj, ObjectBid *table, int size, long int *id)
  */
 int allObjSave (ObjectBid *table, int size)
 {
-    FILE *f = fopen(OBJ_FILE,"wb");
+    FILE *f = fopen(OBJ_FILE,"w+");
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCCESS else ERROR_WRITING
@@ -341,13 +355,22 @@ int allObjLoad (ObjectBid **table, int *size)
     int state;
 
     // open the file
+<<<<<<< HEAD
     FILE* f = fopen(OBJ_FILE,"wb+") ;
+=======
+    FILE* f = fopen(OBJ_FILE,"r") ;
+>>>>>>> 23b8cbf7198d60ed791e03eaca332b4af2d2eed7
     if ( f == NULL )
         return(ERROR_OPENING);
 
     // clean the actual table
     free(*table);
     *table=NULL;
+<<<<<<< HEAD
+=======
+
+    /* @DEBUG */printf("2222\n");
+>>>>>>> 23b8cbf7198d60ed791e03eaca332b4af2d2eed7
 
     // create a space for a new element
     temp = NULL;
@@ -415,7 +438,11 @@ int allIDSLoad (ConfidentialIDS **table, int *size)
     int state;
 
     // open the file
+<<<<<<< HEAD
     FILE* f = fopen(IDS_FILE,"wb+") ;
+=======
+    FILE* f = fopen(IDS_FILE,"r") ;
+>>>>>>> 23b8cbf7198d60ed791e03eaca332b4af2d2eed7
     if ( f == NULL )
         return(ERROR_OPENING);
 
@@ -470,7 +497,7 @@ int allIDSLoad (ConfidentialIDS **table, int *size)
  */
 int allIDSSave (ConfidentialIDS **table, int *size)
 {
-    FILE *f = fopen(IDS_FILE,"wb");
+    FILE *f = fopen(IDS_FILE,"w+");
     if ( f == NULL )
         return(ERROR_OPENING);
     //@TODO if fwrite SUCCESS else ERROR_WRITING
@@ -482,35 +509,24 @@ int allIDSSave (ConfidentialIDS **table, int *size)
 
 /* idsInTable.
  */
-int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, long int *id)
+int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], ConfidentialIDS *table, int size, ConfidentialIDS * ptrIDS)
 {
     int i = 0;
     int find = FALSE;
+
+    if(ptrIDS != NULL)
+        ptrIDS = NULL;
+
     while(find == FALSE && i < size)
     {
         if ( !strcmp(login,table[i].login) && !strcmp(password,table[i].password) )
             find = TRUE;
         i++;
     }
-    if (id != NULL)
-        *id = (find) ? table[i].id : -1 ; // if find : id = id ; else id = -1;
+
+    ptrIDS = (find) ? &table[i] : NULL ;
+
     return find;
-}
-
-
-/* file_length.
-*/
-size_t file_length(char *filename){
-    int length = -1;
-    FILE * file = fopen(filename,"r");
-    if (file!=NULL)
-    {
-        fseek(file,0,SEEK_END);
-        length = ftell(file);
-        fclose(file);
-    }
-    fprintf(ERROROUTPUT,"error unknown file : (%s)\n",filename);
-    return length; // -1 if unknown file, 0 if empty, otherwise it return the file length
 }
 
 
@@ -538,4 +554,16 @@ int isObjectBidTable (int size)
 int isAccountUser (int size)
 {
     return (size == sizeof(UserAccount)) ? TRUE : FALSE;
+}
+
+
+long int getCurrentTime()
+{
+    return (long int)time(NULL);
+}
+
+
+int isFinishObjectBid(ObjectBid * object)
+{
+    return (object->endTime <= getCurrentTime()) ? TRUE : FALSE ;
 }

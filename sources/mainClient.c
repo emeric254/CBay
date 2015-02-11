@@ -47,13 +47,11 @@ int main(void)
 
                             /* List available objects */
                             listObjects(&list,&listSize);
-                            /* @TODO */
                             break;
 
                         case MENU_CHOICE_MAIN_SEARCH:
                             /* Search for a particular object */
                             searchObject(list,listSize);
-                            /* @TODO */
                             break;
                         
                         case MENU_CHOICE_MAIN_BID:
