@@ -3,47 +3,69 @@
 
 #include "structures.h"
 
-/* welcomeMenu.
- * show welcome menu.
- * return user choice.
+/** \fn int welcomeMenu()
+ * \brief show welcome menu.
+ * \return user choice.
+ *
  */
 int welcomeMenu();
 
 
-/* mainMenu.
- * show main menu.
- * return user choice.
+/** \fn int mainMenu()
+ * \brief show main menu.
+ * \return user choice.
+ *
  */
 int mainMenu();
 
-/* connectionInput.
- * asks the user for a login and a password and gets their answer.
- * return a login and a password.
+/** \fn int connectionInput(char* login, char* password)
+ * \brief asks the user for a login and a password and gets their answer.
+ * \param login and password are the information needed to connect to the CBay
+ * service
+ * \return the status code of this operation
+ *
  */
 int connectionInput (char* login, char* password);
 
-/* searchInput.
- * asks the user for an object's name and gets their answer.
- * return an object's name.
+/** \fn int searchInput(char* name)
+ * \brief asks the user for an object's name and gets their answer.
+ * \param name is the name of an object the user will enter.
+ * \return the status code of this operation
+ *
  */
 int searchInput (char* name);
 
-/* displayResult.
- * display the result of an operation from a code.
- * returns nothing.
+/** \fn void displayResult(int code)
+ * \brief display the result of an operation from a code.
+ * \param code is the status or application code which will determine the
+ * message displayed
+ * \return nothing.
+ *
  */
 void displayResult (int code);
 
-/* displayObject.
- * display an object and its properties.
- * returns nothing.
+/** \fn void displayObject(ObjectBid obj)
+ * \brief display an object and its properties.
+ * \param obj is the object to display
+ * \return nothing.
+ *
  */
 void displayObject (ObjectBid obj);
 
-/* displayList.
- * display the list of available objects.
- * returns nothing.
+/** \fn void displayList(ObjectBid * list, size_t listSize)
+ * \brief display the list of available objects.
+ * \param list is the list to display and listSize its size in bytes
+ * \return nothing.
+ *
  */
 void displayList (ObjectBid * list, size_t listSize);
+
+/** \fn int biddingInput(ObjectBid obj, int * price)
+ * \brief ask the user for a price for an object
+ * \param obj is the object for which we want the user to give a price
+ * \return the status code of this operation
+ *
+ */
+int biddingInput(ObjectBid obj, float * price);
 
 #endif

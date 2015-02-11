@@ -169,13 +169,13 @@ int listObjects (ObjectBid ** list, size_t* listSize);
 int searchObject (ObjectBid * list, size_t listSize);
 
 
-/** \fn int bidObject()
+/** \fn int bidObject(UserAccount client)
  * \brief Asks the user for a bid and send it to the server. Display the result.
- * \param
+ * \param client is the connected user who want to bid for the object
  * \return status code of this operation
  *
  */
-int bidObject ();
+int bidObject (UserAccount client);
 
 
 /** \fn void Terminaison

@@ -93,6 +93,7 @@
 #define ERROR_WRONG_TYPE -22
 #define CONNECTION_DENIED -23
 #define ERROR_NO_LIST -24
+#define ERROR_BIDDING -25
 #define ERROR_UNKNOWN -99
 
 

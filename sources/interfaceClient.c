@@ -98,12 +98,12 @@ void displayResult (int code)
         {
             /* OK */
             case STATUS_CODE_OK:
-                fprintf(stdout,"00 OK\n");
+                fprintf(stdout,"00 OK : your request is a success.\n");
                 break;
 
             /* CREATED */
             case STATUS_CODE_CREATED:
-                fprintf(stdout,"01 CREATED\n");
+                fprintf(stdout,"01 CREATED : your request is a success\n");
                 break;
 
             /* BAD REQUEST */
@@ -174,6 +174,31 @@ void displayList (ObjectBid * list, size_t listSize)
             displayObject(list[i]);
         }
     }
+}
+
+/* biddingInput
+*/
+int biddingInput(ObjectBid obj, float* price)
+{
+	/* Clean the screen */
+	CLEAR();
+	
+	/* Display the object's informations */
+	displayObject(obj);
+	
+	/* Get the price */
+	fprintf(stdout,"Enter your price : ");
+	scanf("%f",price);
+	
+	/* Check the price */
+	while (*price < obj.currentBidPrice)
+	{
+		fprintf(stdout,"The price you entered is incorrect.\n"
+		"Please enter a price higher than the current bid : ");
+		scanf("%f",price);
+	}
+	
+	return SUCCESS;
 }
 
 

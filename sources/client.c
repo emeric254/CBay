@@ -604,9 +604,46 @@ int searchObject (ObjectBid * list, size_t listSize)
 
 /* bidObject
 */
-int bidObject ()
+int bidObject (UserAccount client)
 {
-	return SUCCESS;
+	ObjectBid obj;
+	int i=0;
+	int statusCode;
+	char statLine[STATUS_LINE_LENGTH];
+	char* reasonPhrase=NULL;
+	float price=0.0;
+	
+	/* How to know which object the client want to bid on ? */
+	
+	/* Bid on the object */
+	biddingInput(obj,&price);
+	
+	/* Modify the object's currentBidIdBuyer and currentBidPrice */
+	obj.currentBidIdBuyer=client.id;
+	obj.currentBidPrice=price;
+	
+	/* Send the modification to the server, 3 try */
+    while (statusCode != STATUS_CODE_OK && i < 3)
+    {
+        /* Send the request */
+        sendPutObjectBid(&obj);
+
+        /* Get the answer's status line */
+        receiveBinary(statLine,STATUS_LINE_LENGTH);
+
+        /* Extract the status code and the reason phrase from the answer */
+        splitStatusLine(statLine,&statusCode,reasonPhrase);
+
+        i++;
+    }
+    
+    /* Display the result */
+    displayResult(statusCode);
+
+    if (statusCode == STATUS_CODE_OK)
+        return SUCCESS;
+    else
+        return ERROR_BIDDING;
 }
 
 
