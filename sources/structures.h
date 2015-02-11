@@ -2,6 +2,7 @@
 #define __STRUCTURES_H__
 
 #include "defines.h"
+#include <time.h>
 
 
 typedef struct ObjectBid
@@ -271,5 +272,12 @@ int isAccountUser (int size);
 */
 size_t file_length(char * filename);
 
+
+/** \fn long int getCurrentTime()
+ * \brief returns  the  time  as  the  number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC).
+ * \return time  as  the  number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC).
+ *
+*/
+long int getCurrentTime();
 
 #endif

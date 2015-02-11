@@ -352,7 +352,7 @@ int allObjLoad (ObjectBid **table, int *size)
     // clean the actual table
     free(*table);
     *table=NULL;
-    
+
     /* @DEBUG */printf("2222\n");
 
     // create a space for a new element
@@ -545,3 +545,10 @@ int isAccountUser (int size)
 {
     return (size == sizeof(UserAccount)) ? TRUE : FALSE;
 }
+
+
+long int getCurrentTime()
+{
+    return (long int)time(NULL);
+}
+
