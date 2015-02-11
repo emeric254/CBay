@@ -267,7 +267,7 @@ int isAccountUser (int size);
 /** \fn size_t file_length(char *filename)
  * \brief check and return size of a file which its filename or path is given
  * \param filename file name or full path
- * \return status size of this file.
+ * \return size of this file.
  *
 */
 size_t file_length(char * filename);
@@ -279,5 +279,14 @@ size_t file_length(char * filename);
  *
 */
 long int getCurrentTime();
+
+
+/** \fn long int getCurrentTime()
+ * \brief test if an ObjectBid is finished or not, checking his time value.
+ * \param object the ObjectBid to test
+ * \return status code for this operation.
+ *
+*/
+int isFinishObjectBid(ObjectBid * object);
 
 #endif

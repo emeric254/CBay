@@ -552,3 +552,8 @@ long int getCurrentTime()
     return (long int)time(NULL);
 }
 
+
+int isFinishObjectBid(ObjectBid * object)
+{
+    return (object->endTime <= getCurrentTime()) ? TRUE : FALSE ;
+}
