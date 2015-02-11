@@ -87,77 +87,6 @@ int Init(char *machine) {
 }
 
 
-/* Recoit un message envoye par le serveur.
- */
-char *Reception() {
-    char message[BUFFER_LENGTH];
-    int index = 0;
-    int fini = FALSE;
-    int retour = 0;
-    int trouve = FALSE;
-
-    if(connectEnd) {
-        return NULL;
-    }
-
-    while(!fini) {
-        /* on cherche dans le tampon courant */
-        while((bufferEnd > bufferStart) && (!trouve)) {
-            //fprintf(ERROROUTPUT, "Boucle recherche char : %c(%x), index %d debut tampon %d.\n",
-            //                  clientBuffer[bufferStart], clientBuffer[bufferStart], index, bufferStart);
-            if (clientBuffer[bufferStart]=='\n')
-                trouve = TRUE;
-            else
-                message[index++] = clientBuffer[bufferStart++];
-        }
-        /* on a trouve ? */
-        if (trouve) {
-            message[index++] = '\n';
-            message[index] = '\0';
-            bufferStart++;
-            fini = TRUE;
-            //fprintf(ERROROUTPUT, "trouve\n");
-#ifdef WIN32
-            return _strdup(message);
-#else
-            return strdup(message);
-#endif
-        } else {
-            /* il faut en lire plus */
-            bufferStart = 0;
-            //fprintf(ERROROUTPUT, "recv\n");
-            retour = recv(clientSocket, clientBuffer, BUFFER_LENGTH, 0);
-            //fprintf(ERROROUTPUT, "retour : %d\n", retour);
-            if (retour < 0) {
-                perror("Reception, erreur de recv.");
-                return NULL;
-            } else if(retour == 0) {
-                fprintf(ERROROUTPUT, "Reception, le serveur a ferme la connexion.\n");
-                connectEnd = TRUE;
-                // on n'en recevra pas plus, on renvoie ce qu'on avait ou null sinon
-                if(index > 0) {
-                    message[index++] = '\n';
-                    message[index] = '\0';
-#ifdef WIN32
-                    return _strdup(message);
-#else
-                    return strdup(message);
-#endif
-                } else {
-                    return NULL;
-                }
-            } else {
-                /*
-                 * on a recu "retour" octets
-                 */
-                bufferEnd = retour;
-            }
-        }
-    }
-    return NULL;
-}
-
-
 /* receiveBinary.
  */
 int receiveBinary(char *donnees, size_t tailleMax) {
@@ -248,9 +177,13 @@ int sendGetAllObjectBid()
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
+/* @DEBUG */printf("Jusque là tout va bien.\n");
+
     msg[length-2] = ';';
     msg[length-1] = '\n';
     msg[length] = '\0';
+
+/* @DEBUG */printf("Jusque là tout va bien.\n");
 
     if ( send(clientSocket, msg, length, 0) == -1 )
     {

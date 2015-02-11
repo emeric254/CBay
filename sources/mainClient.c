@@ -132,27 +132,3 @@ int main(void)
 }
 
 
-/*
-int main() {
-    char *message = NULL;
-
-    fprintf(stdout,"mainClient !\n");
-
-    if(!InitialisationAvecService(SERVER_ADRESS, SERVER_PORT))
-    {
-        fprintf(stderr,"Erreur d'initialisation !");
-        return 1;
-    }
-
-    if(Emission("GET / HTTP/1.0\n\n")){
-        while (message = Reception()){
-            fprintf(stdout,"%s",message);
-            free(message);
-        }
-    }
-
-    Terminaison();
-
-    return 0;
-}
-*/
