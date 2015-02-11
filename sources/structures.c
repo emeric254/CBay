@@ -231,11 +231,7 @@ int allAccLoad (UserAccount **table, int * size)
     int state;
 
     // open the file
-<<<<<<< HEAD
-    FILE *f = fopen(ACC_FILE,"wb+");
-=======
     FILE *f = fopen(ACC_FILE,"r");
->>>>>>> 23b8cbf7198d60ed791e03eaca332b4af2d2eed7
     if ( f == NULL )
         return(ERROR_OPENING);
 
@@ -355,22 +351,15 @@ int allObjLoad (ObjectBid **table, int *size)
     int state;
 
     // open the file
-<<<<<<< HEAD
-    FILE* f = fopen(OBJ_FILE,"wb+") ;
-=======
     FILE* f = fopen(OBJ_FILE,"r") ;
->>>>>>> 23b8cbf7198d60ed791e03eaca332b4af2d2eed7
     if ( f == NULL )
         return(ERROR_OPENING);
 
     // clean the actual table
     free(*table);
     *table=NULL;
-<<<<<<< HEAD
-=======
 
     /* @DEBUG */printf("2222\n");
->>>>>>> 23b8cbf7198d60ed791e03eaca332b4af2d2eed7
 
     // create a space for a new element
     temp = NULL;
@@ -438,11 +427,7 @@ int allIDSLoad (ConfidentialIDS **table, int *size)
     int state;
 
     // open the file
-<<<<<<< HEAD
-    FILE* f = fopen(IDS_FILE,"wb+") ;
-=======
     FILE* f = fopen(IDS_FILE,"r") ;
->>>>>>> 23b8cbf7198d60ed791e03eaca332b4af2d2eed7
     if ( f == NULL )
         return(ERROR_OPENING);
 

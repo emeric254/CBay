@@ -477,13 +477,16 @@ int accountCreation()
 
 /* connection.
 */
-int connection ()
+int connection (UserAccount * user)
 {
-    int statusCode;
+    int statusCode=ERROR_UNKNOWN;
+    size_t accountSize=0;
     char response[STATUS_LINE_LENGTH];
     char * reasonPhrase=NULL;
     char login[USERACCOUNT_LOGIN_LENGTH];
     char password[USERACCOUNT_PASSWORD_LENGTH];
+    char headers[RESPONSE_HEADER_FIELD_LENGTH];
+    char contentType[RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH];
 
     /* Ask for a login and a password */
     connectionInput(login,password);
@@ -508,8 +511,41 @@ int connection ()
     /* Display the result */
     displayResult(statusCode);
 
+	/* If the connection is OK, we ask for the complete UserAccount */
     if (statusCode == STATUS_CODE_OK)
-        return SUCCESS;
+    {
+		int i=0;
+		statusCode = ERROR_UNKNOWN;
+		while (statusCode != STATUS_CODE_OK && i < 3)
+		{
+		    /* Send a connection request to the server */
+		    sendGetUserAccount(user);
+
+		    /* Get the answer's status line */
+		    receiveBinary(response,STATUS_LINE_LENGTH);
+
+		    /* Extract the status code and the reason phrase from the answer */
+		    splitStatusLine(response,&statusCode,reasonPhrase);
+
+		    i++;
+		}
+		
+		if (statusCode == STATUS_CODE_OK)
+		{
+			/* Get the header fields */
+			receiveBinary(headers,RESPONSE_HEADER_FIELD_LENGTH);
+		
+			/* Extract the list size from the headers */
+			splitResponseHeader(headers,(int *)accountSize,contentType);
+		
+			/* Get the account */
+		    receiveBinary((char*)user,accountSize);
+		    
+		    return SUCCESS;
+		}
+		else
+	        return ERROR_RECEIVING;
+    }
     else
         return CONNECTION_DENIED;
 }
@@ -547,13 +583,13 @@ int listObjects (ObjectBid ** list, int* listSize)
     if (statusCode == STATUS_CODE_OK)
     {
 		/* Get the header fields */
-		receiveBinary(headers,64);
+		receiveBinary(headers,RESPONSE_HEADER_FIELD_LENGTH);
 		
 		/* Extract the list size from the headers */
-		splitResponseHeader(headers,(int *)listSize,contentType);
+		splitResponseHeader(headers,listSize,contentType);
 		
 		/* Get the list */
-        receiveBinary((char*)list,size);
+        receiveBinary((char*)list,*listSize);
         *listSize=(int)(size/sizeof(ObjectBid));
 
         /* Display the list */
@@ -615,6 +651,18 @@ int bidObject (UserAccount client, ObjectBid ** list, int listSize)
 	char statLine[STATUS_LINE_LENGTH];
 	char* reasonPhrase=NULL;
 	float price=0.0;
+	
+	/* Be sure that the list isn't empty */
+    if (list==NULL)
+    {
+        displayResult(ERROR_NO_LIST);
+    }
+    
+    /* Be sure that the user is a client (= able to buy) */
+    if (client.type != ACCOUNT_TYPE_ADMIN && client.type != ACCOUNT_TYPE_USER)
+    {
+    	displayResult(ERROR_WRONG_TYPE);
+    }
 	
 	/* How to know which object the client want to bid on ? */
 	choseObjectInList(&chosenObj,*list,listSize);

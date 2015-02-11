@@ -12,8 +12,9 @@ int main(void)
     // vars
     int menuChoice; // user choice var
     int result;
-    size_t listSize=0;
+    int listSize=0;
     ObjectBid* list=NULL;
+    UserAccount user;
 
     CLEAR();
 
@@ -29,7 +30,7 @@ int main(void)
             case MENU_CHOICE_CONNECTION:
 
                 /* Connect to the server */
-                result=connection();
+                result=connection(&user);
 
                 /* The Main Menu choices : go back to the welcome menu, list
                  * the available objects or search for objects */
@@ -55,7 +56,8 @@ int main(void)
                             break;
                         
                         case MENU_CHOICE_MAIN_BID:
-                        	fprintf(stdout,"WIP\n");
+                        	/* Make a bid on an object */
+                        	bidObject(user,&list,listSize);
                         	break;
 
                         default:
@@ -101,7 +103,8 @@ int main(void)
                             break;
                         
                         case MENU_CHOICE_MAIN_BID:
-                        	fprintf(stdout,"WIP\n");
+                        	/* Make a bid on an object */
+                        	fprintf(stdout,"You need an account in order to bid.\n");
                         	break;
 
                         default:

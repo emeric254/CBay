@@ -143,12 +143,13 @@ int splitResponseHeader(char *responseHeaderField, int* contentLength, char* con
 int accountCreation ();
 
 
-/** \fn int connection()
- * \brief Asks the user for a login and a password and try to connect to the server 
+/** \fn int connection(UserAccount * user)
+ * \brief Asks the user for a login and a password and try to connect to the server
+ * \param user is the account sent back by the server if the connection is ok
  * \return the result (SUCCESS or CONNECTION_DENIED)
  *
  */
-int connection();
+int connection(UserAccount * user);
 
 
 /** \fn int listObjects(ObjectBid ** list, size_t* listSize)

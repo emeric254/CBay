@@ -85,6 +85,10 @@ void displayResult (int code)
             case ERROR_NO_LIST:
                 fprintf(stdout,"No list available. Ask for one before doing this again.\n");
                 break;
+                
+            case ERROR_WRONG_TYPE:
+            	fprintf(stdout,"Sorry, but you don't have the rights to do that.\n");
+            	break;
 
             default:
                 fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
