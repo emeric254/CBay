@@ -182,7 +182,7 @@ int sendGetAllObjectBid()
         perror("sendGet error.");
         return ERROR_SENDING;
     }
-    
+
     return SUCCESS;
 }
 
@@ -545,13 +545,13 @@ int listObjects (ObjectBid ** list, size_t* listSize)
 
     if (statusCode == STATUS_CODE_OK)
     {
-		/* Get the header fields */
-		receiveBinary(headers,64);
-		
-		/* Extract the list size from the headers */
-		splitResponseHeader(headers,(int *)listSize,contentType);
-		
-		/* Get the list */
+        /* Get the header fields */
+        receiveBinary(headers,64);
+
+        /* Extract the list size from the headers */
+        splitResponseHeader(headers,(int *)listSize,contentType);
+
+        /* Get the list */
         receiveBinary((char*)list,*listSize);
 
         /* Display the list */
@@ -581,20 +581,20 @@ int searchObject (ObjectBid * list, size_t listSize)
     /* Ask the user for an object name */
     searchInput(name);
 
-	/* Search for the name of the object in the list */
-	for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
-	{
-		/* If the name of the current object match */
-		if (strcmp(name,list[i].name) == 0)
-		{
-			/* Extend the result list */
-			resultNumber++;
-			result=realloc(result,resultNumber*sizeof(ObjectBid));
-			
-			/* Add the current object to the result list */
-			result[resultNumber-1]=list[i];
-		}
-	}
+    /* Search for the name of the object in the list */
+    for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
+    {
+        /* If the name of the current object match */
+        if (strcmp(name,list[i].name) == 0)
+        {
+            /* Extend the result list */
+            resultNumber++;
+            result=realloc(result,resultNumber*sizeof(ObjectBid));
+
+            /* Add the current object to the result list */
+            result[resultNumber-1]=list[i];
+        }
+    }
 
     /* Display the result */
     displayList(result,resultNumber*sizeof(ObjectBid));
@@ -606,23 +606,23 @@ int searchObject (ObjectBid * list, size_t listSize)
 */
 int bidObject (UserAccount client)
 {
-	ObjectBid obj;
-	int i=0;
-	int statusCode;
-	char statLine[STATUS_LINE_LENGTH];
-	char* reasonPhrase=NULL;
-	float price=0.0;
-	
-	/* How to know which object the client want to bid on ? */
-	
-	/* Bid on the object */
-	biddingInput(obj,&price);
-	
-	/* Modify the object's currentBidIdBuyer and currentBidPrice */
-	obj.currentBidIdBuyer=client.id;
-	obj.currentBidPrice=price;
-	
-	/* Send the modification to the server, 3 try */
+    ObjectBid obj;
+    int i=0;
+    int statusCode;
+    char statLine[STATUS_LINE_LENGTH];
+    char* reasonPhrase=NULL;
+    float price=0.0;
+
+    /* How to know which object the client want to bid on ? */
+
+    /* Bid on the object */
+    biddingInput(obj,&price);
+
+    /* Modify the object's currentBidIdBuyer and currentBidPrice */
+    obj.currentBidIdBuyer=client.id;
+    obj.currentBidPrice=price;
+
+    /* Send the modification to the server, 3 try */
     while (statusCode != STATUS_CODE_OK && i < 3)
     {
         /* Send the request */
@@ -636,7 +636,7 @@ int bidObject (UserAccount client)
 
         i++;
     }
-    
+
     /* Display the result */
     displayResult(statusCode);
 
