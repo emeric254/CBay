@@ -29,7 +29,7 @@ int main()
     long int id = -1; // client's id
 
 
-    char * ptrTemp = NULL; // temporary ptr to data
+//    char * ptrTemp = NULL; // temporary ptr to data
     char * ptrData = NULL; // ptr to data
     int sizeData = 0; // size of data
 
@@ -59,7 +59,6 @@ int main()
 
     // init server
     Init(SERVER_PORT);
-    printf("salut salut \n");
 
     // working cycle
     while(1)
