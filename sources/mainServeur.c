@@ -29,7 +29,7 @@ int main()
     long int id = -1; // client's id
 
 
-//    char * ptrTemp = NULL; // temporary ptr to data
+    char * ptrTemp = NULL; // temporary ptr to data
     char * ptrData = NULL; // ptr to data
     int sizeData = 0; // size of data
 

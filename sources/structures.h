@@ -289,4 +289,15 @@ long int getCurrentTime();
 */
 int isFinishObjectBid(ObjectBid * object);
 
+
+/** \fn int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object)
+ * \brief remove an ObjectBid to an ObjectBid table.
+ * \param table the ObjectBid table to purge of one ObjectBid
+ * \param size size of this table
+ * \param object the ObjectBid to purge from this table
+ * \return status code for this operation.
+ *
+*/
+int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object);
+
 #endif

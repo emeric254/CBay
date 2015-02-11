@@ -556,3 +556,32 @@ int isFinishObjectBid(ObjectBid * object)
 {
     return (object->endTime <= getCurrentTime()) ? TRUE : FALSE ;
 }
+
+
+int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object)
+{
+    int i = 0;
+    int j = 0;
+    ObjectBid * newTable = NULL;
+
+    newTable = malloc((*size-1)*sizeof(ObjectBid));
+
+    if(newTable == NULL)
+        return ERROR_POINTER;
+
+    for(i=0; i < *size-1; i++)
+    {
+        if((*table[i]).id != object->id)
+        {
+            newTable[j++] = *table[i];
+        }
+    }
+
+    if(j != (i-1))
+        return ERROR_POINTER;
+
+    free(*table);
+    table = &newTable;
+
+    return SUCCESS;
+}
