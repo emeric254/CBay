@@ -1,0 +1,144 @@
+\hypertarget{interface_client_8h}{\section{/home/emeric/projets/\-C\-Bay/sources/interface\-Client.h File Reference}
+\label{interface_client_8h}\index{/home/emeric/projets/\-C\-Bay/sources/interface\-Client.\-h@{/home/emeric/projets/\-C\-Bay/sources/interface\-Client.\-h}}
+}
+
+
+This file provide the main function to interact with the user like ,  or . Nearly all the user's input are taken with those functions. The only exception is for the account and the object creation.  
+
+
+{\ttfamily \#include \char`\"{}structures.\-h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{interface_client_8h_a18d95fe5c0e7ef0d86482dd9fd1caf18}{welcome\-Menu} ()
+\begin{DoxyCompactList}\small\item\em show welcome menu. \end{DoxyCompactList}\item 
+int \hyperlink{interface_client_8h_a8396c50bf544009fb2fc4907b00cbad3}{main\-Menu} ()
+\begin{DoxyCompactList}\small\item\em show main menu. \end{DoxyCompactList}\item 
+int \hyperlink{interface_client_8h_a09f835a46035bc73184e8ae1653e0ab3}{connection\-Input} (char $\ast$login, char $\ast$password)
+\begin{DoxyCompactList}\small\item\em asks the user for a login and a password and gets their answer. \end{DoxyCompactList}\item 
+int \hyperlink{interface_client_8h_a0a45236ed7035c07b95c6b8af5beaa04}{search\-Input} (char $\ast$name)
+\begin{DoxyCompactList}\small\item\em asks the user for an object's name and gets their answer. \end{DoxyCompactList}\item 
+void \hyperlink{interface_client_8h_a76fd92bd9a4a47069e01ee37a77aa81b}{display\-Result} (int code)
+\begin{DoxyCompactList}\small\item\em display the result of an operation from a code. \end{DoxyCompactList}\item 
+void \hyperlink{interface_client_8h_a1a5a877bbf1a9c9238cd2193b18b7e00}{display\-Object} (\hyperlink{struct_object_bid}{Object\-Bid} obj)
+\begin{DoxyCompactList}\small\item\em display an object and its properties. \end{DoxyCompactList}\item 
+\hypertarget{interface_client_8h_aaa8b64bd4018998b5623236be3807832}{void {\bfseries display\-List} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)}\label{interface_client_8h_aaa8b64bd4018998b5623236be3807832}
+
+\item 
+\hypertarget{interface_client_8h_a4f6fd2daefd2378d6cee2e274d48f0e2}{int {\bfseries bidding\-Input} (\hyperlink{struct_object_bid}{Object\-Bid} obj, float $\ast$price)}\label{interface_client_8h_a4f6fd2daefd2378d6cee2e274d48f0e2}
+
+\item 
+\hypertarget{interface_client_8h_ac54b37ec076897c48b8b4753ff75463b}{int {\bfseries chose\-Object\-In\-List} (int $\ast$chosen, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)}\label{interface_client_8h_ac54b37ec076897c48b8b4753ff75463b}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file provide the main function to interact with the user like ,  or . Nearly all the user's input are taken with those functions. The only exception is for the account and the object creation. 
+
+\subsection{Function Documentation}
+\hypertarget{interface_client_8h_a09f835a46035bc73184e8ae1653e0ab3}{\index{interface\-Client.\-h@{interface\-Client.\-h}!connection\-Input@{connection\-Input}}
+\index{connection\-Input@{connection\-Input}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{connection\-Input}]{\setlength{\rightskip}{0pt plus 5cm}int connection\-Input (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{login, }
+\item[{char $\ast$}]{password}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_a09f835a46035bc73184e8ae1653e0ab3}
+
+
+asks the user for a login and a password and gets their answer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em login} & and password are the information needed to connect to the C\-Bay service \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the status code of this operation 
+\end{DoxyReturn}
+\hypertarget{interface_client_8h_a1a5a877bbf1a9c9238cd2193b18b7e00}{\index{interface\-Client.\-h@{interface\-Client.\-h}!display\-Object@{display\-Object}}
+\index{display\-Object@{display\-Object}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{display\-Object}]{\setlength{\rightskip}{0pt plus 5cm}void display\-Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid}}]{obj}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_a1a5a877bbf1a9c9238cd2193b18b7e00}
+
+
+display an object and its properties. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & is the object to display \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nothing. 
+\end{DoxyReturn}
+\hypertarget{interface_client_8h_a76fd92bd9a4a47069e01ee37a77aa81b}{\index{interface\-Client.\-h@{interface\-Client.\-h}!display\-Result@{display\-Result}}
+\index{display\-Result@{display\-Result}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{display\-Result}]{\setlength{\rightskip}{0pt plus 5cm}void display\-Result (
+\begin{DoxyParamCaption}
+\item[{int}]{code}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_a76fd92bd9a4a47069e01ee37a77aa81b}
+
+
+display the result of an operation from a code. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & is the status or application code which will determine the message displayed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nothing. 
+\end{DoxyReturn}
+\hypertarget{interface_client_8h_a8396c50bf544009fb2fc4907b00cbad3}{\index{interface\-Client.\-h@{interface\-Client.\-h}!main\-Menu@{main\-Menu}}
+\index{main\-Menu@{main\-Menu}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{main\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}int main\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_a8396c50bf544009fb2fc4907b00cbad3}
+
+
+show main menu. 
+
+\begin{DoxyReturn}{Returns}
+user choice. 
+\end{DoxyReturn}
+\hypertarget{interface_client_8h_a0a45236ed7035c07b95c6b8af5beaa04}{\index{interface\-Client.\-h@{interface\-Client.\-h}!search\-Input@{search\-Input}}
+\index{search\-Input@{search\-Input}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{search\-Input}]{\setlength{\rightskip}{0pt plus 5cm}int search\-Input (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_a0a45236ed7035c07b95c6b8af5beaa04}
+
+
+asks the user for an object's name and gets their answer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & is the name of an object the user will enter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the status code of this operation 
+\end{DoxyReturn}
+\hypertarget{interface_client_8h_a18d95fe5c0e7ef0d86482dd9fd1caf18}{\index{interface\-Client.\-h@{interface\-Client.\-h}!welcome\-Menu@{welcome\-Menu}}
+\index{welcome\-Menu@{welcome\-Menu}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{welcome\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}int welcome\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_a18d95fe5c0e7ef0d86482dd9fd1caf18}
+
+
+show welcome menu. 
+
+\begin{DoxyReturn}{Returns}
+user choice. 
+\end{DoxyReturn}

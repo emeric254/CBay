@@ -1,0 +1,418 @@
+.TH "/home/emeric/projets/CBay/sources/serveur.h" 3 "Thu Feb 12 2015" "CBay" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/emeric/projets/CBay/sources/serveur.h \- 
+.PP
+\&.\&.\&.\&.\&.\&.\&.\&.\&. This file provide some usual function for a server like  ,  ,  ,  ,  or  and  It also contains some other derivated functions to test and play with received requests plus response making functions like  and  \&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBInit\fP (char *port)"
+.br
+.RI "\fIConnection to the server\&. \fP"
+.ti -1c
+.RI "int \fBconnectWait\fP ()"
+.br
+.RI "\fIwait for a client to connect, and then open the connection with him \fP"
+.ti -1c
+.RI "int \fBreceiveBinary\fP (char **data)"
+.br
+.RI "\fIreceive data from the client \fP"
+.ti -1c
+.RI "int \fBsendBinary\fP (char *data, size_t size)"
+.br
+.RI "\fIsend to the server datas from a character array \fP"
+.ti -1c
+.RI "int \fBsendString\fP (char *data)"
+.br
+.RI "\fIsend a string to the client \fP"
+.ti -1c
+.RI "void \fBendClient\fP ()"
+.br
+.RI "\fIclose properly the connection with the client \fP"
+.ti -1c
+.RI "void \fBendServer\fP ()"
+.br
+.RI "\fIclose properly the server process \fP"
+.ti -1c
+.RI "int \fBsendStatusLine\fP (int statusCode)"
+.br
+.RI "\fIsend a status line as described in the RFC \fP"
+.ti -1c
+.RI "int \fBsendHeaderField\fP (int size, int type)"
+.br
+.RI "\fIsend header fileds as described in the RFC \fP"
+.ti -1c
+.RI "int \fBisGetRequest\fP (char *request, int size)"
+.br
+.RI "\fItest if a message is a GET request \fP"
+.ti -1c
+.RI "int \fBisPutRequest\fP (char *request, int size)"
+.br
+.RI "\fItest if a message is a PUT request \fP"
+.ti -1c
+.RI "int \fBisConnectRequest\fP (char *request, int size)"
+.br
+.RI "\fItest if a message is a CONNECT request \fP"
+.ti -1c
+.RI "int \fBisDeleteRequest\fP (char *request, int size)"
+.br
+.RI "\fItest if a message is a DELETE request \fP"
+.ti -1c
+.RI "int \fBsplitGetRequest\fP (char *request, int size, char *data, int *sizeData)"
+.br
+.RI "\fIsplit a GET request to find and output the PDU \fP"
+.ti -1c
+.RI "int \fBsplitPutRequest\fP (char *request, int size, char *data, int *sizeData)"
+.br
+.RI "\fIsplit a PUT request to find and output the PDU \fP"
+.ti -1c
+.RI "int \fBsplitConnectRequest\fP (char *request, int size, char *login, char *password, int *sizeLogin, int *sizePassword)"
+.br
+.RI "\fIsplit a CONNECT request to find and output the login and the password \fP"
+.ti -1c
+.RI "int \fBsplitDeleteRequest\fP (char *request, int size, char *data, int *sizeData)"
+.br
+.RI "\fIsplit a DELETE request to find and output the PDU \fP"
+.ti -1c
+.RI "int \fBanswerUserAccount\fP (\fBUserAccount\fP *account)"
+.br
+.RI "\fIsend an \fBUserAccount\fP to the client \fP"
+.ti -1c
+.RI "int \fBanswerObjectBid\fP (\fBObjectBid\fP *object)"
+.br
+.RI "\fIsend an \fBObjectBid\fP to the client \fP"
+.ti -1c
+.RI "int \fBanswerObjectBidTable\fP (\fBObjectBid\fP *objects, int nbrObjects)"
+.br
+.RI "\fIsend an \fBObjectBid\fP table to the client \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+\&.\&.\&.\&.\&.\&.\&.\&.\&. This file provide some usual function for a server like  ,  ,  ,  ,  or  and  It also contains some other derivated functions to test and play with received requests plus response making functions like  and  \&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "int answerObjectBid (\fBObjectBid\fP *object)"
+
+.PP
+send an \fBObjectBid\fP to the client \fBParameters:\fP
+.RS 4
+\fIobject\fP the \fBObjectBid\fP to send to the client 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int answerObjectBidTable (\fBObjectBid\fP *objects, intnbrObjects)"
+
+.PP
+send an \fBObjectBid\fP table to the client \fBParameters:\fP
+.RS 4
+\fIobjects\fP the \fBObjectBid\fP table to send to the client 
+.br
+\fInbrObjects\fP number of this objects 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int answerUserAccount (\fBUserAccount\fP *account)"
+
+.PP
+send an \fBUserAccount\fP to the client \fBParameters:\fP
+.RS 4
+\fIaccount\fP the \fBUserAccount\fP to send to the client 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int connectWait ()"
+
+.PP
+wait for a client to connect, and then open the connection with him \fBReturns:\fP
+.RS 4
+status code of this operation\&. 
+.RE
+.PP
+
+.SS "int Init (char *port)"
+
+.PP
+Connection to the server\&. initialise the server
+.PP
+\fBParameters:\fP
+.RS 4
+\fIserver\fP is the server's adress 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+SUCCESS or ERROR_UNKNOWN
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIport\fP is the port which will be used by the server 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation\&. 
+.RE
+.PP
+
+.SS "int isConnectRequest (char *request, intsize)"
+
+.PP
+test if a message is a CONNECT request \fBParameters:\fP
+.RS 4
+\fIrequest\fP message to test 
+.br
+\fIsize\fP size of this messsage 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int isDeleteRequest (char *request, intsize)"
+
+.PP
+test if a message is a DELETE request \fBParameters:\fP
+.RS 4
+\fIrequest\fP message to test 
+.br
+\fIsize\fP size of this messsage 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int isGetRequest (char *request, intsize)"
+
+.PP
+test if a message is a GET request \fBParameters:\fP
+.RS 4
+\fIrequest\fP message to test 
+.br
+\fIsize\fP size of this messsage 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int isPutRequest (char *request, intsize)"
+
+.PP
+test if a message is a PUT request \fBParameters:\fP
+.RS 4
+\fIrequest\fP message to test 
+.br
+\fIsize\fP size of this messsage 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int receiveBinary (char **data)"
+
+.PP
+receive data from the client \fBParameters:\fP
+.RS 4
+\fIdata\fP is the data received from the client 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int sendBinary (char *data, size_tsize)"
+
+.PP
+send to the server datas from a character array send binary data to the client
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdonnees\fP is an array containing the data we will send and tailleMax is the maximum character the function will stock in donnees 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of sent bytes, 0 for a closed connection and a negative number in case of an error
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata\fP binary data to send to the client 
+.br
+\fIsize\fP data's size 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int sendHeaderField (intsize, inttype)"
+
+.PP
+send header fileds as described in the RFC \fBParameters:\fP
+.RS 4
+\fIsize\fP size of the data which will be transfered 
+.br
+\fItype\fP type of the data which will be transfered 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int sendStatusLine (intstatusCode)"
+
+.PP
+send a status line as described in the RFC \fBParameters:\fP
+.RS 4
+\fIstatusCode\fP the status code to send to the client the rigth status line 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int sendString (char *string)"
+
+.PP
+send a string to the client \fBParameters:\fP
+.RS 4
+\fIdata\fP string to send to the client 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int splitConnectRequest (char *request, intsize, char *login, char *password, int *sizeLogin, int *sizePassword)"
+
+.PP
+split a CONNECT request to find and output the login and the password \fBParameters:\fP
+.RS 4
+\fIrequest\fP the message which is a DELETE request 
+.br
+\fIsize\fP size of this message 
+.br
+\fIlogin\fP login extracted from this CONNECT request 
+.br
+\fIpassword\fP password extracted from this CONNECT request 
+.br
+\fIsizeLogin\fP length of the login 
+.br
+\fIsizePassword\fP length of the password 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int splitDeleteRequest (char *request, intsize, char *data, int *sizeData)"
+
+.PP
+split a DELETE request to find and output the PDU \fBParameters:\fP
+.RS 4
+\fIrequest\fP the message which is a DELETE request 
+.br
+\fIsize\fP size of this message 
+.br
+\fIdata\fP output data extracted from this DELETE request 
+.br
+\fIsizeData\fP size of the output data 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int splitGetRequest (char *request, intsize, char *data, int *sizeData)"
+
+.PP
+split a GET request to find and output the PDU \fBParameters:\fP
+.RS 4
+\fIrequest\fP the message which is a GET request 
+.br
+\fIsize\fP size of this message 
+.br
+\fIdata\fP output data extracted from this GET request 
+.br
+\fIsizeData\fP size of the output data 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int splitPutRequest (char *request, intsize, char *data, int *sizeData)"
+
+.PP
+split a PUT request to find and output the PDU \fBParameters:\fP
+.RS 4
+\fIrequest\fP the message which is a PUT request 
+.br
+\fIsize\fP size of this message 
+.br
+\fIdata\fP output data extracted from this PUT request 
+.br
+\fIsizeData\fP size of the output data 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for CBay from the source code\&.

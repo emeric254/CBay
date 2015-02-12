@@ -1,0 +1,371 @@
+.TH "/home/emeric/projets/CBay/sources/client.h" 3 "Thu Feb 12 2015" "CBay" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/emeric/projets/CBay/sources/client.h \- 
+.PP
+This file provide some usual function for a BEEP client like , , , , , , , \&. It also contains fonction to send data using other methods than connect (typically GET, PUT and DELETE) or function to split and extract data from incoming answer from the server\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBInit\fP (char *server)"
+.br
+.RI "\fIConnection to the server\&. \fP"
+.ti -1c
+.RI "int \fBreceiveBinary\fP (char *donnees, size_t tailleMax)"
+.br
+.RI "\fIreceive binary datas from the server and store them in a character array \fP"
+.ti -1c
+.RI "int \fBsendBinary\fP (char *donnees, size_t taille)"
+.br
+.RI "\fIsend to the server datas from a character array \fP"
+.ti -1c
+.RI "int \fBsendGetObjectBid\fP (\fBObjectBid\fP *object)"
+.br
+.RI "\fIsend a request to the server to get an object \fP"
+.ti -1c
+.RI "int \fBsendGetAllObjectBid\fP ()"
+.br
+.RI "\fIsend a request to the server to get all the objects \fP"
+.ti -1c
+.RI "int \fBsendPutObjectBid\fP (\fBObjectBid\fP *object)"
+.br
+.RI "\fIsend a request to the server to store an object in it \fP"
+.ti -1c
+.RI "int \fBsendDeleteObjectBid\fP (\fBObjectBid\fP *object)"
+.br
+.RI "\fIsend a request to the server to delete an object \fP"
+.ti -1c
+.RI "int \fBsendGetUserAccount\fP (\fBUserAccount\fP *account)"
+.br
+.RI "\fIsend a request to the server to get an user account \fP"
+.ti -1c
+.RI "int \fBsendPutUserAccount\fP (\fBUserAccount\fP *account)"
+.br
+.RI "\fIsend a request to the server to store an user account in it \fP"
+.ti -1c
+.RI "int \fBsendDeleteUserAccount\fP (\fBUserAccount\fP *account)"
+.br
+.RI "\fIsend a request to the server to delete an user account \fP"
+.ti -1c
+.RI "int \fBsendConnect\fP (char *login, char *password)"
+.br
+.RI "\fIsend a request to the server to connect an user to the CBay service \fP"
+.ti -1c
+.RI "int \fBsplitStatusLine\fP (char *statusLine, int *statusCode, char *statusMessage)"
+.br
+.RI "\fItake a status line and cut it in a status code and a reason phrase \fP"
+.ti -1c
+.RI "int \fBsplitResponseHeader\fP (char *responseHeaderField, int *contentLength, char *contentType)"
+.br
+.RI "\fItake the response header fields and extract the value of fields content-length and content-type \fP"
+.ti -1c
+.RI "int \fBaccountCreation\fP ()"
+.br
+.RI "\fIAsks the user for some informations and create a new \fBUserAccount\fP then send it to the server\&. \fP"
+.ti -1c
+.RI "int \fBconnection\fP (\fBUserAccount\fP *user)"
+.br
+.RI "\fIAsks the user for a login and a password and try to connect to the server\&. \fP"
+.ti -1c
+.RI "int \fBlistObjects\fP (\fBObjectBid\fP **list, int *listSize)"
+.br
+.ti -1c
+.RI "int \fBsearchObject\fP (\fBObjectBid\fP *list, int listSize)"
+.br
+.ti -1c
+.RI "int \fBbidObject\fP (\fBUserAccount\fP client, \fBObjectBid\fP **list, int listSize)"
+.br
+.RI "\fIAsks the user for a bid and send it to the server\&. Display the result\&. \fP"
+.ti -1c
+.RI "int \fBenterObject\fP (\fBUserAccount\fP *user)"
+.br
+.RI "\fIAdd an object into the list of available objects\&. \fP"
+.ti -1c
+.RI "void \fBTerminaison\fP ()"
+.br
+.RI "\fIEnd the connection\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+This file provide some usual function for a BEEP client like , , , , , , , \&. It also contains fonction to send data using other methods than connect (typically GET, PUT and DELETE) or function to split and extract data from incoming answer from the server\&. 
+
+
+.SH "Function Documentation"
+.PP 
+.SS "int accountCreation ()"
+
+.PP
+Asks the user for some informations and create a new \fBUserAccount\fP then send it to the server\&. \fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int bidObject (\fBUserAccount\fPclient, \fBObjectBid\fP **list, intlistSize)"
+
+.PP
+Asks the user for a bid and send it to the server\&. Display the result\&. \fBParameters:\fP
+.RS 4
+\fIclient\fP is the connected user who want to bid for the object, list is the list of object the client will chose from and listSize the number of objects in the list 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int connection (\fBUserAccount\fP *user)"
+
+.PP
+Asks the user for a login and a password and try to connect to the server\&. \fBParameters:\fP
+.RS 4
+\fIuser\fP is the account sent back by the server if the connection is ok 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the result (SUCCESS or CONNECTION_DENIED) 
+.RE
+.PP
+
+.SS "int enterObject (\fBUserAccount\fP *user)"
+
+.PP
+Add an object into the list of available objects\&. \fBParameters:\fP
+.RS 4
+\fIuser\fP is the vendor's account, 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int Init (char *machine)"
+
+.PP
+Connection to the server\&. initialise the server
+.PP
+\fBParameters:\fP
+.RS 4
+\fIserver\fP is the server's adress 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+SUCCESS or ERROR_UNKNOWN
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIport\fP is the port which will be used by the server 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation\&. 
+.RE
+.PP
+
+.SS "int receiveBinary (char *donnees, size_ttailleMax)"
+
+.PP
+receive binary datas from the server and store them in a character array \fBParameters:\fP
+.RS 4
+\fIdonnees\fP is an array in which we store the incoming data and tailleMax is the maximum character the function will stock in donnees 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of received bytes, 0 for a closed connection and a negative number in case of an error 
+.RE
+.PP
+
+.SS "int sendBinary (char *donnees, size_ttaille)"
+
+.PP
+send to the server datas from a character array send binary data to the client
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdonnees\fP is an array containing the data we will send and tailleMax is the maximum character the function will stock in donnees 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of sent bytes, 0 for a closed connection and a negative number in case of an error
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata\fP binary data to send to the client 
+.br
+\fIsize\fP data's size 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int sendConnect (char *login, char *password)"
+
+.PP
+send a request to the server to connect an user to the CBay service \fBParameters:\fP
+.RS 4
+\fIa\fP character array for the login and one for the password 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int sendDeleteObjectBid (\fBObjectBid\fP *object)"
+
+.PP
+send a request to the server to delete an object \fBParameters:\fP
+.RS 4
+\fIan\fP object 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int sendDeleteUserAccount (\fBUserAccount\fP *account)"
+
+.PP
+send a request to the server to delete an user account \fBParameters:\fP
+.RS 4
+\fIan\fP user account 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int sendGetAllObjectBid ()"
+
+.PP
+send a request to the server to get all the objects \fBParameters:\fP
+.RS 4
+\fIan\fP object 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int sendGetObjectBid (\fBObjectBid\fP *object)"
+
+.PP
+send a request to the server to get an object \fBParameters:\fP
+.RS 4
+\fIan\fP object 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int sendGetUserAccount (\fBUserAccount\fP *account)"
+
+.PP
+send a request to the server to get an user account \fBParameters:\fP
+.RS 4
+\fIan\fP user account 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int sendPutObjectBid (\fBObjectBid\fP *object)"
+
+.PP
+send a request to the server to store an object in it \fBParameters:\fP
+.RS 4
+\fIan\fP object 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int sendPutUserAccount (\fBUserAccount\fP *account)"
+
+.PP
+send a request to the server to store an user account in it \fBParameters:\fP
+.RS 4
+\fIan\fP user account 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int splitResponseHeader (char *responseHeaderField, int *contentLength, char *contentType)"
+
+.PP
+take the response header fields and extract the value of fields content-length and content-type \fBParameters:\fP
+.RS 4
+\fIthe\fP responseHeaderField to cut and the contentLength and contentType to extract 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "int splitStatusLine (char *statusLine, int *statusCode, char *statusMessage)"
+
+.PP
+take a status line and cut it in a status code and a reason phrase \fBParameters:\fP
+.RS 4
+\fIthe\fP status line to cut, the status code and the statusMessage to extract 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code of this operation 
+.RE
+.PP
+
+.SS "void Terminaison ()"
+
+.PP
+End the connection\&. \fBReturns:\fP
+.RS 4
+nothing 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for CBay from the source code\&.
