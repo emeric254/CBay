@@ -301,6 +301,12 @@ int main()
                             else
                             {
                                 // add the new object
+                                int idmax = 0;
+
+                                //@TODO get the max id used in ObjectBid table
+
+                                ((ObjectBid*)ptrData)->id = idmax+1;
+                                addObjectBidInTable(&objects, &nbrObjects, (ObjectBid*) ptrData);
                                 sendStatusLine(STATUS_CODE_CREATED);
                             }
                         }
@@ -318,7 +324,9 @@ int main()
                             {
                                 // add the new user
                                 int idmax = 0;
-                                //
+
+                                //@TODO get the max id used in UserAccount table
+
                                 ((UserAccount*)ptrData)->id = idmax+1;
                                 addUserAccountInTable(&accounts, &nbrAccount, (UserAccount*)ptrData);
                                 sendStatusLine(STATUS_CODE_CREATED);
