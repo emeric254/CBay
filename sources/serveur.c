@@ -407,10 +407,10 @@ int isPutRequest(char* request, int size)
 int isConnectRequest(char* request, int size)
 {
     // REQUEST_METHOD_CONNECT
-    if (size == 64)
+    if (size <= 64)
         if ( (!strncmp(request,REQUEST_METHOD_CONNECT,strlen(REQUEST_METHOD_CONNECT)))
             && (request[strlen(REQUEST_METHOD_CONNECT)] == ' ')
-            && (request[35] == ';')
+//            && (request[35] == ';')
             && (request[size-2] == ';')
             && (request[size-1] == '\n') )
             return TRUE;
@@ -497,7 +497,7 @@ int splitConnectRequest(char* request, int size, char* login, char* password, in
     *sizeLogin = 0;
     *sizePassword = 0;
 
-    if (size != 64)
+    if (size > 64 || size <= 0)
     {
         return ERROR_READING;
     }
