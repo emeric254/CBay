@@ -289,4 +289,26 @@ long int getCurrentTime();
 */
 int isFinishObjectBid(ObjectBid * object);
 
+
+/** \fn int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object)
+ * \brief remove an ObjectBid to an ObjectBid table.
+ * \param table the ObjectBid table to purge of one ObjectBid
+ * \param size size of this table
+ * \param object the ObjectBid to purge from this table
+ * \return status code for this operation.
+ *
+*/
+int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object);
+
+
+/** \fn int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * object)
+ * \brief remove an UserAccount to an UserAccount table.
+ * \param table the ObjectBid table to purge of one UserAccount
+ * \param size size of this table
+ * \param object the UserAccount to purge from this table
+ * \return status code for this operation.
+ *
+*/
+int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * object);
+
 #endif
