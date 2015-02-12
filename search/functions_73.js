@@ -1,6 +1,7 @@
 var searchData=
 [
   ['searchinput',['searchInput',['../interface_client_8h.html#a0a45236ed7035c07b95c6b8af5beaa04',1,'interfaceClient.c']]],
+  ['searchobjectbidintable',['searchObjectBidInTable',['../structures_8h.html#aaddc3d7b154c85e500812ebef4f1ebd0',1,'structures.c']]],
   ['sendbinary',['sendBinary',['../client_8h.html#a89f1959ce9abb4013dd6a8e6a26a08f7',1,'sendBinary(char *donnees, size_t taille):&#160;client.c'],['../serveur_8h.html#aed71b18dc0d9c0a63d02c440bc4d3144',1,'sendBinary(char *data, size_t size):&#160;client.c']]],
   ['sendconnect',['sendConnect',['../client_8h.html#a8791da4cdcf01088069bea80b08eb91d',1,'client.c']]],
   ['senddeleteobjectbid',['sendDeleteObjectBid',['../client_8h.html#ac0af861680d0c9ae7d0c347137f8c1b1',1,'client.c']]],
