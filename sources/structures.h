@@ -281,7 +281,7 @@ size_t file_length(char * filename);
 long int getCurrentTime();
 
 
-/** \fn long int getCurrentTime()
+/** \fn int isFinishObjectBid(ObjectBid * object)
  * \brief test if an ObjectBid is finished or not, checking his time value.
  * \param object the ObjectBid to test
  * \return status code for this operation.

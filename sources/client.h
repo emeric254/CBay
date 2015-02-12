@@ -180,6 +180,14 @@ int searchObject (ObjectBid * list, int listSize);
  */
 int bidObject (UserAccount client, ObjectBid ** list, int listSize);
 
+/** \fn int enterObject(UserAccount * user)
+ * \brief Add an object into the list of available objects.
+ * \param user is the vendor's account,
+ * \return status code of this operation
+ *
+ */
+int enterObject(UserAccount * user);
+
 
 /** \fn void Terminaison
  * \brief End the connection

@@ -87,7 +87,7 @@ void userInputUserAccount(UserAccount * account)
 
     printf("Enter your adress\n");
     fgets(account->adress,USERACCOUNT_ADRESS_LENGTH,stdin);
-    if(strlen(account->adress)<USERACCOUNT_LASTNAME_LENGTH-1)
+    if(strlen(account->adress)<USERACCOUNT_ADRESS_LENGTH-1)
         account->adress[strlen(account->adress)] = '\0';
     cleanBuffer();
     CLEAR();

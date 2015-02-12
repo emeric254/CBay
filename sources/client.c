@@ -65,7 +65,7 @@ int Init(char *machine) {
             continue;   /* ignore this one */
 
         if ( ! connect(clientSocket, res->ai_addr, res->ai_addrlen))
-            break;      /* SUCCESSs */
+            break;      /* SUCCESS */
 
         close(clientSocket);    /* ignore this one */
     } while ( (res = res->ai_next) != NULL);
@@ -667,6 +667,12 @@ int bidObject (UserAccount client, ObjectBid ** list, int listSize)
 	/* How to know which object the client want to bid on ? */
 	choseObjectInList(&chosenObj,*list,listSize);
 	
+	/* Is the bid finished yet ? */ /*@TODO => need isFinishObjectBid */
+	/*if ((isFinishObjectBid())==)
+	{
+	
+	}*/
+	
 	/* Bid on the object */
 	biddingInput(*list[chosenObj],&price);
 	
@@ -696,6 +702,28 @@ int bidObject (UserAccount client, ObjectBid ** list, int listSize)
         return SUCCESS;
     else
         return ERROR_BIDDING;
+}
+
+
+/* enterObject
+*/
+int enterObject(UserAccount * user)
+{
+	ObjectBid obj;
+	
+	/* Verify the user is a vendor or an administrator */
+    if (client.type != ACCOUNT_TYPE_ADMIN && client.type != ACCOUNT_TYPE_VENDOR)
+    {
+    	displayResult(ERROR_WRONG_TYPE);
+    }
+	
+	/* Ask the user to give the informations about his object */
+	userInputObjectBid(&obj);
+	
+	/* Put the fields : id,idvendor,startTime,endTime,currentBidPrice,currentBidIdBuyer */
+	
+	
+	return SUCCESS;
 }
 
 
