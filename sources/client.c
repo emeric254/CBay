@@ -145,7 +145,7 @@ int sendGetObjectBid(ObjectBid *object)
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
-    memcpy(&msg[4], object, sizeof(ObjectBid));
+    memcpy(&msg[4], (unsigned char*)object, sizeof(ObjectBid));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
@@ -191,16 +191,12 @@ int sendGetAllObjectBid()
 int sendPutObjectBid(ObjectBid *object)
 {
     int length = 6 + sizeof(ObjectBid);
-    int i = 0;
     char msg[length+1];
 
     strcpy(msg,REQUEST_METHOD_PUT);
     msg[strlen(REQUEST_METHOD_PUT )] = ' ';
 
-    for ( i = 4 ; i < length ; i++ )
-    {
-        msg[i] = ((char*)object)[i];
-    }
+    memcpy(&msg[4], (unsigned char*)object, sizeof(ObjectBid));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
@@ -220,16 +216,12 @@ int sendPutObjectBid(ObjectBid *object)
 int sendDeleteObjectBid(ObjectBid *object)
 {
     int length = 9 + sizeof(ObjectBid);
-    int i = 0;
     char msg[length+1];
 
     strcpy(msg,REQUEST_METHOD_DELETE);
     msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
 
-    for ( i = 7 ; i < length ; i++ )
-    {
-        msg[i] = ((char*)object)[i];
-    }
+    memcpy(&msg[7], (unsigned char*)object, sizeof(ObjectBid));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
@@ -249,16 +241,12 @@ int sendDeleteObjectBid(ObjectBid *object)
 int sendGetUserAccount(UserAccount *account)
 {
     int length = 6 + sizeof(UserAccount);
-    int i = 0;
     char msg[length+1];
 
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
-    for ( i = 4 ; i < length ; i++ )
-    {
-        msg[i] = ((char*)account)[i];
-    }
+    memcpy(&msg[4], (unsigned char*)account, sizeof(UserAccount));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
@@ -278,7 +266,6 @@ int sendGetUserAccount(UserAccount *account)
 int sendPutUserAccount(UserAccount *account)
 {
     int length = 6 + sizeof(UserAccount);
-    int i=0;
     char msg[length+1];
 
     strcpy(msg,REQUEST_METHOD_PUT);
@@ -304,16 +291,12 @@ int sendPutUserAccount(UserAccount *account)
 int sendDeleteUserAccount(UserAccount *account)
 {
     int length = 9 + sizeof(UserAccount);
-    int i = 0;
     char msg[length+1];
 
     strcpy(msg,REQUEST_METHOD_DELETE);
     msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
 
-    for ( i = 7 ; i < length ; i++ )
-    {
-        msg[i] = ((char*)account)[i];
-    }
+    memcpy(&msg[7], (unsigned char*)account, sizeof(UserAccount));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
