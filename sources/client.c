@@ -124,6 +124,7 @@ int receiveBinary(char *donnees, size_t tailleMax) {
  */
 int sendBinary(char *donnees, size_t taille) {
     int retour = 0;
+    printf("%s\n",donnees);
     retour = send(clientSocket, donnees, taille, 0);
     if(retour == -1) {
         perror("sendBinary error.");
@@ -141,16 +142,10 @@ int sendGetObjectBid(ObjectBid *object)
     int length = 6 + sizeof(ObjectBid);
     char msg[length+1];
 
-    fprintf(stderr,"LOLLLLLL");
-
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
-    fprintf(stderr,"%s\n", msg);
-
     memcpy(&msg[4], object, sizeof(ObjectBid));
-
-    fprintf(stderr,"%s\n", msg);
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
@@ -283,22 +278,18 @@ int sendGetUserAccount(UserAccount *account)
 int sendPutUserAccount(UserAccount *account)
 {
     int length = 6 + sizeof(UserAccount);
-    int i = 0;
     char msg[length+1];
 
     strcpy(msg,REQUEST_METHOD_PUT);
     msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
 
-    for ( i = 4 ; i < length ; i++ )
-    {
-        msg[i] = ((char*)account)[i];
-    }
+    memcpy(&msg[4], account, sizeof(UserAccount));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( sendBinary(msg, length) == -1 )
+    if ( sendBinary(msg, length+1) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
