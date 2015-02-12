@@ -301,6 +301,17 @@ int isFinishObjectBid(ObjectBid * object);
 int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object);
 
 
+/** \fn int addObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object)
+ * \brief add an ObjectBid to an ObjectBid table.
+ * \param table the ObjectBid table to append of one ObjectBid
+ * \param size size of this table
+ * \param object the ObjectBid to add into this table
+ * \return status code for this operation.
+ *
+*/
+int addObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object);
+
+
 /** \fn int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * object)
  * \brief remove an UserAccount to an UserAccount table.
  * \param table the UserAccount table to purge of one UserAccount
@@ -310,6 +321,17 @@ int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object);
  *
 */
 int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * user);
+
+
+/** \fn int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * object)
+ * \brief add an UserAccount to an UserAccount table.
+ * \param table the UserAccount table to append of one UserAccount
+ * \param size size of this table
+ * \param user the UserAccount to add into this table
+ * \return status code for this operation.
+ *
+*/
+int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * user);
 
 
 /** \fn int searchObjectBidInTable(ObjectBid * table, int size, ObjectBid * object, ObjectBid * ptrObject)
