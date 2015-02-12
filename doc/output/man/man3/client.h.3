@@ -1,4 +1,4 @@
-.TH "/home/emeric/projets/CBay/sources/client.h" 3 "Thu Feb 12 2015" "CBay" \" -*- nroff -*-
+.TH "/home/emeric/projets/CBay/sources/client.h" 3 "Thu Feb 12 2015" "Version BEEP - 0.1a" "CBay" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -175,6 +175,8 @@ status code of this operation\&.
 .RE
 .PP
 
+.SS "int listObjects (\fBObjectBid\fP **list, int *listSize)"
+
 .SS "int receiveBinary (char *donnees, size_ttailleMax)"
 
 .PP
@@ -188,6 +190,8 @@ receive binary datas from the server and store them in a character array \fBPara
 the number of received bytes, 0 for a closed connection and a negative number in case of an error 
 .RE
 .PP
+
+.SS "int searchObject (\fBObjectBid\fP *list, intlistSize)"
 
 .SS "int sendBinary (char *donnees, size_ttaille)"
 

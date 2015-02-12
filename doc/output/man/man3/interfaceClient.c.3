@@ -1,0 +1,141 @@
+.TH "/home/emeric/projets/CBay/sources/interfaceClient.c" 3 "Thu Feb 12 2015" "Version BEEP - 0.1a" "CBay" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/emeric/projets/CBay/sources/interfaceClient.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'interfaceClient\&.h'\fP
+.br
+\fC#include 'structures\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBwelcomeMenu\fP ()"
+.br
+.RI "\fIshow welcome menu\&. \fP"
+.ti -1c
+.RI "int \fBmainMenu\fP ()"
+.br
+.RI "\fIshow main menu\&. \fP"
+.ti -1c
+.RI "int \fBconnectionInput\fP (char *login, char *password)"
+.br
+.RI "\fIasks the user for a login and a password and gets their answer\&. \fP"
+.ti -1c
+.RI "int \fBsearchInput\fP (char *name)"
+.br
+.RI "\fIasks the user for an object's name and gets their answer\&. \fP"
+.ti -1c
+.RI "void \fBdisplayResult\fP (int code)"
+.br
+.RI "\fIdisplay the result of an operation from a code\&. \fP"
+.ti -1c
+.RI "void \fBdisplayObject\fP (\fBObjectBid\fP obj)"
+.br
+.RI "\fIdisplay an object and its properties\&. \fP"
+.ti -1c
+.RI "void \fBdisplayList\fP (\fBObjectBid\fP *list, int listSize)"
+.br
+.ti -1c
+.RI "int \fBbiddingInput\fP (\fBObjectBid\fP obj, float *price)"
+.br
+.ti -1c
+.RI "int \fBchoseObjectInList\fP (int *chosen, \fBObjectBid\fP *list, int listSize)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int biddingInput (\fBObjectBid\fPobj, float *price)"
+
+.SS "int choseObjectInList (int *chosen, \fBObjectBid\fP *list, intlistSize)"
+
+.SS "int connectionInput (char *login, char *password)"
+
+.PP
+asks the user for a login and a password and gets their answer\&. \fBParameters:\fP
+.RS 4
+\fIlogin\fP and password are the information needed to connect to the CBay service 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the status code of this operation 
+.RE
+.PP
+
+.SS "void displayList (\fBObjectBid\fP *list, intlistSize)"
+
+.SS "void displayObject (\fBObjectBid\fPobj)"
+
+.PP
+display an object and its properties\&. \fBParameters:\fP
+.RS 4
+\fIobj\fP is the object to display 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+
+.SS "void displayResult (intcode)"
+
+.PP
+display the result of an operation from a code\&. \fBParameters:\fP
+.RS 4
+\fIcode\fP is the status or application code which will determine the message displayed 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+
+.SS "int mainMenu ()"
+
+.PP
+show main menu\&. \fBReturns:\fP
+.RS 4
+user choice\&. 
+.RE
+.PP
+
+.SS "int searchInput (char *name)"
+
+.PP
+asks the user for an object's name and gets their answer\&. \fBParameters:\fP
+.RS 4
+\fIname\fP is the name of an object the user will enter\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the status code of this operation 
+.RE
+.PP
+
+.SS "int welcomeMenu ()"
+
+.PP
+show welcome menu\&. \fBReturns:\fP
+.RS 4
+user choice\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for CBay from the source code\&.

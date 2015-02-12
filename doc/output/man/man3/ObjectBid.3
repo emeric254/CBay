@@ -1,4 +1,4 @@
-.TH "ObjectBid" 3 "Thu Feb 12 2015" "CBay" \" -*- nroff -*-
+.TH "ObjectBid" 3 "Thu Feb 12 2015" "Version BEEP - 0.1a" "CBay" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,6 +6,8 @@ ObjectBid \-
 .SH SYNOPSIS
 .br
 .PP
+.PP
+\fC#include <structures\&.h>\fP
 .SS "Data Fields"
 
 .in +1c
@@ -13,13 +15,13 @@ ObjectBid \-
 .RI "long int \fBid\fP"
 .br
 .ti -1c
-.RI "char \fBname\fP [OBJECTBID_NAME_LENGTH]"
+.RI "char \fBname\fP [\fBOBJECTBID_NAME_LENGTH\fP]"
 .br
 .ti -1c
 .RI "float \fBbasePrice\fP"
 .br
 .ti -1c
-.RI "char \fBdescription\fP [OBJECTBID_DESCRIPTION_LENGTH]"
+.RI "char \fBdescription\fP [\fBOBJECTBID_DESCRIPTION_LENGTH\fP]"
 .br
 .ti -1c
 .RI "long int \fBidVendor\fP"
@@ -31,7 +33,7 @@ ObjectBid \-
 .RI "long int \fBendTime\fP"
 .br
 .ti -1c
-.RI "char \fBadress\fP [OBJECTBID_ADRESS_LENGTH]"
+.RI "char \fBadress\fP [\fBOBJECTBID_ADRESS_LENGTH\fP]"
 .br
 .ti -1c
 .RI "float \fBcurrentBidPrice\fP"
@@ -40,6 +42,28 @@ ObjectBid \-
 .RI "long int \fBcurrentBidIdBuyer\fP"
 .br
 .in -1c
+.SH "Field Documentation"
+.PP 
+.SS "char adress[\fBOBJECTBID_ADRESS_LENGTH\fP]"
+
+.SS "float basePrice"
+
+.SS "long int currentBidIdBuyer"
+
+.SS "float currentBidPrice"
+
+.SS "char description[\fBOBJECTBID_DESCRIPTION_LENGTH\fP]"
+
+.SS "long int endTime"
+
+.SS "long int id"
+
+.SS "long int idVendor"
+
+.SS "char name[\fBOBJECTBID_NAME_LENGTH\fP]"
+
+.SS "long int startTime"
+
 
 .SH "Author"
 .PP 

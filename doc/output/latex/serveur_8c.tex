@@ -1,0 +1,548 @@
+\hypertarget{serveur_8c}{\section{/home/emeric/projets/\-C\-Bay/sources/serveur.c File Reference}
+\label{serveur_8c}\index{/home/emeric/projets/\-C\-Bay/sources/serveur.\-c@{/home/emeric/projets/\-C\-Bay/sources/serveur.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$ctype.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+{\ttfamily \#include $<$errno.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$netdb.\-h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\-h$>$}\\*
+{\ttfamily \#include $<$sys/select.\-h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\-h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\-h$>$}\\*
+{\ttfamily \#include $<$strings.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}structures.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}serveur.\-h\char`\"{}}\\*
+Include dependency graph for serveur.\-c\-:
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{serveur_8c_a5a0021a5ca941dc4a69566c8ad57d825}{Init} (char $\ast$port)
+\begin{DoxyCompactList}\small\item\em Connection to the server. \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a8e0cfd2cdc7b92382dc70dd26d796c15}{connect\-Wait} ()
+\begin{DoxyCompactList}\small\item\em wait for a client to connect, and then open the connection with him \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a1ba79c6c125a0abfa57b7ba17c0f7af8}{receive\-Binary} (char $\ast$$\ast$data)
+\begin{DoxyCompactList}\small\item\em receive data from the client \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_aed71b18dc0d9c0a63d02c440bc4d3144}{send\-Binary} (char $\ast$data, size\-\_\-t size)
+\begin{DoxyCompactList}\small\item\em send to the server datas from a character array \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a9c4839208c0dc94512c6e36d29813b9a}{send\-String} (char $\ast$string)
+\begin{DoxyCompactList}\small\item\em send a string to the client \end{DoxyCompactList}\item 
+void \hyperlink{serveur_8c_a54b6d78ba44089862798c271e7c53cb7}{end\-Client} ()
+\begin{DoxyCompactList}\small\item\em close properly the connection with the client \end{DoxyCompactList}\item 
+void \hyperlink{serveur_8c_ac6ea75141abcbfe34f535fe2f89a8764}{end\-Server} ()
+\begin{DoxyCompactList}\small\item\em close properly the server process \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a5ee638c183f3aea235427c91687f68eb}{send\-Status\-Line} (int status\-Code)
+\begin{DoxyCompactList}\small\item\em send a status line as described in the R\-F\-C \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a0297eb5750b13a22b937b66666c2de10}{send\-Header\-Field} (int size, int type)
+\begin{DoxyCompactList}\small\item\em send header fileds as described in the R\-F\-C \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_adf01aee57e8f4f05b62887b78e632311}{is\-Get\-Request} (char $\ast$request, int size)
+\begin{DoxyCompactList}\small\item\em test if a message is a G\-E\-T request \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a50b98bf8bdccca1d10e8c30530f7add3}{is\-Put\-Request} (char $\ast$request, int size)
+\begin{DoxyCompactList}\small\item\em test if a message is a P\-U\-T request \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_ac6207ce9ab9cf7a904c9075e07222a6b}{is\-Connect\-Request} (char $\ast$request, int size)
+\begin{DoxyCompactList}\small\item\em test if a message is a C\-O\-N\-N\-E\-C\-T request \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a37a84214464b018bb62b69ae2c886cfb}{is\-Delete\-Request} (char $\ast$request, int size)
+\begin{DoxyCompactList}\small\item\em test if a message is a D\-E\-L\-E\-T\-E request \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_aaee0fd5652c113cb0db774c993be4cad}{split\-Get\-Request} (char $\ast$request, int size, char $\ast$data, int $\ast$size\-Data)
+\begin{DoxyCompactList}\small\item\em split a G\-E\-T request to find and output the P\-D\-U \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a7213daa35e02db3be9546fb4e6168eb4}{split\-Put\-Request} (char $\ast$request, int size, char $\ast$data, int $\ast$size\-Data)
+\begin{DoxyCompactList}\small\item\em split a P\-U\-T request to find and output the P\-D\-U \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_ac8397d27f5afc6b6fad603d2562dfad3}{split\-Connect\-Request} (char $\ast$request, int size, char $\ast$login, char $\ast$password, int $\ast$size\-Login, int $\ast$size\-Password)
+\begin{DoxyCompactList}\small\item\em split a C\-O\-N\-N\-E\-C\-T request to find and output the login and the password \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a70ee0360c7d9015f78ae0d3e92fdca2c}{split\-Delete\-Request} (char $\ast$request, int size, char $\ast$data, int $\ast$size\-Data)
+\begin{DoxyCompactList}\small\item\em split a D\-E\-L\-E\-T\-E request to find and output the P\-D\-U \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_aa917a3ad17c4d1d607bb9ff1cdc5f8d8}{answer\-User\-Account} (\hyperlink{struct_user_account}{User\-Account} $\ast$account)
+\begin{DoxyCompactList}\small\item\em send an \hyperlink{struct_user_account}{User\-Account} to the client \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a21a8b9a76805cc5ba06d5d0687a548e7}{answer\-Object\-Bid} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$object)
+\begin{DoxyCompactList}\small\item\em send an \hyperlink{struct_object_bid}{Object\-Bid} to the client \end{DoxyCompactList}\item 
+int \hyperlink{serveur_8c_a706d97a8b641d23313d2243561660ed8}{answer\-Object\-Bid\-Table} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$objects, int nbr\-Objects)
+\begin{DoxyCompactList}\small\item\em send an \hyperlink{struct_object_bid}{Object\-Bid} table to the client \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{serveur_8c_ad1409d0f223732c5405bfa50d535e0ae}{listen\-Socket}
+\item 
+socklen\-\_\-t \hyperlink{serveur_8c_af144cf9efd8e4c61e15dd06c89ec7c32}{adress\-Length}
+\item 
+int \hyperlink{serveur_8c_a829a5de12c4f69db072f8cebae7e05e5}{main\-Socket}
+\item 
+char \hyperlink{serveur_8c_a1cdaf98115fa257a229e80fa89a0aab9}{client\-Buffer} \mbox{[}\hyperlink{defines_8h_af7b7dc9a200cb1404c280bd500fd1551}{B\-U\-F\-F\-E\-R\-\_\-\-L\-E\-N\-G\-T\-H}\mbox{]}
+\item 
+int \hyperlink{serveur_8c_ad97fbf9bd2beb5f2cbfe2ef07a1977ba}{buffer\-Start}
+\item 
+int \hyperlink{serveur_8c_a4fc2e45819b55cbf1f9a24c2c1929ae1}{buffer\-End}
+\item 
+int \hyperlink{serveur_8c_ae11cffd08437563d431ff3c88e28976d}{connect\-End} = \hyperlink{defines_8h_aa93f0eb578d23995850d61f7d61c55c1}{F\-A\-L\-S\-E}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{serveur_8c_a21a8b9a76805cc5ba06d5d0687a548e7}{\index{serveur.\-c@{serveur.\-c}!answer\-Object\-Bid@{answer\-Object\-Bid}}
+\index{answer\-Object\-Bid@{answer\-Object\-Bid}!serveur.c@{serveur.\-c}}
+\subsubsection[{answer\-Object\-Bid}]{\setlength{\rightskip}{0pt plus 5cm}int answer\-Object\-Bid (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a21a8b9a76805cc5ba06d5d0687a548e7}
+
+
+send an \hyperlink{struct_object_bid}{Object\-Bid} to the client 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & the \hyperlink{struct_object_bid}{Object\-Bid} to send to the client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a706d97a8b641d23313d2243561660ed8}{\index{serveur.\-c@{serveur.\-c}!answer\-Object\-Bid\-Table@{answer\-Object\-Bid\-Table}}
+\index{answer\-Object\-Bid\-Table@{answer\-Object\-Bid\-Table}!serveur.c@{serveur.\-c}}
+\subsubsection[{answer\-Object\-Bid\-Table}]{\setlength{\rightskip}{0pt plus 5cm}int answer\-Object\-Bid\-Table (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{objects, }
+\item[{int}]{nbr\-Objects}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a706d97a8b641d23313d2243561660ed8}
+
+
+send an \hyperlink{struct_object_bid}{Object\-Bid} table to the client 
+
+
+\begin{DoxyParams}{Parameters}
+{\em objects} & the \hyperlink{struct_object_bid}{Object\-Bid} table to send to the client \\
+\hline
+{\em nbr\-Objects} & number of this objects \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_aa917a3ad17c4d1d607bb9ff1cdc5f8d8}{\index{serveur.\-c@{serveur.\-c}!answer\-User\-Account@{answer\-User\-Account}}
+\index{answer\-User\-Account@{answer\-User\-Account}!serveur.c@{serveur.\-c}}
+\subsubsection[{answer\-User\-Account}]{\setlength{\rightskip}{0pt plus 5cm}int answer\-User\-Account (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{account}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_aa917a3ad17c4d1d607bb9ff1cdc5f8d8}
+
+
+send an \hyperlink{struct_user_account}{User\-Account} to the client 
+
+
+\begin{DoxyParams}{Parameters}
+{\em account} & the \hyperlink{struct_user_account}{User\-Account} to send to the client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a8e0cfd2cdc7b92382dc70dd26d796c15}{\index{serveur.\-c@{serveur.\-c}!connect\-Wait@{connect\-Wait}}
+\index{connect\-Wait@{connect\-Wait}!serveur.c@{serveur.\-c}}
+\subsubsection[{connect\-Wait}]{\setlength{\rightskip}{0pt plus 5cm}int connect\-Wait (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a8e0cfd2cdc7b92382dc70dd26d796c15}
+
+
+wait for a client to connect, and then open the connection with him 
+
+\begin{DoxyReturn}{Returns}
+status code of this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a54b6d78ba44089862798c271e7c53cb7}{\index{serveur.\-c@{serveur.\-c}!end\-Client@{end\-Client}}
+\index{end\-Client@{end\-Client}!serveur.c@{serveur.\-c}}
+\subsubsection[{end\-Client}]{\setlength{\rightskip}{0pt plus 5cm}void end\-Client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a54b6d78ba44089862798c271e7c53cb7}
+
+
+close properly the connection with the client 
+
+\hypertarget{serveur_8c_ac6ea75141abcbfe34f535fe2f89a8764}{\index{serveur.\-c@{serveur.\-c}!end\-Server@{end\-Server}}
+\index{end\-Server@{end\-Server}!serveur.c@{serveur.\-c}}
+\subsubsection[{end\-Server}]{\setlength{\rightskip}{0pt plus 5cm}void end\-Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_ac6ea75141abcbfe34f535fe2f89a8764}
+
+
+close properly the server process 
+
+\hypertarget{serveur_8c_a5a0021a5ca941dc4a69566c8ad57d825}{\index{serveur.\-c@{serveur.\-c}!Init@{Init}}
+\index{Init@{Init}!serveur.c@{serveur.\-c}}
+\subsubsection[{Init}]{\setlength{\rightskip}{0pt plus 5cm}int Init (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{port}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a5a0021a5ca941dc4a69566c8ad57d825}
+
+
+Connection to the server. 
+
+initialise the server
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & is the server's adress \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+S\-U\-C\-C\-E\-S\-S or E\-R\-R\-O\-R\-\_\-\-U\-N\-K\-N\-O\-W\-N
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em port} & is the port which will be used by the server \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_ac6207ce9ab9cf7a904c9075e07222a6b}{\index{serveur.\-c@{serveur.\-c}!is\-Connect\-Request@{is\-Connect\-Request}}
+\index{is\-Connect\-Request@{is\-Connect\-Request}!serveur.c@{serveur.\-c}}
+\subsubsection[{is\-Connect\-Request}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Connect\-Request (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_ac6207ce9ab9cf7a904c9075e07222a6b}
+
+
+test if a message is a C\-O\-N\-N\-E\-C\-T request 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & message to test \\
+\hline
+{\em size} & size of this messsage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a37a84214464b018bb62b69ae2c886cfb}{\index{serveur.\-c@{serveur.\-c}!is\-Delete\-Request@{is\-Delete\-Request}}
+\index{is\-Delete\-Request@{is\-Delete\-Request}!serveur.c@{serveur.\-c}}
+\subsubsection[{is\-Delete\-Request}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Delete\-Request (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a37a84214464b018bb62b69ae2c886cfb}
+
+
+test if a message is a D\-E\-L\-E\-T\-E request 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & message to test \\
+\hline
+{\em size} & size of this messsage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_adf01aee57e8f4f05b62887b78e632311}{\index{serveur.\-c@{serveur.\-c}!is\-Get\-Request@{is\-Get\-Request}}
+\index{is\-Get\-Request@{is\-Get\-Request}!serveur.c@{serveur.\-c}}
+\subsubsection[{is\-Get\-Request}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Get\-Request (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_adf01aee57e8f4f05b62887b78e632311}
+
+
+test if a message is a G\-E\-T request 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & message to test \\
+\hline
+{\em size} & size of this messsage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a50b98bf8bdccca1d10e8c30530f7add3}{\index{serveur.\-c@{serveur.\-c}!is\-Put\-Request@{is\-Put\-Request}}
+\index{is\-Put\-Request@{is\-Put\-Request}!serveur.c@{serveur.\-c}}
+\subsubsection[{is\-Put\-Request}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Put\-Request (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a50b98bf8bdccca1d10e8c30530f7add3}
+
+
+test if a message is a P\-U\-T request 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & message to test \\
+\hline
+{\em size} & size of this messsage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a1ba79c6c125a0abfa57b7ba17c0f7af8}{\index{serveur.\-c@{serveur.\-c}!receive\-Binary@{receive\-Binary}}
+\index{receive\-Binary@{receive\-Binary}!serveur.c@{serveur.\-c}}
+\subsubsection[{receive\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}int receive\-Binary (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{data}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a1ba79c6c125a0abfa57b7ba17c0f7af8}
+
+
+receive data from the client 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & is the data received from the client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_aed71b18dc0d9c0a63d02c440bc4d3144}{\index{serveur.\-c@{serveur.\-c}!send\-Binary@{send\-Binary}}
+\index{send\-Binary@{send\-Binary}!serveur.c@{serveur.\-c}}
+\subsubsection[{send\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Binary (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{data, }
+\item[{size\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_aed71b18dc0d9c0a63d02c440bc4d3144}
+
+
+send to the server datas from a character array 
+
+send binary data to the client
+
+
+\begin{DoxyParams}{Parameters}
+{\em donnees} & is an array containing the data we will send and taille\-Max is the maximum character the function will stock in donnees \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of sent bytes, 0 for a closed connection and a negative number in case of an error
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & binary data to send to the client \\
+\hline
+{\em size} & data's size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a0297eb5750b13a22b937b66666c2de10}{\index{serveur.\-c@{serveur.\-c}!send\-Header\-Field@{send\-Header\-Field}}
+\index{send\-Header\-Field@{send\-Header\-Field}!serveur.c@{serveur.\-c}}
+\subsubsection[{send\-Header\-Field}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Header\-Field (
+\begin{DoxyParamCaption}
+\item[{int}]{size, }
+\item[{int}]{type}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a0297eb5750b13a22b937b66666c2de10}
+
+
+send header fileds as described in the R\-F\-C 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & size of the data which will be transfered \\
+\hline
+{\em type} & type of the data which will be transfered \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a5ee638c183f3aea235427c91687f68eb}{\index{serveur.\-c@{serveur.\-c}!send\-Status\-Line@{send\-Status\-Line}}
+\index{send\-Status\-Line@{send\-Status\-Line}!serveur.c@{serveur.\-c}}
+\subsubsection[{send\-Status\-Line}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Status\-Line (
+\begin{DoxyParamCaption}
+\item[{int}]{status\-Code}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a5ee638c183f3aea235427c91687f68eb}
+
+
+send a status line as described in the R\-F\-C 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status\-Code} & the status code to send to the client the rigth status line \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a9c4839208c0dc94512c6e36d29813b9a}{\index{serveur.\-c@{serveur.\-c}!send\-String@{send\-String}}
+\index{send\-String@{send\-String}!serveur.c@{serveur.\-c}}
+\subsubsection[{send\-String}]{\setlength{\rightskip}{0pt plus 5cm}int send\-String (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{data}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a9c4839208c0dc94512c6e36d29813b9a}
+
+
+send a string to the client 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & string to send to the client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_ac8397d27f5afc6b6fad603d2562dfad3}{\index{serveur.\-c@{serveur.\-c}!split\-Connect\-Request@{split\-Connect\-Request}}
+\index{split\-Connect\-Request@{split\-Connect\-Request}!serveur.c@{serveur.\-c}}
+\subsubsection[{split\-Connect\-Request}]{\setlength{\rightskip}{0pt plus 5cm}int split\-Connect\-Request (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int}]{size, }
+\item[{char $\ast$}]{login, }
+\item[{char $\ast$}]{password, }
+\item[{int $\ast$}]{size\-Login, }
+\item[{int $\ast$}]{size\-Password}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_ac8397d27f5afc6b6fad603d2562dfad3}
+
+
+split a C\-O\-N\-N\-E\-C\-T request to find and output the login and the password 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & the message which is a D\-E\-L\-E\-T\-E request \\
+\hline
+{\em size} & size of this message \\
+\hline
+{\em login} & login extracted from this C\-O\-N\-N\-E\-C\-T request \\
+\hline
+{\em password} & password extracted from this C\-O\-N\-N\-E\-C\-T request \\
+\hline
+{\em size\-Login} & length of the login \\
+\hline
+{\em size\-Password} & length of the password \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a70ee0360c7d9015f78ae0d3e92fdca2c}{\index{serveur.\-c@{serveur.\-c}!split\-Delete\-Request@{split\-Delete\-Request}}
+\index{split\-Delete\-Request@{split\-Delete\-Request}!serveur.c@{serveur.\-c}}
+\subsubsection[{split\-Delete\-Request}]{\setlength{\rightskip}{0pt plus 5cm}int split\-Delete\-Request (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int}]{size, }
+\item[{char $\ast$}]{data, }
+\item[{int $\ast$}]{size\-Data}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a70ee0360c7d9015f78ae0d3e92fdca2c}
+
+
+split a D\-E\-L\-E\-T\-E request to find and output the P\-D\-U 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & the message which is a D\-E\-L\-E\-T\-E request \\
+\hline
+{\em size} & size of this message \\
+\hline
+{\em data} & output data extracted from this D\-E\-L\-E\-T\-E request \\
+\hline
+{\em size\-Data} & size of the output data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_aaee0fd5652c113cb0db774c993be4cad}{\index{serveur.\-c@{serveur.\-c}!split\-Get\-Request@{split\-Get\-Request}}
+\index{split\-Get\-Request@{split\-Get\-Request}!serveur.c@{serveur.\-c}}
+\subsubsection[{split\-Get\-Request}]{\setlength{\rightskip}{0pt plus 5cm}int split\-Get\-Request (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int}]{size, }
+\item[{char $\ast$}]{data, }
+\item[{int $\ast$}]{size\-Data}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_aaee0fd5652c113cb0db774c993be4cad}
+
+
+split a G\-E\-T request to find and output the P\-D\-U 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & the message which is a G\-E\-T request \\
+\hline
+{\em size} & size of this message \\
+\hline
+{\em data} & output data extracted from this G\-E\-T request \\
+\hline
+{\em size\-Data} & size of the output data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{serveur_8c_a7213daa35e02db3be9546fb4e6168eb4}{\index{serveur.\-c@{serveur.\-c}!split\-Put\-Request@{split\-Put\-Request}}
+\index{split\-Put\-Request@{split\-Put\-Request}!serveur.c@{serveur.\-c}}
+\subsubsection[{split\-Put\-Request}]{\setlength{\rightskip}{0pt plus 5cm}int split\-Put\-Request (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int}]{size, }
+\item[{char $\ast$}]{data, }
+\item[{int $\ast$}]{size\-Data}
+\end{DoxyParamCaption}
+)}}\label{serveur_8c_a7213daa35e02db3be9546fb4e6168eb4}
+
+
+split a P\-U\-T request to find and output the P\-D\-U 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & the message which is a P\-U\-T request \\
+\hline
+{\em size} & size of this message \\
+\hline
+{\em data} & output data extracted from this P\-U\-T request \\
+\hline
+{\em size\-Data} & size of the output data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\hypertarget{serveur_8c_af144cf9efd8e4c61e15dd06c89ec7c32}{\index{serveur.\-c@{serveur.\-c}!adress\-Length@{adress\-Length}}
+\index{adress\-Length@{adress\-Length}!serveur.c@{serveur.\-c}}
+\subsubsection[{adress\-Length}]{\setlength{\rightskip}{0pt plus 5cm}socklen\-\_\-t adress\-Length}}\label{serveur_8c_af144cf9efd8e4c61e15dd06c89ec7c32}
+\hypertarget{serveur_8c_a4fc2e45819b55cbf1f9a24c2c1929ae1}{\index{serveur.\-c@{serveur.\-c}!buffer\-End@{buffer\-End}}
+\index{buffer\-End@{buffer\-End}!serveur.c@{serveur.\-c}}
+\subsubsection[{buffer\-End}]{\setlength{\rightskip}{0pt plus 5cm}int buffer\-End}}\label{serveur_8c_a4fc2e45819b55cbf1f9a24c2c1929ae1}
+\hypertarget{serveur_8c_ad97fbf9bd2beb5f2cbfe2ef07a1977ba}{\index{serveur.\-c@{serveur.\-c}!buffer\-Start@{buffer\-Start}}
+\index{buffer\-Start@{buffer\-Start}!serveur.c@{serveur.\-c}}
+\subsubsection[{buffer\-Start}]{\setlength{\rightskip}{0pt plus 5cm}int buffer\-Start}}\label{serveur_8c_ad97fbf9bd2beb5f2cbfe2ef07a1977ba}
+\hypertarget{serveur_8c_a1cdaf98115fa257a229e80fa89a0aab9}{\index{serveur.\-c@{serveur.\-c}!client\-Buffer@{client\-Buffer}}
+\index{client\-Buffer@{client\-Buffer}!serveur.c@{serveur.\-c}}
+\subsubsection[{client\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}char client\-Buffer\mbox{[}{\bf B\-U\-F\-F\-E\-R\-\_\-\-L\-E\-N\-G\-T\-H}\mbox{]}}}\label{serveur_8c_a1cdaf98115fa257a229e80fa89a0aab9}
+\hypertarget{serveur_8c_ae11cffd08437563d431ff3c88e28976d}{\index{serveur.\-c@{serveur.\-c}!connect\-End@{connect\-End}}
+\index{connect\-End@{connect\-End}!serveur.c@{serveur.\-c}}
+\subsubsection[{connect\-End}]{\setlength{\rightskip}{0pt plus 5cm}int connect\-End = {\bf F\-A\-L\-S\-E}}}\label{serveur_8c_ae11cffd08437563d431ff3c88e28976d}
+\hypertarget{serveur_8c_ad1409d0f223732c5405bfa50d535e0ae}{\index{serveur.\-c@{serveur.\-c}!listen\-Socket@{listen\-Socket}}
+\index{listen\-Socket@{listen\-Socket}!serveur.c@{serveur.\-c}}
+\subsubsection[{listen\-Socket}]{\setlength{\rightskip}{0pt plus 5cm}int listen\-Socket}}\label{serveur_8c_ad1409d0f223732c5405bfa50d535e0ae}
+\hypertarget{serveur_8c_a829a5de12c4f69db072f8cebae7e05e5}{\index{serveur.\-c@{serveur.\-c}!main\-Socket@{main\-Socket}}
+\index{main\-Socket@{main\-Socket}!serveur.c@{serveur.\-c}}
+\subsubsection[{main\-Socket}]{\setlength{\rightskip}{0pt plus 5cm}int main\-Socket}}\label{serveur_8c_a829a5de12c4f69db072f8cebae7e05e5}

@@ -1,0 +1,476 @@
+\hypertarget{client_8c}{\section{/home/emeric/projets/\-C\-Bay/sources/client.c File Reference}
+\label{client_8c}\index{/home/emeric/projets/\-C\-Bay/sources/client.\-c@{/home/emeric/projets/\-C\-Bay/sources/client.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$ctype.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+{\ttfamily \#include $<$errno.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$netdb.\-h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\-h$>$}\\*
+{\ttfamily \#include $<$sys/select.\-h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\-h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\-h$>$}\\*
+{\ttfamily \#include $<$strings.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}structures.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}client.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface\-Client.\-h\char`\"{}}\\*
+Include dependency graph for client.\-c\-:
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{client_8c_aa3f5526e7ebeec693be19684410ad009}{Init} (char $\ast$machine)
+\begin{DoxyCompactList}\small\item\em Connection to the server. \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a47e4b0a69e690abdcc95a08fa660c819}{receive\-Binary} (char $\ast$donnees, size\-\_\-t taille\-Max)
+\begin{DoxyCompactList}\small\item\em receive binary datas from the server and store them in a character array \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a89f1959ce9abb4013dd6a8e6a26a08f7}{send\-Binary} (char $\ast$donnees, size\-\_\-t taille)
+\begin{DoxyCompactList}\small\item\em send to the server datas from a character array \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_ad43491844975cb6318cf40550b62e54d}{send\-Get\-Object\-Bid} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$object)
+\begin{DoxyCompactList}\small\item\em send a request to the server to get an object \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a6749551ed05b3290335d8100c0ec0072}{send\-Get\-All\-Object\-Bid} ()
+\begin{DoxyCompactList}\small\item\em send a request to the server to get all the objects \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a8adfc5e934eb14484a855e5436ca528b}{send\-Put\-Object\-Bid} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$object)
+\begin{DoxyCompactList}\small\item\em send a request to the server to store an object in it \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_ac0af861680d0c9ae7d0c347137f8c1b1}{send\-Delete\-Object\-Bid} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$object)
+\begin{DoxyCompactList}\small\item\em send a request to the server to delete an object \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a3c93f98fe4a9853dba34b5415627afaa}{send\-Get\-User\-Account} (\hyperlink{struct_user_account}{User\-Account} $\ast$account)
+\begin{DoxyCompactList}\small\item\em send a request to the server to get an user account \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_aa299cb38810025467a6515bfcc834321}{send\-Put\-User\-Account} (\hyperlink{struct_user_account}{User\-Account} $\ast$account)
+\begin{DoxyCompactList}\small\item\em send a request to the server to store an user account in it \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a2ebe477642298bc447e6be2cc8d6fb9f}{send\-Delete\-User\-Account} (\hyperlink{struct_user_account}{User\-Account} $\ast$account)
+\begin{DoxyCompactList}\small\item\em send a request to the server to delete an user account \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a8791da4cdcf01088069bea80b08eb91d}{send\-Connect} (char $\ast$login, char $\ast$password)
+\begin{DoxyCompactList}\small\item\em send a request to the server to connect an user to the C\-Bay service \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a71fd27f4ecd18f6381e91ff96f4c3c4c}{split\-Status\-Line} (char $\ast$status\-Line, int $\ast$status\-Code, char $\ast$status\-Message)
+\begin{DoxyCompactList}\small\item\em take a status line and cut it in a status code and a reason phrase \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_af7c3cbc753ca7a74527a957491f31a19}{split\-Response\-Header} (char $\ast$response\-Header\-Field, int $\ast$content\-Length, char $\ast$content\-Type)
+\begin{DoxyCompactList}\small\item\em take the response header fields and extract the value of fields content-\/length and content-\/type \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a433c2400c9c9705371b55c7ec51f31f9}{account\-Creation} ()
+\begin{DoxyCompactList}\small\item\em Asks the user for some informations and create a new \hyperlink{struct_user_account}{User\-Account} then send it to the server. \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a2204bb5da49d6ebcb2e203855ab2627d}{connection} (\hyperlink{struct_user_account}{User\-Account} $\ast$user)
+\begin{DoxyCompactList}\small\item\em Asks the user for a login and a password and try to connect to the server. \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a7c273f6fdfa010393ee40637b0795c90}{list\-Objects} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$$\ast$list, int $\ast$list\-Size)
+\item 
+int \hyperlink{client_8c_a6f10e34ceac93601a3c8caf82f94957a}{search\-Object} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)
+\item 
+int \hyperlink{client_8c_ae3cd8f1e077cc2a30ae2655d9208775d}{bid\-Object} (\hyperlink{struct_user_account}{User\-Account} client, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$$\ast$list, int list\-Size)
+\begin{DoxyCompactList}\small\item\em Asks the user for a bid and send it to the server. Display the result. \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_aecf6a7972f0be2f1fa93ca0b63dcd255}{enter\-Object} (\hyperlink{struct_user_account}{User\-Account} $\ast$user)
+\begin{DoxyCompactList}\small\item\em Add an object into the list of available objects. \end{DoxyCompactList}\item 
+void \hyperlink{client_8c_ac7ef540969b7383da220fee7814ab22b}{Terminaison} ()
+\begin{DoxyCompactList}\small\item\em End the connection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{client_8c_adc5475d507e3d713ad405bbeb6eb41e7}{client\-Socket}
+\item 
+char \hyperlink{client_8c_a1cdaf98115fa257a229e80fa89a0aab9}{client\-Buffer} \mbox{[}\hyperlink{defines_8h_af7b7dc9a200cb1404c280bd500fd1551}{B\-U\-F\-F\-E\-R\-\_\-\-L\-E\-N\-G\-T\-H}\mbox{]}
+\item 
+int \hyperlink{client_8c_ad97fbf9bd2beb5f2cbfe2ef07a1977ba}{buffer\-Start}
+\item 
+int \hyperlink{client_8c_a4fc2e45819b55cbf1f9a24c2c1929ae1}{buffer\-End}
+\item 
+int \hyperlink{client_8c_ae11cffd08437563d431ff3c88e28976d}{connect\-End} = \hyperlink{defines_8h_aa93f0eb578d23995850d61f7d61c55c1}{F\-A\-L\-S\-E}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{client_8c_a433c2400c9c9705371b55c7ec51f31f9}{\index{client.\-c@{client.\-c}!account\-Creation@{account\-Creation}}
+\index{account\-Creation@{account\-Creation}!client.c@{client.\-c}}
+\subsubsection[{account\-Creation}]{\setlength{\rightskip}{0pt plus 5cm}int account\-Creation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a433c2400c9c9705371b55c7ec51f31f9}
+
+
+Asks the user for some informations and create a new \hyperlink{struct_user_account}{User\-Account} then send it to the server. 
+
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_ae3cd8f1e077cc2a30ae2655d9208775d}{\index{client.\-c@{client.\-c}!bid\-Object@{bid\-Object}}
+\index{bid\-Object@{bid\-Object}!client.c@{client.\-c}}
+\subsubsection[{bid\-Object}]{\setlength{\rightskip}{0pt plus 5cm}int bid\-Object (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account}}]{client, }
+\item[{{\bf Object\-Bid} $\ast$$\ast$}]{list, }
+\item[{int}]{list\-Size}
+\end{DoxyParamCaption}
+)}}\label{client_8c_ae3cd8f1e077cc2a30ae2655d9208775d}
+
+
+Asks the user for a bid and send it to the server. Display the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client} & is the connected user who want to bid for the object, list is the list of object the client will chose from and list\-Size the number of objects in the list \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_a2204bb5da49d6ebcb2e203855ab2627d}{\index{client.\-c@{client.\-c}!connection@{connection}}
+\index{connection@{connection}!client.c@{client.\-c}}
+\subsubsection[{connection}]{\setlength{\rightskip}{0pt plus 5cm}int connection (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a2204bb5da49d6ebcb2e203855ab2627d}
+
+
+Asks the user for a login and a password and try to connect to the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & is the account sent back by the server if the connection is ok \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the result (S\-U\-C\-C\-E\-S\-S or C\-O\-N\-N\-E\-C\-T\-I\-O\-N\-\_\-\-D\-E\-N\-I\-E\-D) 
+\end{DoxyReturn}
+\hypertarget{client_8c_aecf6a7972f0be2f1fa93ca0b63dcd255}{\index{client.\-c@{client.\-c}!enter\-Object@{enter\-Object}}
+\index{enter\-Object@{enter\-Object}!client.c@{client.\-c}}
+\subsubsection[{enter\-Object}]{\setlength{\rightskip}{0pt plus 5cm}int enter\-Object (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}}\label{client_8c_aecf6a7972f0be2f1fa93ca0b63dcd255}
+
+
+Add an object into the list of available objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & is the vendor's account, \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_aa3f5526e7ebeec693be19684410ad009}{\index{client.\-c@{client.\-c}!Init@{Init}}
+\index{Init@{Init}!client.c@{client.\-c}}
+\subsubsection[{Init}]{\setlength{\rightskip}{0pt plus 5cm}int Init (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{port}
+\end{DoxyParamCaption}
+)}}\label{client_8c_aa3f5526e7ebeec693be19684410ad009}
+
+
+Connection to the server. 
+
+initialise the server
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & is the server's adress \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+S\-U\-C\-C\-E\-S\-S or E\-R\-R\-O\-R\-\_\-\-U\-N\-K\-N\-O\-W\-N
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em port} & is the port which will be used by the server \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation. 
+\end{DoxyReturn}
+\hypertarget{client_8c_a7c273f6fdfa010393ee40637b0795c90}{\index{client.\-c@{client.\-c}!list\-Objects@{list\-Objects}}
+\index{list\-Objects@{list\-Objects}!client.c@{client.\-c}}
+\subsubsection[{list\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}int list\-Objects (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$$\ast$}]{list, }
+\item[{int $\ast$}]{list\-Size}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a7c273f6fdfa010393ee40637b0795c90}
+\hypertarget{client_8c_a47e4b0a69e690abdcc95a08fa660c819}{\index{client.\-c@{client.\-c}!receive\-Binary@{receive\-Binary}}
+\index{receive\-Binary@{receive\-Binary}!client.c@{client.\-c}}
+\subsubsection[{receive\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}int receive\-Binary (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{donnees, }
+\item[{size\-\_\-t}]{taille\-Max}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a47e4b0a69e690abdcc95a08fa660c819}
+
+
+receive binary datas from the server and store them in a character array 
+
+
+\begin{DoxyParams}{Parameters}
+{\em donnees} & is an array in which we store the incoming data and taille\-Max is the maximum character the function will stock in donnees \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of received bytes, 0 for a closed connection and a negative number in case of an error 
+\end{DoxyReturn}
+\hypertarget{client_8c_a6f10e34ceac93601a3c8caf82f94957a}{\index{client.\-c@{client.\-c}!search\-Object@{search\-Object}}
+\index{search\-Object@{search\-Object}!client.c@{client.\-c}}
+\subsubsection[{search\-Object}]{\setlength{\rightskip}{0pt plus 5cm}int search\-Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{list, }
+\item[{int}]{list\-Size}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a6f10e34ceac93601a3c8caf82f94957a}
+\hypertarget{client_8c_a89f1959ce9abb4013dd6a8e6a26a08f7}{\index{client.\-c@{client.\-c}!send\-Binary@{send\-Binary}}
+\index{send\-Binary@{send\-Binary}!client.c@{client.\-c}}
+\subsubsection[{send\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Binary (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{data, }
+\item[{size\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a89f1959ce9abb4013dd6a8e6a26a08f7}
+
+
+send to the server datas from a character array 
+
+send binary data to the client
+
+
+\begin{DoxyParams}{Parameters}
+{\em donnees} & is an array containing the data we will send and taille\-Max is the maximum character the function will stock in donnees \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of sent bytes, 0 for a closed connection and a negative number in case of an error
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & binary data to send to the client \\
+\hline
+{\em size} & data's size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{client_8c_a8791da4cdcf01088069bea80b08eb91d}{\index{client.\-c@{client.\-c}!send\-Connect@{send\-Connect}}
+\index{send\-Connect@{send\-Connect}!client.c@{client.\-c}}
+\subsubsection[{send\-Connect}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Connect (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{login, }
+\item[{char $\ast$}]{password}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a8791da4cdcf01088069bea80b08eb91d}
+
+
+send a request to the server to connect an user to the C\-Bay service 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & character array for the login and one for the password \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_ac0af861680d0c9ae7d0c347137f8c1b1}{\index{client.\-c@{client.\-c}!send\-Delete\-Object\-Bid@{send\-Delete\-Object\-Bid}}
+\index{send\-Delete\-Object\-Bid@{send\-Delete\-Object\-Bid}!client.c@{client.\-c}}
+\subsubsection[{send\-Delete\-Object\-Bid}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Delete\-Object\-Bid (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{client_8c_ac0af861680d0c9ae7d0c347137f8c1b1}
+
+
+send a request to the server to delete an object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an} & object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_a2ebe477642298bc447e6be2cc8d6fb9f}{\index{client.\-c@{client.\-c}!send\-Delete\-User\-Account@{send\-Delete\-User\-Account}}
+\index{send\-Delete\-User\-Account@{send\-Delete\-User\-Account}!client.c@{client.\-c}}
+\subsubsection[{send\-Delete\-User\-Account}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Delete\-User\-Account (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{account}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a2ebe477642298bc447e6be2cc8d6fb9f}
+
+
+send a request to the server to delete an user account 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an} & user account \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_a6749551ed05b3290335d8100c0ec0072}{\index{client.\-c@{client.\-c}!send\-Get\-All\-Object\-Bid@{send\-Get\-All\-Object\-Bid}}
+\index{send\-Get\-All\-Object\-Bid@{send\-Get\-All\-Object\-Bid}!client.c@{client.\-c}}
+\subsubsection[{send\-Get\-All\-Object\-Bid}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Get\-All\-Object\-Bid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a6749551ed05b3290335d8100c0ec0072}
+
+
+send a request to the server to get all the objects 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an} & object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_ad43491844975cb6318cf40550b62e54d}{\index{client.\-c@{client.\-c}!send\-Get\-Object\-Bid@{send\-Get\-Object\-Bid}}
+\index{send\-Get\-Object\-Bid@{send\-Get\-Object\-Bid}!client.c@{client.\-c}}
+\subsubsection[{send\-Get\-Object\-Bid}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Get\-Object\-Bid (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{client_8c_ad43491844975cb6318cf40550b62e54d}
+
+
+send a request to the server to get an object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an} & object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_a3c93f98fe4a9853dba34b5415627afaa}{\index{client.\-c@{client.\-c}!send\-Get\-User\-Account@{send\-Get\-User\-Account}}
+\index{send\-Get\-User\-Account@{send\-Get\-User\-Account}!client.c@{client.\-c}}
+\subsubsection[{send\-Get\-User\-Account}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Get\-User\-Account (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{account}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a3c93f98fe4a9853dba34b5415627afaa}
+
+
+send a request to the server to get an user account 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an} & user account \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_a8adfc5e934eb14484a855e5436ca528b}{\index{client.\-c@{client.\-c}!send\-Put\-Object\-Bid@{send\-Put\-Object\-Bid}}
+\index{send\-Put\-Object\-Bid@{send\-Put\-Object\-Bid}!client.c@{client.\-c}}
+\subsubsection[{send\-Put\-Object\-Bid}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Put\-Object\-Bid (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a8adfc5e934eb14484a855e5436ca528b}
+
+
+send a request to the server to store an object in it 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an} & object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_aa299cb38810025467a6515bfcc834321}{\index{client.\-c@{client.\-c}!send\-Put\-User\-Account@{send\-Put\-User\-Account}}
+\index{send\-Put\-User\-Account@{send\-Put\-User\-Account}!client.c@{client.\-c}}
+\subsubsection[{send\-Put\-User\-Account}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Put\-User\-Account (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{account}
+\end{DoxyParamCaption}
+)}}\label{client_8c_aa299cb38810025467a6515bfcc834321}
+
+
+send a request to the server to store an user account in it 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an} & user account \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_af7c3cbc753ca7a74527a957491f31a19}{\index{client.\-c@{client.\-c}!split\-Response\-Header@{split\-Response\-Header}}
+\index{split\-Response\-Header@{split\-Response\-Header}!client.c@{client.\-c}}
+\subsubsection[{split\-Response\-Header}]{\setlength{\rightskip}{0pt plus 5cm}split\-Response\-Header (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{response\-Header\-Field, }
+\item[{int $\ast$}]{content\-Length, }
+\item[{char $\ast$}]{content\-Type}
+\end{DoxyParamCaption}
+)}}\label{client_8c_af7c3cbc753ca7a74527a957491f31a19}
+
+
+take the response header fields and extract the value of fields content-\/length and content-\/type 
+
+
+\begin{DoxyParams}{Parameters}
+{\em the} & response\-Header\-Field to cut and the content\-Length and content\-Type to extract \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_a71fd27f4ecd18f6381e91ff96f4c3c4c}{\index{client.\-c@{client.\-c}!split\-Status\-Line@{split\-Status\-Line}}
+\index{split\-Status\-Line@{split\-Status\-Line}!client.c@{client.\-c}}
+\subsubsection[{split\-Status\-Line}]{\setlength{\rightskip}{0pt plus 5cm}split\-Status\-Line (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{status\-Line, }
+\item[{int $\ast$}]{status\-Code, }
+\item[{char $\ast$}]{status\-Message}
+\end{DoxyParamCaption}
+)}}\label{client_8c_a71fd27f4ecd18f6381e91ff96f4c3c4c}
+
+
+take a status line and cut it in a status code and a reason phrase 
+
+
+\begin{DoxyParams}{Parameters}
+{\em the} & status line to cut, the status code and the status\-Message to extract \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code of this operation 
+\end{DoxyReturn}
+\hypertarget{client_8c_ac7ef540969b7383da220fee7814ab22b}{\index{client.\-c@{client.\-c}!Terminaison@{Terminaison}}
+\index{Terminaison@{Terminaison}!client.c@{client.\-c}}
+\subsubsection[{Terminaison}]{\setlength{\rightskip}{0pt plus 5cm}void Terminaison (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{client_8c_ac7ef540969b7383da220fee7814ab22b}
+
+
+End the connection. 
+
+\begin{DoxyReturn}{Returns}
+nothing 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\hypertarget{client_8c_a4fc2e45819b55cbf1f9a24c2c1929ae1}{\index{client.\-c@{client.\-c}!buffer\-End@{buffer\-End}}
+\index{buffer\-End@{buffer\-End}!client.c@{client.\-c}}
+\subsubsection[{buffer\-End}]{\setlength{\rightskip}{0pt plus 5cm}int buffer\-End}}\label{client_8c_a4fc2e45819b55cbf1f9a24c2c1929ae1}
+\hypertarget{client_8c_ad97fbf9bd2beb5f2cbfe2ef07a1977ba}{\index{client.\-c@{client.\-c}!buffer\-Start@{buffer\-Start}}
+\index{buffer\-Start@{buffer\-Start}!client.c@{client.\-c}}
+\subsubsection[{buffer\-Start}]{\setlength{\rightskip}{0pt plus 5cm}int buffer\-Start}}\label{client_8c_ad97fbf9bd2beb5f2cbfe2ef07a1977ba}
+\hypertarget{client_8c_a1cdaf98115fa257a229e80fa89a0aab9}{\index{client.\-c@{client.\-c}!client\-Buffer@{client\-Buffer}}
+\index{client\-Buffer@{client\-Buffer}!client.c@{client.\-c}}
+\subsubsection[{client\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}char client\-Buffer\mbox{[}{\bf B\-U\-F\-F\-E\-R\-\_\-\-L\-E\-N\-G\-T\-H}\mbox{]}}}\label{client_8c_a1cdaf98115fa257a229e80fa89a0aab9}
+\hypertarget{client_8c_adc5475d507e3d713ad405bbeb6eb41e7}{\index{client.\-c@{client.\-c}!client\-Socket@{client\-Socket}}
+\index{client\-Socket@{client\-Socket}!client.c@{client.\-c}}
+\subsubsection[{client\-Socket}]{\setlength{\rightskip}{0pt plus 5cm}int client\-Socket}}\label{client_8c_adc5475d507e3d713ad405bbeb6eb41e7}
+\hypertarget{client_8c_ae11cffd08437563d431ff3c88e28976d}{\index{client.\-c@{client.\-c}!connect\-End@{connect\-End}}
+\index{connect\-End@{connect\-End}!client.c@{client.\-c}}
+\subsubsection[{connect\-End}]{\setlength{\rightskip}{0pt plus 5cm}int connect\-End = {\bf F\-A\-L\-S\-E}}}\label{client_8c_ae11cffd08437563d431ff3c88e28976d}

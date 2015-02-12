@@ -6,6 +6,7 @@
 This file provides function for a B\-E\-E\-P client. It also contains fonction to send data using other methods than connect (typically G\-E\-T, P\-U\-T and D\-E\-L\-E\-T\-E) or function to split and extract data from incoming answer from the server.  
 
 
+This graph shows which files directly or indirectly include this file\-:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -39,11 +40,9 @@ int \hyperlink{client_8h_a433c2400c9c9705371b55c7ec51f31f9}{account\-Creation} (
 \begin{DoxyCompactList}\small\item\em Asks the user for some informations and create a new \hyperlink{struct_user_account}{User\-Account} then send it to the server. \end{DoxyCompactList}\item 
 int \hyperlink{client_8h_a2204bb5da49d6ebcb2e203855ab2627d}{connection} (\hyperlink{struct_user_account}{User\-Account} $\ast$user)
 \begin{DoxyCompactList}\small\item\em Asks the user for a login and a password and try to connect to the server. \end{DoxyCompactList}\item 
-\hypertarget{client_8h_a7c273f6fdfa010393ee40637b0795c90}{int {\bfseries list\-Objects} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$$\ast$list, int $\ast$list\-Size)}\label{client_8h_a7c273f6fdfa010393ee40637b0795c90}
-
+int \hyperlink{client_8h_a7c273f6fdfa010393ee40637b0795c90}{list\-Objects} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$$\ast$list, int $\ast$list\-Size)
 \item 
-\hypertarget{client_8h_a6f10e34ceac93601a3c8caf82f94957a}{int {\bfseries search\-Object} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)}\label{client_8h_a6f10e34ceac93601a3c8caf82f94957a}
-
+int \hyperlink{client_8h_a6f10e34ceac93601a3c8caf82f94957a}{search\-Object} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)
 \item 
 int \hyperlink{client_8h_ae3cd8f1e077cc2a30ae2655d9208775d}{bid\-Object} (\hyperlink{struct_user_account}{User\-Account} client, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$$\ast$list, int list\-Size)
 \begin{DoxyCompactList}\small\item\em Asks the user for a bid and send it to the server. Display the result. \end{DoxyCompactList}\item 
@@ -159,6 +158,14 @@ S\-U\-C\-C\-E\-S\-S or E\-R\-R\-O\-R\-\_\-\-U\-N\-K\-N\-O\-W\-N
 \begin{DoxyReturn}{Returns}
 status code of this operation. 
 \end{DoxyReturn}
+\hypertarget{client_8h_a7c273f6fdfa010393ee40637b0795c90}{\index{client.\-h@{client.\-h}!list\-Objects@{list\-Objects}}
+\index{list\-Objects@{list\-Objects}!client.h@{client.\-h}}
+\subsubsection[{list\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}int list\-Objects (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$$\ast$}]{list, }
+\item[{int $\ast$}]{list\-Size}
+\end{DoxyParamCaption}
+)}}\label{client_8h_a7c273f6fdfa010393ee40637b0795c90}
 \hypertarget{client_8h_a47e4b0a69e690abdcc95a08fa660c819}{\index{client.\-h@{client.\-h}!receive\-Binary@{receive\-Binary}}
 \index{receive\-Binary@{receive\-Binary}!client.h@{client.\-h}}
 \subsubsection[{receive\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}int receive\-Binary (
@@ -179,6 +186,14 @@ receive binary datas from the server and store them in a character array
 \begin{DoxyReturn}{Returns}
 the number of received bytes, 0 for a closed connection and a negative number in case of an error 
 \end{DoxyReturn}
+\hypertarget{client_8h_a6f10e34ceac93601a3c8caf82f94957a}{\index{client.\-h@{client.\-h}!search\-Object@{search\-Object}}
+\index{search\-Object@{search\-Object}!client.h@{client.\-h}}
+\subsubsection[{search\-Object}]{\setlength{\rightskip}{0pt plus 5cm}int search\-Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{list, }
+\item[{int}]{list\-Size}
+\end{DoxyParamCaption}
+)}}\label{client_8h_a6f10e34ceac93601a3c8caf82f94957a}
 \hypertarget{client_8h_a89f1959ce9abb4013dd6a8e6a26a08f7}{\index{client.\-h@{client.\-h}!send\-Binary@{send\-Binary}}
 \index{send\-Binary@{send\-Binary}!client.h@{client.\-h}}
 \subsubsection[{send\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}int send\-Binary (

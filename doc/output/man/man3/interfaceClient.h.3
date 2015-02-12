@@ -1,4 +1,4 @@
-.TH "/home/emeric/projets/CBay/sources/interfaceClient.h" 3 "Thu Feb 12 2015" "CBay" \" -*- nroff -*-
+.TH "/home/emeric/projets/CBay/sources/interfaceClient.h" 3 "Thu Feb 12 2015" "Version BEEP - 0.1a" "CBay" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -56,6 +56,10 @@ This file provides the main function to interact with the user like displaying m
 
 .SH "Function Documentation"
 .PP 
+.SS "int biddingInput (\fBObjectBid\fPobj, float *price)"
+
+.SS "int choseObjectInList (int *chosen, \fBObjectBid\fP *list, intlistSize)"
+
 .SS "int connectionInput (char *login, char *password)"
 
 .PP
@@ -69,6 +73,8 @@ asks the user for a login and a password and gets their answer\&. \fBParameters:
 the status code of this operation 
 .RE
 .PP
+
+.SS "void displayList (\fBObjectBid\fP *list, intlistSize)"
 
 .SS "void displayObject (\fBObjectBid\fPobj)"
 

@@ -6,6 +6,7 @@
 This file provides B\-E\-E\-P server functions This file provides some usual functions for a server like init, reception and emission. It also contains some other derivated functions to test and play with received requests plus response making functions like status line and header fields answering .  
 
 
+This graph shows which files directly or indirectly include this file\-:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,11 +20,9 @@ int \hyperlink{serveur_8h_aed71b18dc0d9c0a63d02c440bc4d3144}{send\-Binary} (char
 \begin{DoxyCompactList}\small\item\em send to the server datas from a character array \end{DoxyCompactList}\item 
 int \hyperlink{serveur_8h_ad2959e97e8c0f02fe7e4e70cf5312b54}{send\-String} (char $\ast$data)
 \begin{DoxyCompactList}\small\item\em send a string to the client \end{DoxyCompactList}\item 
-\hypertarget{serveur_8h_a54b6d78ba44089862798c271e7c53cb7}{void \hyperlink{serveur_8h_a54b6d78ba44089862798c271e7c53cb7}{end\-Client} ()}\label{serveur_8h_a54b6d78ba44089862798c271e7c53cb7}
-
+void \hyperlink{serveur_8h_a54b6d78ba44089862798c271e7c53cb7}{end\-Client} ()
 \begin{DoxyCompactList}\small\item\em close properly the connection with the client \end{DoxyCompactList}\item 
-\hypertarget{serveur_8h_ac6ea75141abcbfe34f535fe2f89a8764}{void \hyperlink{serveur_8h_ac6ea75141abcbfe34f535fe2f89a8764}{end\-Server} ()}\label{serveur_8h_ac6ea75141abcbfe34f535fe2f89a8764}
-
+void \hyperlink{serveur_8h_ac6ea75141abcbfe34f535fe2f89a8764}{end\-Server} ()
 \begin{DoxyCompactList}\small\item\em close properly the server process \end{DoxyCompactList}\item 
 int \hyperlink{serveur_8h_a5ee638c183f3aea235427c91687f68eb}{send\-Status\-Line} (int status\-Code)
 \begin{DoxyCompactList}\small\item\em send a status line as described in the R\-F\-C \end{DoxyCompactList}\item 
@@ -131,6 +130,28 @@ wait for a client to connect, and then open the connection with him
 \begin{DoxyReturn}{Returns}
 status code of this operation. 
 \end{DoxyReturn}
+\hypertarget{serveur_8h_a54b6d78ba44089862798c271e7c53cb7}{\index{serveur.\-h@{serveur.\-h}!end\-Client@{end\-Client}}
+\index{end\-Client@{end\-Client}!serveur.h@{serveur.\-h}}
+\subsubsection[{end\-Client}]{\setlength{\rightskip}{0pt plus 5cm}void end\-Client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{serveur_8h_a54b6d78ba44089862798c271e7c53cb7}
+
+
+close properly the connection with the client 
+
+\hypertarget{serveur_8h_ac6ea75141abcbfe34f535fe2f89a8764}{\index{serveur.\-h@{serveur.\-h}!end\-Server@{end\-Server}}
+\index{end\-Server@{end\-Server}!serveur.h@{serveur.\-h}}
+\subsubsection[{end\-Server}]{\setlength{\rightskip}{0pt plus 5cm}void end\-Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{serveur_8h_ac6ea75141abcbfe34f535fe2f89a8764}
+
+
+close properly the server process 
+
 \hypertarget{serveur_8h_a5a0021a5ca941dc4a69566c8ad57d825}{\index{serveur.\-h@{serveur.\-h}!Init@{Init}}
 \index{Init@{Init}!serveur.h@{serveur.\-h}}
 \subsubsection[{Init}]{\setlength{\rightskip}{0pt plus 5cm}int Init (

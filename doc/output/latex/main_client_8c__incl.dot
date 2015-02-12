@@ -1,0 +1,23 @@
+digraph "/home/emeric/projets/CBay/sources/mainClient.c"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="/home/emeric/projets\l/CBay/sources/mainClient.c",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="stdio.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="stdlib.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="string.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="structures.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structures_8h.html",tooltip="this file provides functions for data manipulation This file provides data structures and usual assoc..."];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="defines.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$defines_8h.html",tooltip="This file defines all constants."];
+  Node5 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="time.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="interfaceClient.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_client_8h.html",tooltip="This file provides the main function to interact with the user like displaying menus or menu choices..."];
+  Node8 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="client.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html",tooltip="This file provides function for a BEEP client. It also contains fonction to send data using other met..."];
+}

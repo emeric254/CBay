@@ -1,4 +1,4 @@
-.TH "ConfidentialIDS" 3 "Thu Feb 12 2015" "CBay" \" -*- nroff -*-
+.TH "ConfidentialIDS" 3 "Thu Feb 12 2015" "Version BEEP - 0.1a" "CBay" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,6 +6,8 @@ ConfidentialIDS \-
 .SH SYNOPSIS
 .br
 .PP
+.PP
+\fC#include <structures\&.h>\fP
 .SS "Data Fields"
 
 .in +1c
@@ -13,12 +15,20 @@ ConfidentialIDS \-
 .RI "long int \fBid\fP"
 .br
 .ti -1c
-.RI "char \fBlogin\fP [USERACCOUNT_LOGIN_LENGTH]"
+.RI "char \fBlogin\fP [\fBUSERACCOUNT_LOGIN_LENGTH\fP]"
 .br
 .ti -1c
-.RI "char \fBpassword\fP [USERACCOUNT_PASSWORD_LENGTH]"
+.RI "char \fBpassword\fP [\fBUSERACCOUNT_PASSWORD_LENGTH\fP]"
 .br
 .in -1c
+.SH "Field Documentation"
+.PP 
+.SS "long int id"
+
+.SS "char login[\fBUSERACCOUNT_LOGIN_LENGTH\fP]"
+
+.SS "char password[\fBUSERACCOUNT_PASSWORD_LENGTH\fP]"
+
 
 .SH "Author"
 .PP 

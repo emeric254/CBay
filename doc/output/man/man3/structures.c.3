@@ -1,0 +1,534 @@
+.TH "/home/emeric/projets/CBay/sources/structures.c" 3 "Thu Feb 12 2015" "Version BEEP - 0.1a" "CBay" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/emeric/projets/CBay/sources/structures.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'structures\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcleanBuffer\fP ()"
+.br
+.RI "\fIclean the buffer \fP"
+.ti -1c
+.RI "char \fBgetAChar\fP ()"
+.br
+.RI "\fIwait for a char input from the user \fP"
+.ti -1c
+.RI "void \fBuserInputUserAccount\fP (\fBUserAccount\fP *account)"
+.br
+.RI "\fIask the user to input fields of a new \fBUserAccount\fP var except ids\&. \fP"
+.ti -1c
+.RI "void \fBuserInputObjectBid\fP (\fBObjectBid\fP *bid)"
+.br
+.RI "\fIask the user to input fields of a new \fBObjectBid\fP except ids' and currentBid vars\&. \fP"
+.ti -1c
+.RI "int \fBmailCheck\fP (char *mail, int length)"
+.br
+.RI "\fIcheck if an input string is composed as a valid mail adress \fP"
+.ti -1c
+.RI "int \fBaccSave\fP (\fBUserAccount\fP user, FILE *f)"
+.br
+.RI "\fIsave account's informations into the ACC_FILE \fP"
+.ti -1c
+.RI "int \fBaccLoad\fP (\fBUserAccount\fP *user, FILE *f)"
+.br
+.RI "\fIload account's informations from the ACC_FILE \fP"
+.ti -1c
+.RI "int \fBuserInTable\fP (\fBUserAccount\fP *user, \fBUserAccount\fP *table, int size, \fBUserAccount\fP *ptrAccount)"
+.br
+.ti -1c
+.RI "int \fBallAccSave\fP (\fBUserAccount\fP *table, int size)"
+.br
+.RI "\fIsave a table of \fBUserAccount\fP from the ACC_FILE \fP"
+.ti -1c
+.RI "int \fBallAccLoad\fP (\fBUserAccount\fP **table, int *size)"
+.br
+.RI "\fIload a table of \fBUserAccount\fP from the ACC_FILE \fP"
+.ti -1c
+.RI "int \fBobjSave\fP (\fBObjectBid\fP obj, FILE *f)"
+.br
+.RI "\fIsave object's informations into the OBJ_FILE \fP"
+.ti -1c
+.RI "int \fBobjLoad\fP (\fBObjectBid\fP *obj, FILE *f)"
+.br
+.RI "\fIload object's informations from the OBJ_FILE \fP"
+.ti -1c
+.RI "int \fBobjInTable\fP (\fBObjectBid\fP *obj, \fBObjectBid\fP *table, int size, \fBObjectBid\fP *ptrObject)"
+.br
+.ti -1c
+.RI "int \fBallObjSave\fP (\fBObjectBid\fP *table, int size)"
+.br
+.RI "\fIsave a table of objects to the OBJ_FILE \fP"
+.ti -1c
+.RI "int \fBallObjLoad\fP (\fBObjectBid\fP **table, int *size)"
+.br
+.RI "\fIload a table of objects from the OBJ_FILE \fP"
+.ti -1c
+.RI "int \fBidsLoad\fP (\fBConfidentialIDS\fP *ids, FILE *f)"
+.br
+.RI "\fIload ids's informations from the IDS_FILE \fP"
+.ti -1c
+.RI "int \fBallIDSLoad\fP (\fBConfidentialIDS\fP **table, int *size)"
+.br
+.RI "\fIload a table of IDS from the IDS_FILE \fP"
+.ti -1c
+.RI "int \fBallIDSSave\fP (\fBConfidentialIDS\fP **table, int *size)"
+.br
+.RI "\fIsave all the IDS table to the IDS_FILE \fP"
+.ti -1c
+.RI "int \fBidsInTable\fP (char login[\fBUSERACCOUNT_LOGIN_LENGTH\fP], char password[\fBUSERACCOUNT_PASSWORD_LENGTH\fP], \fBConfidentialIDS\fP *table, int size, \fBConfidentialIDS\fP *ptrIDS)"
+.br
+.ti -1c
+.RI "int \fBisObjectBid\fP (int size)"
+.br
+.ti -1c
+.RI "int \fBisObjectBidTable\fP (int size)"
+.br
+.RI "\fItest if the data's size given match to an \fBObjectBid\fP table size \fP"
+.ti -1c
+.RI "int \fBisAccountUser\fP (int size)"
+.br
+.RI "\fItest if the data's size given match to an \fBUserAccount\fP var size \fP"
+.ti -1c
+.RI "long int \fBgetCurrentTime\fP ()"
+.br
+.RI "\fIreturns the time as the number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC)\&. \fP"
+.ti -1c
+.RI "int \fBisFinishObjectBid\fP (\fBObjectBid\fP *object)"
+.br
+.RI "\fItest if an \fBObjectBid\fP is finished or not, checking his time value\&. \fP"
+.ti -1c
+.RI "int \fBremoveObjectBidInTable\fP (\fBObjectBid\fP **table, int *size, \fBObjectBid\fP *object)"
+.br
+.RI "\fIremove an \fBObjectBid\fP to an \fBObjectBid\fP table\&. \fP"
+.ti -1c
+.RI "int \fBaddObjectBidInTable\fP (\fBObjectBid\fP **table, int *size, \fBObjectBid\fP *object)"
+.br
+.RI "\fIadd an \fBObjectBid\fP to an \fBObjectBid\fP table\&. \fP"
+.ti -1c
+.RI "int \fBremoveUserAccountInTable\fP (\fBUserAccount\fP **table, int *size, \fBUserAccount\fP *user)"
+.br
+.RI "\fIremove an \fBUserAccount\fP to an \fBUserAccount\fP table\&. \fP"
+.ti -1c
+.RI "int \fBaddUserAccountInTable\fP (\fBUserAccount\fP **table, int *size, \fBUserAccount\fP *user)"
+.br
+.RI "\fIadd an \fBUserAccount\fP to an \fBUserAccount\fP table\&. \fP"
+.ti -1c
+.RI "int \fBsearchObjectBidInTable\fP (\fBObjectBid\fP *table, int size, \fBObjectBid\fP *object, \fBObjectBid\fP *ptrObject)"
+.br
+.RI "\fIsearch by name a matching \fBObjectBid\fP \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int accLoad (\fBUserAccount\fP *user, FILE *f)"
+
+.PP
+load account's informations from the ACC_FILE \fBParameters:\fP
+.RS 4
+\fIuser\fP output user var 
+.br
+\fIf\fP file descriptor to the input file (ACC_FILE) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int accSave (\fBUserAccount\fPuser, FILE *f)"
+
+.PP
+save account's informations into the ACC_FILE \fBParameters:\fP
+.RS 4
+\fIuser\fP user var to save 
+.br
+\fIf\fP file descriptor to the output file (ACC_FILE) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int addObjectBidInTable (\fBObjectBid\fP **table, int *size, \fBObjectBid\fP *object)"
+
+.PP
+add an \fBObjectBid\fP to an \fBObjectBid\fP table\&. \fBParameters:\fP
+.RS 4
+\fItable\fP the \fBObjectBid\fP table to append of one \fBObjectBid\fP 
+.br
+\fIsize\fP size of this table 
+.br
+\fIobject\fP the \fBObjectBid\fP to add into this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int addUserAccountInTable (\fBUserAccount\fP **table, int *size, \fBUserAccount\fP *object)"
+
+.PP
+add an \fBUserAccount\fP to an \fBUserAccount\fP table\&. \fBParameters:\fP
+.RS 4
+\fItable\fP the \fBUserAccount\fP table to append of one \fBUserAccount\fP 
+.br
+\fIsize\fP size of this table 
+.br
+\fIuser\fP the \fBUserAccount\fP to add into this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int allAccLoad (\fBUserAccount\fP **table, int *size)"
+
+.PP
+load a table of \fBUserAccount\fP from the ACC_FILE \fBParameters:\fP
+.RS 4
+\fItable\fP output table which will be load 
+.br
+\fIsize\fP size of this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int allAccSave (\fBUserAccount\fP *table, intsize)"
+
+.PP
+save a table of \fBUserAccount\fP from the ACC_FILE \fBParameters:\fP
+.RS 4
+\fItable\fP input table to save 
+.br
+\fIsize\fP size of this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int allIDSLoad (\fBConfidentialIDS\fP **table, int *size)"
+
+.PP
+load a table of IDS from the IDS_FILE \fBParameters:\fP
+.RS 4
+\fItable\fP output IDS table to load 
+.br
+\fIsize\fP size of this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int allIDSSave (\fBConfidentialIDS\fP **table, int *size)"
+
+.PP
+save all the IDS table to the IDS_FILE \fBParameters:\fP
+.RS 4
+\fItable\fP ptr to the IDS table to save 
+.br
+\fIsize\fP size of this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int allObjLoad (\fBObjectBid\fP **table, int *size)"
+
+.PP
+load a table of objects from the OBJ_FILE \fBParameters:\fP
+.RS 4
+\fItable\fP output \fBObjectBid\fP table to load 
+.br
+\fIsize\fP output size of this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int allObjSave (\fBObjectBid\fP *table, intsize)"
+
+.PP
+save a table of objects to the OBJ_FILE \fBParameters:\fP
+.RS 4
+\fItable\fP input \fBObjectBid\fP table to save 
+.br
+\fIsize\fP size of this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "void cleanBuffer ()"
+
+.PP
+clean the buffer 
+.SS "char getAChar ()"
+
+.PP
+wait for a char input from the user \fBReturns:\fP
+.RS 4
+char input by the user 
+.RE
+.PP
+
+.SS "long int getCurrentTime ()"
+
+.PP
+returns the time as the number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC)\&. \fBReturns:\fP
+.RS 4
+time as the number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC)\&. 
+.RE
+.PP
+
+.SS "int idsInTable (charlogin[USERACCOUNT_LOGIN_LENGTH], charpassword[USERACCOUNT_PASSWORD_LENGTH], \fBConfidentialIDS\fP *table, intsize, \fBConfidentialIDS\fP *ptrIDS)"
+
+.SS "int idsLoad (\fBConfidentialIDS\fP *ids, FILE *f)"
+
+.PP
+load ids's informations from the IDS_FILE \fBParameters:\fP
+.RS 4
+\fIids\fP output IDS to load 
+.br
+\fIf\fP file descriptor to the input file (IDS_FILE) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int isAccountUser (intsize)"
+
+.PP
+test if the data's size given match to an \fBUserAccount\fP var size \fBParameters:\fP
+.RS 4
+\fIsize\fP data to test size 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int isFinishObjectBid (\fBObjectBid\fP *object)"
+
+.PP
+test if an \fBObjectBid\fP is finished or not, checking his time value\&. \fBParameters:\fP
+.RS 4
+\fIobject\fP the \fBObjectBid\fP to test 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int isObjectBid (intsize)"
+
+.SS "int isObjectBidTable (intsize)"
+
+.PP
+test if the data's size given match to an \fBObjectBid\fP table size \fBParameters:\fP
+.RS 4
+\fIsize\fP data to test size 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int mailCheck (char *mail, inttaille)"
+
+.PP
+check if an input string is composed as a valid mail adress \fBParameters:\fP
+.RS 4
+\fImail\fP the input string to test 
+.br
+\fIlength\fP input string length 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int objInTable (\fBObjectBid\fP *obj, \fBObjectBid\fP *table, intsize, \fBObjectBid\fP *ptrObject)"
+
+.SS "int objLoad (\fBObjectBid\fP *obj, FILE *f)"
+
+.PP
+load object's informations from the OBJ_FILE test if the data's size given match to an \fBObjectBid\fP var size
+.PP
+\fBParameters:\fP
+.RS 4
+\fIobj\fP the \fBObjectBid\fP loaded 
+.br
+\fIf\fP file descriptor to the input file (OBJ_FILE) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsize\fP data to test size 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int objSave (\fBObjectBid\fPobj, FILE *f)"
+
+.PP
+save object's informations into the OBJ_FILE \fBParameters:\fP
+.RS 4
+\fIobj\fP an \fBObjectBid\fP to save 
+.br
+\fIf\fP file descriptor to the output file (OBJ_FILE) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int removeObjectBidInTable (\fBObjectBid\fP **table, int *size, \fBObjectBid\fP *object)"
+
+.PP
+remove an \fBObjectBid\fP to an \fBObjectBid\fP table\&. \fBParameters:\fP
+.RS 4
+\fItable\fP the \fBObjectBid\fP table to purge of one \fBObjectBid\fP 
+.br
+\fIsize\fP size of this table 
+.br
+\fIobject\fP the \fBObjectBid\fP to purge from this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int removeUserAccountInTable (\fBUserAccount\fP **table, int *size, \fBUserAccount\fP *object)"
+
+.PP
+remove an \fBUserAccount\fP to an \fBUserAccount\fP table\&. \fBParameters:\fP
+.RS 4
+\fItable\fP the \fBUserAccount\fP table to purge of one \fBUserAccount\fP 
+.br
+\fIsize\fP size of this table 
+.br
+\fIuser\fP the \fBUserAccount\fP to purge from this table 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int searchObjectBidInTable (\fBObjectBid\fP *table, intsize, \fBObjectBid\fP *object, \fBObjectBid\fP *ptrObject)"
+
+.PP
+search by name a matching \fBObjectBid\fP \fBParameters:\fP
+.RS 4
+\fItable\fP the \fBObjectBid\fP table to search in 
+.br
+\fIsize\fP size of this table 
+.br
+\fIobject\fP the \fBObjectBid\fP to search 
+.br
+\fIptrObject\fP pointer to a matching \fBObjectBid\fP found 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "void userInputObjectBid (\fBObjectBid\fP *bid)"
+
+.PP
+ask the user to input fields of a new \fBObjectBid\fP except ids' and currentBid vars\&. \fBParameters:\fP
+.RS 4
+\fIbid\fP the output \fBObjectBid\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "void userInputUserAccount (\fBUserAccount\fP *account)"
+
+.PP
+ask the user to input fields of a new \fBUserAccount\fP var except ids\&. \fBParameters:\fP
+.RS 4
+\fIaccount\fP the output \fBUserAccount\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+status code for this operation\&. 
+.RE
+.PP
+
+.SS "int userInTable (\fBUserAccount\fP *user, \fBUserAccount\fP *table, intsize, \fBUserAccount\fP *ptrAccount)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for CBay from the source code\&.

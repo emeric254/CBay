@@ -7,6 +7,8 @@ This file provides the main function to interact with the user like displaying m
 
 
 {\ttfamily \#include \char`\"{}structures.\-h\char`\"{}}\\*
+Include dependency graph for interface\-Client.\-h\-:
+This graph shows which files directly or indirectly include this file\-:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -22,14 +24,11 @@ void \hyperlink{interface_client_8h_a76fd92bd9a4a47069e01ee37a77aa81b}{display\-
 \begin{DoxyCompactList}\small\item\em display the result of an operation from a code. \end{DoxyCompactList}\item 
 void \hyperlink{interface_client_8h_a1a5a877bbf1a9c9238cd2193b18b7e00}{display\-Object} (\hyperlink{struct_object_bid}{Object\-Bid} obj)
 \begin{DoxyCompactList}\small\item\em display an object and its properties. \end{DoxyCompactList}\item 
-\hypertarget{interface_client_8h_aaa8b64bd4018998b5623236be3807832}{void {\bfseries display\-List} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)}\label{interface_client_8h_aaa8b64bd4018998b5623236be3807832}
-
+void \hyperlink{interface_client_8h_aaa8b64bd4018998b5623236be3807832}{display\-List} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)
 \item 
-\hypertarget{interface_client_8h_a4f6fd2daefd2378d6cee2e274d48f0e2}{int {\bfseries bidding\-Input} (\hyperlink{struct_object_bid}{Object\-Bid} obj, float $\ast$price)}\label{interface_client_8h_a4f6fd2daefd2378d6cee2e274d48f0e2}
-
+int \hyperlink{interface_client_8h_a4f6fd2daefd2378d6cee2e274d48f0e2}{bidding\-Input} (\hyperlink{struct_object_bid}{Object\-Bid} obj, float $\ast$price)
 \item 
-\hypertarget{interface_client_8h_ac54b37ec076897c48b8b4753ff75463b}{int {\bfseries chose\-Object\-In\-List} (int $\ast$chosen, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)}\label{interface_client_8h_ac54b37ec076897c48b8b4753ff75463b}
-
+int \hyperlink{interface_client_8h_ac54b37ec076897c48b8b4753ff75463b}{chose\-Object\-In\-List} (int $\ast$chosen, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$list, int list\-Size)
 \end{DoxyCompactItemize}
 
 
@@ -37,6 +36,23 @@ void \hyperlink{interface_client_8h_a1a5a877bbf1a9c9238cd2193b18b7e00}{display\-
 This file provides the main function to interact with the user like displaying menus or menu choices. Nearly all the user's input are taken with those functions. The only exception is for the account and the object creation. 
 
 \subsection{Function Documentation}
+\hypertarget{interface_client_8h_a4f6fd2daefd2378d6cee2e274d48f0e2}{\index{interface\-Client.\-h@{interface\-Client.\-h}!bidding\-Input@{bidding\-Input}}
+\index{bidding\-Input@{bidding\-Input}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{bidding\-Input}]{\setlength{\rightskip}{0pt plus 5cm}int bidding\-Input (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid}}]{obj, }
+\item[{float $\ast$}]{price}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_a4f6fd2daefd2378d6cee2e274d48f0e2}
+\hypertarget{interface_client_8h_ac54b37ec076897c48b8b4753ff75463b}{\index{interface\-Client.\-h@{interface\-Client.\-h}!chose\-Object\-In\-List@{chose\-Object\-In\-List}}
+\index{chose\-Object\-In\-List@{chose\-Object\-In\-List}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{chose\-Object\-In\-List}]{\setlength{\rightskip}{0pt plus 5cm}int chose\-Object\-In\-List (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{chosen, }
+\item[{{\bf Object\-Bid} $\ast$}]{list, }
+\item[{int}]{list\-Size}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_ac54b37ec076897c48b8b4753ff75463b}
 \hypertarget{interface_client_8h_a09f835a46035bc73184e8ae1653e0ab3}{\index{interface\-Client.\-h@{interface\-Client.\-h}!connection\-Input@{connection\-Input}}
 \index{connection\-Input@{connection\-Input}!interfaceClient.h@{interface\-Client.\-h}}
 \subsubsection[{connection\-Input}]{\setlength{\rightskip}{0pt plus 5cm}int connection\-Input (
@@ -57,6 +73,14 @@ asks the user for a login and a password and gets their answer.
 \begin{DoxyReturn}{Returns}
 the status code of this operation 
 \end{DoxyReturn}
+\hypertarget{interface_client_8h_aaa8b64bd4018998b5623236be3807832}{\index{interface\-Client.\-h@{interface\-Client.\-h}!display\-List@{display\-List}}
+\index{display\-List@{display\-List}!interfaceClient.h@{interface\-Client.\-h}}
+\subsubsection[{display\-List}]{\setlength{\rightskip}{0pt plus 5cm}void display\-List (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{list, }
+\item[{int}]{list\-Size}
+\end{DoxyParamCaption}
+)}}\label{interface_client_8h_aaa8b64bd4018998b5623236be3807832}
 \hypertarget{interface_client_8h_a1a5a877bbf1a9c9238cd2193b18b7e00}{\index{interface\-Client.\-h@{interface\-Client.\-h}!display\-Object@{display\-Object}}
 \index{display\-Object@{display\-Object}!interfaceClient.h@{interface\-Client.\-h}}
 \subsubsection[{display\-Object}]{\setlength{\rightskip}{0pt plus 5cm}void display\-Object (

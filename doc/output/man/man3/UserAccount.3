@@ -1,4 +1,4 @@
-.TH "UserAccount" 3 "Thu Feb 12 2015" "CBay" \" -*- nroff -*-
+.TH "UserAccount" 3 "Thu Feb 12 2015" "Version BEEP - 0.1a" "CBay" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,6 +6,8 @@ UserAccount \-
 .SH SYNOPSIS
 .br
 .PP
+.PP
+\fC#include <structures\&.h>\fP
 .SS "Data Fields"
 
 .in +1c
@@ -16,18 +18,32 @@ UserAccount \-
 .RI "\fBConfidentialIDS\fP \fBIDS\fP"
 .br
 .ti -1c
-.RI "char \fBname\fP [USERACCOUNT_NAME_LENGTH]"
+.RI "char \fBname\fP [\fBUSERACCOUNT_NAME_LENGTH\fP]"
 .br
 .ti -1c
-.RI "char \fBlastname\fP [USERACCOUNT_LASTNAME_LENGTH]"
+.RI "char \fBlastname\fP [\fBUSERACCOUNT_LASTNAME_LENGTH\fP]"
 .br
 .ti -1c
-.RI "char \fBadress\fP [USERACCOUNT_ADRESS_LENGTH]"
+.RI "char \fBadress\fP [\fBUSERACCOUNT_ADRESS_LENGTH\fP]"
 .br
 .ti -1c
-.RI "char \fBmail\fP [USERACCOUNT_MAIL_LENGTH]"
+.RI "char \fBmail\fP [\fBUSERACCOUNT_MAIL_LENGTH\fP]"
 .br
 .in -1c
+.SH "Field Documentation"
+.PP 
+.SS "char adress[\fBUSERACCOUNT_ADRESS_LENGTH\fP]"
+
+.SS "\fBConfidentialIDS\fP IDS"
+
+.SS "char lastname[\fBUSERACCOUNT_LASTNAME_LENGTH\fP]"
+
+.SS "char mail[\fBUSERACCOUNT_MAIL_LENGTH\fP]"
+
+.SS "char name[\fBUSERACCOUNT_NAME_LENGTH\fP]"
+
+.SS "char type"
+
 
 .SH "Author"
 .PP 
