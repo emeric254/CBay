@@ -67,10 +67,12 @@ int main()
 
         while (end == FALSE)
         {
-            length = receiveBinary(message);
+            length = receiveBinary(&message);
+
+//            printf("message >>%d>>%s\n",length,message);
+
             if (length > 0 && message != NULL)
             {
-                printf("message >>%s\n",message);
 
                 if(isConnectRequest(message, length) == TRUE) //        CONNECT ------------------------------------------------------------------------
                 {
@@ -345,7 +347,7 @@ int main()
                         end = TRUE; // end client connection
                         break;
                     default:
-                        fprintf(ERROROUTPUT, "%s >> %d >> %d\n", ERROR_OUTPUT_LABEL, ERROR_UNKNOWN, length);
+                        fprintf(ERROROUTPUT, "%s >> %d >> %d >> %s\n", ERROR_OUTPUT_LABEL, ERROR_UNKNOWN, length, message);
                         end = TRUE; // end client connection
                         quit = TRUE; // and quit the server
                         break;

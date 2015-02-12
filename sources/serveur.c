@@ -128,10 +128,10 @@ int connectWait()
 /* receiveBinary.
  *
 */
-int receiveBinary(char *data)
+int receiveBinary(char **data)
 {
-    free(data);
-    data=NULL;
+    free(*data);
+    *data=NULL;
 
     char localBuffer[BUFFER_LENGTH];
     int index = 0;
@@ -160,11 +160,12 @@ int receiveBinary(char *data)
             localBuffer[index] = '\0';
             bufferStart++;
             end = TRUE;
+            printf("%s\n", localBuffer);
 
 #ifdef WIN32
-            data = _strdup(localBuffer);
+            *data = _strdup(localBuffer);
 #else
-            data = strdup(localBuffer);
+            *data = strdup(localBuffer);
 #endif
             return index*sizeof(char); // == data size
         }
@@ -187,11 +188,11 @@ int receiveBinary(char *data)
                     localBuffer[index++] = '\n';
                     localBuffer[index] = '\0';
 #ifdef WIN32
-                    data = _strdup(localBuffer);
+                    *data = _strdup(localBuffer);
 #else
-                    data = strdup(localBuffer);
+                    *data = strdup(localBuffer);
 #endif
-                return index * sizeof(char); // == data size
+                    return index * sizeof(char); // == data size
                 }
                 else
                 {

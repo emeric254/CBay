@@ -20,6 +20,8 @@ int main(void)
 
     Init(SERVER_ADRESS);
 
+    sendGetAllObjectBid();
+
     /* The Welcome Menu : Connection and Account Creation */
     while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
     {
