@@ -271,7 +271,13 @@ int sendPutUserAccount(UserAccount *account)
     strcpy(msg,REQUEST_METHOD_PUT);
     msg[strlen(REQUEST_METHOD_PUT)] = ' ';
 
-    strncpy(&msg[4], (char*)account, sizeof(UserAccount));
+//    strncpy(&msg[4], (char*)account, sizeof(UserAccount));
+//    memcpy(&msg[4], account, sizeof(UserAccount));
+    size_t i=4;
+    for(i=4;i<sizeof(UserAccount);i++)
+    {
+        msg[i] = ((char*)account)[i-4];
+    }
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
