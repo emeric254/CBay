@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>CBay: Main Page</title>
+<title>CBay: File List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -35,9 +35,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -54,6 +54,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           </span>
         </div>
       </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -73,9 +79,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">CBay Documentation</div>  </div>
+<div class="title">File List</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock">Here is a list of all documented files with brief descriptions:</div><div class="directory">
+<div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span>]</div><table class="directory">
+<tr id="row_0_" class="even"><td class="entry"><img id="arr_0_" src="ftv2mlastnode.png" alt="\" width="16" height="22" onclick="toggleFolder('0_')"/><img id="img_0_" src="ftv2folderopen.png" alt="-" width="24" height="22" onclick="toggleFolder('0_')"/><a class="el" href="dir_08d237fc27d4ecd563f71c5d52f2fecc.html" target="_self">sources</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2node.png" alt="o" width="16" height="22" /><a href="client_8h_source.html"><img src="ftv2doc.png" alt="*" width="24" height="22" /></a><a class="el" href="client_8h.html" target="_self">client.h</a></td><td class="desc">This file provide some usual function for a BEEP client like , , , , , , , . It also contains fonction to send data using other methods than connect (typically GET, PUT and DELETE) or function to split and extract data from incoming answer from the server</td></tr>
+<tr id="row_0_1_" class="even"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2node.png" alt="o" width="16" height="22" /><a href="defines_8h_source.html"><img src="ftv2doc.png" alt="*" width="24" height="22" /></a><b>defines.h</b></td><td class="desc"></td></tr>
+<tr id="row_0_2_"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2node.png" alt="o" width="16" height="22" /><a href="interface_client_8h_source.html"><img src="ftv2doc.png" alt="*" width="24" height="22" /></a><a class="el" href="interface_client_8h.html" target="_self">interfaceClient.h</a></td><td class="desc">This file provide the main function to interact with the user like ,  or . Nearly all the user's input are taken with those functions. The only exception is for the account and the object creation</td></tr>
+<tr id="row_0_3_" class="even"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2node.png" alt="o" width="16" height="22" /><a href="serveur_8h_source.html"><img src="ftv2doc.png" alt="*" width="24" height="22" /></a><a class="el" href="serveur_8h.html" target="_self">serveur.h</a></td><td class="desc">......... This file provide some usual function for a server like  ,  ,  ,  ,  or  and  It also contains some other derivated functions to test and play with received requests plus response making functions like  and  </td></tr>
+<tr id="row_0_4_"><td class="entry"><img src="ftv2blank.png" alt="&#160;" width="16" height="22" /><img src="ftv2lastnode.png" alt="\" width="16" height="22" /><a href="structures_8h_source.html"><img src="ftv2doc.png" alt="*" width="24" height="22" /></a><b>structures.h</b></td><td class="desc"></td></tr>
+</table>
+</div><!-- directory -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>CBay: Main Page</title>
+<title>CBay: ObjectBid Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -35,8 +35,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -56,7 +56,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
-</div><!-- top -->
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
+    </ul>
+  </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -71,11 +76,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">CBay Documentation</div>  </div>
+<div class="title">ObjectBid Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a53f4656a3ccbae3d40e94f582eef745f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53f4656a3ccbae3d40e94f582eef745f"></a>
+long int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="memitem:a8b0efa1f52a6b46d640cfcf93172083e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b0efa1f52a6b46d640cfcf93172083e"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> [OBJECTBID_NAME_LENGTH]</td></tr>
+<tr class="memitem:ad7e7bdb2bbc09612e2b037a0df5d76dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad7e7bdb2bbc09612e2b037a0df5d76dd"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>basePrice</b></td></tr>
+<tr class="memitem:a203af9554762f924c14e5c30b24352a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a203af9554762f924c14e5c30b24352a1"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>description</b> [OBJECTBID_DESCRIPTION_LENGTH]</td></tr>
+<tr class="memitem:a56c855fe82a6ab9e09389c23a73eeec0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56c855fe82a6ab9e09389c23a73eeec0"></a>
+long int&#160;</td><td class="memItemRight" valign="bottom"><b>idVendor</b></td></tr>
+<tr class="memitem:a39256f6302441e1a26db958909e7431d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39256f6302441e1a26db958909e7431d"></a>
+long int&#160;</td><td class="memItemRight" valign="bottom"><b>startTime</b></td></tr>
+<tr class="memitem:a03ea3a2cebde4b5cae63c7105339c294"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03ea3a2cebde4b5cae63c7105339c294"></a>
+long int&#160;</td><td class="memItemRight" valign="bottom"><b>endTime</b></td></tr>
+<tr class="memitem:a05eb87542785d73c5aa5cbe4e3a6d262"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05eb87542785d73c5aa5cbe4e3a6d262"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>adress</b> [OBJECTBID_ADRESS_LENGTH]</td></tr>
+<tr class="memitem:a8864df4945a55f29bb320025d6011cc1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8864df4945a55f29bb320025d6011cc1"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>currentBidPrice</b></td></tr>
+<tr class="memitem:aa79adfae7ada9530c98f5510fc34a0f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa79adfae7ada9530c98f5510fc34a0f7"></a>
+long int&#160;</td><td class="memItemRight" valign="bottom"><b>currentBidIdBuyer</b></td></tr>
+</table>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/emeric/projets/CBay/sources/<a class="el" href="structures_8h_source.html">structures.h</a></li>
+</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
