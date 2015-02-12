@@ -511,40 +511,40 @@ int connection (UserAccount * user)
     /* Display the result */
     displayResult(statusCode);
 
-	/* If the connection is OK, we ask for the complete UserAccount */
+    /* If the connection is OK, we ask for the complete UserAccount */
     if (statusCode == STATUS_CODE_OK)
     {
-		int i=0;
-		statusCode = ERROR_UNKNOWN;
-		while (statusCode != STATUS_CODE_OK && i < 3)
-		{
-		    /* Send a connection request to the server */
-		    sendGetUserAccount(user);
+        int i=0;
+        statusCode = ERROR_UNKNOWN;
+        while (statusCode != STATUS_CODE_OK && i < 3)
+        {
+            /* Send a connection request to the server */
+            sendGetUserAccount(user);
 
-		    /* Get the answer's status line */
-		    receiveBinary(response,STATUS_LINE_LENGTH);
+            /* Get the answer's status line */
+            receiveBinary(response,STATUS_LINE_LENGTH);
 
-		    /* Extract the status code and the reason phrase from the answer */
-		    splitStatusLine(response,&statusCode,reasonPhrase);
+            /* Extract the status code and the reason phrase from the answer */
+            splitStatusLine(response,&statusCode,reasonPhrase);
 
-		    i++;
-		}
-		
-		if (statusCode == STATUS_CODE_OK)
-		{
-			/* Get the header fields */
-			receiveBinary(headers,RESPONSE_HEADER_FIELD_LENGTH);
-		
-			/* Extract the list size from the headers */
-			splitResponseHeader(headers,(int *)accountSize,contentType);
-		
-			/* Get the account */
-		    receiveBinary((char*)user,accountSize);
-		    
-		    return SUCCESS;
-		}
-		else
-	        return ERROR_RECEIVING;
+            i++;
+        }
+
+        if (statusCode == STATUS_CODE_OK)
+        {
+            /* Get the header fields */
+            receiveBinary(headers,RESPONSE_HEADER_FIELD_LENGTH);
+
+            /* Extract the list size from the headers */
+            splitResponseHeader(headers,(int *)accountSize,contentType);
+
+            /* Get the account */
+            receiveBinary((char*)user,accountSize);
+
+            return SUCCESS;
+        }
+        else
+            return ERROR_RECEIVING;
     }
     else
         return CONNECTION_DENIED;
@@ -582,13 +582,13 @@ int listObjects (ObjectBid ** list, int* listSize)
 
     if (statusCode == STATUS_CODE_OK)
     {
-		/* Get the header fields */
-		receiveBinary(headers,RESPONSE_HEADER_FIELD_LENGTH);
-		
-		/* Extract the list size from the headers */
-		splitResponseHeader(headers,listSize,contentType);
-		
-		/* Get the list */
+        /* Get the header fields */
+        receiveBinary(headers,RESPONSE_HEADER_FIELD_LENGTH);
+
+        /* Extract the list size from the headers */
+        splitResponseHeader(headers,listSize,contentType);
+
+        /* Get the list */
         receiveBinary((char*)list,*listSize);
         *listSize=(int)(size/sizeof(ObjectBid));
 
@@ -619,20 +619,20 @@ int searchObject (ObjectBid * list, int listSize)
     /* Ask the user for an object name */
     searchInput(name);
 
-	/* Search for the name of the object in the list */
-	for (i=0;i<listSize;i++)
-	{
-		/* If the name of the current object match */
-		if (strcmp(name,list[i].name) == 0)
-		{
-			/* Extend the result list */
-			resultNumber++;
-			result=realloc(result,resultNumber*sizeof(ObjectBid));
-			
-			/* Add the current object to the result list */
-			result[resultNumber-1]=list[i];
-		}
-	}
+    /* Search for the name of the object in the list */
+    for (i=0;i<listSize;i++)
+    {
+        /* If the name of the current object match */
+        if (strcmp(name,list[i].name) == 0)
+        {
+            /* Extend the result list */
+            resultNumber++;
+            result=realloc(result,resultNumber*sizeof(ObjectBid));
+
+            /* Add the current object to the result list */
+            result[resultNumber-1]=list[i];
+        }
+    }
 
     /* Display the result */
     displayList(result,resultNumber*sizeof(ObjectBid));
@@ -644,43 +644,43 @@ int searchObject (ObjectBid * list, int listSize)
 */
 int bidObject (UserAccount client, ObjectBid ** list, int listSize)
 {
-	ObjectBid obj;
-	int i=0;
-	int statusCode;
-	int chosenObj=-1;
-	char statLine[STATUS_LINE_LENGTH];
-	char* reasonPhrase=NULL;
-	float price=0.0;
-	
-	/* Be sure that the list isn't empty */
+    ObjectBid obj;
+    int i=0;
+    int statusCode;
+    int chosenObj=-1;
+    char statLine[STATUS_LINE_LENGTH];
+    char* reasonPhrase=NULL;
+    float price=0.0;
+
+    /* Be sure that the list isn't empty */
     if (list==NULL)
     {
         displayResult(ERROR_NO_LIST);
     }
-    
+
     /* Be sure that the user is a client (= able to buy) */
     if (client.type != ACCOUNT_TYPE_ADMIN && client.type != ACCOUNT_TYPE_USER)
     {
-    	displayResult(ERROR_WRONG_TYPE);
+        displayResult(ERROR_WRONG_TYPE);
     }
-	
-	/* How to know which object the client want to bid on ? */
-	choseObjectInList(&chosenObj,*list,listSize);
-	
-	/* Is the bid finished yet ? */ /*@TODO => need isFinishObjectBid */
-	/*if ((isFinishObjectBid())==)
-	{
-	
-	}*/
-	
-	/* Bid on the object */
-	biddingInput(*list[chosenObj],&price);
-	
-	/* Modify the object's currentBidIdBuyer and currentBidPrice */
-	list[chosenObj]->currentBidIdBuyer=client.id;
-	list[chosenObj]->currentBidPrice=price;
-	
-	/* Send the modification to the server, 3 try */
+
+    /* How to know which object the client want to bid on ? */
+    choseObjectInList(&chosenObj,*list,listSize);
+
+    /* Is the bid finished yet ? */ /*@TODO => need isFinishObjectBid */
+    /*if ((isFinishObjectBid())==)
+    {
+
+    }*/
+
+    /* Bid on the object */
+    biddingInput(*list[chosenObj],&price);
+
+    /* Modify the object's currentBidIdBuyer and currentBidPrice */
+    list[chosenObj]->currentBidIdBuyer=client.id;
+    list[chosenObj]->currentBidPrice=price;
+
+    /* Send the modification to the server, 3 try */
     while (statusCode != STATUS_CODE_OK && i < 3)
     {
         /* Send the request */
@@ -709,21 +709,22 @@ int bidObject (UserAccount client, ObjectBid ** list, int listSize)
 */
 int enterObject(UserAccount * user)
 {
-	ObjectBid obj;
-	
-	/* Verify the user is a vendor or an administrator */
-    if (client.type != ACCOUNT_TYPE_ADMIN && client.type != ACCOUNT_TYPE_VENDOR)
+    ObjectBid obj;
+
+    /* Verify the user is a vendor or an administrator */
+    if (user->type != ACCOUNT_TYPE_ADMIN && user->type != ACCOUNT_TYPE_VENDOR)
     {
-    	displayResult(ERROR_WRONG_TYPE);
+        displayResult(ERROR_WRONG_TYPE);
+        // return ERROR_WRONG_TYPE;
     }
-	
-	/* Ask the user to give the informations about his object */
-	userInputObjectBid(&obj);
-	
-	/* Put the fields : id,idvendor,startTime,endTime,currentBidPrice,currentBidIdBuyer */
-	
-	
-	return SUCCESS;
+
+    /* Ask the user to give the informations about his object */
+    userInputObjectBid(&obj);
+
+    /* Put the fields : id,idvendor,startTime,endTime,currentBidPrice,currentBidIdBuyer */
+
+
+    return SUCCESS;
 }
 
 

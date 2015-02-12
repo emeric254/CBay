@@ -46,9 +46,9 @@ void userInputUserAccount(UserAccount * account)
     {
         // type choice
         printf("Choice your account type\n");
-        printf("%c - %s\n",ACCOUNT_TYPE_ADMIN,ACCOUNT_LABEL_ADMIN);
-        printf("%c - %s\n",ACCOUNT_TYPE_VENDOR,ACCOUNT_LABEL_VENDOR);
-        printf("%c - %s\n",ACCOUNT_TYPE_USER,ACCOUNT_LABEL_USER);
+        printf("%c -> %s\n",ACCOUNT_TYPE_ADMIN,ACCOUNT_LABEL_ADMIN);
+        printf("%c -> %s\n",ACCOUNT_TYPE_VENDOR,ACCOUNT_LABEL_VENDOR);
+        printf("%c -> %s\n",ACCOUNT_TYPE_USER,ACCOUNT_LABEL_USER);
         account->type = getAChar();
         CLEAR();
         switch(account->type)
@@ -67,38 +67,46 @@ void userInputUserAccount(UserAccount * account)
                 printf("Input error, please make a correct choice !\n");
                 break;
         }
-    }while(goodInput);
+    }while( ! goodInput);
 
     CLEAR();
+
+    cleanBuffer();
 
     printf("Enter your name\n");
     fgets(account->name,USERACCOUNT_NAME_LENGTH,stdin);
-    if(strlen(account->name)<USERACCOUNT_NAME_LENGTH-1)
-        account->name[strlen(account->name)] = '\0';
-    cleanBuffer();
+    if(account->name[strlen(account->name)-1]=='\n')
+        account->name[strlen(account->name)-1] = '\0';
+    else
+        cleanBuffer();
     CLEAR();
+
+    printf("%s<<",account->name);
 
     printf("Enter your lastname\n");
     fgets(account->lastname,USERACCOUNT_LASTNAME_LENGTH,stdin);
-    if(strlen(account->lastname)<USERACCOUNT_LASTNAME_LENGTH-1)
-        account->lastname[strlen(account->lastname)] = '\0';
-    cleanBuffer();
+    if(account->lastname[strlen(account->lastname)-1]=='\n')
+        account->lastname[strlen(account->lastname)-1] = '\0';
+    else
+        cleanBuffer();
     CLEAR();
 
     printf("Enter your adress\n");
     fgets(account->adress,USERACCOUNT_ADRESS_LENGTH,stdin);
-    if(strlen(account->adress)<USERACCOUNT_ADRESS_LENGTH-1)
-        account->adress[strlen(account->adress)] = '\0';
-    cleanBuffer();
+    if(account->adress[strlen(account->adress)-1]=='\n')
+        account->adress[strlen(account->adress)-1] = '\0';
+    else
+        cleanBuffer();
     CLEAR();
 
     do
     {
         printf("Enter your mail\n");
         fgets(account->mail,USERACCOUNT_MAIL_LENGTH,stdin);
-        if(strlen(account->mail)<USERACCOUNT_MAIL_LENGTH-1)
-            account->mail[strlen(account->mail)] = '\0';
-        cleanBuffer();
+        if(account->mail[strlen(account->mail)-1]=='\n')
+            account->mail[strlen(account->mail)-1] = '\0';
+        else
+            cleanBuffer();
     }while(!mailCheck(account->mail,strlen(account->mail)));
     CLEAR();
 
@@ -117,28 +125,30 @@ void userInputObjectBid(ObjectBid * bid)
 
     printf("Enter the bid name\n");
     fgets(bid->name,OBJECTBID_NAME_LENGTH,stdin);
-    if(strlen(bid->name)<OBJECTBID_NAME_LENGTH-1)
-        bid->adress[strlen(bid->name)] = '\0';
-    cleanBuffer();
+    if(bid->name[strlen(bid->name)-1]=='\n')
+        bid->name[strlen(bid->name)-1] = '\0';
+    else
+        cleanBuffer();
     CLEAR();
 
     printf("Enter the bid base price\n");
     fscanf(stdin,"%f",&(bid->basePrice));
-    cleanBuffer();
     CLEAR();
 
     printf("Enter the bid description\n");
     fgets(bid->description,OBJECTBID_DESCRIPTION_LENGTH,stdin);
-    if(strlen(bid->description)<OBJECTBID_DESCRIPTION_LENGTH-1)
-        bid->description[strlen(bid->description)] = '\0';
-    cleanBuffer();
+    if(bid->name[strlen(bid->name)-1]=='\n')
+        bid->name[strlen(bid->name)-1] = '\0';
+    else
+        cleanBuffer();
     CLEAR();
 
     printf("Enter the bid adress\n");
     fgets(bid->adress,OBJECTBID_ADRESS_LENGTH,stdin);
-    if(strlen(bid->adress)<OBJECTBID_ADRESS_LENGTH-1)
-        bid->adress[strlen(bid->adress)] = '\0';
-    cleanBuffer();
+    if(bid->name[strlen(bid->name)-1]=='\n')
+        bid->name[strlen(bid->name)-1] = '\0';
+    else
+        cleanBuffer();
     CLEAR();
 }
 
@@ -152,11 +162,13 @@ int mailCheck(char *mail, int length)
         fprintf(ERROROUTPUT,"null pointer");
         exit(ERROR_POINTER);
     }
+
     int i = 0;
     int arobase = 0 ;
+
     // count how many '@'
     for(i=0;i<length;i++)
-        if((mail[i] = '@'))
+        if((mail[i] == '@'))
             arobase ++;
     //only one '@' in a valide mail adress
 

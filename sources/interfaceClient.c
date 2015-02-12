@@ -39,6 +39,7 @@ int connectionInput (char* login, char* password)
 {
     /* Clean the screen */
     CLEAR();
+    cleanBuffer();
 
     /* Get the login and the password */
     fprintf(stdout,"\t\t\t\tPlease enter your login and your password\n");
@@ -85,10 +86,10 @@ void displayResult (int code)
             case ERROR_NO_LIST:
                 fprintf(stdout,"No list available. Ask for one before doing this again.\n");
                 break;
-                
+
             case ERROR_WRONG_TYPE:
-            	fprintf(stdout,"Sorry, but you don't have the rights to do that.\n");
-            	break;
+                fprintf(stdout,"Sorry, but you don't have the rights to do that.\n");
+                break;
 
             default:
                 fprintf(stdout,"Application Error.\nExcuse us for the inconvenience.\n");
@@ -149,12 +150,12 @@ void displayResult (int code)
 */
 void displayObject (ObjectBid obj)
 {
-	fprintf(stdout,"\t\tName : %s\n",obj.name);
-	fprintf(stdout,"\t\tDescription : %s\n",obj.description);
-	fprintf(stdout,"\t\tBase price : %f\n",obj.basePrice);
-	fprintf(stdout,"\t\tSell start time : %ld\n",obj.startTime);
-	fprintf(stdout,"\t\tSell end time : %ld\n",obj.endTime);
-	fprintf(stdout,"\t\tCurrent price : %f\n\n",obj.currentBidPrice);
+    fprintf(stdout,"\t\tName : %s\n",obj.name);
+    fprintf(stdout,"\t\tDescription : %s\n",obj.description);
+    fprintf(stdout,"\t\tBase price : %f\n",obj.basePrice);
+    fprintf(stdout,"\t\tSell start time : %ld\n",obj.startTime);
+    fprintf(stdout,"\t\tSell end time : %ld\n",obj.endTime);
+    fprintf(stdout,"\t\tCurrent price : %f\n\n",obj.currentBidPrice);
 }
 
 /* displayList.
@@ -174,7 +175,7 @@ void displayList (ObjectBid * list, int listSize)
     {
         for (i=0;i<listSize;i++)
         {
-        	fprintf(stdout,"\t\tObject n°%d :\n",i+1);
+            fprintf(stdout,"\t\tObject n°%d :\n",i+1);
             displayObject(list[i]);
         }
     }
@@ -184,25 +185,25 @@ void displayList (ObjectBid * list, int listSize)
 */
 int biddingInput(ObjectBid obj, float* price)
 {
-	/* Clean the screen */
-	CLEAR();
-	
-	/* Display the object's informations */
-	displayObject(obj);
-	
-	/* Get the price */
-	fprintf(stdout,"Enter your price : ");
-	scanf("%f",price);
-	
-	/* Check the price */
-	while (*price <= obj.currentBidPrice)
-	{
-		fprintf(stdout,"The price you entered is incorrect.\n"
-		"Please enter a price higher than the current bid : ");
-		scanf("%f",price);
-	}
-	
-	return SUCCESS;
+    /* Clean the screen */
+    CLEAR();
+
+    /* Display the object's informations */
+    displayObject(obj);
+
+    /* Get the price */
+    fprintf(stdout,"Enter your price : ");
+    scanf("%f",price);
+
+    /* Check the price */
+    while (*price <= obj.currentBidPrice)
+    {
+        fprintf(stdout,"The price you entered is incorrect.\n"
+        "Please enter a price higher than the current bid : ");
+        scanf("%f",price);
+    }
+
+    return SUCCESS;
 }
 
 
@@ -210,23 +211,23 @@ int biddingInput(ObjectBid obj, float* price)
 */
 int choseObjectInList(int * chosen, ObjectBid * list, int listSize)
 {
-	/* Display the list */
-	displayList(list,listSize);
-	
-	/* Get the object's number */
-	fprintf(stdout,"Please chose the number of the item you want to bid on : ");
-	scanf("%d",chosen);
-	*chosen -= 1;
-	
-	/* Verify that the number is correct */
-	while ((*chosen >= listSize) || (*chosen < 0))
-	{
-		fprintf(stdout,"Chose a number in the list please : ");
-		scanf("%d",chosen);
-		*chosen -= 1;
-	}
-	
-	return SUCCESS;
+    /* Display the list */
+    displayList(list,listSize);
+
+    /* Get the object's number */
+    fprintf(stdout,"Please chose the number of the item you want to bid on : ");
+    scanf("%d",chosen);
+    *chosen -= 1;
+
+    /* Verify that the number is correct */
+    while ((*chosen >= listSize) || (*chosen < 0))
+    {
+        fprintf(stdout,"Chose a number in the list please : ");
+        scanf("%d",chosen);
+        *chosen -= 1;
+    }
+
+    return SUCCESS;
 }
 
 
