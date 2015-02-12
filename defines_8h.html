@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -67,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,172 +93,1030 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This file defines all constants.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="defines_8h__dep__incl.png" border="0" usemap="#_2home_2emeric_2projets_2_c_bay_2sources_2defines_8hdep" alt=""/></div>
+<map name="_2home_2emeric_2projets_2_c_bay_2sources_2defines_8hdep" id="_2home_2emeric_2projets_2_c_bay_2sources_2defines_8hdep">
+</map>
+</div>
+</div>
 <p><a href="defines_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a365a0242ae081a029e1a24906f2940be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a365a0242ae081a029e1a24906f2940be"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACC_FILE</b>&#160;&#160;&#160;&quot;accounts.txt&quot;</td></tr>
-<tr class="memitem:a7bc899325f36d64e4511cc49499756f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7bc899325f36d64e4511cc49499756f9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>OBJ_FILE</b>&#160;&#160;&#160;&quot;objects.txt&quot;</td></tr>
-<tr class="memitem:afa331f2b65d5f8adebb78b02bcaa5bd4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa331f2b65d5f8adebb78b02bcaa5bd4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>IDS_FILE</b>&#160;&#160;&#160;&quot;ids.txt&quot;</td></tr>
-<tr class="memitem:aa8cecfc5c5c054d2875c03e77b7be15d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8cecfc5c5c054d2875c03e77b7be15d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TRUE</b>&#160;&#160;&#160;1</td></tr>
-<tr class="memitem:aa93f0eb578d23995850d61f7d61c55c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa93f0eb578d23995850d61f7d61c55c1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>FALSE</b>&#160;&#160;&#160;0</td></tr>
-<tr class="memitem:af7b7dc9a200cb1404c280bd500fd1551"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7b7dc9a200cb1404c280bd500fd1551"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>BUFFER_LENGTH</b>&#160;&#160;&#160;4096</td></tr>
-<tr class="memitem:a6542afbf1c7c9be4481de7fe32640cd4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6542afbf1c7c9be4481de7fe32640cd4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROROUTPUT</b>&#160;&#160;&#160;stderr</td></tr>
-<tr class="memitem:a3ccef53b0e3f0076d03c96a0b46ec218"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ccef53b0e3f0076d03c96a0b46ec218"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_OUTPUT_LABEL</b>&#160;&#160;&#160;&quot;[error]&quot;</td></tr>
-<tr class="memitem:ac42367fe5c999ec6650de83e9d72fe8c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac42367fe5c999ec6650de83e9d72fe8c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVER_PORT</b>&#160;&#160;&#160;&quot;25000&quot;</td></tr>
-<tr class="memitem:a2e3a2aabbaf65c798170e9149f52ff99"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e3a2aabbaf65c798170e9149f52ff99"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVER_ADRESS</b>&#160;&#160;&#160;&quot;127.0.0.1&quot;</td></tr>
-<tr class="memitem:a09e08a66570ef7683f6a777d6da7f124"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09e08a66570ef7683f6a777d6da7f124"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_LINE_LENGTH</b>&#160;&#160;&#160;16</td></tr>
-<tr class="memitem:ac6de6db9f0d99f4bcaea0ff2c91ec015"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6de6db9f0d99f4bcaea0ff2c91ec015"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RESPONSE_HEADER_LENGTH</b>&#160;&#160;&#160;64</td></tr>
-<tr class="memitem:a2ce6bbc01181f70c18e80e603d3317d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ce6bbc01181f70c18e80e603d3317d2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH</b>&#160;&#160;&#160;&quot;Content-length: &quot;</td></tr>
-<tr class="memitem:a772c07a90e45d9a0415321cb531f5350"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a772c07a90e45d9a0415321cb531f5350"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE</b>&#160;&#160;&#160;&quot;Content-type: &quot;</td></tr>
-<tr class="memitem:a0b2eb3ecc6719dca42441a8c830faee8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b2eb3ecc6719dca42441a8c830faee8"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RESPONSE_HEADER_FIELD_LENGTH</b>&#160;&#160;&#160;64</td></tr>
-<tr class="memitem:a8720220eaecaaf6a6c821d00e1941659"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8720220eaecaaf6a6c821d00e1941659"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH</b>&#160;&#160;&#160;16</td></tr>
-<tr class="memitem:a3c2b69c69c779dcb089ef0c367b5fa48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c2b69c69c779dcb089ef0c367b5fa48"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONTENT_TYPE_OBJECTBID_ID</b>&#160;&#160;&#160;0</td></tr>
-<tr class="memitem:abe916fca02831af5b517097c36851402"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe916fca02831af5b517097c36851402"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONTENT_TYPE_USERACCOUNT_ID</b>&#160;&#160;&#160;1</td></tr>
-<tr class="memitem:a18aa71f75f5c6c4fe1097e13a3c054bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18aa71f75f5c6c4fe1097e13a3c054bc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REQUEST_METHOD_GET</b>&#160;&#160;&#160;&quot;GET&quot;</td></tr>
-<tr class="memitem:a91540e83379cadcd55447e4940794112"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91540e83379cadcd55447e4940794112"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REQUEST_METHOD_PUT</b>&#160;&#160;&#160;&quot;PUT&quot;</td></tr>
-<tr class="memitem:ad6243dbf0c785d6b9520a8b9e842c277"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad6243dbf0c785d6b9520a8b9e842c277"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REQUEST_METHOD_CONNECT</b>&#160;&#160;&#160;&quot;CONNECT&quot;</td></tr>
-<tr class="memitem:a7f163cd1abd8ae2d463aa913d602fa86"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f163cd1abd8ae2d463aa913d602fa86"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REQUEST_METHOD_DELETE</b>&#160;&#160;&#160;&quot;DELETE&quot;</td></tr>
-<tr class="memitem:adedaf9cf734c9fe50b0cdfcc2f4ed9ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adedaf9cf734c9fe50b0cdfcc2f4ed9ec"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_CODE_OK</b>&#160;&#160;&#160;00</td></tr>
-<tr class="memitem:a18135ace86a9201d3fc83405363b5f68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18135ace86a9201d3fc83405363b5f68"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_CODE_CREATED</b>&#160;&#160;&#160;01</td></tr>
-<tr class="memitem:a971424c1e2979cfc7aed72e54a45842b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a971424c1e2979cfc7aed72e54a45842b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REASON_PHRASE_OK</b>&#160;&#160;&#160;&quot;Ok&quot;</td></tr>
-<tr class="memitem:a4c85be1d4867cfaa7036f84a003ab020"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c85be1d4867cfaa7036f84a003ab020"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REASON_PHRASE_CREATED</b>&#160;&#160;&#160;&quot;Created&quot;</td></tr>
-<tr class="memitem:a79ea2e2f490fa927478b038825232bb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79ea2e2f490fa927478b038825232bb7"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_CODE_BAD_REQUEST</b>&#160;&#160;&#160;-1</td></tr>
-<tr class="memitem:a214e98982b05317559fc0899a9586dad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a214e98982b05317559fc0899a9586dad"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_CODE_NOT_CREATED</b>&#160;&#160;&#160;-2</td></tr>
-<tr class="memitem:a903ab886c8a815fcb193869ed50831d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a903ab886c8a815fcb193869ed50831d9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_CODE_INTERNAL_SERVER_ERROR</b>&#160;&#160;&#160;-3</td></tr>
-<tr class="memitem:afb2c382adab6b22cdf9e5d3b148f0d35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb2c382adab6b22cdf9e5d3b148f0d35"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_CODE_CONFLICT</b>&#160;&#160;&#160;-4</td></tr>
-<tr class="memitem:ab4e90b7d3fd11211a72169f1567f6381"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4e90b7d3fd11211a72169f1567f6381"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_CODE_FORBIDDEN</b>&#160;&#160;&#160;-5</td></tr>
-<tr class="memitem:a6fdc0c57c0b234d8da1c04b57beb5b54"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6fdc0c57c0b234d8da1c04b57beb5b54"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REASON_PHRASE_BAD_REQUEST</b>&#160;&#160;&#160;&quot;Bad Request&quot;</td></tr>
-<tr class="memitem:a016dc9e3f149a15b29355fbef1492ab3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a016dc9e3f149a15b29355fbef1492ab3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REASON_PHRASE_NOT_CREATED</b>&#160;&#160;&#160;&quot;Not Created&quot;</td></tr>
-<tr class="memitem:a8839a48bf1fb4591fee62a4bfb821744"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8839a48bf1fb4591fee62a4bfb821744"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REASON_PHRASE_INTERNAL_SERVER_ERROR</b>&#160;&#160;&#160;&quot;Server Error&quot;</td></tr>
-<tr class="memitem:a4d9218996bbee903fdbaddc4786685e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d9218996bbee903fdbaddc4786685e8"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REASON_PHRASE_CONFLICT</b>&#160;&#160;&#160;&quot;Conflict&quot;</td></tr>
-<tr class="memitem:a25b591f7819366e81fb78cf478a2fdd7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a25b591f7819366e81fb78cf478a2fdd7"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REASON_PHRASE_FORBIDDEN</b>&#160;&#160;&#160;&quot;Forbidden&quot;</td></tr>
-<tr class="memitem:a599f36fe475d71985428415d6576310a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a599f36fe475d71985428415d6576310a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCOUNT_TYPE_ADMIN</b>&#160;&#160;&#160;'a'</td></tr>
-<tr class="memitem:a6b9445ab027f019fa2c460bd94e91ba4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b9445ab027f019fa2c460bd94e91ba4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCOUNT_TYPE_VENDOR</b>&#160;&#160;&#160;'v'</td></tr>
-<tr class="memitem:a98e57018c4feb8eb86668fc96cd61013"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98e57018c4feb8eb86668fc96cd61013"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCOUNT_TYPE_USER</b>&#160;&#160;&#160;'u'</td></tr>
-<tr class="memitem:a1898a2805984371f360cd2f33469b001"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1898a2805984371f360cd2f33469b001"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCOUNT_TYPE_UNKNOW</b>&#160;&#160;&#160;'z'</td></tr>
-<tr class="memitem:a872a5bd0d27ebecffed505d4c7bd8f27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a872a5bd0d27ebecffed505d4c7bd8f27"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCOUNT_LABEL_ADMIN</b>&#160;&#160;&#160;&quot;Admin, become a god ;) &quot;</td></tr>
-<tr class="memitem:a0f7a6b8676aa074196ae5fac01118903"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f7a6b8676aa074196ae5fac01118903"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCOUNT_LABEL_VENDOR</b>&#160;&#160;&#160;&quot;Vendor, limited to sell things&quot;</td></tr>
-<tr class="memitem:a50af0b17c99e478b2380f71c4a2d457d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50af0b17c99e478b2380f71c4a2d457d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCOUNT_LABEL_USER</b>&#160;&#160;&#160;&quot;User, limited to bought things&quot;</td></tr>
-<tr class="memitem:aa90cac659d18e8ef6294c7ae337f6b58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa90cac659d18e8ef6294c7ae337f6b58"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCESS</b>&#160;&#160;&#160;-10</td></tr>
-<tr class="memitem:ad2dd41993cc19a613aefcd43f2ae5d4f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2dd41993cc19a613aefcd43f2ae5d4f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_OPENING</b>&#160;&#160;&#160;-11</td></tr>
-<tr class="memitem:a697b77863efc5e53e7f19bada251684a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a697b77863efc5e53e7f19bada251684a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_READING</b>&#160;&#160;&#160;-12</td></tr>
-<tr class="memitem:a00e24bec6e22042f96f2314b2fbad7d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00e24bec6e22042f96f2314b2fbad7d9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_WRITING</b>&#160;&#160;&#160;-13</td></tr>
-<tr class="memitem:a5e0259cb3f12a95d8dcf1009244315a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e0259cb3f12a95d8dcf1009244315a6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_READING_BUFF</b>&#160;&#160;&#160;-14</td></tr>
-<tr class="memitem:a4263f15c3dda04df97ed46528ef3fd07"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4263f15c3dda04df97ed46528ef3fd07"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_OPENING_BUFF</b>&#160;&#160;&#160;-15</td></tr>
-<tr class="memitem:abd94d85c062275019deacbdb8c4bc625"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abd94d85c062275019deacbdb8c4bc625"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_WRITING_BUFF</b>&#160;&#160;&#160;-16</td></tr>
-<tr class="memitem:a57edf85749ef8e9e92037e1c14f6b575"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57edf85749ef8e9e92037e1c14f6b575"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_EMPTY_BUFF</b>&#160;&#160;&#160;-17</td></tr>
-<tr class="memitem:ab78a2223d176415b00a1ce412d9a890b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab78a2223d176415b00a1ce412d9a890b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_USER</b>&#160;&#160;&#160;-18</td></tr>
-<tr class="memitem:acd367f503fc2bbd180508ed05d897280"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd367f503fc2bbd180508ed05d897280"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_POINTER</b>&#160;&#160;&#160;-19</td></tr>
-<tr class="memitem:a0e5058e02df4957798a3c257db65582e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e5058e02df4957798a3c257db65582e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_SENDING</b>&#160;&#160;&#160;-20</td></tr>
-<tr class="memitem:ad075d8235e4fa7196908f17a5c52e791"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad075d8235e4fa7196908f17a5c52e791"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_RECEIVING</b>&#160;&#160;&#160;-21</td></tr>
-<tr class="memitem:ab38ba8ca1d549229d141957a4dd8a169"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab38ba8ca1d549229d141957a4dd8a169"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_WRONG_TYPE</b>&#160;&#160;&#160;-22</td></tr>
-<tr class="memitem:a6241da74f1f960b325e07fcd4a1241f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6241da74f1f960b325e07fcd4a1241f2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONNECTION_DENIED</b>&#160;&#160;&#160;-23</td></tr>
-<tr class="memitem:ae3b38e95b75f0012222419746f69dd71"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3b38e95b75f0012222419746f69dd71"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_NO_LIST</b>&#160;&#160;&#160;-24</td></tr>
-<tr class="memitem:a44ce4af2e9dca51084385c7a670b5cc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a44ce4af2e9dca51084385c7a670b5cc3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_BIDDING</b>&#160;&#160;&#160;-25</td></tr>
-<tr class="memitem:ade5d86f955604ec489f0c144f47226fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade5d86f955604ec489f0c144f47226fc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_UNKNOWN</b>&#160;&#160;&#160;-99</td></tr>
-<tr class="memitem:a0caa3fa609352f1a2e1e727d9f963dfa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0caa3fa609352f1a2e1e727d9f963dfa"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>OBJECTBID_NAME_LENGTH</b>&#160;&#160;&#160;96</td></tr>
-<tr class="memitem:a786b09e764b0e8442655b6b7c78ede00"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a786b09e764b0e8442655b6b7c78ede00"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>OBJECTBID_DESCRIPTION_LENGTH</b>&#160;&#160;&#160;320</td></tr>
-<tr class="memitem:a37a3e3c9149775a1de0391b6af399125"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a37a3e3c9149775a1de0391b6af399125"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>OBJECTBID_ADRESS_LENGTH</b>&#160;&#160;&#160;96</td></tr>
-<tr class="memitem:ae31be58dfd3ef1f3cb849fb35b7ac9ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae31be58dfd3ef1f3cb849fb35b7ac9ec"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>USERACCOUNT_LOGIN_LENGTH</b>&#160;&#160;&#160;27</td></tr>
-<tr class="memitem:aff14d22469bb0bb5d650a58db2130a41"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff14d22469bb0bb5d650a58db2130a41"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>USERACCOUNT_PASSWORD_LENGTH</b>&#160;&#160;&#160;26</td></tr>
-<tr class="memitem:a19e07c697a90c76dc929a297b857f607"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19e07c697a90c76dc929a297b857f607"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>USERACCOUNT_NAME_LENGTH</b>&#160;&#160;&#160;75</td></tr>
-<tr class="memitem:af504a907ef57172c931bd86960095678"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af504a907ef57172c931bd86960095678"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>USERACCOUNT_LASTNAME_LENGTH</b>&#160;&#160;&#160;64</td></tr>
-<tr class="memitem:adebc02c1bf42467bc097c05dfe461dc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adebc02c1bf42467bc097c05dfe461dc5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>USERACCOUNT_ADRESS_LENGTH</b>&#160;&#160;&#160;96</td></tr>
-<tr class="memitem:ab707ed00c5341acd2f33edf23891c34e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab707ed00c5341acd2f33edf23891c34e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>USERACCOUNT_MAIL_LENGTH</b>&#160;&#160;&#160;80</td></tr>
-<tr class="memitem:a1f3e01da379a8c66568ea30f95b0cf60"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f3e01da379a8c66568ea30f95b0cf60"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MENU_CHOICE_QUIT</b>&#160;&#160;&#160;0</td></tr>
-<tr class="memitem:a7160592a8591eb0857c8815088c3b756"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7160592a8591eb0857c8815088c3b756"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MENU_CHOICE_CONNECTION</b>&#160;&#160;&#160;1</td></tr>
-<tr class="memitem:aadea6d12469da37a0cd15a03b6d36b0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aadea6d12469da37a0cd15a03b6d36b0a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MENU_CHOICE_ACCOUNT_CREATION</b>&#160;&#160;&#160;2</td></tr>
-<tr class="memitem:add137f23ab3d2313f8a55055ce8a05be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add137f23ab3d2313f8a55055ce8a05be"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MENU_CHOICE_ANONYMOUS</b>&#160;&#160;&#160;3</td></tr>
-<tr class="memitem:a1d06f5436feef07e4330d70f43e6cfc1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d06f5436feef07e4330d70f43e6cfc1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MENU_CHOICE_MAIN_LIST</b>&#160;&#160;&#160;1</td></tr>
-<tr class="memitem:a8e8b78e38d8109be518ba7c7e712b1b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e8b78e38d8109be518ba7c7e712b1b6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MENU_CHOICE_MAIN_SEARCH</b>&#160;&#160;&#160;2</td></tr>
-<tr class="memitem:ac93d8d3a40ce05cc580f9904ca4026aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac93d8d3a40ce05cc580f9904ca4026aa"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MENU_CHOICE_MAIN_BID</b>&#160;&#160;&#160;3</td></tr>
-<tr class="memitem:aacb71dbc63837c5e60f70180643354b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aacb71dbc63837c5e60f70180643354b2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CLEAR</b>()&#160;&#160;&#160;system(&quot;clear&quot;)</td></tr>
+<tr class="memitem:a365a0242ae081a029e1a24906f2940be"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a365a0242ae081a029e1a24906f2940be">ACC_FILE</a>&#160;&#160;&#160;&quot;accounts.txt&quot;</td></tr>
+<tr class="memitem:a7bc899325f36d64e4511cc49499756f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a7bc899325f36d64e4511cc49499756f9">OBJ_FILE</a>&#160;&#160;&#160;&quot;objects.txt&quot;</td></tr>
+<tr class="memitem:afa331f2b65d5f8adebb78b02bcaa5bd4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#afa331f2b65d5f8adebb78b02bcaa5bd4">IDS_FILE</a>&#160;&#160;&#160;&quot;ids.txt&quot;</td></tr>
+<tr class="memitem:aa8cecfc5c5c054d2875c03e77b7be15d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:aa93f0eb578d23995850d61f7d61c55c1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:af7b7dc9a200cb1404c280bd500fd1551"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#af7b7dc9a200cb1404c280bd500fd1551">BUFFER_LENGTH</a>&#160;&#160;&#160;4096</td></tr>
+<tr class="memitem:a6542afbf1c7c9be4481de7fe32640cd4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a6542afbf1c7c9be4481de7fe32640cd4">ERROROUTPUT</a>&#160;&#160;&#160;stderr</td></tr>
+<tr class="memitem:a3ccef53b0e3f0076d03c96a0b46ec218"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a3ccef53b0e3f0076d03c96a0b46ec218">ERROR_OUTPUT_LABEL</a>&#160;&#160;&#160;&quot;[error]&quot;</td></tr>
+<tr class="memitem:ac42367fe5c999ec6650de83e9d72fe8c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ac42367fe5c999ec6650de83e9d72fe8c">SERVER_PORT</a>&#160;&#160;&#160;&quot;25000&quot;</td></tr>
+<tr class="memitem:a2e3a2aabbaf65c798170e9149f52ff99"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a2e3a2aabbaf65c798170e9149f52ff99">SERVER_ADRESS</a>&#160;&#160;&#160;&quot;127.0.0.1&quot;</td></tr>
+<tr class="memitem:a09e08a66570ef7683f6a777d6da7f124"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a09e08a66570ef7683f6a777d6da7f124">STATUS_LINE_LENGTH</a>&#160;&#160;&#160;16</td></tr>
+<tr class="memitem:ac6de6db9f0d99f4bcaea0ff2c91ec015"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ac6de6db9f0d99f4bcaea0ff2c91ec015">RESPONSE_HEADER_LENGTH</a>&#160;&#160;&#160;64</td></tr>
+<tr class="memitem:a2ce6bbc01181f70c18e80e603d3317d2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a2ce6bbc01181f70c18e80e603d3317d2">RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH</a>&#160;&#160;&#160;&quot;Content-length: &quot;</td></tr>
+<tr class="memitem:a772c07a90e45d9a0415321cb531f5350"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a772c07a90e45d9a0415321cb531f5350">RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE</a>&#160;&#160;&#160;&quot;Content-type: &quot;</td></tr>
+<tr class="memitem:a0b2eb3ecc6719dca42441a8c830faee8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a0b2eb3ecc6719dca42441a8c830faee8">RESPONSE_HEADER_FIELD_LENGTH</a>&#160;&#160;&#160;64</td></tr>
+<tr class="memitem:a8720220eaecaaf6a6c821d00e1941659"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a8720220eaecaaf6a6c821d00e1941659">RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH</a>&#160;&#160;&#160;16</td></tr>
+<tr class="memitem:a3c2b69c69c779dcb089ef0c367b5fa48"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a3c2b69c69c779dcb089ef0c367b5fa48">CONTENT_TYPE_OBJECTBID_ID</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:abe916fca02831af5b517097c36851402"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#abe916fca02831af5b517097c36851402">CONTENT_TYPE_USERACCOUNT_ID</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a18aa71f75f5c6c4fe1097e13a3c054bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a18aa71f75f5c6c4fe1097e13a3c054bc">REQUEST_METHOD_GET</a>&#160;&#160;&#160;&quot;GET&quot;</td></tr>
+<tr class="memitem:a91540e83379cadcd55447e4940794112"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a91540e83379cadcd55447e4940794112">REQUEST_METHOD_PUT</a>&#160;&#160;&#160;&quot;PUT&quot;</td></tr>
+<tr class="memitem:ad6243dbf0c785d6b9520a8b9e842c277"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ad6243dbf0c785d6b9520a8b9e842c277">REQUEST_METHOD_CONNECT</a>&#160;&#160;&#160;&quot;CONNECT&quot;</td></tr>
+<tr class="memitem:a7f163cd1abd8ae2d463aa913d602fa86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a7f163cd1abd8ae2d463aa913d602fa86">REQUEST_METHOD_DELETE</a>&#160;&#160;&#160;&quot;DELETE&quot;</td></tr>
+<tr class="memitem:adedaf9cf734c9fe50b0cdfcc2f4ed9ec"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#adedaf9cf734c9fe50b0cdfcc2f4ed9ec">STATUS_CODE_OK</a>&#160;&#160;&#160;00</td></tr>
+<tr class="memitem:a18135ace86a9201d3fc83405363b5f68"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a18135ace86a9201d3fc83405363b5f68">STATUS_CODE_CREATED</a>&#160;&#160;&#160;01</td></tr>
+<tr class="memitem:a971424c1e2979cfc7aed72e54a45842b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a971424c1e2979cfc7aed72e54a45842b">REASON_PHRASE_OK</a>&#160;&#160;&#160;&quot;Ok&quot;</td></tr>
+<tr class="memitem:a4c85be1d4867cfaa7036f84a003ab020"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a4c85be1d4867cfaa7036f84a003ab020">REASON_PHRASE_CREATED</a>&#160;&#160;&#160;&quot;Created&quot;</td></tr>
+<tr class="memitem:a79ea2e2f490fa927478b038825232bb7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a79ea2e2f490fa927478b038825232bb7">STATUS_CODE_BAD_REQUEST</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memitem:a214e98982b05317559fc0899a9586dad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a214e98982b05317559fc0899a9586dad">STATUS_CODE_NOT_CREATED</a>&#160;&#160;&#160;-2</td></tr>
+<tr class="memitem:a903ab886c8a815fcb193869ed50831d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a903ab886c8a815fcb193869ed50831d9">STATUS_CODE_INTERNAL_SERVER_ERROR</a>&#160;&#160;&#160;-3</td></tr>
+<tr class="memitem:afb2c382adab6b22cdf9e5d3b148f0d35"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#afb2c382adab6b22cdf9e5d3b148f0d35">STATUS_CODE_CONFLICT</a>&#160;&#160;&#160;-4</td></tr>
+<tr class="memitem:ab4e90b7d3fd11211a72169f1567f6381"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ab4e90b7d3fd11211a72169f1567f6381">STATUS_CODE_FORBIDDEN</a>&#160;&#160;&#160;-5</td></tr>
+<tr class="memitem:a6fdc0c57c0b234d8da1c04b57beb5b54"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a6fdc0c57c0b234d8da1c04b57beb5b54">REASON_PHRASE_BAD_REQUEST</a>&#160;&#160;&#160;&quot;Bad Request&quot;</td></tr>
+<tr class="memitem:a016dc9e3f149a15b29355fbef1492ab3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a016dc9e3f149a15b29355fbef1492ab3">REASON_PHRASE_NOT_CREATED</a>&#160;&#160;&#160;&quot;Not Created&quot;</td></tr>
+<tr class="memitem:a8839a48bf1fb4591fee62a4bfb821744"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a8839a48bf1fb4591fee62a4bfb821744">REASON_PHRASE_INTERNAL_SERVER_ERROR</a>&#160;&#160;&#160;&quot;Server Error&quot;</td></tr>
+<tr class="memitem:a4d9218996bbee903fdbaddc4786685e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a4d9218996bbee903fdbaddc4786685e8">REASON_PHRASE_CONFLICT</a>&#160;&#160;&#160;&quot;Conflict&quot;</td></tr>
+<tr class="memitem:a25b591f7819366e81fb78cf478a2fdd7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a25b591f7819366e81fb78cf478a2fdd7">REASON_PHRASE_FORBIDDEN</a>&#160;&#160;&#160;&quot;Forbidden&quot;</td></tr>
+<tr class="memitem:a599f36fe475d71985428415d6576310a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a599f36fe475d71985428415d6576310a">ACCOUNT_TYPE_ADMIN</a>&#160;&#160;&#160;'a'</td></tr>
+<tr class="memitem:a6b9445ab027f019fa2c460bd94e91ba4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a6b9445ab027f019fa2c460bd94e91ba4">ACCOUNT_TYPE_VENDOR</a>&#160;&#160;&#160;'v'</td></tr>
+<tr class="memitem:a98e57018c4feb8eb86668fc96cd61013"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a98e57018c4feb8eb86668fc96cd61013">ACCOUNT_TYPE_USER</a>&#160;&#160;&#160;'u'</td></tr>
+<tr class="memitem:a1898a2805984371f360cd2f33469b001"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a1898a2805984371f360cd2f33469b001">ACCOUNT_TYPE_UNKNOW</a>&#160;&#160;&#160;'z'</td></tr>
+<tr class="memitem:a872a5bd0d27ebecffed505d4c7bd8f27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a872a5bd0d27ebecffed505d4c7bd8f27">ACCOUNT_LABEL_ADMIN</a>&#160;&#160;&#160;&quot;Admin, become a god ;) &quot;</td></tr>
+<tr class="memitem:a0f7a6b8676aa074196ae5fac01118903"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a0f7a6b8676aa074196ae5fac01118903">ACCOUNT_LABEL_VENDOR</a>&#160;&#160;&#160;&quot;Vendor, limited to sell things&quot;</td></tr>
+<tr class="memitem:a50af0b17c99e478b2380f71c4a2d457d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a50af0b17c99e478b2380f71c4a2d457d">ACCOUNT_LABEL_USER</a>&#160;&#160;&#160;&quot;User, limited to bought things&quot;</td></tr>
+<tr class="memitem:aa90cac659d18e8ef6294c7ae337f6b58"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#aa90cac659d18e8ef6294c7ae337f6b58">SUCCESS</a>&#160;&#160;&#160;-10</td></tr>
+<tr class="memitem:ad2dd41993cc19a613aefcd43f2ae5d4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ad2dd41993cc19a613aefcd43f2ae5d4f">ERROR_OPENING</a>&#160;&#160;&#160;-11</td></tr>
+<tr class="memitem:a697b77863efc5e53e7f19bada251684a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a697b77863efc5e53e7f19bada251684a">ERROR_READING</a>&#160;&#160;&#160;-12</td></tr>
+<tr class="memitem:a00e24bec6e22042f96f2314b2fbad7d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a00e24bec6e22042f96f2314b2fbad7d9">ERROR_WRITING</a>&#160;&#160;&#160;-13</td></tr>
+<tr class="memitem:a5e0259cb3f12a95d8dcf1009244315a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a5e0259cb3f12a95d8dcf1009244315a6">ERROR_READING_BUFF</a>&#160;&#160;&#160;-14</td></tr>
+<tr class="memitem:a4263f15c3dda04df97ed46528ef3fd07"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a4263f15c3dda04df97ed46528ef3fd07">ERROR_OPENING_BUFF</a>&#160;&#160;&#160;-15</td></tr>
+<tr class="memitem:abd94d85c062275019deacbdb8c4bc625"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#abd94d85c062275019deacbdb8c4bc625">ERROR_WRITING_BUFF</a>&#160;&#160;&#160;-16</td></tr>
+<tr class="memitem:a57edf85749ef8e9e92037e1c14f6b575"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a57edf85749ef8e9e92037e1c14f6b575">ERROR_EMPTY_BUFF</a>&#160;&#160;&#160;-17</td></tr>
+<tr class="memitem:ab78a2223d176415b00a1ce412d9a890b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ab78a2223d176415b00a1ce412d9a890b">ERROR_USER</a>&#160;&#160;&#160;-18</td></tr>
+<tr class="memitem:acd367f503fc2bbd180508ed05d897280"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#acd367f503fc2bbd180508ed05d897280">ERROR_POINTER</a>&#160;&#160;&#160;-19</td></tr>
+<tr class="memitem:a0e5058e02df4957798a3c257db65582e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a0e5058e02df4957798a3c257db65582e">ERROR_SENDING</a>&#160;&#160;&#160;-20</td></tr>
+<tr class="memitem:ad075d8235e4fa7196908f17a5c52e791"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ad075d8235e4fa7196908f17a5c52e791">ERROR_RECEIVING</a>&#160;&#160;&#160;-21</td></tr>
+<tr class="memitem:ab38ba8ca1d549229d141957a4dd8a169"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ab38ba8ca1d549229d141957a4dd8a169">ERROR_WRONG_TYPE</a>&#160;&#160;&#160;-22</td></tr>
+<tr class="memitem:a6241da74f1f960b325e07fcd4a1241f2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a6241da74f1f960b325e07fcd4a1241f2">CONNECTION_DENIED</a>&#160;&#160;&#160;-23</td></tr>
+<tr class="memitem:ae3b38e95b75f0012222419746f69dd71"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ae3b38e95b75f0012222419746f69dd71">ERROR_NO_LIST</a>&#160;&#160;&#160;-24</td></tr>
+<tr class="memitem:a44ce4af2e9dca51084385c7a670b5cc3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a44ce4af2e9dca51084385c7a670b5cc3">ERROR_BIDDING</a>&#160;&#160;&#160;-25</td></tr>
+<tr class="memitem:ade5d86f955604ec489f0c144f47226fc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ade5d86f955604ec489f0c144f47226fc">ERROR_UNKNOWN</a>&#160;&#160;&#160;-99</td></tr>
+<tr class="memitem:a0caa3fa609352f1a2e1e727d9f963dfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a0caa3fa609352f1a2e1e727d9f963dfa">OBJECTBID_NAME_LENGTH</a>&#160;&#160;&#160;96</td></tr>
+<tr class="memitem:a786b09e764b0e8442655b6b7c78ede00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a786b09e764b0e8442655b6b7c78ede00">OBJECTBID_DESCRIPTION_LENGTH</a>&#160;&#160;&#160;320</td></tr>
+<tr class="memitem:a37a3e3c9149775a1de0391b6af399125"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a37a3e3c9149775a1de0391b6af399125">OBJECTBID_ADRESS_LENGTH</a>&#160;&#160;&#160;96</td></tr>
+<tr class="memitem:ae31be58dfd3ef1f3cb849fb35b7ac9ec"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ae31be58dfd3ef1f3cb849fb35b7ac9ec">USERACCOUNT_LOGIN_LENGTH</a>&#160;&#160;&#160;27</td></tr>
+<tr class="memitem:aff14d22469bb0bb5d650a58db2130a41"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#aff14d22469bb0bb5d650a58db2130a41">USERACCOUNT_PASSWORD_LENGTH</a>&#160;&#160;&#160;26</td></tr>
+<tr class="memitem:a19e07c697a90c76dc929a297b857f607"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a19e07c697a90c76dc929a297b857f607">USERACCOUNT_NAME_LENGTH</a>&#160;&#160;&#160;75</td></tr>
+<tr class="memitem:af504a907ef57172c931bd86960095678"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#af504a907ef57172c931bd86960095678">USERACCOUNT_LASTNAME_LENGTH</a>&#160;&#160;&#160;64</td></tr>
+<tr class="memitem:adebc02c1bf42467bc097c05dfe461dc5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#adebc02c1bf42467bc097c05dfe461dc5">USERACCOUNT_ADRESS_LENGTH</a>&#160;&#160;&#160;96</td></tr>
+<tr class="memitem:ab707ed00c5341acd2f33edf23891c34e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ab707ed00c5341acd2f33edf23891c34e">USERACCOUNT_MAIL_LENGTH</a>&#160;&#160;&#160;80</td></tr>
+<tr class="memitem:a1f3e01da379a8c66568ea30f95b0cf60"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a1f3e01da379a8c66568ea30f95b0cf60">MENU_CHOICE_QUIT</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a7160592a8591eb0857c8815088c3b756"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a7160592a8591eb0857c8815088c3b756">MENU_CHOICE_CONNECTION</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:aadea6d12469da37a0cd15a03b6d36b0a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#aadea6d12469da37a0cd15a03b6d36b0a">MENU_CHOICE_ACCOUNT_CREATION</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:add137f23ab3d2313f8a55055ce8a05be"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#add137f23ab3d2313f8a55055ce8a05be">MENU_CHOICE_ANONYMOUS</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:a1d06f5436feef07e4330d70f43e6cfc1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a1d06f5436feef07e4330d70f43e6cfc1">MENU_CHOICE_MAIN_LIST</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a8e8b78e38d8109be518ba7c7e712b1b6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a8e8b78e38d8109be518ba7c7e712b1b6">MENU_CHOICE_MAIN_SEARCH</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:ac93d8d3a40ce05cc580f9904ca4026aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#ac93d8d3a40ce05cc580f9904ca4026aa">MENU_CHOICE_MAIN_BID</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:aacb71dbc63837c5e60f70180643354b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#aacb71dbc63837c5e60f70180643354b2">CLEAR</a>()&#160;&#160;&#160;system(&quot;clear&quot;)</td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This file defines all constants. </p>
-</div></div><!-- contents -->
+</div><h2>Macro Definition Documentation</h2>
+<a class="anchor" id="a365a0242ae081a029e1a24906f2940be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACC_FILE&#160;&#160;&#160;&quot;accounts.txt&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a872a5bd0d27ebecffed505d4c7bd8f27"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACCOUNT_LABEL_ADMIN&#160;&#160;&#160;&quot;Admin, become a god ;) &quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a50af0b17c99e478b2380f71c4a2d457d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACCOUNT_LABEL_USER&#160;&#160;&#160;&quot;User, limited to bought things&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0f7a6b8676aa074196ae5fac01118903"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACCOUNT_LABEL_VENDOR&#160;&#160;&#160;&quot;Vendor, limited to sell things&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a599f36fe475d71985428415d6576310a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACCOUNT_TYPE_ADMIN&#160;&#160;&#160;'a'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1898a2805984371f360cd2f33469b001"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACCOUNT_TYPE_UNKNOW&#160;&#160;&#160;'z'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a98e57018c4feb8eb86668fc96cd61013"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACCOUNT_TYPE_USER&#160;&#160;&#160;'u'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6b9445ab027f019fa2c460bd94e91ba4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACCOUNT_TYPE_VENDOR&#160;&#160;&#160;'v'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af7b7dc9a200cb1404c280bd500fd1551"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUFFER_LENGTH&#160;&#160;&#160;4096</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aacb71dbc63837c5e60f70180643354b2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CLEAR</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;system(&quot;clear&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6241da74f1f960b325e07fcd4a1241f2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONNECTION_DENIED&#160;&#160;&#160;-23</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3c2b69c69c779dcb089ef0c367b5fa48"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONTENT_TYPE_OBJECTBID_ID&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abe916fca02831af5b517097c36851402"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONTENT_TYPE_USERACCOUNT_ID&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a44ce4af2e9dca51084385c7a670b5cc3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_BIDDING&#160;&#160;&#160;-25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a57edf85749ef8e9e92037e1c14f6b575"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_EMPTY_BUFF&#160;&#160;&#160;-17</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae3b38e95b75f0012222419746f69dd71"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_NO_LIST&#160;&#160;&#160;-24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad2dd41993cc19a613aefcd43f2ae5d4f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_OPENING&#160;&#160;&#160;-11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4263f15c3dda04df97ed46528ef3fd07"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_OPENING_BUFF&#160;&#160;&#160;-15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3ccef53b0e3f0076d03c96a0b46ec218"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_OUTPUT_LABEL&#160;&#160;&#160;&quot;[error]&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acd367f503fc2bbd180508ed05d897280"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_POINTER&#160;&#160;&#160;-19</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a697b77863efc5e53e7f19bada251684a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_READING&#160;&#160;&#160;-12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5e0259cb3f12a95d8dcf1009244315a6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_READING_BUFF&#160;&#160;&#160;-14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad075d8235e4fa7196908f17a5c52e791"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_RECEIVING&#160;&#160;&#160;-21</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0e5058e02df4957798a3c257db65582e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_SENDING&#160;&#160;&#160;-20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ade5d86f955604ec489f0c144f47226fc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_UNKNOWN&#160;&#160;&#160;-99</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab78a2223d176415b00a1ce412d9a890b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_USER&#160;&#160;&#160;-18</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a00e24bec6e22042f96f2314b2fbad7d9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_WRITING&#160;&#160;&#160;-13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abd94d85c062275019deacbdb8c4bc625"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_WRITING_BUFF&#160;&#160;&#160;-16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab38ba8ca1d549229d141957a4dd8a169"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_WRONG_TYPE&#160;&#160;&#160;-22</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6542afbf1c7c9be4481de7fe32640cd4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROROUTPUT&#160;&#160;&#160;stderr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa93f0eb578d23995850d61f7d61c55c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FALSE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afa331f2b65d5f8adebb78b02bcaa5bd4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IDS_FILE&#160;&#160;&#160;&quot;ids.txt&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aadea6d12469da37a0cd15a03b6d36b0a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CHOICE_ACCOUNT_CREATION&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="add137f23ab3d2313f8a55055ce8a05be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CHOICE_ANONYMOUS&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7160592a8591eb0857c8815088c3b756"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CHOICE_CONNECTION&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac93d8d3a40ce05cc580f9904ca4026aa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CHOICE_MAIN_BID&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1d06f5436feef07e4330d70f43e6cfc1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CHOICE_MAIN_LIST&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8e8b78e38d8109be518ba7c7e712b1b6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CHOICE_MAIN_SEARCH&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1f3e01da379a8c66568ea30f95b0cf60"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CHOICE_QUIT&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7bc899325f36d64e4511cc49499756f9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OBJ_FILE&#160;&#160;&#160;&quot;objects.txt&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a37a3e3c9149775a1de0391b6af399125"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OBJECTBID_ADRESS_LENGTH&#160;&#160;&#160;96</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a786b09e764b0e8442655b6b7c78ede00"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OBJECTBID_DESCRIPTION_LENGTH&#160;&#160;&#160;320</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0caa3fa609352f1a2e1e727d9f963dfa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OBJECTBID_NAME_LENGTH&#160;&#160;&#160;96</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6fdc0c57c0b234d8da1c04b57beb5b54"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REASON_PHRASE_BAD_REQUEST&#160;&#160;&#160;&quot;Bad Request&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4d9218996bbee903fdbaddc4786685e8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REASON_PHRASE_CONFLICT&#160;&#160;&#160;&quot;Conflict&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4c85be1d4867cfaa7036f84a003ab020"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REASON_PHRASE_CREATED&#160;&#160;&#160;&quot;Created&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a25b591f7819366e81fb78cf478a2fdd7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REASON_PHRASE_FORBIDDEN&#160;&#160;&#160;&quot;Forbidden&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8839a48bf1fb4591fee62a4bfb821744"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REASON_PHRASE_INTERNAL_SERVER_ERROR&#160;&#160;&#160;&quot;Server Error&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a016dc9e3f149a15b29355fbef1492ab3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REASON_PHRASE_NOT_CREATED&#160;&#160;&#160;&quot;Not Created&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a971424c1e2979cfc7aed72e54a45842b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REASON_PHRASE_OK&#160;&#160;&#160;&quot;Ok&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad6243dbf0c785d6b9520a8b9e842c277"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REQUEST_METHOD_CONNECT&#160;&#160;&#160;&quot;CONNECT&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7f163cd1abd8ae2d463aa913d602fa86"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REQUEST_METHOD_DELETE&#160;&#160;&#160;&quot;DELETE&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a18aa71f75f5c6c4fe1097e13a3c054bc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REQUEST_METHOD_GET&#160;&#160;&#160;&quot;GET&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a91540e83379cadcd55447e4940794112"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REQUEST_METHOD_PUT&#160;&#160;&#160;&quot;PUT&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8720220eaecaaf6a6c821d00e1941659"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0b2eb3ecc6719dca42441a8c830faee8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RESPONSE_HEADER_FIELD_LENGTH&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2ce6bbc01181f70c18e80e603d3317d2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH&#160;&#160;&#160;&quot;Content-length: &quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a772c07a90e45d9a0415321cb531f5350"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RESPONSE_HEADER_FIELDNAME_CONTENT_TYPE&#160;&#160;&#160;&quot;Content-type: &quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac6de6db9f0d99f4bcaea0ff2c91ec015"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RESPONSE_HEADER_LENGTH&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2e3a2aabbaf65c798170e9149f52ff99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SERVER_ADRESS&#160;&#160;&#160;&quot;127.0.0.1&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac42367fe5c999ec6650de83e9d72fe8c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SERVER_PORT&#160;&#160;&#160;&quot;25000&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a79ea2e2f490fa927478b038825232bb7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_CODE_BAD_REQUEST&#160;&#160;&#160;-1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afb2c382adab6b22cdf9e5d3b148f0d35"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_CODE_CONFLICT&#160;&#160;&#160;-4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a18135ace86a9201d3fc83405363b5f68"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_CODE_CREATED&#160;&#160;&#160;01</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab4e90b7d3fd11211a72169f1567f6381"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_CODE_FORBIDDEN&#160;&#160;&#160;-5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a903ab886c8a815fcb193869ed50831d9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_CODE_INTERNAL_SERVER_ERROR&#160;&#160;&#160;-3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a214e98982b05317559fc0899a9586dad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_CODE_NOT_CREATED&#160;&#160;&#160;-2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adedaf9cf734c9fe50b0cdfcc2f4ed9ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_CODE_OK&#160;&#160;&#160;00</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a09e08a66570ef7683f6a777d6da7f124"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_LINE_LENGTH&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa90cac659d18e8ef6294c7ae337f6b58"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SUCCESS&#160;&#160;&#160;-10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa8cecfc5c5c054d2875c03e77b7be15d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TRUE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adebc02c1bf42467bc097c05dfe461dc5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USERACCOUNT_ADRESS_LENGTH&#160;&#160;&#160;96</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af504a907ef57172c931bd86960095678"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USERACCOUNT_LASTNAME_LENGTH&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae31be58dfd3ef1f3cb849fb35b7ac9ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USERACCOUNT_LOGIN_LENGTH&#160;&#160;&#160;27</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab707ed00c5341acd2f33edf23891c34e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USERACCOUNT_MAIL_LENGTH&#160;&#160;&#160;80</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a19e07c697a90c76dc929a297b857f607"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USERACCOUNT_NAME_LENGTH&#160;&#160;&#160;75</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aff14d22469bb0bb5d650a58db2130a41"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USERACCOUNT_PASSWORD_LENGTH&#160;&#160;&#160;26</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:55 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

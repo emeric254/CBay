@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -67,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,30 +93,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="structures_8h.html" title="this file provides functions for data manipulation This file provides data structures and usual assoc...">structures.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">int</span> welcomeMenu();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">int</span> <a class="code" href="interface_client_8c.html#a18d95fe5c0e7ef0d86482dd9fd1caf18" title="show welcome menu.">welcomeMenu</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">int</span> mainMenu();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">int</span> <a class="code" href="interface_client_8c.html#a8396c50bf544009fb2fc4907b00cbad3" title="show main menu.">mainMenu</a>();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">int</span> connectionInput (<span class="keywordtype">char</span>* login, <span class="keywordtype">char</span>* password);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">int</span> <a class="code" href="interface_client_8c.html#a09f835a46035bc73184e8ae1653e0ab3" title="asks the user for a login and a password and gets their answer.">connectionInput</a> (<span class="keywordtype">char</span>* login, <span class="keywordtype">char</span>* password);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">int</span> searchInput (<span class="keywordtype">char</span>* name);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">int</span> <a class="code" href="interface_client_8c.html#a0a45236ed7035c07b95c6b8af5beaa04" title="asks the user for an object&#39;s name and gets their answer.">searchInput</a> (<span class="keywordtype">char</span>* name);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> displayResult (<span class="keywordtype">int</span> code);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_client_8c.html#a76fd92bd9a4a47069e01ee37a77aa81b" title="display the result of an operation from a code.">displayResult</a> (<span class="keywordtype">int</span> code);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> displayObject (<a class="code" href="struct_object_bid.html">ObjectBid</a> obj);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_client_8c.html#a1a5a877bbf1a9c9238cd2193b18b7e00" title="display an object and its properties.">displayObject</a> (<a class="code" href="struct_object_bid.html">ObjectBid</a> obj);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordtype">void</span> displayList (<a class="code" href="struct_object_bid.html">ObjectBid</a> * list, <span class="keywordtype">int</span> listSize);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_client_8c.html#aaa8b64bd4018998b5623236be3807832">displayList</a> (<a class="code" href="struct_object_bid.html">ObjectBid</a> * list, <span class="keywordtype">int</span> listSize);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">int</span> biddingInput(<a class="code" href="struct_object_bid.html">ObjectBid</a> obj, <span class="keywordtype">float</span> * price);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">int</span> <a class="code" href="interface_client_8c.html#a4f6fd2daefd2378d6cee2e274d48f0e2">biddingInput</a>(<a class="code" href="struct_object_bid.html">ObjectBid</a> obj, <span class="keywordtype">float</span> * price);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordtype">int</span> choseObjectInList(<span class="keywordtype">int</span> * chosen, <a class="code" href="struct_object_bid.html">ObjectBid</a> * list, <span class="keywordtype">int</span> listSize);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordtype">int</span> <a class="code" href="interface_client_8c.html#ac54b37ec076897c48b8b4753ff75463b">choseObjectInList</a>(<span class="keywordtype">int</span> * chosen, <a class="code" href="struct_object_bid.html">ObjectBid</a> * list, <span class="keywordtype">int</span> listSize);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:54 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

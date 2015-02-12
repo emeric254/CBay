@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -67,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,71 +91,71 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="serveur_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __SERVEUR_H__</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define __SERVEUR_H__</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> Init(<span class="keywordtype">char</span> * port);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> <a class="code" href="client_8c.html#aa3f5526e7ebeec693be19684410ad009" title="Connection to the server.">Init</a>(<span class="keywordtype">char</span> * port);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">int</span> connectWait();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a8e0cfd2cdc7b92382dc70dd26d796c15" title="wait for a client to connect, and then open the connection with him">connectWait</a>();</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">int</span> receiveBinary(<span class="keywordtype">char</span> ** data);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">int</span> <a class="code" href="client_8c.html#a47e4b0a69e690abdcc95a08fa660c819" title="receive binary datas from the server and store them in a character array">receiveBinary</a>(<span class="keywordtype">char</span> ** data);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">int</span> sendBinary(<span class="keywordtype">char</span> * data, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">int</span> <a class="code" href="client_8c.html#a89f1959ce9abb4013dd6a8e6a26a08f7" title="send to the server datas from a character array">sendBinary</a>(<span class="keywordtype">char</span> * data, <span class="keywordtype">size_t</span> size);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">int</span> sendString(<span class="keywordtype">char</span> * data);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a9c4839208c0dc94512c6e36d29813b9a" title="send a string to the client">sendString</a>(<span class="keywordtype">char</span> * data);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> endClient();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> <a class="code" href="serveur_8c.html#a54b6d78ba44089862798c271e7c53cb7" title="close properly the connection with the client">endClient</a>();</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span> endServer();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span> <a class="code" href="serveur_8c.html#ac6ea75141abcbfe34f535fe2f89a8764" title="close properly the server process">endServer</a>();</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">int</span> sendStatusLine(<span class="keywordtype">int</span> statusCode);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a5ee638c183f3aea235427c91687f68eb" title="send a status line as described in the RFC">sendStatusLine</a>(<span class="keywordtype">int</span> statusCode);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">int</span> sendHeaderField(<span class="keywordtype">int</span> size, <span class="keywordtype">int</span> type);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a0297eb5750b13a22b937b66666c2de10" title="send header fileds as described in the RFC">sendHeaderField</a>(<span class="keywordtype">int</span> size, <span class="keywordtype">int</span> type);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">int</span> isGetRequest(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#adf01aee57e8f4f05b62887b78e632311" title="test if a message is a GET request">isGetRequest</a>(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">int</span> isPutRequest(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a50b98bf8bdccca1d10e8c30530f7add3" title="test if a message is a PUT request">isPutRequest</a>(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">int</span> isConnectRequest(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#ac6207ce9ab9cf7a904c9075e07222a6b" title="test if a message is a CONNECT request">isConnectRequest</a>(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">int</span> isDeleteRequest(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a37a84214464b018bb62b69ae2c886cfb" title="test if a message is a DELETE request">isDeleteRequest</a>(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keywordtype">int</span> splitGetRequest(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size, <span class="keywordtype">char</span>* data, <span class="keywordtype">int</span>* sizeData);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#aaee0fd5652c113cb0db774c993be4cad" title="split a GET request to find and output the PDU">splitGetRequest</a>(<span class="keywordtype">char</span>* request, <span class="keywordtype">int</span> size, <span class="keywordtype">char</span>* data, <span class="keywordtype">int</span>* sizeData);</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordtype">int</span> splitPutRequest(<span class="keywordtype">char</span> * request, <span class="keywordtype">int</span> size, <span class="keywordtype">char</span> * data, <span class="keywordtype">int</span> * sizeData);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a7213daa35e02db3be9546fb4e6168eb4" title="split a PUT request to find and output the PDU">splitPutRequest</a>(<span class="keywordtype">char</span> * request, <span class="keywordtype">int</span> size, <span class="keywordtype">char</span> * data, <span class="keywordtype">int</span> * sizeData);</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keywordtype">int</span> splitConnectRequest(<span class="keywordtype">char</span> * request, <span class="keywordtype">int</span> size, <span class="keywordtype">char</span> * login, <span class="keywordtype">char</span> * password, <span class="keywordtype">int</span> * sizeLogin, <span class="keywordtype">int</span> * sizePassword);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#ac8397d27f5afc6b6fad603d2562dfad3" title="split a CONNECT request to find and output the login and the password">splitConnectRequest</a>(<span class="keywordtype">char</span> * request, <span class="keywordtype">int</span> size, <span class="keywordtype">char</span> * login, <span class="keywordtype">char</span> * password, <span class="keywordtype">int</span> * sizeLogin, <span class="keywordtype">int</span> * sizePassword);</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keywordtype">int</span> splitDeleteRequest(<span class="keywordtype">char</span> * request, <span class="keywordtype">int</span> size, <span class="keywordtype">char</span> * data, <span class="keywordtype">int</span> * sizeData);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a70ee0360c7d9015f78ae0d3e92fdca2c" title="split a DELETE request to find and output the PDU">splitDeleteRequest</a>(<span class="keywordtype">char</span> * request, <span class="keywordtype">int</span> size, <span class="keywordtype">char</span> * data, <span class="keywordtype">int</span> * sizeData);</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keywordtype">int</span> answerUserAccount(<a class="code" href="struct_user_account.html">UserAccount</a> * account);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#aa917a3ad17c4d1d607bb9ff1cdc5f8d8" title="send an UserAccount to the client">answerUserAccount</a>(<a class="code" href="struct_user_account.html">UserAccount</a> * account);</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keywordtype">int</span> answerObjectBid(<a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a21a8b9a76805cc5ba06d5d0687a548e7" title="send an ObjectBid to the client">answerObjectBid</a>(<a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>);</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keywordtype">int</span> answerObjectBidTable(<a class="code" href="struct_object_bid.html">ObjectBid</a> * objects, <span class="keywordtype">int</span> nbrObjects);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serveur_8c.html#a706d97a8b641d23313d2243561660ed8" title="send an ObjectBid table to the client">answerObjectBidTable</a>(<a class="code" href="struct_object_bid.html">ObjectBid</a> * objects, <span class="keywordtype">int</span> nbrObjects);</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:54 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

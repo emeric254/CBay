@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -67,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -95,133 +97,133 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="code" href="struct_confidential_i_d_s.html">   15</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> id;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">char</span> login[USERACCOUNT_LOGIN_LENGTH];</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">char</span> password[USERACCOUNT_PASSWORD_LENGTH];</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="struct_confidential_i_d_s.html#a53f4656a3ccbae3d40e94f582eef745f">   17</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="struct_confidential_i_d_s.html#a53f4656a3ccbae3d40e94f582eef745f">id</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="code" href="struct_confidential_i_d_s.html#a4bf7e90f51b7f7d3617117ae6f12c052">   18</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_confidential_i_d_s.html#a4bf7e90f51b7f7d3617117ae6f12c052">login</a>[<a class="code" href="defines_8h.html#ae31be58dfd3ef1f3cb849fb35b7ac9ec">USERACCOUNT_LOGIN_LENGTH</a>];</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="code" href="struct_confidential_i_d_s.html#a79861f2b044c93f50ef5ffe118c1e28d">   19</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_confidential_i_d_s.html#a79861f2b044c93f50ef5ffe118c1e28d">password</a>[<a class="code" href="defines_8h.html#aff14d22469bb0bb5d650a58db2130a41">USERACCOUNT_PASSWORD_LENGTH</a>];</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <a class="code" href="structures_8h.html#acc1a7a7abcefe621ee1d34b4c98e8226">ConfidentialIDS</a>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno"><a class="code" href="struct_object_bid.html">   22</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_object_bid.html">ObjectBid</a></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> id;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">char</span> name[OBJECTBID_NAME_LENGTH];</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">float</span> basePrice;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">char</span> description[OBJECTBID_DESCRIPTION_LENGTH];</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> idVendor;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> startTime;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> endTime;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">char</span> adress[OBJECTBID_ADRESS_LENGTH];</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">float</span>  currentBidPrice;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> currentBidIdBuyer;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;} <a class="code" href="struct_object_bid.html">ObjectBid</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="struct_object_bid.html#a53f4656a3ccbae3d40e94f582eef745f">   24</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="struct_object_bid.html#a53f4656a3ccbae3d40e94f582eef745f">id</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="code" href="struct_object_bid.html#a8b0efa1f52a6b46d640cfcf93172083e">   25</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_object_bid.html#a8b0efa1f52a6b46d640cfcf93172083e">name</a>[<a class="code" href="defines_8h.html#a0caa3fa609352f1a2e1e727d9f963dfa">OBJECTBID_NAME_LENGTH</a>];</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="code" href="struct_object_bid.html#ad7e7bdb2bbc09612e2b037a0df5d76dd">   26</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="struct_object_bid.html#ad7e7bdb2bbc09612e2b037a0df5d76dd">basePrice</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="struct_object_bid.html#a203af9554762f924c14e5c30b24352a1">   27</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_object_bid.html#a203af9554762f924c14e5c30b24352a1">description</a>[<a class="code" href="defines_8h.html#a786b09e764b0e8442655b6b7c78ede00">OBJECTBID_DESCRIPTION_LENGTH</a>];</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="struct_object_bid.html#a56c855fe82a6ab9e09389c23a73eeec0">   28</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="struct_object_bid.html#a56c855fe82a6ab9e09389c23a73eeec0">idVendor</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="code" href="struct_object_bid.html#a39256f6302441e1a26db958909e7431d">   29</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="struct_object_bid.html#a39256f6302441e1a26db958909e7431d">startTime</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="struct_object_bid.html#a03ea3a2cebde4b5cae63c7105339c294">   30</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="struct_object_bid.html#a03ea3a2cebde4b5cae63c7105339c294">endTime</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="code" href="struct_object_bid.html#a05eb87542785d73c5aa5cbe4e3a6d262">   31</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_object_bid.html#a05eb87542785d73c5aa5cbe4e3a6d262">adress</a>[<a class="code" href="defines_8h.html#a37a3e3c9149775a1de0391b6af399125">OBJECTBID_ADRESS_LENGTH</a>];</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="struct_object_bid.html#a8864df4945a55f29bb320025d6011cc1">   32</a></span>&#160;    <span class="keywordtype">float</span>  <a class="code" href="struct_object_bid.html#a8864df4945a55f29bb320025d6011cc1">currentBidPrice</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="struct_object_bid.html#aa79adfae7ada9530c98f5510fc34a0f7">   33</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="struct_object_bid.html#aa79adfae7ada9530c98f5510fc34a0f7">currentBidIdBuyer</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;} <a class="code" href="structures_8h.html#ab591711c307c07efffae57a734a3d3bb">ObjectBid</a>;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="struct_user_account.html">   37</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_user_account.html">UserAccount</a></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">char</span> type;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> IDS;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">char</span> name[USERACCOUNT_NAME_LENGTH];</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">char</span> lastname[USERACCOUNT_LASTNAME_LENGTH];</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">char</span> adress[USERACCOUNT_ADRESS_LENGTH];</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">char</span> mail[USERACCOUNT_MAIL_LENGTH];</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <a class="code" href="struct_user_account.html">UserAccount</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="struct_user_account.html#aff17911edc8208aa8ddb1c7c52c78389">   39</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_user_account.html#aff17911edc8208aa8ddb1c7c52c78389">type</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="struct_user_account.html#a588d1e5ad85c65bc2b00e9432faadc0e">   40</a></span>&#160;    <a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> <a class="code" href="struct_user_account.html#a588d1e5ad85c65bc2b00e9432faadc0e">IDS</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="struct_user_account.html#ab3f0e8a7b7c292feb10bb01486452533">   41</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_user_account.html#ab3f0e8a7b7c292feb10bb01486452533">name</a>[<a class="code" href="defines_8h.html#a19e07c697a90c76dc929a297b857f607">USERACCOUNT_NAME_LENGTH</a>];</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="struct_user_account.html#a570366d76c40b10dee4a3db834bc53be">   42</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_user_account.html#a570366d76c40b10dee4a3db834bc53be">lastname</a>[<a class="code" href="defines_8h.html#af504a907ef57172c931bd86960095678">USERACCOUNT_LASTNAME_LENGTH</a>];</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="struct_user_account.html#accd59deb6270e807cd96a582c141e631">   43</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_user_account.html#accd59deb6270e807cd96a582c141e631">adress</a>[<a class="code" href="defines_8h.html#adebc02c1bf42467bc097c05dfe461dc5">USERACCOUNT_ADRESS_LENGTH</a>];</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="struct_user_account.html#aa9bbf7bea4117b927642aee2875821d9">   44</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_user_account.html#aa9bbf7bea4117b927642aee2875821d9">mail</a>[<a class="code" href="defines_8h.html#ab707ed00c5341acd2f33edf23891c34e">USERACCOUNT_MAIL_LENGTH</a>];</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <a class="code" href="structures_8h.html#aba02e44230ed4acde9398867fa870282">UserAccount</a>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> cleanBuffer();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> <a class="code" href="structures_8c.html#a750be53afe22b006b8b36b42f3c12323" title="clean the buffer">cleanBuffer</a>();</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span> <a class="code" href="structures_8h.html#af8cccbdcee2fd10ca6b912e1f5ca962f" title="remove Carriage Return from a string">cleanCRString</a>(<span class="keywordtype">char</span> * <span class="keywordtype">string</span>);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">char</span> getAChar();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">char</span> <a class="code" href="structures_8c.html#a5f244481cf9d3e508f74a24cb6cc417e" title="wait for a char input from the user">getAChar</a>();</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">int</span> mailCheck(<span class="keywordtype">char</span> * mail, <span class="keywordtype">int</span> length);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a86188c34a7bbb187f81952b1d0f53c46" title="check if an input string is composed as a valid mail adress">mailCheck</a>(<span class="keywordtype">char</span> * mail, <span class="keywordtype">int</span> length);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> userInputUserAccount(<a class="code" href="struct_user_account.html">UserAccount</a> * account);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> <a class="code" href="structures_8c.html#a64d18118ca3880bb08a20870145afede" title="ask the user to input fields of a new UserAccount var except ids.">userInputUserAccount</a>(<a class="code" href="struct_user_account.html">UserAccount</a> * account);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> userInputObjectBid(<a class="code" href="struct_object_bid.html">ObjectBid</a> * bid);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="structures_8c.html#a558a9ba0cd7c4d5bbbea72d8af42dcd1" title="ask the user to input fields of a new ObjectBid except ids&#39; and currentBid vars.">userInputObjectBid</a>(<a class="code" href="struct_object_bid.html">ObjectBid</a> * bid);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">int</span> accSave (<a class="code" href="struct_user_account.html">UserAccount</a> user, FILE * f);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#aac6348b7a88e1ac252885cb0cc342569" title="save account&#39;s informations into the ACC_FILE">accSave</a> (<a class="code" href="struct_user_account.html">UserAccount</a> user, FILE * f);</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keywordtype">int</span> accLoad (<a class="code" href="struct_user_account.html">UserAccount</a> * user, FILE * f);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a47c0fe248045c32784f2a62af5305f6d" title="load account&#39;s informations from the ACC_FILE">accLoad</a> (<a class="code" href="struct_user_account.html">UserAccount</a> * user, FILE * f);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">int</span> userInTable (<a class="code" href="struct_user_account.html">UserAccount</a> * user, <a class="code" href="struct_user_account.html">UserAccount</a> * table, <span class="keywordtype">int</span> size, <a class="code" href="struct_user_account.html">UserAccount</a> * ptrUser);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a6383074ae5e822adb461bc03e620c917">userInTable</a> (<a class="code" href="struct_user_account.html">UserAccount</a> * user, <a class="code" href="struct_user_account.html">UserAccount</a> * table, <span class="keywordtype">int</span> size, <a class="code" href="struct_user_account.html">UserAccount</a> * ptrUser);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keywordtype">int</span> allAccSave (<a class="code" href="struct_user_account.html">UserAccount</a> * table, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a6a148a030d3a7a89011a170ebfbf5fa3" title="save a table of UserAccount from the ACC_FILE">allAccSave</a> (<a class="code" href="struct_user_account.html">UserAccount</a> * table, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keywordtype">int</span> allAccLoad (<a class="code" href="struct_user_account.html">UserAccount</a> ** table, <span class="keywordtype">int</span> * size);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a4a73e70cf0be85c7cf9a3f840380a5b0" title="load a table of UserAccount from the ACC_FILE">allAccLoad</a> (<a class="code" href="struct_user_account.html">UserAccount</a> ** table, <span class="keywordtype">int</span> * size);</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keywordtype">int</span> objSave (<a class="code" href="struct_object_bid.html">ObjectBid</a> obj, FILE * f);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a259df54235616d3704771e942a87a475" title="save object&#39;s informations into the OBJ_FILE">objSave</a> (<a class="code" href="struct_object_bid.html">ObjectBid</a> obj, FILE * f);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keywordtype">int</span> objLoad (<a class="code" href="struct_object_bid.html">ObjectBid</a> * obj, FILE * f);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a076e84eeaffd3b7c4f9dbeb16032bad8" title="load object&#39;s informations from the OBJ_FILE">objLoad</a> (<a class="code" href="struct_object_bid.html">ObjectBid</a> * obj, FILE * f);</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keywordtype">int</span> objInTable (<a class="code" href="struct_object_bid.html">ObjectBid</a> * obj, <a class="code" href="struct_object_bid.html">ObjectBid</a> * table, <span class="keywordtype">int</span> size, <a class="code" href="struct_object_bid.html">ObjectBid</a> * ptrObject);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a0d45a214e06dccc832a39e75ab2299dc">objInTable</a> (<a class="code" href="struct_object_bid.html">ObjectBid</a> * obj, <a class="code" href="struct_object_bid.html">ObjectBid</a> * table, <span class="keywordtype">int</span> size, <a class="code" href="struct_object_bid.html">ObjectBid</a> * ptrObject);</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keywordtype">int</span> allObjSave (<a class="code" href="struct_object_bid.html">ObjectBid</a> * table, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#ab3753d192dad954c5cf924af4debc2fb" title="save a table of objects to the OBJ_FILE">allObjSave</a> (<a class="code" href="struct_object_bid.html">ObjectBid</a> * table, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keywordtype">int</span> allObjLoad (<a class="code" href="struct_object_bid.html">ObjectBid</a> ** table, <span class="keywordtype">int</span> * size);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a5c57560da0f85821c1b5d05f7100e2b7" title="load a table of objects from the OBJ_FILE">allObjLoad</a> (<a class="code" href="struct_object_bid.html">ObjectBid</a> ** table, <span class="keywordtype">int</span> * size);</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="keywordtype">int</span> idsLoad (<a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> * ids, FILE * f);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a190e418f43882436596eb5f5ad3e311d" title="load ids&#39;s informations from the IDS_FILE">idsLoad</a> (<a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> * ids, FILE * f);</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keywordtype">int</span> allIDSLoad (<a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> ** table, <span class="keywordtype">int</span> * size);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a9732991a9ff8e7457cb236a2f10a1d8f" title="load a table of IDS from the IDS_FILE">allIDSLoad</a> (<a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> ** table, <span class="keywordtype">int</span> * size);</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="keywordtype">int</span> allIDSSave (<a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> ** table, <span class="keywordtype">int</span> * size);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a7286f32b0a46ee6b224e99ef40013706" title="save all the IDS table to the IDS_FILE">allIDSSave</a> (<a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> ** table, <span class="keywordtype">int</span> * size);</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keywordtype">int</span> idsInTable (<span class="keywordtype">char</span> login[USERACCOUNT_LOGIN_LENGTH], <span class="keywordtype">char</span> password[USERACCOUNT_PASSWORD_LENGTH], <a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> * table, <span class="keywordtype">int</span> size, <a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> * ptrIDS);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#abb38401ea0132366bc4de3c3d21cdf47">idsInTable</a> (<span class="keywordtype">char</span> login[<a class="code" href="defines_8h.html#ae31be58dfd3ef1f3cb849fb35b7ac9ec">USERACCOUNT_LOGIN_LENGTH</a>], <span class="keywordtype">char</span> password[<a class="code" href="defines_8h.html#aff14d22469bb0bb5d650a58db2130a41">USERACCOUNT_PASSWORD_LENGTH</a>], <a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> * table, <span class="keywordtype">int</span> size, <a class="code" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> * ptrIDS);</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keywordtype">int</span> isObjectBid (<span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#af094709494be4d401c209a49ffa53a5a">isObjectBid</a> (<span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keywordtype">int</span> isObjectBidTable (<span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a6a7956b4134280481814d4ea92db29cc" title="test if the data&#39;s size given match to an ObjectBid table size">isObjectBidTable</a> (<span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keywordtype">int</span> isAccountUser (<span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a5b0d6dbe63edf9446e38694a3594ee45" title="test if the data&#39;s size given match to an UserAccount var size">isAccountUser</a> (<span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="keywordtype">long</span> <span class="keywordtype">int</span> getCurrentTime();</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a4d8ef14ec7a8c72c5eb498edd1b47456" title="returns the time as the number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC)...">getCurrentTime</a>();</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keywordtype">int</span> isFinishObjectBid(<a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a8fc6b5c9a7e0be38dcfe52e720e4926c" title="test if an ObjectBid is finished or not, checking his time value.">isFinishObjectBid</a>(<a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>);</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="keywordtype">int</span> removeObjectBidInTable(<a class="code" href="struct_object_bid.html">ObjectBid</a> ** table, <span class="keywordtype">int</span> * size, <a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#aa1eda1209519ffb2ae485e6763cfd2f5" title="remove an ObjectBid to an ObjectBid table.">removeObjectBidInTable</a>(<a class="code" href="struct_object_bid.html">ObjectBid</a> ** table, <span class="keywordtype">int</span> * size, <a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>);</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="keywordtype">int</span> addObjectBidInTable(<a class="code" href="struct_object_bid.html">ObjectBid</a> ** table, <span class="keywordtype">int</span> * size, <a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#ad456681e402245780a5af4ff2028c3e2" title="add an ObjectBid to an ObjectBid table.">addObjectBidInTable</a>(<a class="code" href="struct_object_bid.html">ObjectBid</a> ** table, <span class="keywordtype">int</span> * size, <a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>);</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keywordtype">int</span> removeUserAccountInTable(<a class="code" href="struct_user_account.html">UserAccount</a> ** table, <span class="keywordtype">int</span> * size, <a class="code" href="struct_user_account.html">UserAccount</a> * user);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#ae3b94353222b08c568be7d1db44ee3fb" title="remove an UserAccount to an UserAccount table.">removeUserAccountInTable</a>(<a class="code" href="struct_user_account.html">UserAccount</a> ** table, <span class="keywordtype">int</span> * size, <a class="code" href="struct_user_account.html">UserAccount</a> * user);</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keywordtype">int</span> addUserAccountInTable(<a class="code" href="struct_user_account.html">UserAccount</a> ** table, <span class="keywordtype">int</span> * size, <a class="code" href="struct_user_account.html">UserAccount</a> * user);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#a501738157cdbaf59d6be9375591895b7" title="add an UserAccount to an UserAccount table.">addUserAccountInTable</a>(<a class="code" href="struct_user_account.html">UserAccount</a> ** table, <span class="keywordtype">int</span> * size, <a class="code" href="struct_user_account.html">UserAccount</a> * user);</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="keywordtype">int</span> searchObjectBidInTable(<a class="code" href="struct_object_bid.html">ObjectBid</a> * table, <span class="keywordtype">int</span> size, <a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>, <a class="code" href="struct_object_bid.html">ObjectBid</a> * ptrObject);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="keywordtype">int</span> <a class="code" href="structures_8c.html#aaddc3d7b154c85e500812ebef4f1ebd0" title="search by name a matching ObjectBid">searchObjectBidInTable</a>(<a class="code" href="struct_object_bid.html">ObjectBid</a> * table, <span class="keywordtype">int</span> size, <a class="code" href="struct_object_bid.html">ObjectBid</a> * <span class="keywordtype">object</span>, <a class="code" href="struct_object_bid.html">ObjectBid</a> * ptrObject);</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:54 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

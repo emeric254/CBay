@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -60,6 +62,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -67,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,23 +87,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ConfidentialIDS Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="structures_8h_source.html">structures.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a53f4656a3ccbae3d40e94f582eef745f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53f4656a3ccbae3d40e94f582eef745f"></a>
-long int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
-<tr class="memitem:a4bf7e90f51b7f7d3617117ae6f12c052"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4bf7e90f51b7f7d3617117ae6f12c052"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>login</b> [USERACCOUNT_LOGIN_LENGTH]</td></tr>
-<tr class="memitem:a79861f2b044c93f50ef5ffe118c1e28d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79861f2b044c93f50ef5ffe118c1e28d"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>password</b> [USERACCOUNT_PASSWORD_LENGTH]</td></tr>
+<tr class="memitem:a53f4656a3ccbae3d40e94f582eef745f"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_confidential_i_d_s.html#a53f4656a3ccbae3d40e94f582eef745f">id</a></td></tr>
+<tr class="memitem:a4bf7e90f51b7f7d3617117ae6f12c052"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_confidential_i_d_s.html#a4bf7e90f51b7f7d3617117ae6f12c052">login</a> [<a class="el" href="defines_8h.html#ae31be58dfd3ef1f3cb849fb35b7ac9ec">USERACCOUNT_LOGIN_LENGTH</a>]</td></tr>
+<tr class="memitem:a79861f2b044c93f50ef5ffe118c1e28d"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_confidential_i_d_s.html#a79861f2b044c93f50ef5ffe118c1e28d">password</a> [<a class="el" href="defines_8h.html#aff14d22469bb0bb5d650a58db2130a41">USERACCOUNT_PASSWORD_LENGTH</a>]</td></tr>
 </table>
+<h2>Field Documentation</h2>
+<a class="anchor" id="a53f4656a3ccbae3d40e94f582eef745f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4bf7e90f51b7f7d3617117ae6f12c052"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char login[<a class="el" href="defines_8h.html#ae31be58dfd3ef1f3cb849fb35b7ac9ec">USERACCOUNT_LOGIN_LENGTH</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a79861f2b044c93f50ef5ffe118c1e28d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char password[<a class="el" href="defines_8h.html#aff14d22469bb0bb5d650a58db2130a41">USERACCOUNT_PASSWORD_LENGTH</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/home/emeric/projets/CBay/sources/<a class="el" href="structures_8h_source.html">structures.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:55 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

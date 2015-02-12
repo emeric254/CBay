@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -60,6 +62,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -67,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,29 +87,105 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">UserAccount Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="structures_8h_source.html">structures.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for UserAccount:</div>
+<div class="dyncontent">
+<div class="center"><img src="struct_user_account__coll__graph.png" border="0" usemap="#_user_account_coll__map" alt="Collaboration graph"/></div>
+<map name="_user_account_coll__map" id="_user_account_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:aff17911edc8208aa8ddb1c7c52c78389"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff17911edc8208aa8ddb1c7c52c78389"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
-<tr class="memitem:a588d1e5ad85c65bc2b00e9432faadc0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a588d1e5ad85c65bc2b00e9432faadc0e"></a>
-<a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>IDS</b></td></tr>
-<tr class="memitem:ab3f0e8a7b7c292feb10bb01486452533"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab3f0e8a7b7c292feb10bb01486452533"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> [USERACCOUNT_NAME_LENGTH]</td></tr>
-<tr class="memitem:a570366d76c40b10dee4a3db834bc53be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a570366d76c40b10dee4a3db834bc53be"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>lastname</b> [USERACCOUNT_LASTNAME_LENGTH]</td></tr>
-<tr class="memitem:accd59deb6270e807cd96a582c141e631"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accd59deb6270e807cd96a582c141e631"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>adress</b> [USERACCOUNT_ADRESS_LENGTH]</td></tr>
-<tr class="memitem:aa9bbf7bea4117b927642aee2875821d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9bbf7bea4117b927642aee2875821d9"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>mail</b> [USERACCOUNT_MAIL_LENGTH]</td></tr>
+<tr class="memitem:aff17911edc8208aa8ddb1c7c52c78389"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user_account.html#aff17911edc8208aa8ddb1c7c52c78389">type</a></td></tr>
+<tr class="memitem:a588d1e5ad85c65bc2b00e9432faadc0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user_account.html#a588d1e5ad85c65bc2b00e9432faadc0e">IDS</a></td></tr>
+<tr class="memitem:ab3f0e8a7b7c292feb10bb01486452533"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user_account.html#ab3f0e8a7b7c292feb10bb01486452533">name</a> [<a class="el" href="defines_8h.html#a19e07c697a90c76dc929a297b857f607">USERACCOUNT_NAME_LENGTH</a>]</td></tr>
+<tr class="memitem:a570366d76c40b10dee4a3db834bc53be"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user_account.html#a570366d76c40b10dee4a3db834bc53be">lastname</a> [<a class="el" href="defines_8h.html#af504a907ef57172c931bd86960095678">USERACCOUNT_LASTNAME_LENGTH</a>]</td></tr>
+<tr class="memitem:accd59deb6270e807cd96a582c141e631"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user_account.html#accd59deb6270e807cd96a582c141e631">adress</a> [<a class="el" href="defines_8h.html#adebc02c1bf42467bc097c05dfe461dc5">USERACCOUNT_ADRESS_LENGTH</a>]</td></tr>
+<tr class="memitem:aa9bbf7bea4117b927642aee2875821d9"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user_account.html#aa9bbf7bea4117b927642aee2875821d9">mail</a> [<a class="el" href="defines_8h.html#ab707ed00c5341acd2f33edf23891c34e">USERACCOUNT_MAIL_LENGTH</a>]</td></tr>
 </table>
+<h2>Field Documentation</h2>
+<a class="anchor" id="accd59deb6270e807cd96a582c141e631"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char adress[<a class="el" href="defines_8h.html#adebc02c1bf42467bc097c05dfe461dc5">USERACCOUNT_ADRESS_LENGTH</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a588d1e5ad85c65bc2b00e9432faadc0e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> IDS</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a570366d76c40b10dee4a3db834bc53be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char lastname[<a class="el" href="defines_8h.html#af504a907ef57172c931bd86960095678">USERACCOUNT_LASTNAME_LENGTH</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa9bbf7bea4117b927642aee2875821d9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char mail[<a class="el" href="defines_8h.html#ab707ed00c5341acd2f33edf23891c34e">USERACCOUNT_MAIL_LENGTH</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab3f0e8a7b7c292feb10bb01486452533"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char name[<a class="el" href="defines_8h.html#a19e07c697a90c76dc929a297b857f607">USERACCOUNT_NAME_LENGTH</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aff17911edc8208aa8ddb1c7c52c78389"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/home/emeric/projets/CBay/sources/<a class="el" href="structures_8h_source.html">structures.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:55 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

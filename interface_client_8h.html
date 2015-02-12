@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -67,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -92,6 +94,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>This file provides the main function to interact with the user like displaying menus or menu choices. Nearly all the user's input are taken with those functions. The only exception is for the account and the object creation.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="structures_8h_source.html">structures.h</a>&quot;</code><br/>
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for interfaceClient.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="interface_client_8h__incl.png" border="0" usemap="#_2home_2emeric_2projets_2_c_bay_2sources_2interface_client_8h" alt=""/></div>
+<map name="_2home_2emeric_2projets_2_c_bay_2sources_2interface_client_8h" id="_2home_2emeric_2projets_2_c_bay_2sources_2interface_client_8h">
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="interface_client_8h__dep__incl.png" border="0" usemap="#_2home_2emeric_2projets_2_c_bay_2sources_2interface_client_8hdep" alt=""/></div>
+<map name="_2home_2emeric_2projets_2_c_bay_2sources_2interface_client_8hdep" id="_2home_2emeric_2projets_2_c_bay_2sources_2interface_client_8hdep">
+</map>
+</div>
 </div>
 <p><a href="interface_client_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -109,16 +125,71 @@ Functions</h2></td></tr>
 <tr class="memdesc:a76fd92bd9a4a47069e01ee37a77aa81b"><td class="mdescLeft">&#160;</td><td class="mdescRight">display the result of an operation from a code.  <a href="#a76fd92bd9a4a47069e01ee37a77aa81b"></a><br/></td></tr>
 <tr class="memitem:a1a5a877bbf1a9c9238cd2193b18b7e00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_client_8h.html#a1a5a877bbf1a9c9238cd2193b18b7e00">displayObject</a> (<a class="el" href="struct_object_bid.html">ObjectBid</a> obj)</td></tr>
 <tr class="memdesc:a1a5a877bbf1a9c9238cd2193b18b7e00"><td class="mdescLeft">&#160;</td><td class="mdescRight">display an object and its properties.  <a href="#a1a5a877bbf1a9c9238cd2193b18b7e00"></a><br/></td></tr>
-<tr class="memitem:aaa8b64bd4018998b5623236be3807832"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa8b64bd4018998b5623236be3807832"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>displayList</b> (<a class="el" href="struct_object_bid.html">ObjectBid</a> *list, int listSize)</td></tr>
-<tr class="memitem:a4f6fd2daefd2378d6cee2e274d48f0e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f6fd2daefd2378d6cee2e274d48f0e2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>biddingInput</b> (<a class="el" href="struct_object_bid.html">ObjectBid</a> obj, float *price)</td></tr>
-<tr class="memitem:ac54b37ec076897c48b8b4753ff75463b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac54b37ec076897c48b8b4753ff75463b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>choseObjectInList</b> (int *chosen, <a class="el" href="struct_object_bid.html">ObjectBid</a> *list, int listSize)</td></tr>
+<tr class="memitem:aaa8b64bd4018998b5623236be3807832"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_client_8h.html#aaa8b64bd4018998b5623236be3807832">displayList</a> (<a class="el" href="struct_object_bid.html">ObjectBid</a> *list, int listSize)</td></tr>
+<tr class="memitem:a4f6fd2daefd2378d6cee2e274d48f0e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_client_8h.html#a4f6fd2daefd2378d6cee2e274d48f0e2">biddingInput</a> (<a class="el" href="struct_object_bid.html">ObjectBid</a> obj, float *price)</td></tr>
+<tr class="memitem:ac54b37ec076897c48b8b4753ff75463b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_client_8h.html#ac54b37ec076897c48b8b4753ff75463b">choseObjectInList</a> (int *chosen, <a class="el" href="struct_object_bid.html">ObjectBid</a> *list, int listSize)</td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This file provides the main function to interact with the user like displaying menus or menu choices. Nearly all the user's input are taken with those functions. The only exception is for the account and the object creation. </p>
 </div><h2>Function Documentation</h2>
+<a class="anchor" id="a4f6fd2daefd2378d6cee2e274d48f0e2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int biddingInput </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_object_bid.html">ObjectBid</a>&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>price</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac54b37ec076897c48b8b4753ff75463b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int choseObjectInList </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>chosen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_object_bid.html">ObjectBid</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>listSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a09f835a46035bc73184e8ae1653e0ab3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -151,6 +222,32 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>choseObjectInList</b> 
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the status code of this operation </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaa8b64bd4018998b5623236be3807832"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void displayList </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_object_bid.html">ObjectBid</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>listSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -268,7 +365,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>choseObjectInList</b> 
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:55 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

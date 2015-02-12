@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -67,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -95,6 +97,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="defines_8h_source.html">defines.h</a>&quot;</code><br/>
 <code>#include &lt;time.h&gt;</code><br/>
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for structures.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="structures_8h__incl.png" border="0" usemap="#_2home_2emeric_2projets_2_c_bay_2sources_2structures_8h" alt=""/></div>
+<map name="_2home_2emeric_2projets_2_c_bay_2sources_2structures_8h" id="_2home_2emeric_2projets_2_c_bay_2sources_2structures_8h">
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="structures_8h__dep__incl.png" border="0" usemap="#_2home_2emeric_2projets_2_c_bay_2sources_2structures_8hdep" alt=""/></div>
+<map name="_2home_2emeric_2projets_2_c_bay_2sources_2structures_8hdep" id="_2home_2emeric_2projets_2_c_bay_2sources_2structures_8hdep">
+</map>
+</div>
 </div>
 <p><a href="structures_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -106,18 +122,14 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:acc1a7a7abcefe621ee1d34b4c98e8226"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc1a7a7abcefe621ee1d34b4c98e8226"></a>
-typedef struct <a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ConfidentialIDS</b></td></tr>
-<tr class="memitem:ab591711c307c07efffae57a734a3d3bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab591711c307c07efffae57a734a3d3bb"></a>
-typedef struct <a class="el" href="struct_object_bid.html">ObjectBid</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ObjectBid</b></td></tr>
-<tr class="memitem:aba02e44230ed4acde9398867fa870282"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba02e44230ed4acde9398867fa870282"></a>
-typedef struct <a class="el" href="struct_user_account.html">UserAccount</a>&#160;</td><td class="memItemRight" valign="bottom"><b>UserAccount</b></td></tr>
+<tr class="memitem:acc1a7a7abcefe621ee1d34b4c98e8226"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#acc1a7a7abcefe621ee1d34b4c98e8226">ConfidentialIDS</a></td></tr>
+<tr class="memitem:ab591711c307c07efffae57a734a3d3bb"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_object_bid.html">ObjectBid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#ab591711c307c07efffae57a734a3d3bb">ObjectBid</a></td></tr>
+<tr class="memitem:aba02e44230ed4acde9398867fa870282"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_user_account.html">UserAccount</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#aba02e44230ed4acde9398867fa870282">UserAccount</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a750be53afe22b006b8b36b42f3c12323"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a750be53afe22b006b8b36b42f3c12323"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a750be53afe22b006b8b36b42f3c12323">cleanBuffer</a> ()</td></tr>
-<tr class="memdesc:a750be53afe22b006b8b36b42f3c12323"><td class="mdescLeft">&#160;</td><td class="mdescRight">clean the buffer <br/></td></tr>
+<tr class="memitem:a750be53afe22b006b8b36b42f3c12323"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a750be53afe22b006b8b36b42f3c12323">cleanBuffer</a> ()</td></tr>
+<tr class="memdesc:a750be53afe22b006b8b36b42f3c12323"><td class="mdescLeft">&#160;</td><td class="mdescRight">clean the buffer  <a href="#a750be53afe22b006b8b36b42f3c12323"></a><br/></td></tr>
 <tr class="memitem:af8cccbdcee2fd10ca6b912e1f5ca962f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#af8cccbdcee2fd10ca6b912e1f5ca962f">cleanCRString</a> (char *string)</td></tr>
 <tr class="memdesc:af8cccbdcee2fd10ca6b912e1f5ca962f"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove Carriage Return from a string  <a href="#af8cccbdcee2fd10ca6b912e1f5ca962f"></a><br/></td></tr>
 <tr class="memitem:a5f244481cf9d3e508f74a24cb6cc417e"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a5f244481cf9d3e508f74a24cb6cc417e">getAChar</a> ()</td></tr>
@@ -132,8 +144,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 <tr class="memdesc:aac6348b7a88e1ac252885cb0cc342569"><td class="mdescLeft">&#160;</td><td class="mdescRight">save account's informations into the ACC_FILE  <a href="#aac6348b7a88e1ac252885cb0cc342569"></a><br/></td></tr>
 <tr class="memitem:a47c0fe248045c32784f2a62af5305f6d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a47c0fe248045c32784f2a62af5305f6d">accLoad</a> (<a class="el" href="struct_user_account.html">UserAccount</a> *user, FILE *f)</td></tr>
 <tr class="memdesc:a47c0fe248045c32784f2a62af5305f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">load account's informations from the ACC_FILE  <a href="#a47c0fe248045c32784f2a62af5305f6d"></a><br/></td></tr>
-<tr class="memitem:ab6342cd9fca84ca43ba8b1d13534966a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab6342cd9fca84ca43ba8b1d13534966a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>userInTable</b> (<a class="el" href="struct_user_account.html">UserAccount</a> *user, <a class="el" href="struct_user_account.html">UserAccount</a> *table, int size, <a class="el" href="struct_user_account.html">UserAccount</a> *ptrUser)</td></tr>
+<tr class="memitem:ab6342cd9fca84ca43ba8b1d13534966a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#ab6342cd9fca84ca43ba8b1d13534966a">userInTable</a> (<a class="el" href="struct_user_account.html">UserAccount</a> *user, <a class="el" href="struct_user_account.html">UserAccount</a> *table, int size, <a class="el" href="struct_user_account.html">UserAccount</a> *ptrUser)</td></tr>
 <tr class="memitem:a6a148a030d3a7a89011a170ebfbf5fa3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a6a148a030d3a7a89011a170ebfbf5fa3">allAccSave</a> (<a class="el" href="struct_user_account.html">UserAccount</a> *table, int size)</td></tr>
 <tr class="memdesc:a6a148a030d3a7a89011a170ebfbf5fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">save a table of <a class="el" href="struct_user_account.html">UserAccount</a> from the ACC_FILE  <a href="#a6a148a030d3a7a89011a170ebfbf5fa3"></a><br/></td></tr>
 <tr class="memitem:a4a73e70cf0be85c7cf9a3f840380a5b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a4a73e70cf0be85c7cf9a3f840380a5b0">allAccLoad</a> (<a class="el" href="struct_user_account.html">UserAccount</a> **table, int *size)</td></tr>
@@ -142,8 +153,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>userInTable</b> (<a cl
 <tr class="memdesc:a259df54235616d3704771e942a87a475"><td class="mdescLeft">&#160;</td><td class="mdescRight">save object's informations into the OBJ_FILE  <a href="#a259df54235616d3704771e942a87a475"></a><br/></td></tr>
 <tr class="memitem:a076e84eeaffd3b7c4f9dbeb16032bad8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a076e84eeaffd3b7c4f9dbeb16032bad8">objLoad</a> (<a class="el" href="struct_object_bid.html">ObjectBid</a> *obj, FILE *f)</td></tr>
 <tr class="memdesc:a076e84eeaffd3b7c4f9dbeb16032bad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">load object's informations from the OBJ_FILE  <a href="#a076e84eeaffd3b7c4f9dbeb16032bad8"></a><br/></td></tr>
-<tr class="memitem:a0d45a214e06dccc832a39e75ab2299dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d45a214e06dccc832a39e75ab2299dc"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>objInTable</b> (<a class="el" href="struct_object_bid.html">ObjectBid</a> *obj, <a class="el" href="struct_object_bid.html">ObjectBid</a> *table, int size, <a class="el" href="struct_object_bid.html">ObjectBid</a> *ptrObject)</td></tr>
+<tr class="memitem:a0d45a214e06dccc832a39e75ab2299dc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a0d45a214e06dccc832a39e75ab2299dc">objInTable</a> (<a class="el" href="struct_object_bid.html">ObjectBid</a> *obj, <a class="el" href="struct_object_bid.html">ObjectBid</a> *table, int size, <a class="el" href="struct_object_bid.html">ObjectBid</a> *ptrObject)</td></tr>
 <tr class="memitem:ab3753d192dad954c5cf924af4debc2fb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#ab3753d192dad954c5cf924af4debc2fb">allObjSave</a> (<a class="el" href="struct_object_bid.html">ObjectBid</a> *table, int size)</td></tr>
 <tr class="memdesc:ab3753d192dad954c5cf924af4debc2fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">save a table of objects to the OBJ_FILE  <a href="#ab3753d192dad954c5cf924af4debc2fb"></a><br/></td></tr>
 <tr class="memitem:a5c57560da0f85821c1b5d05f7100e2b7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a5c57560da0f85821c1b5d05f7100e2b7">allObjLoad</a> (<a class="el" href="struct_object_bid.html">ObjectBid</a> **table, int *size)</td></tr>
@@ -154,10 +164,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>objInTable</b> (<a cla
 <tr class="memdesc:a9732991a9ff8e7457cb236a2f10a1d8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">load a table of IDS from the IDS_FILE  <a href="#a9732991a9ff8e7457cb236a2f10a1d8f"></a><br/></td></tr>
 <tr class="memitem:a7286f32b0a46ee6b224e99ef40013706"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a7286f32b0a46ee6b224e99ef40013706">allIDSSave</a> (<a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> **table, int *size)</td></tr>
 <tr class="memdesc:a7286f32b0a46ee6b224e99ef40013706"><td class="mdescLeft">&#160;</td><td class="mdescRight">save all the IDS table to the IDS_FILE  <a href="#a7286f32b0a46ee6b224e99ef40013706"></a><br/></td></tr>
-<tr class="memitem:abb38401ea0132366bc4de3c3d21cdf47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb38401ea0132366bc4de3c3d21cdf47"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>idsInTable</b> (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_PASSWORD_LENGTH], <a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> *table, int size, <a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> *ptrIDS)</td></tr>
-<tr class="memitem:af094709494be4d401c209a49ffa53a5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af094709494be4d401c209a49ffa53a5a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>isObjectBid</b> (int size)</td></tr>
+<tr class="memitem:abb38401ea0132366bc4de3c3d21cdf47"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#abb38401ea0132366bc4de3c3d21cdf47">idsInTable</a> (char login[<a class="el" href="defines_8h.html#ae31be58dfd3ef1f3cb849fb35b7ac9ec">USERACCOUNT_LOGIN_LENGTH</a>], char password[<a class="el" href="defines_8h.html#aff14d22469bb0bb5d650a58db2130a41">USERACCOUNT_PASSWORD_LENGTH</a>], <a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> *table, int size, <a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> *ptrIDS)</td></tr>
+<tr class="memitem:af094709494be4d401c209a49ffa53a5a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#af094709494be4d401c209a49ffa53a5a">isObjectBid</a> (int size)</td></tr>
 <tr class="memitem:a6a7956b4134280481814d4ea92db29cc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a6a7956b4134280481814d4ea92db29cc">isObjectBidTable</a> (int size)</td></tr>
 <tr class="memdesc:a6a7956b4134280481814d4ea92db29cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">test if the data's size given match to an <a class="el" href="struct_object_bid.html">ObjectBid</a> table size  <a href="#a6a7956b4134280481814d4ea92db29cc"></a><br/></td></tr>
 <tr class="memitem:a5b0d6dbe63edf9446e38694a3594ee45"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a5b0d6dbe63edf9446e38694a3594ee45">isAccountUser</a> (int size)</td></tr>
@@ -179,7 +187,44 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>isObjectBid</b> (int s
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>this file provides functions for data manipulation This file provides data structures and usual associated functions. There is also utilities like clenBuffer. </p>
-</div><h2>Function Documentation</h2>
+</div><h2>Typedef Documentation</h2>
+<a class="anchor" id="acc1a7a7abcefe621ee1d34b4c98e8226"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a>  <a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab591711c307c07efffae57a734a3d3bb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_object_bid.html">ObjectBid</a>  <a class="el" href="struct_object_bid.html">ObjectBid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aba02e44230ed4acde9398867fa870282"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_user_account.html">UserAccount</a>  <a class="el" href="struct_user_account.html">UserAccount</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2>Function Documentation</h2>
 <a class="anchor" id="a47c0fe248045c32784f2a62af5305f6d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -554,6 +599,23 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>isObjectBid</b> (int s
 
 </div>
 </div>
+<a class="anchor" id="a750be53afe22b006b8b36b42f3c12323"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cleanBuffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>clean the buffer </p>
+
+</div>
+</div>
 <a class="anchor" id="af8cccbdcee2fd10ca6b912e1f5ca962f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -611,6 +673,50 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>isObjectBid</b> (int s
 
 <p>returns the time as the number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC). </p>
 <dl class="section return"><dt>Returns</dt><dd>time as the number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abb38401ea0132366bc4de3c3d21cdf47"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int idsInTable </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>login</em>[USERACCOUNT_LOGIN_LENGTH], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>password</em>[USERACCOUNT_PASSWORD_LENGTH], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_confidential_i_d_s.html">ConfidentialIDS</a> *&#160;</td>
+          <td class="paramname"><em>ptrIDS</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -700,6 +806,22 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>isObjectBid</b> (int s
 
 </div>
 </div>
+<a class="anchor" id="af094709494be4d401c209a49ffa53a5a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isObjectBid </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a6a7956b4134280481814d4ea92db29cc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -758,6 +880,44 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>isObjectBid</b> (int s
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>status code for this operation. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0d45a214e06dccc832a39e75ab2299dc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int objInTable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_object_bid.html">ObjectBid</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_object_bid.html">ObjectBid</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_object_bid.html">ObjectBid</a> *&#160;</td>
+          <td class="paramname"><em>ptrObject</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1027,10 +1187,48 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>isObjectBid</b> (int s
 
 </div>
 </div>
+<a class="anchor" id="ab6342cd9fca84ca43ba8b1d13534966a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int userInTable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_user_account.html">UserAccount</a> *&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_user_account.html">UserAccount</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_user_account.html">UserAccount</a> *&#160;</td>
+          <td class="paramname"><em>ptrUser</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:55 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

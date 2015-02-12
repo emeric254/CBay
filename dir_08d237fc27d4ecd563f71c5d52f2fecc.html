@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -61,7 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -80,30 +82,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">sources Directory Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Directory dependency graph for /home/emeric/projets/CBay/sources/:</div>
+<div class="dyncontent">
+<div class="center"><img src="dir_08d237fc27d4ecd563f71c5d52f2fecc_dep.png" border="0" usemap="#dir__08d237fc27d4ecd563f71c5d52f2fecc__dep" alt="/home/emeric/projets/CBay/sources/"/></div>
+<map name="dir__08d237fc27d4ecd563f71c5d52f2fecc__dep" id="dir__08d237fc27d4ecd563f71c5d52f2fecc__dep">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="files"></a>
 Files</h2></td></tr>
-<tr class="memitem:client_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>client.c</b></td></tr>
+<tr class="memitem:client_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html">client.c</a></td></tr>
 <tr class="memitem:client_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html">client.h</a> <a href="client_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:client_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file provides function for a BEEP client. It also contains fonction to send data using other methods than connect (typically GET, PUT and DELETE) or function to split and extract data from incoming answer from the server. <br/></td></tr>
 <tr class="memitem:defines_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html">defines.h</a> <a href="defines_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:defines_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file defines all constants. <br/></td></tr>
-<tr class="memitem:interface_client_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>interfaceClient.c</b></td></tr>
+<tr class="memitem:interface_client_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_client_8c.html">interfaceClient.c</a></td></tr>
 <tr class="memitem:interface_client_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_client_8h.html">interfaceClient.h</a> <a href="interface_client_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:interface_client_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file provides the main function to interact with the user like displaying menus or menu choices. Nearly all the user's input are taken with those functions. The only exception is for the account and the object creation. <br/></td></tr>
-<tr class="memitem:main_client_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>mainClient.c</b></td></tr>
-<tr class="memitem:main_serveur_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>mainServeur.c</b></td></tr>
-<tr class="memitem:serveur_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>serveur.c</b></td></tr>
+<tr class="memitem:main_client_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_client_8c.html">mainClient.c</a></td></tr>
+<tr class="memitem:main_serveur_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_serveur_8c.html">mainServeur.c</a></td></tr>
+<tr class="memitem:serveur_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8c.html">serveur.c</a></td></tr>
 <tr class="memitem:serveur_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8h.html">serveur.h</a> <a href="serveur_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:serveur_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file provides BEEP server functions This file provides some usual functions for a server like init, reception and emission. It also contains some other derivated functions to test and play with received requests plus response making functions like status line and header fields answering . <br/></td></tr>
-<tr class="memitem:structures_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>structures.c</b></td></tr>
+<tr class="memitem:structures_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8c.html">structures.c</a></td></tr>
 <tr class="memitem:structures_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html">structures.h</a> <a href="structures_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:structures_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">this file provides functions for data manipulation This file provides data structures and usual associated functions. There is also utilities like clenBuffer. <br/></td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:55 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CBay
+   &#160;<span id="projectnumber">BEEP - 0.1a</span>
    </div>
+   <div id="projectbrief">Le but du projet est de construire une application C &#39;serveur&#39;, et une &#39;client&#39;. Ces deux aplications permettent de gérer des enchères distribuées.</div>
   </td>
  </tr>
  </tbody>
@@ -67,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,7 +93,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This file provides BEEP server functions This file provides some usual functions for a server like init, reception and emission. It also contains some other derivated functions to test and play with received requests plus response making functions like status line and header fields answering .  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="serveur_8h__dep__incl.png" border="0" usemap="#_2home_2emeric_2projets_2_c_bay_2sources_2serveur_8hdep" alt=""/></div>
+<map name="_2home_2emeric_2projets_2_c_bay_2sources_2serveur_8hdep" id="_2home_2emeric_2projets_2_c_bay_2sources_2serveur_8hdep">
+</map>
+</div>
+</div>
 <p><a href="serveur_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
@@ -106,12 +115,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:aed71b18dc0d9c0a63d02c440bc4d3144"><td class="mdescLeft">&#160;</td><td class="mdescRight">send to the server datas from a character array  <a href="#aed71b18dc0d9c0a63d02c440bc4d3144"></a><br/></td></tr>
 <tr class="memitem:ad2959e97e8c0f02fe7e4e70cf5312b54"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8h.html#ad2959e97e8c0f02fe7e4e70cf5312b54">sendString</a> (char *data)</td></tr>
 <tr class="memdesc:ad2959e97e8c0f02fe7e4e70cf5312b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">send a string to the client  <a href="#ad2959e97e8c0f02fe7e4e70cf5312b54"></a><br/></td></tr>
-<tr class="memitem:a54b6d78ba44089862798c271e7c53cb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54b6d78ba44089862798c271e7c53cb7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8h.html#a54b6d78ba44089862798c271e7c53cb7">endClient</a> ()</td></tr>
-<tr class="memdesc:a54b6d78ba44089862798c271e7c53cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">close properly the connection with the client <br/></td></tr>
-<tr class="memitem:ac6ea75141abcbfe34f535fe2f89a8764"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6ea75141abcbfe34f535fe2f89a8764"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8h.html#ac6ea75141abcbfe34f535fe2f89a8764">endServer</a> ()</td></tr>
-<tr class="memdesc:ac6ea75141abcbfe34f535fe2f89a8764"><td class="mdescLeft">&#160;</td><td class="mdescRight">close properly the server process <br/></td></tr>
+<tr class="memitem:a54b6d78ba44089862798c271e7c53cb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8h.html#a54b6d78ba44089862798c271e7c53cb7">endClient</a> ()</td></tr>
+<tr class="memdesc:a54b6d78ba44089862798c271e7c53cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">close properly the connection with the client  <a href="#a54b6d78ba44089862798c271e7c53cb7"></a><br/></td></tr>
+<tr class="memitem:ac6ea75141abcbfe34f535fe2f89a8764"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8h.html#ac6ea75141abcbfe34f535fe2f89a8764">endServer</a> ()</td></tr>
+<tr class="memdesc:ac6ea75141abcbfe34f535fe2f89a8764"><td class="mdescLeft">&#160;</td><td class="mdescRight">close properly the server process  <a href="#ac6ea75141abcbfe34f535fe2f89a8764"></a><br/></td></tr>
 <tr class="memitem:a5ee638c183f3aea235427c91687f68eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8h.html#a5ee638c183f3aea235427c91687f68eb">sendStatusLine</a> (int statusCode)</td></tr>
 <tr class="memdesc:a5ee638c183f3aea235427c91687f68eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">send a status line as described in the RFC  <a href="#a5ee638c183f3aea235427c91687f68eb"></a><br/></td></tr>
 <tr class="memitem:a0297eb5750b13a22b937b66666c2de10"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serveur_8h.html#a0297eb5750b13a22b937b66666c2de10">sendHeaderField</a> (int size, int type)</td></tr>
@@ -243,6 +250,40 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serv
 
 <p>wait for a client to connect, and then open the connection with him </p>
 <dl class="section return"><dt>Returns</dt><dd>status code of this operation. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a54b6d78ba44089862798c271e7c53cb7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void endClient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>close properly the connection with the client </p>
+
+</div>
+</div>
+<a class="anchor" id="ac6ea75141abcbfe34f535fe2f89a8764"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void endServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>close properly the server process </p>
 
 </div>
 </div>
@@ -795,7 +836,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serv
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 21:29:55 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 12 2015 21:36:27 for CBay by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
