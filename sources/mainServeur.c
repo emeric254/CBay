@@ -68,15 +68,20 @@ int main()
         while (end == FALSE)
         {
             length = receiveBinary(message);
-            if (length > 0)
+            if (length > 0 && message != NULL)
             {
-                printf("%s\n",message);
-                if(isConnectRequest(message, length) == TRUE)
+                printf("message >>%s\n",message);
+
+                if(isConnectRequest(message, length) == TRUE) //        CONNECT ------------------------------------------------------------------------
                 {
                     if(connected != TRUE) // not already connected
                     {
                         if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCCESS)
-                            return state;
+                        {
+                            fprintf(ERROROUTPUT,">>> %d", state);
+                            fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                            sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                        }
 
                         strncpy(login,ptrLogin,sizeLogin);
                         strncpy(password,ptrPassword,sizePasword);
@@ -97,13 +102,17 @@ int main()
                     }
                     // else { /* already connected ! */}
                 }
-                else if(isDeleteRequest(message, length) == TRUE)
+                else if(isDeleteRequest(message, length) == TRUE) //    DELETE ------------------------------------------------------------------------
                 {
                     if(connected == TRUE)
                     {
                         // work with this Delete request
                         if ((state = splitDeleteRequest(message, length, ptrData, &sizeData)) != SUCCESS)
-                            return state;
+                        {
+                            fprintf(ERROROUTPUT,">>> %d", state);
+                            fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                            sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                        }
 
                         if(isAccountUser(sizeData) == TRUE)
                         {
@@ -113,10 +122,12 @@ int main()
                                 {
                                     // admin || user can delete his account
                                     removeUserAccountInTable(&accounts, &nbrAccount, ptrAccount);
+                                    // save this new account table
                                     allAccSave(accounts, nbrAccount);
+                                    // disconnect the user who delete his own account
                                     if(id == ptrAccount->id)
                                         end = TRUE;
-                                    // save this new account table
+                                    // ok
                                     sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
@@ -139,7 +150,9 @@ int main()
                                 {
                                     // admin || vendor of this object
                                     removeObjectBidInTable(&objects, &nbrObjects, ptrObject);
+                                    // save the new table
                                     allObjSave(objects, nbrObjects);
+                                    // ok
                                     sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
@@ -161,20 +174,33 @@ int main()
                         sendStatusLine(STATUS_CODE_FORBIDDEN);
                     }
                 }
-                else if(isGetRequest(message, length) == TRUE)
+                else if(isGetRequest(message, length) == TRUE) //       GET ------------------------------------------------------------------------
                 {
                     if(connected == TRUE)
                     {
                         // work with this Get request
                         if ((state = splitPutRequest(message, length, ptrData, &sizeData)) != SUCCESS)
-                            return state;
+                        {
+                            fprintf(ERROROUTPUT,">>> %d", state);
+                            fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
+                            sendStatusLine(STATUS_CODE_BAD_REQUEST);
+                        }
+
                         if(isAccountUser(sizeData) == TRUE)
                         {
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
                             {
-                                // admin || user can update his account
+                                // admin || user can show his account
+                                if(accountType != ACCOUNT_TYPE_ADMIN && id != ptrAccount->id)
+                                {
+                                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                                    sendStatusLine(STATUS_CODE_FORBIDDEN);
+                                }
+                                else
+                                    if((state = answerUserAccount(ptrAccount)) != SUCCESS)
+                                        fprintf(ERROROUTPUT,">>> %d\n", state);
                             }
-                            else // ser doesn't have his UserAccount
+                            else // user doesn't have his UserAccount
                             {
                                 // try to send user's UserAccount
                                 UserAccount temp;
@@ -185,7 +211,7 @@ int main()
                                     if((state = answerUserAccount(ptrAccount)) != SUCCESS)
                                         fprintf(ERROROUTPUT,">>> %d\n", state);
                                 }
-                                else // unknown account
+                                else // unknown account, non exsitant account
                                 {
                                     fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
                                     sendStatusLine(STATUS_CODE_BAD_REQUEST);
@@ -199,7 +225,7 @@ int main()
                                 if((state = answerObjectBid(ptrObject)) != SUCCESS)
                                     fprintf(ERROROUTPUT,">>> %d\n", state);
                             }
-                            else if (FALSE) // search by name
+                            else if (searchObjectBidInTable(objects, nbrObjects, (ObjectBid*)ptrData, ptrObject) == TRUE) // search by name
                             {
                                 if((state = answerObjectBid(ptrObject)) != SUCCESS)
                                     fprintf(ERROROUTPUT,">>> %d\n", state);
@@ -211,6 +237,11 @@ int main()
                                 sendStatusLine(STATUS_CODE_BAD_REQUEST);
                             }
                         }
+                        else if(sizeData == 0)
+                        {
+                            if((state = answerObjectBidTable(objects, nbrObjects)) != SUCCESS)
+                                fprintf(ERROROUTPUT,">>> %d\n", state);
+                        }
                     }
                     else // not connected
                     {
@@ -218,7 +249,7 @@ int main()
                         sendStatusLine(STATUS_CODE_FORBIDDEN);
                     }
                 }
-                else if(isPutRequest(message, length) == TRUE)
+                else if(isPutRequest(message, length) == TRUE) //       PUT ------------------------------------------------------------------------
                 {
                     if(connected == TRUE)
                     {
@@ -232,7 +263,9 @@ int main()
                                 if(accountType == ACCOUNT_TYPE_ADMIN || id == ptrAccount->id)
                                 {
                                     // admin || user can update his account
+
                                     //@TODO update this account
+
                                     allAccSave(accounts, nbrAccount);
                                     sendStatusLine(STATUS_CODE_OK);
                                 }
@@ -250,7 +283,9 @@ int main()
                                 if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_TYPE_VENDOR && id == ptrObject->idVendor))
                                 {
                                     // admin || vendor of this object
+
                                     //@TODO update this object
+
                                     allObjSave(objects, nbrObjects);
                                     sendStatusLine(STATUS_CODE_OK);
                                 }
