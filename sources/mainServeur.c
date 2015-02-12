@@ -29,7 +29,6 @@ int main()
     long int id = -1; // client's id
 
 
-    char * ptrTemp = NULL; // temporary ptr to data
     char * ptrData = NULL; // ptr to data
     int sizeData = 0; // size of data
 
@@ -175,9 +174,9 @@ int main()
                             {
                                 // admin || user can update his account
                             }
-                            else // non existant
+                            else // ser doesn't have his UserAccount
                             {
-                                // renvoi le compte du user connected
+                                // try to send user's UserAccount
                                 UserAccount temp;
                                 temp.id = id;
 
@@ -186,7 +185,7 @@ int main()
                                     if((state = answerUserAccount(ptrAccount)) != SUCCESS)
                                         fprintf(ERROROUTPUT,">>> %d\n", state);
                                 }
-                                else
+                                else // unknown account
                                 {
                                     fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
                                     sendStatusLine(STATUS_CODE_BAD_REQUEST);
