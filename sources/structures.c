@@ -74,7 +74,7 @@ void userInputUserAccount(UserAccount * account)
     cleanBuffer();
 
     printf("Enter your name\n");
-    fgets(account->name,USERACCOUNT_NAME_LENGTH,stdin);
+    fgets(account->name,USERACCOUNT_NAME_LENGTH-1,stdin);
     if(account->name[strlen(account->name)-1]=='\n')
         account->name[strlen(account->name)-1] = '\0';
     else
@@ -84,7 +84,7 @@ void userInputUserAccount(UserAccount * account)
     printf("%s<<",account->name);
 
     printf("Enter your lastname\n");
-    fgets(account->lastname,USERACCOUNT_LASTNAME_LENGTH,stdin);
+    fgets(account->lastname,USERACCOUNT_LASTNAME_LENGTH-1,stdin);
     if(account->lastname[strlen(account->lastname)-1]=='\n')
         account->lastname[strlen(account->lastname)-1] = '\0';
     else
@@ -92,7 +92,7 @@ void userInputUserAccount(UserAccount * account)
     CLEAR();
 
     printf("Enter your adress\n");
-    fgets(account->adress,USERACCOUNT_ADRESS_LENGTH,stdin);
+    fgets(account->adress,USERACCOUNT_ADRESS_LENGTH-1,stdin);
     if(account->adress[strlen(account->adress)-1]=='\n')
         account->adress[strlen(account->adress)-1] = '\0';
     else
@@ -102,7 +102,7 @@ void userInputUserAccount(UserAccount * account)
     do
     {
         printf("Enter your mail\n");
-        fgets(account->mail,USERACCOUNT_MAIL_LENGTH,stdin);
+        fgets(account->mail,USERACCOUNT_MAIL_LENGTH-1,stdin);
         if(account->mail[strlen(account->mail)-1]=='\n')
             account->mail[strlen(account->mail)-1] = '\0';
         else

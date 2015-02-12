@@ -139,22 +139,24 @@ int sendBinary(char *donnees, size_t taille) {
 int sendGetObjectBid(ObjectBid *object)
 {
     int length = 6 + sizeof(ObjectBid);
-    int i = 0;
     char msg[length+1];
+
+    fprintf(stderr,"LOLLLLLL");
 
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
+    fprintf(stderr,"%s\n", msg);
 
-    for ( i = 4 ; i < length ; i++ )
-    {
-        fputc(((unsigned char*)object)[i],stdout);
-        msg[i] = ((unsigned char*)object)[i];
-    }
+    memcpy(&msg[4], object, sizeof(ObjectBid));
+
+    fprintf(stderr,"%s\n", msg);
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
     msg[length] = '\0';
+
+    fprintf(stderr,"%s\n", msg);
 
     if ( sendBinary(msg, length) == -1 )
     {
@@ -446,13 +448,19 @@ int splitResponseHeader(char *responseHeaderField, int* contentLength, char* con
 */
 int accountCreation()
 {
-    int statusCode;
+    int statusCode = STATUS_CODE_NOT_CREATED;
     char response[STATUS_LINE_LENGTH];
     char * reasonPhrase=NULL;
     UserAccount acc;
 
     /* Get the informations about the new account */
     userInputUserAccount(&acc);
+
+    printf("id = %ld\n",acc.id);
+    printf("name = %s\n",acc.name);
+    printf("lastname = %s\n",acc.lastname);
+    printf("adress = %s\n",acc.adress);
+    printf("mail = %s\n",acc.mail);
 
     /* Try to send the request.
      * If the answer is not CREATED, resend it */
