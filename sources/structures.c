@@ -113,15 +113,15 @@ void userInputUserAccount(UserAccount * account)
     CLEAR();
 
 
-    printf("Enter your login");
+    printf("Enter your login\n");
     fgets(account->IDS.login,USERACCOUNT_LOGIN_LENGTH,stdin);
-    if(account->IDS.password[strlen(account->IDS.password)-1]=='\n')
-        account->IDS.password[strlen(account->IDS.password)-1] = '\0';
+    if(account->IDS.login[strlen(account->IDS.login)-1]=='\n')
+        account->IDS.login[strlen(account->IDS.login)-1] = '\0';
     else
         cleanBuffer();
     CLEAR();
 
-    printf("Enter your password");
+    printf("Enter your password\n");
     fgets(account->IDS.password,USERACCOUNT_PASSWORD_LENGTH,stdin);
     if(account->IDS.password[strlen(account->IDS.password)-1]=='\n')
         account->IDS.password[strlen(account->IDS.password)-1] = '\0';
