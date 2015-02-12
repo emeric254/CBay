@@ -313,6 +313,18 @@ int sendPutUserAccount(UserAccount *account)
     sprintf(&msg[j],"%s;",account->IDS.password);
     j+=strlen(account->IDS.password)+1;
 
+    sprintf(&msg[j],"%s;",account->name);
+    j+=strlen(account->name)+1;
+
+    sprintf(&msg[j],"%s;",account->lastname);
+    j+=strlen(account->lastname)+1;
+
+    sprintf(&msg[j],"%s;",account->adress);
+    j+=strlen(account->adress)+1;
+
+    sprintf(&msg[j],"%s;",account->mail);
+    j+=strlen(account->mail)+1;
+
 //etc
 
     msg[length-2] = ';';
