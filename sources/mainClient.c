@@ -18,7 +18,7 @@ int main(void)
 
     CLEAR();
 
-	Init(SERVER_ADRESS);
+    Init(SERVER_ADRESS);
 
     /* The Welcome Menu : Connection and Account Creation */
     while ( MENU_CHOICE_QUIT != ( menuChoice = welcomeMenu() ) )
@@ -54,11 +54,11 @@ int main(void)
                             /* Search for a particular object */
                             searchObject(list,listSize);
                             break;
-                        
+
                         case MENU_CHOICE_MAIN_BID:
-                        	/* Make a bid on an object */
-                        	bidObject(user,&list,listSize);
-                        	break;
+                            /* Make a bid on an object */
+                            bidObject(user,&list,listSize);
+                            break;
 
                         default:
                             printf("\n\t --- Please make a correct choice !\n\n");
@@ -101,11 +101,11 @@ int main(void)
                             /* Search for a particular object */
                             searchObject(list,listSize);
                             break;
-                        
+
                         case MENU_CHOICE_MAIN_BID:
-                        	/* Make a bid on an object */
-                        	fprintf(stdout,"You need an account in order to bid.\n");
-                        	break;
+                            /* Make a bid on an object */
+                            fprintf(stdout,"You need an account in order to bid.\n");
+                            break;
 
                         default:
                             printf("\n\t --- Please make a correct choice !\n\n");
