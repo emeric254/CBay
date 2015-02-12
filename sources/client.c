@@ -582,7 +582,6 @@ int listObjects (ObjectBid ** list, int* listSize)
 
     if (statusCode == STATUS_CODE_OK)
     {
-<<<<<<< HEAD
 		/* Get the header fields */
 		receiveBinary(headers,RESPONSE_HEADER_FIELD_LENGTH);
 		
@@ -590,15 +589,6 @@ int listObjects (ObjectBid ** list, int* listSize)
 		splitResponseHeader(headers,listSize,contentType);
 		
 		/* Get the list */
-=======
-        /* Get the header fields */
-        receiveBinary(headers,64);
-
-        /* Extract the list size from the headers */
-        splitResponseHeader(headers,(int *)listSize,contentType);
-
-        /* Get the list */
->>>>>>> fab11eea1e2b7667fb1f2f9f1a29475ac05281a3
         receiveBinary((char*)list,*listSize);
         *listSize=(int)(size/sizeof(ObjectBid));
 
@@ -629,7 +619,6 @@ int searchObject (ObjectBid * list, int listSize)
     /* Ask the user for an object name */
     searchInput(name);
 
-<<<<<<< HEAD
 	/* Search for the name of the object in the list */
 	for (i=0;i<listSize;i++)
 	{
@@ -644,22 +633,6 @@ int searchObject (ObjectBid * list, int listSize)
 			result[resultNumber-1]=list[i];
 		}
 	}
-=======
-    /* Search for the name of the object in the list */
-    for (i=0;i<(int)(listSize/sizeof(ObjectBid));i++)
-    {
-        /* If the name of the current object match */
-        if (strcmp(name,list[i].name) == 0)
-        {
-            /* Extend the result list */
-            resultNumber++;
-            result=realloc(result,resultNumber*sizeof(ObjectBid));
-
-            /* Add the current object to the result list */
-            result[resultNumber-1]=list[i];
-        }
-    }
->>>>>>> fab11eea1e2b7667fb1f2f9f1a29475ac05281a3
 
     /* Display the result */
     displayList(result,resultNumber*sizeof(ObjectBid));
