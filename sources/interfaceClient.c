@@ -10,11 +10,17 @@
  */
 int welcomeMenu()
 {
-    fprintf(stdout, "\t\t\t\tWELCOME ON BEEP\n\n\n");
-    fprintf(stdout, "\t\t\t\t%d - Quit\n", MENU_CHOICE_QUIT);
-    fprintf(stdout, "\t\t\t\t%d - Connection\n", MENU_CHOICE_CONNECTION);
-    fprintf(stdout, "\t\t\t\t%d - Account creation\n", MENU_CHOICE_ACCOUNT_CREATION);
-    fprintf(stdout, "\t\t\t\t%d - Continue anonymously\n", MENU_CHOICE_ANONYMOUS);
+    fprintf(stdout, " \n \t\t\
+ ██████╗██████╗  █████╗ ██╗   ██╗ \n \t\t\
+██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝ \n \t\t\
+██║     ██████╔╝███████║ ╚████╔╝  \n \t\t\
+██║     ██╔══██╗██╔══██║  ╚██╔╝   \n \t\t\
+╚██████╗██████╔╝██║  ██║   ██║    \n \t\t\
+ ╚═════╝╚═════╝ ╚═╝  ╚═╝   ╚═╝    \n\n\n");
+    fprintf(stdout, " %d - Quit\n", MENU_CHOICE_QUIT);
+    fprintf(stdout, " %d - Connection\n", MENU_CHOICE_CONNECTION);
+    fprintf(stdout, " %d - Account creation\n", MENU_CHOICE_ACCOUNT_CREATION);
+    fprintf(stdout, " %d - Continue anonymously\n", MENU_CHOICE_ANONYMOUS);
 //    cleanBuffer();
     return getAChar() - '0';
 }
@@ -24,11 +30,21 @@ int welcomeMenu()
  */
 int mainMenu()
 {
-    fprintf(stdout, "\t\t\t\tWELCOME ON BEEP\n\n\n");
-    fprintf(stdout, "\t\t\t\t%d - Go back\n", MENU_CHOICE_QUIT);
-    fprintf(stdout, "\t\t\t\t%d - Object list\n", MENU_CHOICE_MAIN_LIST);
-    fprintf(stdout, "\t\t\t\t%d - Search object(s)\n", MENU_CHOICE_MAIN_SEARCH);
-    fprintf(stdout, "\t\t\t\t%d - Bid for an object\n", MENU_CHOICE_MAIN_BID);
+    fprintf(stdout, " \n\
+▀█████████▄     ▄████████    ▄████████    ▄███████▄ \n\
+  ███    ███   ███    ███   ███    ███   ███    ███ \n\
+  ███    ███   ███    █▀    ███    █▀    ███    ███ \n\
+ ▄███▄▄▄██▀   ▄███▄▄▄      ▄███▄▄▄       ███    ███ \n\
+▀▀███▀▀▀██▄  ▀▀███▀▀▀     ▀▀███▀▀▀     ▀█████████▀  \n\
+  ███    ██▄   ███    █▄    ███    █▄    ███        \n\
+  ███    ███   ███    ███   ███    ███   ███        \n\
+▄█████████▀    ██████████   ██████████  ▄████▀      \n\
+                                                    \n\n\n");
+    fprintf(stdout, "\tWELCOME ON BEEP\n\n\n");
+    fprintf(stdout, "\t%d - Go back\n", MENU_CHOICE_QUIT);
+    fprintf(stdout, "\t%d - Object list\n", MENU_CHOICE_MAIN_LIST);
+    fprintf(stdout, "\t%d - Search object(s)\n", MENU_CHOICE_MAIN_SEARCH);
+    fprintf(stdout, "\t%d - Bid for an object\n", MENU_CHOICE_MAIN_BID);
 //    cleanBuffer();
     return getAChar() - '0';
 }
