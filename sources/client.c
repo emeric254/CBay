@@ -307,11 +307,11 @@ int sendPutUserAccount(UserAccount *account)
     memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
     j+=sizeof(long int); // pour l'id ca marche ;)
 
-    sprintf(&msg[j],"%s",account->IDS.login);
-    j+=strlen(account->IDS.login);
+    sprintf(&msg[j],"%s;",account->IDS.login); // le ';' en fin pour delimiter car ca va pas le faire sinon
+    j+=strlen(account->IDS.login)+1; // +1 car delimiteur
 
-    sprintf(&msg[j],"%s",account->IDS.password);
-    j+=strlen(account->IDS.password);
+    sprintf(&msg[j],"%s;",account->IDS.password);
+    j+=strlen(account->IDS.password)+1;
 
 //etc
 
