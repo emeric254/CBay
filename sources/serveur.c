@@ -269,25 +269,25 @@ int sendStatusLine(int statusCode)
     switch(statusCode)
     {
         case STATUS_CODE_OK:
-            strcpy(statusLine, "STATUS_CODE_OK");     // <<-- `"STATUS_CODE"` convert `STATUS_CODE` into a char array, and `strcpy` copy it into the message
+            sprintf(statusLine,"%2d",STATUS_CODE_OK);     // <<-- `"STATUS_CODE"` convert `STATUS_CODE` into a char array, and `strcpy` copy it into the message
             break;
         case STATUS_CODE_CREATED:
-            strcpy(statusLine, "STATUS_CODE_CREATED");
+            sprintf(statusLine,"%2d",STATUS_CODE_CREATED);
             break;
         case STATUS_CODE_BAD_REQUEST:
-            strcpy(statusLine, "STATUS_CODE_BAD_REQUEST");
+            sprintf(statusLine,"%2d",STATUS_CODE_BAD_REQUEST);
             break;
         case STATUS_CODE_NOT_CREATED:
-            strcpy(statusLine, "STATUS_CODE_NOT_CREATED");
+            sprintf(statusLine,"%2d",STATUS_CODE_NOT_CREATED);
             break;
         case STATUS_CODE_CONFLICT:
-            strcpy(statusLine, "STATUS_CODE_CONFLICT");
+            sprintf(statusLine,"%2d",STATUS_CODE_CONFLICT);
             break;
         case STATUS_CODE_FORBIDDEN:
-            strcpy(statusLine, "STATUS_CODE_FORBIDDEN");
+            sprintf(statusLine,"%2d",STATUS_CODE_FORBIDDEN);
             break;
         default:    // equivalent to : case STATUS_CODE_INTERNAL_SERVER_ERROR:
-            strcpy(statusLine, "STATUS_CODE_INTERNAL_SERVER_ERROR");
+            sprintf(statusLine,"%2d",STATUS_CODE_INTERNAL_SERVER_ERROR);
             break;
     }
 

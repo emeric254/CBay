@@ -196,7 +196,7 @@ int sendPutObjectBid(ObjectBid *object)
     strcpy(msg,REQUEST_METHOD_PUT);
     msg[strlen(REQUEST_METHOD_PUT )] = ' ';
 
-    memcpy(&msg[4], (unsigned char*)object, sizeof(ObjectBid));
+    memcpy(&msg[4], object, sizeof(ObjectBid));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
@@ -276,31 +276,31 @@ int sendPutUserAccount(UserAccount *account)
     msg[j] = account->type;
     j+=sizeof(char);
 
-    memcpy(&msg[j], (unsigned char*)&(account->IDS.id), sizeof(long int));
+    memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
     j+=sizeof(long int);
 
-    memcpy(&msg[j], (unsigned char*)account->IDS.login, USERACCOUNT_LOGIN_LENGTH*sizeof(char));
+    memcpy(&msg[j], account->IDS.login, USERACCOUNT_LOGIN_LENGTH*sizeof(char));
     j+=USERACCOUNT_LOGIN_LENGTH*sizeof(char);
 
-    memcpy(&msg[j], (unsigned char*)account->IDS.password, USERACCOUNT_PASSWORD_LENGTH*sizeof(char));
+    memcpy(&msg[j], account->IDS.password, USERACCOUNT_PASSWORD_LENGTH*sizeof(char));
     j+=USERACCOUNT_PASSWORD_LENGTH*sizeof(char);
 
-    memcpy(&msg[j], (unsigned char*)account->name, USERACCOUNT_NAME_LENGTH*sizeof(char));
+    memcpy(&msg[j], account->name, USERACCOUNT_NAME_LENGTH*sizeof(char));
     j+=USERACCOUNT_NAME_LENGTH*sizeof(char);
 
-    memcpy(&msg[j], (unsigned char*)account->lastname, USERACCOUNT_LASTNAME_LENGTH*sizeof(char));
+    memcpy(&msg[j], account->lastname, USERACCOUNT_LASTNAME_LENGTH*sizeof(char));
     j+=USERACCOUNT_LASTNAME_LENGTH*sizeof(char);
 
-    memcpy(&msg[j], (unsigned char*)account->adress, USERACCOUNT_ADRESS_LENGTH*sizeof(char));
+    memcpy(&msg[j], account->adress, USERACCOUNT_ADRESS_LENGTH*sizeof(char));
     j+=USERACCOUNT_ADRESS_LENGTH*sizeof(char);
 
-    memcpy(&msg[j], (unsigned char*)account->mail, USERACCOUNT_MAIL_LENGTH*sizeof(char));
+    memcpy(&msg[j], account->mail, USERACCOUNT_MAIL_LENGTH*sizeof(char));
     j+=USERACCOUNT_MAIL_LENGTH*sizeof(char);
 
     fprintf(stderr,"%d > %d > %s \n",length,j, msg);
 */
 
-    memcpy(&msg[4], (unsigned char*)account, sizeof(UserAccount));
+    memcpy(&msg[4], account, sizeof(UserAccount));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
@@ -378,6 +378,7 @@ int sendConnect(char* login, char* password)
 */
 int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
 {
+    printf("%s\n",statusLine);
     if(!strncmp(statusLine,"STATUS_CODE_OK",2))
     {
         *statusCode = STATUS_CODE_OK;
