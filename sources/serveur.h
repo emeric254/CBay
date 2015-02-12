@@ -26,13 +26,13 @@ int Init(char * port);
 int connectWait();
 
 
-/** \fn int receiveBinary(char *data)
+/** \fn int receiveBinary(char ** data)
  * \brief receive data from the client
  * \param data is the data received from the client
  * \return status code for this operation.
  *
  */
-int receiveBinary(char * data);
+int receiveBinary(char ** data);
 
 
 /** \fn int sendBinary(char * data, size_t size)

@@ -154,7 +154,7 @@ int sendGetObjectBid(ObjectBid *object)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -177,7 +177,7 @@ int sendGetAllObjectBid()
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -207,7 +207,7 @@ int sendPutObjectBid(ObjectBid *object)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -236,7 +236,7 @@ int sendDeleteObjectBid(ObjectBid *object)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -265,7 +265,7 @@ int sendGetUserAccount(UserAccount *account)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -294,7 +294,7 @@ int sendPutUserAccount(UserAccount *account)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -323,7 +323,7 @@ int sendDeleteUserAccount(UserAccount *account)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -356,7 +356,7 @@ int sendConnect(char* login, char* password)
     msg[length++] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length,0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -479,12 +479,15 @@ int accountCreation()
 */
 int connection (UserAccount * user)
 {
-    int statusCode=ERROR_UNKNOWN;
+    int statusCode=STATUS_CODE_NOT_CREATED;
     size_t accountSize=0;
+
     char response[STATUS_LINE_LENGTH];
     char * reasonPhrase=NULL;
+
     char login[USERACCOUNT_LOGIN_LENGTH];
     char password[USERACCOUNT_PASSWORD_LENGTH];
+
     char headers[RESPONSE_HEADER_FIELD_LENGTH];
     char contentType[RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH];
 
@@ -492,7 +495,7 @@ int connection (UserAccount * user)
     connectionInput(login,password);
 
     /* Try to send the request.
-     * If the answer is NOT_CREATED, resend it */
+     * If the answer is NOT_CREATED, resend it 3 times maximum*/
     int i=0;
     while (statusCode == STATUS_CODE_NOT_CREATED && i < 3)
     {
@@ -501,6 +504,8 @@ int connection (UserAccount * user)
 
         /* Get the answer's status line */
         receiveBinary(response,STATUS_LINE_LENGTH);
+
+        printf(">>>>>%s\n",response);
 
         /* Extract the status code and the reason phrase from the answer */
         splitStatusLine(response,&statusCode,reasonPhrase);

@@ -303,12 +303,24 @@ int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object);
 
 /** \fn int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * object)
  * \brief remove an UserAccount to an UserAccount table.
- * \param table the ObjectBid table to purge of one UserAccount
+ * \param table the UserAccount table to purge of one UserAccount
  * \param size size of this table
- * \param object the UserAccount to purge from this table
+ * \param user the UserAccount to purge from this table
  * \return status code for this operation.
  *
 */
-int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * object);
+int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * user);
+
+
+/** \fn int searchObjectBidInTable(ObjectBid * table, int size, ObjectBid * object, ObjectBid * ptrObject)
+ * \brief search by name a matching ObjectBid
+ * \param table the ObjectBid table to search in
+ * \param size size of this table
+ * \param object the ObjectBid to search
+ * \param ptrObject pointer to a matching ObjectBid found
+ * \return status code for this operation.
+ *
+*/
+int searchObjectBidInTable(ObjectBid * table, int size, ObjectBid * object, ObjectBid * ptrObject);
 
 #endif

@@ -595,7 +595,7 @@ int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object)
 }
 
 
-int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * object)
+int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * user)
 {
     int i = 0;
     int j = 0;
@@ -608,7 +608,7 @@ int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * obj
 
     for(i=0; i < *size-1; i++)
     {
-        if((*table[i]).id != object->id)
+        if((*table[i]).id != user->id)
         {
             newTable[j++] = *table[i];
         }
@@ -621,4 +621,24 @@ int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * obj
     table = &newTable;
 
     return SUCCESS;
+}
+
+
+int searchObjectBidInTable(ObjectBid * table, int size, ObjectBid * object, ObjectBid * ptrObject)
+{
+    int i = 0;
+
+    if(ptrObject!=NULL)
+        ptrObject = NULL;
+
+    for(i=0; i < size-1; i++)
+    {
+        if((table[i]).name != object->name)
+        {
+            ptrObject = &(table[i]);
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
