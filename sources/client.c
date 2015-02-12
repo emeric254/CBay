@@ -300,7 +300,20 @@ int sendPutUserAccount(UserAccount *account)
     fprintf(stderr,"%d > %d > %s \n",length,j, msg);
 */
 
-    memcpy(&msg[4], account, sizeof(UserAccount));
+//    memcpy(&msg[4], account, sizeof(UserAccount));
+
+    int j = 4;
+
+    memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
+    j+=sizeof(long int); // pour l'id ca marche ;)
+
+    sprintf(&msg[j],"%s",account->IDS.login);
+    j+=strlen(account->IDS.login);
+
+    sprintf(&msg[j],"%s",account->IDS.password);
+    j+=strlen(account->IDS.password);
+
+//etc
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
