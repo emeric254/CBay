@@ -1,8 +1,9 @@
 # CBay (Projet C) - Enchères Distribuées
 ========================================
+[documentation du projet](http://emeric254.github.io/CBay/)
+----------------------------------------
 
-Le but du projet est de construire une application C 'serveur', et une 'client' (en recyclant le code du TP 3).
-
+> Le but du projet est de construire une application C 'serveur', et une 'client' (en recyclant le code du TP 3).
 Ces deux aplications permettent de gérer des enchères distribuées.
 
 
