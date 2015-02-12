@@ -112,6 +112,23 @@ void userInputUserAccount(UserAccount * account)
     }while(!mailCheck(account->mail,strlen(account->mail)));
     CLEAR();
 
+
+    printf("Enter your login");
+    fgets(account->IDS.login,USERACCOUNT_LOGIN_LENGTH,stdin);
+    if(account->IDS.password[strlen(account->IDS.password)-1]=='\n')
+        account->IDS.password[strlen(account->IDS.password)-1] = '\0';
+    else
+        cleanBuffer();
+    CLEAR();
+
+    printf("Enter your password");
+    fgets(account->IDS.password,USERACCOUNT_PASSWORD_LENGTH,stdin);
+    if(account->IDS.password[strlen(account->IDS.password)-1]=='\n')
+        account->IDS.password[strlen(account->IDS.password)-1] = '\0';
+    else
+        cleanBuffer();
+    CLEAR();
+
 }
 
 
