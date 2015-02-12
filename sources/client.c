@@ -90,15 +90,15 @@ int Init(char *machine) {
 int receiveBinary(char *donnees, size_t tailleMax) {
     size_t dejaRecu = 0;
     int retour = 0;
-    /* on commence par recopier tout ce qui reste dans le tampon
+    /* starts by copying what´s left in the buffer
      */
     while((bufferEnd > bufferStart) && (dejaRecu < tailleMax)) {
         donnees[dejaRecu] = clientBuffer[bufferStart];
         dejaRecu++;
         bufferStart++;
     }
-    /* si on n'est pas arrive au max
-     * on essaie de recevoir plus de donnees
+    /* if max not reached,
+     * keep on receiving data
      */
     if(dejaRecu < tailleMax) {
         retour = recv(clientSocket, donnees + dejaRecu, tailleMax - dejaRecu, 0);
@@ -110,7 +110,7 @@ int receiveBinary(char *donnees, size_t tailleMax) {
             return 0;
         } else {
             /*
-             * on a recu "retour" octets en plus
+             * We received "retour" more bytes 
              */
             return dejaRecu + retour;
         }
