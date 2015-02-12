@@ -41,7 +41,7 @@ int Init(char *machine) {
     WSADATA wsaData;
     if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR)
     {
-        fprintf(ERROROUTPUT,"WSAStartup() n'a pas fonctionne, erreur : %d\n", WSAGetLastError()) ;
+        fprintf(ERROROUTPUT,"WSAStartup() didn't function, error : %d\n", WSAGetLastError()) ;
         WSACleanup();
         exit(SUCCESS);
     }
@@ -54,7 +54,7 @@ int Init(char *machine) {
 
     if ( (n = getaddrinfo(machine, service, &hints, &res)) )
     {
-            fprintf(ERROROUTPUT, "Initialisation, erreur de getaddrinfo : %s", gai_strerror(n));
+            fprintf(ERROROUTPUT, "Initialisation, getaddrinfo error : %s", gai_strerror(n));
             return ERROR_UNKNOWN;
     }
     ressave = res;
@@ -71,7 +71,7 @@ int Init(char *machine) {
     } while ( (res = res->ai_next) != NULL);
 
     if (res == NULL) {
-            perror("Initialisation, erreur de connect.");
+            perror("Initialisation, connection error.");
             return ERROR_UNKNOWN;
     }
 
@@ -79,7 +79,7 @@ int Init(char *machine) {
 
     connectEnd = FALSE;
 
-    printf("Connexion avec le serveur reussie.\n");
+    printf("Connection with server successful.\n");
 
     return SUCCESS;
 }
