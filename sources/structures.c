@@ -42,7 +42,7 @@ void userInputUserAccount(UserAccount * account)
         exit(ERROR_POINTER);
     }
 
-    account->id=-1;
+    account->IDS.id=-1;
 
     do
     {
@@ -210,7 +210,7 @@ int userInTable (UserAccount *user, UserAccount *table, int size, UserAccount * 
 
     while(find == FALSE && i < size)
     {
-        if ( user->id == table[i].id )
+        if ( user->IDS.id == table[i].IDS.id )
             find = TRUE;
         i++;
     }
@@ -635,7 +635,7 @@ int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * use
 
     for(i=0; i < *size-1; i++)
     {
-        if((*table[i]).id != user->id)
+        if((*table[i]).IDS.id != user->IDS.id)
         {
             newTable[j++] = *table[i];
         }

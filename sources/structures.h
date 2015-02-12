@@ -23,14 +23,13 @@ typedef struct ObjectBid
     char adress[OBJECTBID_ADRESS_LENGTH];
     float  currentBidPrice;
     long int currentBidIdBuyer;
-    ConfidentialIDS IDS;
 } ObjectBid;
 
 
 typedef struct UserAccount
 {
     char type;
-    long int id;
+    ConfidentialIDS IDS;
     char name[USERACCOUNT_NAME_LENGTH];
     char lastname[USERACCOUNT_LASTNAME_LENGTH];
     char adress[USERACCOUNT_ADRESS_LENGTH];

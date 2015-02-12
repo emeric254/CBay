@@ -120,14 +120,14 @@ int main()
                         {
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
                             {
-                                if(accountType == ACCOUNT_TYPE_ADMIN || id == ptrAccount->id)
+                                if(accountType == ACCOUNT_TYPE_ADMIN || id == ptrAccount->IDS.id)
                                 {
                                     // admin || user can delete his account
                                     removeUserAccountInTable(&accounts, &nbrAccount, ptrAccount);
                                     // save this new account table
                                     allAccSave(accounts, nbrAccount);
                                     // disconnect the user who delete his own account
-                                    if(id == ptrAccount->id)
+                                    if(id == ptrAccount->IDS.id)
                                         end = TRUE;
                                     // ok
                                     sendStatusLine(STATUS_CODE_OK);
@@ -193,7 +193,7 @@ int main()
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
                             {
                                 // admin || user can show his account
-                                if(accountType != ACCOUNT_TYPE_ADMIN && id != ptrAccount->id)
+                                if(accountType != ACCOUNT_TYPE_ADMIN && id != ptrAccount->IDS.id)
                                 {
                                     fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
                                     sendStatusLine(STATUS_CODE_FORBIDDEN);
@@ -206,7 +206,7 @@ int main()
                             {
                                 // try to send user's UserAccount
                                 UserAccount temp;
-                                temp.id = id;
+                                temp.IDS.id = id;
 
                                 if(userInTable(&temp, accounts, nbrAccount, ptrAccount) == TRUE)
                                 {
@@ -263,7 +263,7 @@ int main()
                         {
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
                             {
-                                if(accountType == ACCOUNT_TYPE_ADMIN || id == ptrAccount->id)
+                                if(accountType == ACCOUNT_TYPE_ADMIN || id == ptrAccount->IDS.id)
                                 {
                                     // admin || user can update his account
 
@@ -327,7 +327,7 @@ int main()
 
                                 //@TODO get the max id used in UserAccount table
 
-                                ((UserAccount*)ptrData)->id = idmax+1;
+                                ((UserAccount*)ptrData)->IDS.id = idmax+1;
                                 addUserAccountInTable(&accounts, &nbrAccount, (UserAccount*)ptrData);
                                 sendStatusLine(STATUS_CODE_CREATED);
                             }
