@@ -113,7 +113,8 @@ int main()
                                 if(accountType == ACCOUNT_TYPE_ADMIN || id == ptrAccount->id)
                                 {
                                     // admin || user can delete his account
-                                    //@TODO delete this account
+                                    removeUserAccountInTable(&accounts, &nbrAccount, ptrAccount);
+                                    allAccSave(accounts, nbrAccount);
                                     if(id == ptrAccount->id)
                                         end = TRUE;
                                     // save this new account table
@@ -138,8 +139,8 @@ int main()
                                 if(accountType == ACCOUNT_TYPE_ADMIN || (accountType == ACCOUNT_TYPE_VENDOR && ptrObject->idVendor == id))
                                 {
                                     // admin || vendor of this object
-                                    //@TODO delete this object
-                                    // save this new object table
+                                    removeObjectBidInTable(&objects, &nbrObjects, ptrObject);
+                                    allObjSave(objects, nbrObjects);
                                     sendStatusLine(STATUS_CODE_OK);
                                 }
                                 else
