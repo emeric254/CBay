@@ -42,6 +42,8 @@ void userInputUserAccount(UserAccount * account)
         exit(ERROR_POINTER);
     }
 
+    account->id=-1;
+
     do
     {
         // type choice

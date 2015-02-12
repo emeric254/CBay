@@ -317,6 +317,10 @@ int main()
                             else
                             {
                                 // add the new user
+                                int idmax = 0;
+                                //
+                                ((UserAccount*)ptrData)->id = idmax+1;
+                                addUserAccountInTable(&accounts, &nbrAccount, (UserAccount*)ptrData);
                                 sendStatusLine(STATUS_CODE_CREATED);
                             }
                         }
