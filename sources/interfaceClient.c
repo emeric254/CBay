@@ -45,8 +45,16 @@ int connectionInput (char* login, char* password)
     fprintf(stdout,"\t\t\t\tPlease enter your login and your password\n");
     fprintf(stdout,"\t\t\t\tLogin : ");
     fgets(login,USERACCOUNT_LOGIN_LENGTH,stdin);
+    if(login[strlen(login)-1]=='\n')
+        login[strlen(login)-1] = '\0';
+    else
+        cleanBuffer();
     fprintf(stdout,"\t\t\t\tPassword : ");
     fgets(password,USERACCOUNT_PASSWORD_LENGTH,stdin);
+    if(password[strlen(password)-1]=='\n')
+        password[strlen(password)-1] = '\0';
+    else
+        cleanBuffer();
 
     /* Clean all the \n and \r possibly being in the login and password */
 //    cleanCRString(login);
@@ -65,6 +73,10 @@ int searchInput (char* name)
     /* Get the name */
     fprintf(stdout,"\t\t\t\tPlease enter the name of the object you're seeking\n");
     fgets(name,OBJECTBID_NAME_LENGTH,stdin);
+    if(name[strlen(name)-1]=='\n')
+        name[strlen(name)-1] = '\0';
+    else
+        cleanBuffer();
 
     /* Clean all the \n and \r possibly being in the name */
 //    cleanCRString(name);
