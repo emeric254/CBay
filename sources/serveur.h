@@ -2,10 +2,10 @@
 #define __SERVEUR_H__
 
 /** \file serveur.h
- * \brief .........
- * This file provide some usual function for a server like \Init , \connectWait , \endClient , \endServer , \sendString or \sendBinary and \receiveBinary
+ * \brief This file provides BEEP server functions
+ * This file provides some usual functions for a server like init, reception and emission.
  * It also contains some other derivated functions to test and play with received requests
- * plus response making functions like \sendStatusLine and \sendHeaderField .
+ * plus response making functions like status line and header fields answering .
 */
 
 

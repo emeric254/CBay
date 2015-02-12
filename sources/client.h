@@ -2,9 +2,7 @@
 #define __CLIENT_H__
 
 /** \file client.h
- * \brief This file provide some usual function for a BEEP client like \Init,
- * \receiveBinary, \sendConnect, \listObjects, \searchObject, \bidObject,
- * \connection, \accountCreation.
+ * \brief This file provides function for a BEEP client.
  * It also contains fonction to send data using other methods than connect
  * (typically GET, PUT and DELETE) or function to split and extract data from
  * incoming answer from the server.

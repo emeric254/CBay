@@ -1,8 +1,16 @@
 #ifndef __STRUCTURES_H__
 #define __STRUCTURES_H__
 
+/** \file structures.h
+ * \brief this file provides functions for data manipulation
+ * This file provides data structures and usual associated functions.
+ * There is also utilities like clenBuffer.
+*/
+
+
 #include "defines.h"
 #include <time.h>
+
 
 typedef struct ConfidentialIDS
 {
@@ -262,15 +270,6 @@ int isObjectBidTable (int size);
  *
 */
 int isAccountUser (int size);
-
-
-/** \fn size_t file_length(char *filename)
- * \brief check and return size of a file which its filename or path is given
- * \param filename file name or full path
- * \return size of this file.
- *
-*/
-size_t file_length(char * filename);
 
 
 /** \fn long int getCurrentTime()

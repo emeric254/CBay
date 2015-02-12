@@ -1,7 +1,11 @@
 #ifndef __DEFINE_H__
 #define __DEFINE_H__
 
-/* ... */
+/** \file defines.h
+ * \brief This file defines all constants
+ *
+*/
+
 
 // Save files
 #define ACC_FILE "accounts.txt"

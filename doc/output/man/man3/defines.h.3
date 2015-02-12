@@ -1,0 +1,254 @@
+.TH "/home/emeric/projets/CBay/sources/defines.h" 3 "Thu Feb 12 2015" "CBay" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/emeric/projets/CBay/sources/defines.h \- 
+.PP
+This file defines all constants\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBACC_FILE\fP   'accounts\&.txt'"
+.br
+.ti -1c
+.RI "#define \fBOBJ_FILE\fP   'objects\&.txt'"
+.br
+.ti -1c
+.RI "#define \fBIDS_FILE\fP   'ids\&.txt'"
+.br
+.ti -1c
+.RI "#define \fBTRUE\fP   1"
+.br
+.ti -1c
+.RI "#define \fBFALSE\fP   0"
+.br
+.ti -1c
+.RI "#define \fBBUFFER_LENGTH\fP   4096"
+.br
+.ti -1c
+.RI "#define \fBERROROUTPUT\fP   stderr"
+.br
+.ti -1c
+.RI "#define \fBERROR_OUTPUT_LABEL\fP   '[error]'"
+.br
+.ti -1c
+.RI "#define \fBSERVER_PORT\fP   '25000'"
+.br
+.ti -1c
+.RI "#define \fBSERVER_ADRESS\fP   '127\&.0\&.0\&.1'"
+.br
+.ti -1c
+.RI "#define \fBSTATUS_LINE_LENGTH\fP   16"
+.br
+.ti -1c
+.RI "#define \fBRESPONSE_HEADER_LENGTH\fP   64"
+.br
+.ti -1c
+.RI "#define \fBRESPONSE_HEADER_FIELDNAME_CONTENT_LENGTH\fP   'Content-length: '"
+.br
+.ti -1c
+.RI "#define \fBRESPONSE_HEADER_FIELDNAME_CONTENT_TYPE\fP   'Content-type: '"
+.br
+.ti -1c
+.RI "#define \fBRESPONSE_HEADER_FIELD_LENGTH\fP   64"
+.br
+.ti -1c
+.RI "#define \fBRESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH\fP   16"
+.br
+.ti -1c
+.RI "#define \fBCONTENT_TYPE_OBJECTBID_ID\fP   0"
+.br
+.ti -1c
+.RI "#define \fBCONTENT_TYPE_USERACCOUNT_ID\fP   1"
+.br
+.ti -1c
+.RI "#define \fBREQUEST_METHOD_GET\fP   'GET'"
+.br
+.ti -1c
+.RI "#define \fBREQUEST_METHOD_PUT\fP   'PUT'"
+.br
+.ti -1c
+.RI "#define \fBREQUEST_METHOD_CONNECT\fP   'CONNECT'"
+.br
+.ti -1c
+.RI "#define \fBREQUEST_METHOD_DELETE\fP   'DELETE'"
+.br
+.ti -1c
+.RI "#define \fBSTATUS_CODE_OK\fP   00"
+.br
+.ti -1c
+.RI "#define \fBSTATUS_CODE_CREATED\fP   01"
+.br
+.ti -1c
+.RI "#define \fBREASON_PHRASE_OK\fP   'Ok'"
+.br
+.ti -1c
+.RI "#define \fBREASON_PHRASE_CREATED\fP   'Created'"
+.br
+.ti -1c
+.RI "#define \fBSTATUS_CODE_BAD_REQUEST\fP   -1"
+.br
+.ti -1c
+.RI "#define \fBSTATUS_CODE_NOT_CREATED\fP   -2"
+.br
+.ti -1c
+.RI "#define \fBSTATUS_CODE_INTERNAL_SERVER_ERROR\fP   -3"
+.br
+.ti -1c
+.RI "#define \fBSTATUS_CODE_CONFLICT\fP   -4"
+.br
+.ti -1c
+.RI "#define \fBSTATUS_CODE_FORBIDDEN\fP   -5"
+.br
+.ti -1c
+.RI "#define \fBREASON_PHRASE_BAD_REQUEST\fP   'Bad Request'"
+.br
+.ti -1c
+.RI "#define \fBREASON_PHRASE_NOT_CREATED\fP   'Not Created'"
+.br
+.ti -1c
+.RI "#define \fBREASON_PHRASE_INTERNAL_SERVER_ERROR\fP   'Server Error'"
+.br
+.ti -1c
+.RI "#define \fBREASON_PHRASE_CONFLICT\fP   'Conflict'"
+.br
+.ti -1c
+.RI "#define \fBREASON_PHRASE_FORBIDDEN\fP   'Forbidden'"
+.br
+.ti -1c
+.RI "#define \fBACCOUNT_TYPE_ADMIN\fP   'a'"
+.br
+.ti -1c
+.RI "#define \fBACCOUNT_TYPE_VENDOR\fP   'v'"
+.br
+.ti -1c
+.RI "#define \fBACCOUNT_TYPE_USER\fP   'u'"
+.br
+.ti -1c
+.RI "#define \fBACCOUNT_TYPE_UNKNOW\fP   'z'"
+.br
+.ti -1c
+.RI "#define \fBACCOUNT_LABEL_ADMIN\fP   'Admin, become a god ;) '"
+.br
+.ti -1c
+.RI "#define \fBACCOUNT_LABEL_VENDOR\fP   'Vendor, limited to sell things'"
+.br
+.ti -1c
+.RI "#define \fBACCOUNT_LABEL_USER\fP   'User, limited to bought things'"
+.br
+.ti -1c
+.RI "#define \fBSUCCESS\fP   -10"
+.br
+.ti -1c
+.RI "#define \fBERROR_OPENING\fP   -11"
+.br
+.ti -1c
+.RI "#define \fBERROR_READING\fP   -12"
+.br
+.ti -1c
+.RI "#define \fBERROR_WRITING\fP   -13"
+.br
+.ti -1c
+.RI "#define \fBERROR_READING_BUFF\fP   -14"
+.br
+.ti -1c
+.RI "#define \fBERROR_OPENING_BUFF\fP   -15"
+.br
+.ti -1c
+.RI "#define \fBERROR_WRITING_BUFF\fP   -16"
+.br
+.ti -1c
+.RI "#define \fBERROR_EMPTY_BUFF\fP   -17"
+.br
+.ti -1c
+.RI "#define \fBERROR_USER\fP   -18"
+.br
+.ti -1c
+.RI "#define \fBERROR_POINTER\fP   -19"
+.br
+.ti -1c
+.RI "#define \fBERROR_SENDING\fP   -20"
+.br
+.ti -1c
+.RI "#define \fBERROR_RECEIVING\fP   -21"
+.br
+.ti -1c
+.RI "#define \fBERROR_WRONG_TYPE\fP   -22"
+.br
+.ti -1c
+.RI "#define \fBCONNECTION_DENIED\fP   -23"
+.br
+.ti -1c
+.RI "#define \fBERROR_NO_LIST\fP   -24"
+.br
+.ti -1c
+.RI "#define \fBERROR_BIDDING\fP   -25"
+.br
+.ti -1c
+.RI "#define \fBERROR_UNKNOWN\fP   -99"
+.br
+.ti -1c
+.RI "#define \fBOBJECTBID_NAME_LENGTH\fP   96"
+.br
+.ti -1c
+.RI "#define \fBOBJECTBID_DESCRIPTION_LENGTH\fP   320"
+.br
+.ti -1c
+.RI "#define \fBOBJECTBID_ADRESS_LENGTH\fP   96"
+.br
+.ti -1c
+.RI "#define \fBUSERACCOUNT_LOGIN_LENGTH\fP   27"
+.br
+.ti -1c
+.RI "#define \fBUSERACCOUNT_PASSWORD_LENGTH\fP   26"
+.br
+.ti -1c
+.RI "#define \fBUSERACCOUNT_NAME_LENGTH\fP   75"
+.br
+.ti -1c
+.RI "#define \fBUSERACCOUNT_LASTNAME_LENGTH\fP   64"
+.br
+.ti -1c
+.RI "#define \fBUSERACCOUNT_ADRESS_LENGTH\fP   96"
+.br
+.ti -1c
+.RI "#define \fBUSERACCOUNT_MAIL_LENGTH\fP   80"
+.br
+.ti -1c
+.RI "#define \fBMENU_CHOICE_QUIT\fP   0"
+.br
+.ti -1c
+.RI "#define \fBMENU_CHOICE_CONNECTION\fP   1"
+.br
+.ti -1c
+.RI "#define \fBMENU_CHOICE_ACCOUNT_CREATION\fP   2"
+.br
+.ti -1c
+.RI "#define \fBMENU_CHOICE_ANONYMOUS\fP   3"
+.br
+.ti -1c
+.RI "#define \fBMENU_CHOICE_MAIN_LIST\fP   1"
+.br
+.ti -1c
+.RI "#define \fBMENU_CHOICE_MAIN_SEARCH\fP   2"
+.br
+.ti -1c
+.RI "#define \fBMENU_CHOICE_MAIN_BID\fP   3"
+.br
+.ti -1c
+.RI "#define \fBCLEAR\fP()   system('clear')"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This file defines all constants\&. 
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for CBay from the source code\&.

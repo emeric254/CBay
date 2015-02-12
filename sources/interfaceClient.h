@@ -4,8 +4,8 @@
 #include "structures.h"
 
 /** \file interfaceClient.h
- * \brief This file provide the main function to interact with the user like
- * \displayResult, \displayObject or \mainMenu. Nearly all the user's input are
+ * \brief This file provides the main function to interact with the user like
+ * displaying menus or menu choices. Nearly all the user's input are
  * taken with those functions. The only exception is for the account and the
  * object creation.
  *

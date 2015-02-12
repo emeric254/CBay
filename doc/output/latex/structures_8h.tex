@@ -1,0 +1,646 @@
+\hypertarget{structures_8h}{\section{/home/emeric/projets/\-C\-Bay/sources/structures.h File Reference}
+\label{structures_8h}\index{/home/emeric/projets/\-C\-Bay/sources/structures.\-h@{/home/emeric/projets/\-C\-Bay/sources/structures.\-h}}
+}
+
+
+this file provides functions for data manipulation This file provides data structures and usual associated functions. There is also utilities like clen\-Buffer.  
+
+
+{\ttfamily \#include \char`\"{}defines.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$time.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_confidential_i_d_s}{Confidential\-I\-D\-S}
+\item 
+struct \hyperlink{struct_object_bid}{Object\-Bid}
+\item 
+struct \hyperlink{struct_user_account}{User\-Account}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structures_8h_acc1a7a7abcefe621ee1d34b4c98e8226}{typedef struct \hyperlink{struct_confidential_i_d_s}{Confidential\-I\-D\-S} {\bfseries Confidential\-I\-D\-S}}\label{structures_8h_acc1a7a7abcefe621ee1d34b4c98e8226}
+
+\item 
+\hypertarget{structures_8h_ab591711c307c07efffae57a734a3d3bb}{typedef struct \hyperlink{struct_object_bid}{Object\-Bid} {\bfseries Object\-Bid}}\label{structures_8h_ab591711c307c07efffae57a734a3d3bb}
+
+\item 
+\hypertarget{structures_8h_aba02e44230ed4acde9398867fa870282}{typedef struct \hyperlink{struct_user_account}{User\-Account} {\bfseries User\-Account}}\label{structures_8h_aba02e44230ed4acde9398867fa870282}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structures_8h_a750be53afe22b006b8b36b42f3c12323}{void \hyperlink{structures_8h_a750be53afe22b006b8b36b42f3c12323}{clean\-Buffer} ()}\label{structures_8h_a750be53afe22b006b8b36b42f3c12323}
+
+\begin{DoxyCompactList}\small\item\em clean the buffer \end{DoxyCompactList}\item 
+void \hyperlink{structures_8h_af8cccbdcee2fd10ca6b912e1f5ca962f}{clean\-C\-R\-String} (char $\ast$string)
+\begin{DoxyCompactList}\small\item\em remove Carriage Return from a string \end{DoxyCompactList}\item 
+char \hyperlink{structures_8h_a5f244481cf9d3e508f74a24cb6cc417e}{get\-A\-Char} ()
+\begin{DoxyCompactList}\small\item\em wait for a char input from the user \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a86188c34a7bbb187f81952b1d0f53c46}{mail\-Check} (char $\ast$mail, int length)
+\begin{DoxyCompactList}\small\item\em check if an input string is composed as a valid mail adress \end{DoxyCompactList}\item 
+void \hyperlink{structures_8h_a64d18118ca3880bb08a20870145afede}{user\-Input\-User\-Account} (\hyperlink{struct_user_account}{User\-Account} $\ast$account)
+\begin{DoxyCompactList}\small\item\em ask the user to input fields of a new \hyperlink{struct_user_account}{User\-Account} var except ids. \end{DoxyCompactList}\item 
+void \hyperlink{structures_8h_a558a9ba0cd7c4d5bbbea72d8af42dcd1}{user\-Input\-Object\-Bid} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$bid)
+\begin{DoxyCompactList}\small\item\em ask the user to input fields of a new \hyperlink{struct_object_bid}{Object\-Bid} except ids' and current\-Bid vars. \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_aac6348b7a88e1ac252885cb0cc342569}{acc\-Save} (\hyperlink{struct_user_account}{User\-Account} user, F\-I\-L\-E $\ast$f)
+\begin{DoxyCompactList}\small\item\em save account's informations into the A\-C\-C\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a47c0fe248045c32784f2a62af5305f6d}{acc\-Load} (\hyperlink{struct_user_account}{User\-Account} $\ast$user, F\-I\-L\-E $\ast$f)
+\begin{DoxyCompactList}\small\item\em load account's informations from the A\-C\-C\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+\hypertarget{structures_8h_ab6342cd9fca84ca43ba8b1d13534966a}{int {\bfseries user\-In\-Table} (\hyperlink{struct_user_account}{User\-Account} $\ast$user, \hyperlink{struct_user_account}{User\-Account} $\ast$table, int size, \hyperlink{struct_user_account}{User\-Account} $\ast$ptr\-User)}\label{structures_8h_ab6342cd9fca84ca43ba8b1d13534966a}
+
+\item 
+int \hyperlink{structures_8h_a6a148a030d3a7a89011a170ebfbf5fa3}{all\-Acc\-Save} (\hyperlink{struct_user_account}{User\-Account} $\ast$table, int size)
+\begin{DoxyCompactList}\small\item\em save a table of \hyperlink{struct_user_account}{User\-Account} from the A\-C\-C\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a4a73e70cf0be85c7cf9a3f840380a5b0}{all\-Acc\-Load} (\hyperlink{struct_user_account}{User\-Account} $\ast$$\ast$table, int $\ast$size)
+\begin{DoxyCompactList}\small\item\em load a table of \hyperlink{struct_user_account}{User\-Account} from the A\-C\-C\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a259df54235616d3704771e942a87a475}{obj\-Save} (\hyperlink{struct_object_bid}{Object\-Bid} obj, F\-I\-L\-E $\ast$f)
+\begin{DoxyCompactList}\small\item\em save object's informations into the O\-B\-J\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a076e84eeaffd3b7c4f9dbeb16032bad8}{obj\-Load} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$obj, F\-I\-L\-E $\ast$f)
+\begin{DoxyCompactList}\small\item\em load object's informations from the O\-B\-J\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+\hypertarget{structures_8h_a0d45a214e06dccc832a39e75ab2299dc}{int {\bfseries obj\-In\-Table} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$obj, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$table, int size, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$ptr\-Object)}\label{structures_8h_a0d45a214e06dccc832a39e75ab2299dc}
+
+\item 
+int \hyperlink{structures_8h_ab3753d192dad954c5cf924af4debc2fb}{all\-Obj\-Save} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$table, int size)
+\begin{DoxyCompactList}\small\item\em save a table of objects to the O\-B\-J\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a5c57560da0f85821c1b5d05f7100e2b7}{all\-Obj\-Load} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$$\ast$table, int $\ast$size)
+\begin{DoxyCompactList}\small\item\em load a table of objects from the O\-B\-J\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a190e418f43882436596eb5f5ad3e311d}{ids\-Load} (\hyperlink{struct_confidential_i_d_s}{Confidential\-I\-D\-S} $\ast$ids, F\-I\-L\-E $\ast$f)
+\begin{DoxyCompactList}\small\item\em load ids's informations from the I\-D\-S\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a9732991a9ff8e7457cb236a2f10a1d8f}{all\-I\-D\-S\-Load} (\hyperlink{struct_confidential_i_d_s}{Confidential\-I\-D\-S} $\ast$$\ast$table, int $\ast$size)
+\begin{DoxyCompactList}\small\item\em load a table of I\-D\-S from the I\-D\-S\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a7286f32b0a46ee6b224e99ef40013706}{all\-I\-D\-S\-Save} (\hyperlink{struct_confidential_i_d_s}{Confidential\-I\-D\-S} $\ast$$\ast$table, int $\ast$size)
+\begin{DoxyCompactList}\small\item\em save all the I\-D\-S table to the I\-D\-S\-\_\-\-F\-I\-L\-E \end{DoxyCompactList}\item 
+\hypertarget{structures_8h_abb38401ea0132366bc4de3c3d21cdf47}{int {\bfseries ids\-In\-Table} (char login\mbox{[}U\-S\-E\-R\-A\-C\-C\-O\-U\-N\-T\-\_\-\-L\-O\-G\-I\-N\-\_\-\-L\-E\-N\-G\-T\-H\mbox{]}, char password\mbox{[}U\-S\-E\-R\-A\-C\-C\-O\-U\-N\-T\-\_\-\-P\-A\-S\-S\-W\-O\-R\-D\-\_\-\-L\-E\-N\-G\-T\-H\mbox{]}, \hyperlink{struct_confidential_i_d_s}{Confidential\-I\-D\-S} $\ast$table, int size, \hyperlink{struct_confidential_i_d_s}{Confidential\-I\-D\-S} $\ast$ptr\-I\-D\-S)}\label{structures_8h_abb38401ea0132366bc4de3c3d21cdf47}
+
+\item 
+\hypertarget{structures_8h_af094709494be4d401c209a49ffa53a5a}{int {\bfseries is\-Object\-Bid} (int size)}\label{structures_8h_af094709494be4d401c209a49ffa53a5a}
+
+\item 
+int \hyperlink{structures_8h_a6a7956b4134280481814d4ea92db29cc}{is\-Object\-Bid\-Table} (int size)
+\begin{DoxyCompactList}\small\item\em test if the data's size given match to an \hyperlink{struct_object_bid}{Object\-Bid} table size \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a5b0d6dbe63edf9446e38694a3594ee45}{is\-Account\-User} (int size)
+\begin{DoxyCompactList}\small\item\em test if the data's size given match to an \hyperlink{struct_user_account}{User\-Account} var size \end{DoxyCompactList}\item 
+long int \hyperlink{structures_8h_a4d8ef14ec7a8c72c5eb498edd1b47456}{get\-Current\-Time} ()
+\begin{DoxyCompactList}\small\item\em returns the time as the number of seconds since the Epoch, 1970-\/01-\/01 00\-:00\-:00 +0000 (U\-T\-C). \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a8fc6b5c9a7e0be38dcfe52e720e4926c}{is\-Finish\-Object\-Bid} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$object)
+\begin{DoxyCompactList}\small\item\em test if an \hyperlink{struct_object_bid}{Object\-Bid} is finished or not, checking his time value. \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_aa1eda1209519ffb2ae485e6763cfd2f5}{remove\-Object\-Bid\-In\-Table} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$$\ast$table, int $\ast$size, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$object)
+\begin{DoxyCompactList}\small\item\em remove an \hyperlink{struct_object_bid}{Object\-Bid} to an \hyperlink{struct_object_bid}{Object\-Bid} table. \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_ad456681e402245780a5af4ff2028c3e2}{add\-Object\-Bid\-In\-Table} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$$\ast$table, int $\ast$size, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$object)
+\begin{DoxyCompactList}\small\item\em add an \hyperlink{struct_object_bid}{Object\-Bid} to an \hyperlink{struct_object_bid}{Object\-Bid} table. \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_ae3b94353222b08c568be7d1db44ee3fb}{remove\-User\-Account\-In\-Table} (\hyperlink{struct_user_account}{User\-Account} $\ast$$\ast$table, int $\ast$size, \hyperlink{struct_user_account}{User\-Account} $\ast$user)
+\begin{DoxyCompactList}\small\item\em remove an \hyperlink{struct_user_account}{User\-Account} to an \hyperlink{struct_user_account}{User\-Account} table. \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_a501738157cdbaf59d6be9375591895b7}{add\-User\-Account\-In\-Table} (\hyperlink{struct_user_account}{User\-Account} $\ast$$\ast$table, int $\ast$size, \hyperlink{struct_user_account}{User\-Account} $\ast$user)
+\begin{DoxyCompactList}\small\item\em add an \hyperlink{struct_user_account}{User\-Account} to an \hyperlink{struct_user_account}{User\-Account} table. \end{DoxyCompactList}\item 
+int \hyperlink{structures_8h_aaddc3d7b154c85e500812ebef4f1ebd0}{search\-Object\-Bid\-In\-Table} (\hyperlink{struct_object_bid}{Object\-Bid} $\ast$table, int size, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$object, \hyperlink{struct_object_bid}{Object\-Bid} $\ast$ptr\-Object)
+\begin{DoxyCompactList}\small\item\em search by name a matching \hyperlink{struct_object_bid}{Object\-Bid} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+this file provides functions for data manipulation This file provides data structures and usual associated functions. There is also utilities like clen\-Buffer. 
+
+\subsection{Function Documentation}
+\hypertarget{structures_8h_a47c0fe248045c32784f2a62af5305f6d}{\index{structures.\-h@{structures.\-h}!acc\-Load@{acc\-Load}}
+\index{acc\-Load@{acc\-Load}!structures.h@{structures.\-h}}
+\subsubsection[{acc\-Load}]{\setlength{\rightskip}{0pt plus 5cm}int acc\-Load (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{user, }
+\item[{F\-I\-L\-E $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a47c0fe248045c32784f2a62af5305f6d}
+
+
+load account's informations from the A\-C\-C\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & output user var \\
+\hline
+{\em f} & file descriptor to the input file (A\-C\-C\-\_\-\-F\-I\-L\-E) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_aac6348b7a88e1ac252885cb0cc342569}{\index{structures.\-h@{structures.\-h}!acc\-Save@{acc\-Save}}
+\index{acc\-Save@{acc\-Save}!structures.h@{structures.\-h}}
+\subsubsection[{acc\-Save}]{\setlength{\rightskip}{0pt plus 5cm}int acc\-Save (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account}}]{user, }
+\item[{F\-I\-L\-E $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_aac6348b7a88e1ac252885cb0cc342569}
+
+
+save account's informations into the A\-C\-C\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & user var to save \\
+\hline
+{\em f} & file descriptor to the output file (A\-C\-C\-\_\-\-F\-I\-L\-E) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_ad456681e402245780a5af4ff2028c3e2}{\index{structures.\-h@{structures.\-h}!add\-Object\-Bid\-In\-Table@{add\-Object\-Bid\-In\-Table}}
+\index{add\-Object\-Bid\-In\-Table@{add\-Object\-Bid\-In\-Table}!structures.h@{structures.\-h}}
+\subsubsection[{add\-Object\-Bid\-In\-Table}]{\setlength{\rightskip}{0pt plus 5cm}int add\-Object\-Bid\-In\-Table (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$$\ast$}]{table, }
+\item[{int $\ast$}]{size, }
+\item[{{\bf Object\-Bid} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_ad456681e402245780a5af4ff2028c3e2}
+
+
+add an \hyperlink{struct_object_bid}{Object\-Bid} to an \hyperlink{struct_object_bid}{Object\-Bid} table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & the \hyperlink{struct_object_bid}{Object\-Bid} table to append of one \hyperlink{struct_object_bid}{Object\-Bid} \\
+\hline
+{\em size} & size of this table \\
+\hline
+{\em object} & the \hyperlink{struct_object_bid}{Object\-Bid} to add into this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a501738157cdbaf59d6be9375591895b7}{\index{structures.\-h@{structures.\-h}!add\-User\-Account\-In\-Table@{add\-User\-Account\-In\-Table}}
+\index{add\-User\-Account\-In\-Table@{add\-User\-Account\-In\-Table}!structures.h@{structures.\-h}}
+\subsubsection[{add\-User\-Account\-In\-Table}]{\setlength{\rightskip}{0pt plus 5cm}int add\-User\-Account\-In\-Table (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$$\ast$}]{table, }
+\item[{int $\ast$}]{size, }
+\item[{{\bf User\-Account} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a501738157cdbaf59d6be9375591895b7}
+
+
+add an \hyperlink{struct_user_account}{User\-Account} to an \hyperlink{struct_user_account}{User\-Account} table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & the \hyperlink{struct_user_account}{User\-Account} table to append of one \hyperlink{struct_user_account}{User\-Account} \\
+\hline
+{\em size} & size of this table \\
+\hline
+{\em user} & the \hyperlink{struct_user_account}{User\-Account} to add into this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a4a73e70cf0be85c7cf9a3f840380a5b0}{\index{structures.\-h@{structures.\-h}!all\-Acc\-Load@{all\-Acc\-Load}}
+\index{all\-Acc\-Load@{all\-Acc\-Load}!structures.h@{structures.\-h}}
+\subsubsection[{all\-Acc\-Load}]{\setlength{\rightskip}{0pt plus 5cm}int all\-Acc\-Load (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$$\ast$}]{table, }
+\item[{int $\ast$}]{size}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a4a73e70cf0be85c7cf9a3f840380a5b0}
+
+
+load a table of \hyperlink{struct_user_account}{User\-Account} from the A\-C\-C\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & output table which will be load \\
+\hline
+{\em size} & size of this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a6a148a030d3a7a89011a170ebfbf5fa3}{\index{structures.\-h@{structures.\-h}!all\-Acc\-Save@{all\-Acc\-Save}}
+\index{all\-Acc\-Save@{all\-Acc\-Save}!structures.h@{structures.\-h}}
+\subsubsection[{all\-Acc\-Save}]{\setlength{\rightskip}{0pt plus 5cm}int all\-Acc\-Save (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{table, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a6a148a030d3a7a89011a170ebfbf5fa3}
+
+
+save a table of \hyperlink{struct_user_account}{User\-Account} from the A\-C\-C\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & input table to save \\
+\hline
+{\em size} & size of this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a9732991a9ff8e7457cb236a2f10a1d8f}{\index{structures.\-h@{structures.\-h}!all\-I\-D\-S\-Load@{all\-I\-D\-S\-Load}}
+\index{all\-I\-D\-S\-Load@{all\-I\-D\-S\-Load}!structures.h@{structures.\-h}}
+\subsubsection[{all\-I\-D\-S\-Load}]{\setlength{\rightskip}{0pt plus 5cm}int all\-I\-D\-S\-Load (
+\begin{DoxyParamCaption}
+\item[{{\bf Confidential\-I\-D\-S} $\ast$$\ast$}]{table, }
+\item[{int $\ast$}]{size}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a9732991a9ff8e7457cb236a2f10a1d8f}
+
+
+load a table of I\-D\-S from the I\-D\-S\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & output I\-D\-S table to load \\
+\hline
+{\em size} & size of this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a7286f32b0a46ee6b224e99ef40013706}{\index{structures.\-h@{structures.\-h}!all\-I\-D\-S\-Save@{all\-I\-D\-S\-Save}}
+\index{all\-I\-D\-S\-Save@{all\-I\-D\-S\-Save}!structures.h@{structures.\-h}}
+\subsubsection[{all\-I\-D\-S\-Save}]{\setlength{\rightskip}{0pt plus 5cm}int all\-I\-D\-S\-Save (
+\begin{DoxyParamCaption}
+\item[{{\bf Confidential\-I\-D\-S} $\ast$$\ast$}]{table, }
+\item[{int $\ast$}]{size}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a7286f32b0a46ee6b224e99ef40013706}
+
+
+save all the I\-D\-S table to the I\-D\-S\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & ptr to the I\-D\-S table to save \\
+\hline
+{\em size} & size of this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a5c57560da0f85821c1b5d05f7100e2b7}{\index{structures.\-h@{structures.\-h}!all\-Obj\-Load@{all\-Obj\-Load}}
+\index{all\-Obj\-Load@{all\-Obj\-Load}!structures.h@{structures.\-h}}
+\subsubsection[{all\-Obj\-Load}]{\setlength{\rightskip}{0pt plus 5cm}int all\-Obj\-Load (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$$\ast$}]{table, }
+\item[{int $\ast$}]{size}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a5c57560da0f85821c1b5d05f7100e2b7}
+
+
+load a table of objects from the O\-B\-J\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & output \hyperlink{struct_object_bid}{Object\-Bid} table to load \\
+\hline
+{\em size} & output size of this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_ab3753d192dad954c5cf924af4debc2fb}{\index{structures.\-h@{structures.\-h}!all\-Obj\-Save@{all\-Obj\-Save}}
+\index{all\-Obj\-Save@{all\-Obj\-Save}!structures.h@{structures.\-h}}
+\subsubsection[{all\-Obj\-Save}]{\setlength{\rightskip}{0pt plus 5cm}int all\-Obj\-Save (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{table, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_ab3753d192dad954c5cf924af4debc2fb}
+
+
+save a table of objects to the O\-B\-J\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & input \hyperlink{struct_object_bid}{Object\-Bid} table to save \\
+\hline
+{\em size} & size of this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_af8cccbdcee2fd10ca6b912e1f5ca962f}{\index{structures.\-h@{structures.\-h}!clean\-C\-R\-String@{clean\-C\-R\-String}}
+\index{clean\-C\-R\-String@{clean\-C\-R\-String}!structures.h@{structures.\-h}}
+\subsubsection[{clean\-C\-R\-String}]{\setlength{\rightskip}{0pt plus 5cm}void clean\-C\-R\-String (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{string}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_af8cccbdcee2fd10ca6b912e1f5ca962f}
+
+
+remove Carriage Return from a string 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & string to clean \\
+\hline
+\end{DoxyParams}
+\hypertarget{structures_8h_a5f244481cf9d3e508f74a24cb6cc417e}{\index{structures.\-h@{structures.\-h}!get\-A\-Char@{get\-A\-Char}}
+\index{get\-A\-Char@{get\-A\-Char}!structures.h@{structures.\-h}}
+\subsubsection[{get\-A\-Char}]{\setlength{\rightskip}{0pt plus 5cm}char get\-A\-Char (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a5f244481cf9d3e508f74a24cb6cc417e}
+
+
+wait for a char input from the user 
+
+\begin{DoxyReturn}{Returns}
+char input by the user 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a4d8ef14ec7a8c72c5eb498edd1b47456}{\index{structures.\-h@{structures.\-h}!get\-Current\-Time@{get\-Current\-Time}}
+\index{get\-Current\-Time@{get\-Current\-Time}!structures.h@{structures.\-h}}
+\subsubsection[{get\-Current\-Time}]{\setlength{\rightskip}{0pt plus 5cm}long int get\-Current\-Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a4d8ef14ec7a8c72c5eb498edd1b47456}
+
+
+returns the time as the number of seconds since the Epoch, 1970-\/01-\/01 00\-:00\-:00 +0000 (U\-T\-C). 
+
+\begin{DoxyReturn}{Returns}
+time as the number of seconds since the Epoch, 1970-\/01-\/01 00\-:00\-:00 +0000 (U\-T\-C). 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a190e418f43882436596eb5f5ad3e311d}{\index{structures.\-h@{structures.\-h}!ids\-Load@{ids\-Load}}
+\index{ids\-Load@{ids\-Load}!structures.h@{structures.\-h}}
+\subsubsection[{ids\-Load}]{\setlength{\rightskip}{0pt plus 5cm}int ids\-Load (
+\begin{DoxyParamCaption}
+\item[{{\bf Confidential\-I\-D\-S} $\ast$}]{ids, }
+\item[{F\-I\-L\-E $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a190e418f43882436596eb5f5ad3e311d}
+
+
+load ids's informations from the I\-D\-S\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ids} & output I\-D\-S to load \\
+\hline
+{\em f} & file descriptor to the input file (I\-D\-S\-\_\-\-F\-I\-L\-E) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a5b0d6dbe63edf9446e38694a3594ee45}{\index{structures.\-h@{structures.\-h}!is\-Account\-User@{is\-Account\-User}}
+\index{is\-Account\-User@{is\-Account\-User}!structures.h@{structures.\-h}}
+\subsubsection[{is\-Account\-User}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Account\-User (
+\begin{DoxyParamCaption}
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a5b0d6dbe63edf9446e38694a3594ee45}
+
+
+test if the data's size given match to an \hyperlink{struct_user_account}{User\-Account} var size 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & data to test size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a8fc6b5c9a7e0be38dcfe52e720e4926c}{\index{structures.\-h@{structures.\-h}!is\-Finish\-Object\-Bid@{is\-Finish\-Object\-Bid}}
+\index{is\-Finish\-Object\-Bid@{is\-Finish\-Object\-Bid}!structures.h@{structures.\-h}}
+\subsubsection[{is\-Finish\-Object\-Bid}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Finish\-Object\-Bid (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a8fc6b5c9a7e0be38dcfe52e720e4926c}
+
+
+test if an \hyperlink{struct_object_bid}{Object\-Bid} is finished or not, checking his time value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & the \hyperlink{struct_object_bid}{Object\-Bid} to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a6a7956b4134280481814d4ea92db29cc}{\index{structures.\-h@{structures.\-h}!is\-Object\-Bid\-Table@{is\-Object\-Bid\-Table}}
+\index{is\-Object\-Bid\-Table@{is\-Object\-Bid\-Table}!structures.h@{structures.\-h}}
+\subsubsection[{is\-Object\-Bid\-Table}]{\setlength{\rightskip}{0pt plus 5cm}int is\-Object\-Bid\-Table (
+\begin{DoxyParamCaption}
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a6a7956b4134280481814d4ea92db29cc}
+
+
+test if the data's size given match to an \hyperlink{struct_object_bid}{Object\-Bid} table size 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & data to test size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a86188c34a7bbb187f81952b1d0f53c46}{\index{structures.\-h@{structures.\-h}!mail\-Check@{mail\-Check}}
+\index{mail\-Check@{mail\-Check}!structures.h@{structures.\-h}}
+\subsubsection[{mail\-Check}]{\setlength{\rightskip}{0pt plus 5cm}int mail\-Check (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{mail, }
+\item[{int}]{length}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a86188c34a7bbb187f81952b1d0f53c46}
+
+
+check if an input string is composed as a valid mail adress 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mail} & the input string to test \\
+\hline
+{\em length} & input string length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a076e84eeaffd3b7c4f9dbeb16032bad8}{\index{structures.\-h@{structures.\-h}!obj\-Load@{obj\-Load}}
+\index{obj\-Load@{obj\-Load}!structures.h@{structures.\-h}}
+\subsubsection[{obj\-Load}]{\setlength{\rightskip}{0pt plus 5cm}int obj\-Load (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{obj, }
+\item[{F\-I\-L\-E $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a076e84eeaffd3b7c4f9dbeb16032bad8}
+
+
+load object's informations from the O\-B\-J\-\_\-\-F\-I\-L\-E 
+
+test if the data's size given match to an \hyperlink{struct_object_bid}{Object\-Bid} var size
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & the \hyperlink{struct_object_bid}{Object\-Bid} loaded \\
+\hline
+{\em f} & file descriptor to the input file (O\-B\-J\-\_\-\-F\-I\-L\-E) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em size} & data to test size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a259df54235616d3704771e942a87a475}{\index{structures.\-h@{structures.\-h}!obj\-Save@{obj\-Save}}
+\index{obj\-Save@{obj\-Save}!structures.h@{structures.\-h}}
+\subsubsection[{obj\-Save}]{\setlength{\rightskip}{0pt plus 5cm}int obj\-Save (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid}}]{obj, }
+\item[{F\-I\-L\-E $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a259df54235616d3704771e942a87a475}
+
+
+save object's informations into the O\-B\-J\-\_\-\-F\-I\-L\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & an \hyperlink{struct_object_bid}{Object\-Bid} to save \\
+\hline
+{\em f} & file descriptor to the output file (O\-B\-J\-\_\-\-F\-I\-L\-E) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_aa1eda1209519ffb2ae485e6763cfd2f5}{\index{structures.\-h@{structures.\-h}!remove\-Object\-Bid\-In\-Table@{remove\-Object\-Bid\-In\-Table}}
+\index{remove\-Object\-Bid\-In\-Table@{remove\-Object\-Bid\-In\-Table}!structures.h@{structures.\-h}}
+\subsubsection[{remove\-Object\-Bid\-In\-Table}]{\setlength{\rightskip}{0pt plus 5cm}int remove\-Object\-Bid\-In\-Table (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$$\ast$}]{table, }
+\item[{int $\ast$}]{size, }
+\item[{{\bf Object\-Bid} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_aa1eda1209519ffb2ae485e6763cfd2f5}
+
+
+remove an \hyperlink{struct_object_bid}{Object\-Bid} to an \hyperlink{struct_object_bid}{Object\-Bid} table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & the \hyperlink{struct_object_bid}{Object\-Bid} table to purge of one \hyperlink{struct_object_bid}{Object\-Bid} \\
+\hline
+{\em size} & size of this table \\
+\hline
+{\em object} & the \hyperlink{struct_object_bid}{Object\-Bid} to purge from this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_ae3b94353222b08c568be7d1db44ee3fb}{\index{structures.\-h@{structures.\-h}!remove\-User\-Account\-In\-Table@{remove\-User\-Account\-In\-Table}}
+\index{remove\-User\-Account\-In\-Table@{remove\-User\-Account\-In\-Table}!structures.h@{structures.\-h}}
+\subsubsection[{remove\-User\-Account\-In\-Table}]{\setlength{\rightskip}{0pt plus 5cm}int remove\-User\-Account\-In\-Table (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$$\ast$}]{table, }
+\item[{int $\ast$}]{size, }
+\item[{{\bf User\-Account} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_ae3b94353222b08c568be7d1db44ee3fb}
+
+
+remove an \hyperlink{struct_user_account}{User\-Account} to an \hyperlink{struct_user_account}{User\-Account} table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & the \hyperlink{struct_user_account}{User\-Account} table to purge of one \hyperlink{struct_user_account}{User\-Account} \\
+\hline
+{\em size} & size of this table \\
+\hline
+{\em user} & the \hyperlink{struct_user_account}{User\-Account} to purge from this table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_aaddc3d7b154c85e500812ebef4f1ebd0}{\index{structures.\-h@{structures.\-h}!search\-Object\-Bid\-In\-Table@{search\-Object\-Bid\-In\-Table}}
+\index{search\-Object\-Bid\-In\-Table@{search\-Object\-Bid\-In\-Table}!structures.h@{structures.\-h}}
+\subsubsection[{search\-Object\-Bid\-In\-Table}]{\setlength{\rightskip}{0pt plus 5cm}int search\-Object\-Bid\-In\-Table (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{table, }
+\item[{int}]{size, }
+\item[{{\bf Object\-Bid} $\ast$}]{object, }
+\item[{{\bf Object\-Bid} $\ast$}]{ptr\-Object}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_aaddc3d7b154c85e500812ebef4f1ebd0}
+
+
+search by name a matching \hyperlink{struct_object_bid}{Object\-Bid} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & the \hyperlink{struct_object_bid}{Object\-Bid} table to search in \\
+\hline
+{\em size} & size of this table \\
+\hline
+{\em object} & the \hyperlink{struct_object_bid}{Object\-Bid} to search \\
+\hline
+{\em ptr\-Object} & pointer to a matching \hyperlink{struct_object_bid}{Object\-Bid} found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a558a9ba0cd7c4d5bbbea72d8af42dcd1}{\index{structures.\-h@{structures.\-h}!user\-Input\-Object\-Bid@{user\-Input\-Object\-Bid}}
+\index{user\-Input\-Object\-Bid@{user\-Input\-Object\-Bid}!structures.h@{structures.\-h}}
+\subsubsection[{user\-Input\-Object\-Bid}]{\setlength{\rightskip}{0pt plus 5cm}void user\-Input\-Object\-Bid (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\-Bid} $\ast$}]{bid}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a558a9ba0cd7c4d5bbbea72d8af42dcd1}
+
+
+ask the user to input fields of a new \hyperlink{struct_object_bid}{Object\-Bid} except ids' and current\-Bid vars. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bid} & the output \hyperlink{struct_object_bid}{Object\-Bid} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
+\hypertarget{structures_8h_a64d18118ca3880bb08a20870145afede}{\index{structures.\-h@{structures.\-h}!user\-Input\-User\-Account@{user\-Input\-User\-Account}}
+\index{user\-Input\-User\-Account@{user\-Input\-User\-Account}!structures.h@{structures.\-h}}
+\subsubsection[{user\-Input\-User\-Account}]{\setlength{\rightskip}{0pt plus 5cm}void user\-Input\-User\-Account (
+\begin{DoxyParamCaption}
+\item[{{\bf User\-Account} $\ast$}]{account}
+\end{DoxyParamCaption}
+)}}\label{structures_8h_a64d18118ca3880bb08a20870145afede}
+
+
+ask the user to input fields of a new \hyperlink{struct_user_account}{User\-Account} var except ids. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em account} & the output \hyperlink{struct_user_account}{User\-Account} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code for this operation. 
+\end{DoxyReturn}
