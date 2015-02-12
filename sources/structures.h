@@ -4,6 +4,12 @@
 #include "defines.h"
 #include <time.h>
 
+typedef struct ConfidentialIDS
+{
+    long int id;
+    char login[USERACCOUNT_LOGIN_LENGTH];
+    char password[USERACCOUNT_PASSWORD_LENGTH];
+} ConfidentialIDS;
 
 typedef struct ObjectBid
 {
@@ -17,6 +23,7 @@ typedef struct ObjectBid
     char adress[OBJECTBID_ADRESS_LENGTH];
     float  currentBidPrice;
     long int currentBidIdBuyer;
+    ConfidentialIDS IDS;
 } ObjectBid;
 
 
@@ -31,12 +38,6 @@ typedef struct UserAccount
 } UserAccount;
 
 
-typedef struct ConfidentialIDS
-{
-    long int id;
-    char login[USERACCOUNT_LOGIN_LENGTH];
-    char password[USERACCOUNT_PASSWORD_LENGTH];
-} ConfidentialIDS;
 
 
 /** \fn void cleanBuffer()

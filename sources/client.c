@@ -110,7 +110,7 @@ int receiveBinary(char *donnees, size_t tailleMax) {
             return 0;
         } else {
             /*
-             * We received "retour" more bytes 
+             * We received "retour" more bytes
              */
             return dejaRecu + retour;
         }
@@ -145,9 +145,11 @@ int sendGetObjectBid(ObjectBid *object)
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
+
     for ( i = 4 ; i < length ; i++ )
     {
-        msg[i] = ((char*)object)[i];
+        fputc(((unsigned char*)object)[i],stdout);
+        msg[i] = ((unsigned char*)object)[i];
     }
 
     msg[length-2] = ';';
