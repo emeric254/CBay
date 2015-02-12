@@ -251,11 +251,12 @@ int main()
                 }
                 else if(isPutRequest(message, length) == TRUE) //       PUT ------------------------------------------------------------------------
                 {
+                    // work with this Put request
+                    if ((state = splitPutRequest(message, length, ptrData, &sizeData)) != SUCCESS)
+                        return state;
+
                     if(connected == TRUE)
                     {
-                        // work with this Put request
-                        if ((state = splitPutRequest(message, length, ptrData, &sizeData)) != SUCCESS)
-                            return state;
                         if(isAccountUser(sizeData) == TRUE)
                         {
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
@@ -295,12 +296,33 @@ int main()
                                     sendStatusLine(STATUS_CODE_FORBIDDEN);
                                 }
                             }
+                            else
+                            {
+                                // add the new object
+                                sendStatusLine(STATUS_CODE_CREATED);
+                            }
                         }
                     }
                     else // not connected
                     {
-                        fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
-                        sendStatusLine(STATUS_CODE_FORBIDDEN);
+                        if(isAccountUser(sizeData) == TRUE)
+                        {
+                            if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
+                            {
+                                    fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                                    sendStatusLine(STATUS_CODE_FORBIDDEN);
+                            }
+                            else
+                            {
+                                // add the new user
+                                sendStatusLine(STATUS_CODE_CREATED);
+                            }
+                        }
+                        else
+                        {
+                            fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_FORBIDDEN, REASON_PHRASE_FORBIDDEN, message);
+                            sendStatusLine(STATUS_CODE_FORBIDDEN);
+                        }
                     }
                 }
                 else

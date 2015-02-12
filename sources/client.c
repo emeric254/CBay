@@ -154,7 +154,7 @@ int sendGetObjectBid(ObjectBid *object)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -177,7 +177,7 @@ int sendGetAllObjectBid()
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -207,7 +207,7 @@ int sendPutObjectBid(ObjectBid *object)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -236,7 +236,7 @@ int sendDeleteObjectBid(ObjectBid *object)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -265,7 +265,7 @@ int sendGetUserAccount(UserAccount *account)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -294,7 +294,7 @@ int sendPutUserAccount(UserAccount *account)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -323,7 +323,7 @@ int sendDeleteUserAccount(UserAccount *account)
     msg[length-1] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length, 0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -356,7 +356,7 @@ int sendConnect(char* login, char* password)
     msg[length++] = '\n';
     msg[length] = '\0';
 
-    if ( send(clientSocket, msg, length,0) == -1 )
+    if ( sendBinary(msg, length) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
