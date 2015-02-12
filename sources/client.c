@@ -278,12 +278,13 @@ int sendGetUserAccount(UserAccount *account)
 int sendPutUserAccount(UserAccount *account)
 {
     int length = 6 + sizeof(UserAccount);
+    int i=0;
     char msg[length+1];
 
     strcpy(msg,REQUEST_METHOD_PUT);
-    msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
+    msg[strlen(REQUEST_METHOD_PUT)] = ' ';
 
-    memcpy(&msg[4], account, sizeof(UserAccount));
+    memcpy(&msg[4], (unsigned char*)account, sizeof(UserAccount));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
