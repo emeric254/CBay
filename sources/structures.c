@@ -595,6 +595,31 @@ int removeObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object)
 }
 
 
+int addObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object)
+{
+    int i = 0;
+    ObjectBid * newTable = NULL;
+
+    *size += 1;
+    newTable = malloc((*size)*sizeof(ObjectBid));
+
+    if(newTable == NULL)
+        return ERROR_POINTER;
+
+    for(i=0; i < *size -1 ; i++)
+    {
+        newTable[i] = *table[i];
+    }
+
+    newTable[*size -1] = *object;
+
+    free(*table);
+    table = &newTable;
+
+    return SUCCESS;
+}
+
+
 int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * user)
 {
     int i = 0;
