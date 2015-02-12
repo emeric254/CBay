@@ -145,7 +145,7 @@ int sendGetObjectBid(ObjectBid *object)
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
-    memcpy(&msg[4], (unsigned char*)object, sizeof(ObjectBid));
+    strncpy(&msg[4], (char*)object, sizeof(ObjectBid));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
@@ -271,7 +271,7 @@ int sendPutUserAccount(UserAccount *account)
     strcpy(msg,REQUEST_METHOD_PUT);
     msg[strlen(REQUEST_METHOD_PUT)] = ' ';
 
-    memcpy(&msg[4], (unsigned char*)account, sizeof(UserAccount));
+    strncpy(&msg[4], (char*)account, sizeof(UserAccount));
 
     msg[length-2] = ';';
     msg[length-1] = '\n';
