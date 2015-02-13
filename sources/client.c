@@ -145,15 +145,43 @@ int sendGetObjectBid(ObjectBid *object)
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
-    memcpy(&msg[4], object, sizeof(ObjectBid));
+    int j = 4;
 
-    msg[length-2] = ';';
-    msg[length-1] = '\n';
-    msg[length] = '\0';
+    memcpy(&msg[j], &(object->id), sizeof(long int));
+    j+=sizeof(long int);
 
-    fprintf(stderr,"%s\n", msg);
+    sprintf(&msg[j],"%s;",object->name);
+    j+=strlen(object->name)+1;
 
-    if ( sendBinary(msg, length) == -1 )
+    memcpy(&msg[j], &(object->basePrice), sizeof(float));
+    j+=sizeof(float);
+
+    sprintf(&msg[j],"%s;",object->description);
+    j+=strlen(object->description)+1;
+
+    memcpy(&msg[j], &(object->idVendor), sizeof(long int));
+    j+=sizeof(long int);
+
+    memcpy(&msg[j], &(object->startTime), sizeof(long int));
+    j+=sizeof(long int);
+
+    memcpy(&msg[j], &(object->endTime), sizeof(long int));
+    j+=sizeof(long int);
+
+    sprintf(&msg[j],"%s;",object->adress);
+    j+=strlen(object->adress)+1;
+
+    memcpy(&msg[j], &(object->currentBidPrice), sizeof(float));
+    j+=sizeof(float);
+
+    memcpy(&msg[j], &(object->currentBidIdBuyer), sizeof(float));
+    j+=sizeof(float);
+
+    msg[j++] = ';';
+    msg[j++] = '\n';
+    msg[j++] = '\0';
+
+    if ( sendBinary(msg, j) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -196,13 +224,43 @@ int sendPutObjectBid(ObjectBid *object)
     strcpy(msg,REQUEST_METHOD_PUT);
     msg[strlen(REQUEST_METHOD_PUT )] = ' ';
 
-    memcpy(&msg[4], object, sizeof(ObjectBid));
+    int j = 4;
 
-    msg[length-2] = ';';
-    msg[length-1] = '\n';
-    msg[length] = '\0';
+    memcpy(&msg[j], &(object->id), sizeof(long int));
+    j+=sizeof(long int);
 
-    if ( sendBinary(msg, length) == -1 )
+    sprintf(&msg[j],"%s;",object->name);
+    j+=strlen(object->name)+1;
+
+    memcpy(&msg[j], &(object->basePrice), sizeof(float));
+    j+=sizeof(float);
+
+    sprintf(&msg[j],"%s;",object->description);
+    j+=strlen(object->description)+1;
+
+    memcpy(&msg[j], &(object->idVendor), sizeof(long int));
+    j+=sizeof(long int);
+
+    memcpy(&msg[j], &(object->startTime), sizeof(long int));
+    j+=sizeof(long int);
+
+    memcpy(&msg[j], &(object->endTime), sizeof(long int));
+    j+=sizeof(long int);
+
+    sprintf(&msg[j],"%s;",object->adress);
+    j+=strlen(object->adress)+1;
+
+    memcpy(&msg[j], &(object->currentBidPrice), sizeof(float));
+    j+=sizeof(float);
+
+    memcpy(&msg[j], &(object->currentBidIdBuyer), sizeof(float));
+    j+=sizeof(float);
+
+    msg[j++] = ';';
+    msg[j++] = '\n';
+    msg[j++] = '\0';
+
+    if ( sendBinary(msg, j) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -221,13 +279,43 @@ int sendDeleteObjectBid(ObjectBid *object)
     strcpy(msg,REQUEST_METHOD_DELETE);
     msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
 
-    memcpy(&msg[4], object, sizeof(ObjectBid));
+    int j = 7;
 
-    msg[length-2] = ';';
-    msg[length-1] = '\n';
-    msg[length] = '\0';
+    memcpy(&msg[j], &(object->id), sizeof(long int));
+    j+=sizeof(long int);
 
-    if ( sendBinary(msg, length) == -1 )
+    sprintf(&msg[j],"%s;",object->name);
+    j+=strlen(object->name)+1;
+
+    memcpy(&msg[j], &(object->basePrice), sizeof(float));
+    j+=sizeof(float);
+
+    sprintf(&msg[j],"%s;",object->description);
+    j+=strlen(object->description)+1;
+
+    memcpy(&msg[j], &(object->idVendor), sizeof(long int));
+    j+=sizeof(long int);
+
+    memcpy(&msg[j], &(object->startTime), sizeof(long int));
+    j+=sizeof(long int);
+
+    memcpy(&msg[j], &(object->endTime), sizeof(long int));
+    j+=sizeof(long int);
+
+    sprintf(&msg[j],"%s;",object->adress);
+    j+=strlen(object->adress)+1;
+
+    memcpy(&msg[j], &(object->currentBidPrice), sizeof(float));
+    j+=sizeof(float);
+
+    memcpy(&msg[j], &(object->currentBidIdBuyer), sizeof(float));
+    j+=sizeof(float);
+
+    msg[j++] = ';';
+    msg[j++] = '\n';
+    msg[j++] = '\0';
+
+    if ( sendBinary(msg, j) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -246,13 +334,34 @@ int sendGetUserAccount(UserAccount *account)
     strcpy(msg,REQUEST_METHOD_GET);
     msg[strlen(REQUEST_METHOD_GET )] = ' ';
 
-    memcpy(&msg[4], account, sizeof(UserAccount));
+    int j = 4;
 
-    msg[length-2] = ';';
-    msg[length-1] = '\n';
-    msg[length] = '\0';
+    memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
+    j+=sizeof(long int);
 
-    if ( sendBinary(msg, length) == -1 )
+    sprintf(&msg[j],"%s;",account->IDS.login);
+    j+=strlen(account->IDS.login)+1;
+
+    sprintf(&msg[j],"%s;",account->IDS.password);
+    j+=strlen(account->IDS.password)+1;
+
+    sprintf(&msg[j],"%s;",account->name);
+    j+=strlen(account->name)+1;
+
+    sprintf(&msg[j],"%s;",account->lastname);
+    j+=strlen(account->lastname)+1;
+
+    sprintf(&msg[j],"%s;",account->adress);
+    j+=strlen(account->adress)+1;
+
+    sprintf(&msg[j],"%s;",account->mail);
+    j+=strlen(account->mail)+1;
+
+    msg[j++] = ';';
+    msg[j++] = '\n';
+    msg[j++] = '\0';
+
+    if ( sendBinary(msg, j) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -270,45 +379,14 @@ int sendPutUserAccount(UserAccount *account)
 
     strcpy(msg,REQUEST_METHOD_PUT);
     msg[strlen(REQUEST_METHOD_PUT)] = ' ';
-/*
-    size_t j = 4;
-
-    msg[j] = account->type;
-    j+=sizeof(char);
-
-    memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
-    j+=sizeof(long int);
-
-    memcpy(&msg[j], account->IDS.login, USERACCOUNT_LOGIN_LENGTH*sizeof(char));
-    j+=USERACCOUNT_LOGIN_LENGTH*sizeof(char);
-
-    memcpy(&msg[j], account->IDS.password, USERACCOUNT_PASSWORD_LENGTH*sizeof(char));
-    j+=USERACCOUNT_PASSWORD_LENGTH*sizeof(char);
-
-    memcpy(&msg[j], account->name, USERACCOUNT_NAME_LENGTH*sizeof(char));
-    j+=USERACCOUNT_NAME_LENGTH*sizeof(char);
-
-    memcpy(&msg[j], account->lastname, USERACCOUNT_LASTNAME_LENGTH*sizeof(char));
-    j+=USERACCOUNT_LASTNAME_LENGTH*sizeof(char);
-
-    memcpy(&msg[j], account->adress, USERACCOUNT_ADRESS_LENGTH*sizeof(char));
-    j+=USERACCOUNT_ADRESS_LENGTH*sizeof(char);
-
-    memcpy(&msg[j], account->mail, USERACCOUNT_MAIL_LENGTH*sizeof(char));
-    j+=USERACCOUNT_MAIL_LENGTH*sizeof(char);
-
-    fprintf(stderr,"%d > %d > %s \n",length,j, msg);
-*/
-
-//    memcpy(&msg[4], account, sizeof(UserAccount));
 
     int j = 4;
 
     memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
-    j+=sizeof(long int); // pour l'id ca marche ;)
+    j+=sizeof(long int);
 
-    sprintf(&msg[j],"%s;",account->IDS.login); // le ';' en fin pour delimiter car ca va pas le faire sinon
-    j+=strlen(account->IDS.login)+1; // +1 car delimiteur
+    sprintf(&msg[j],"%s;",account->IDS.login);
+    j+=strlen(account->IDS.login)+1;
 
     sprintf(&msg[j],"%s;",account->IDS.password);
     j+=strlen(account->IDS.password)+1;
@@ -325,14 +403,11 @@ int sendPutUserAccount(UserAccount *account)
     sprintf(&msg[j],"%s;",account->mail);
     j+=strlen(account->mail)+1;
 
-//etc
+    msg[j++] = ';';
+    msg[j++] = '\n';
+    msg[j++] = '\0';
 
-    msg[length-2] = ';';
-    msg[length-1] = '\n';
-    msg[length++] = '\0';
-
-
-    if ( sendBinary(msg, length) == -1 )
+    if ( sendBinary(msg, j) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -351,13 +426,34 @@ int sendDeleteUserAccount(UserAccount *account)
     strcpy(msg,REQUEST_METHOD_DELETE);
     msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
 
-    memcpy(&msg[4], account, sizeof(UserAccount));
+    int j = 7;
 
-    msg[length-2] = ';';
-    msg[length-1] = '\n';
-    msg[length] = '\0';
+    memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
+    j+=sizeof(long int);
 
-    if ( sendBinary(msg, length) == -1 )
+    sprintf(&msg[j],"%s;",account->IDS.login);
+    j+=strlen(account->IDS.login)+1;
+
+    sprintf(&msg[j],"%s;",account->IDS.password);
+    j+=strlen(account->IDS.password)+1;
+
+    sprintf(&msg[j],"%s;",account->name);
+    j+=strlen(account->name)+1;
+
+    sprintf(&msg[j],"%s;",account->lastname);
+    j+=strlen(account->lastname)+1;
+
+    sprintf(&msg[j],"%s;",account->adress);
+    j+=strlen(account->adress)+1;
+
+    sprintf(&msg[j],"%s;",account->mail);
+    j+=strlen(account->mail)+1;
+
+    msg[j++] = ';';
+    msg[j++] = '\n';
+    msg[j++] = '\0';
+
+    if ( sendBinary(msg, j) == -1 )
     {
         perror("sendGet error.");
         return ERROR_SENDING;
@@ -467,7 +563,7 @@ int accountCreation()
 {
     int statusCode = STATUS_CODE_NOT_CREATED;
     char response[STATUS_LINE_LENGTH];
-    char * reasonPhrase=NULL;
+    char reasonPhrase[BUFFER_LENGTH];
     UserAccount acc;
 
     /* Get the informations about the new account */
@@ -586,7 +682,7 @@ int listObjects (ObjectBid ** list, int* listSize)
     char statLine[STATUS_LINE_LENGTH];
     char headers[RESPONSE_HEADER_FIELD_LENGTH];
     char contentType[RESPONSE_HEADER_FIELD_CONTENT_TYPE_LENGTH];
-    char * reasonPhrase=NULL;
+    char reasonPhrase[BUFFER_LENGTH];
 
     /* Send the request, 3 try */
     while (statusCode != STATUS_CODE_OK && i < 3)
@@ -675,7 +771,7 @@ int bidObject (UserAccount client, ObjectBid ** list, int listSize)
     int statusCode;
     int chosenObj=-1;
     char statLine[STATUS_LINE_LENGTH];
-    char* reasonPhrase=NULL;
+    char reasonPhrase[BUFFER_LENGTH];
     float price=0.0;
 
     /* Be sure that the list isn't empty */
