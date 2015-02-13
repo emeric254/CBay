@@ -40,7 +40,7 @@ int mainMenu()
   ███    ███   ███    ███   ███    ███   ███        \n\
 ▄█████████▀    ██████████   ██████████  ▄████▀      \n\
                                                     \n\n\n");
-    fprintf(stdout, "\tWELCOME ON BEEP\n\n\n");
+    fprintf(stdout, "\tWELCOME ON BEEP - 0.1a\n\n\n");
     fprintf(stdout, "\t%d - Go back\n", MENU_CHOICE_QUIT);
     fprintf(stdout, "\t%d - Object list\n", MENU_CHOICE_MAIN_LIST);
     fprintf(stdout, "\t%d - Search object(s)\n", MENU_CHOICE_MAIN_SEARCH);

@@ -328,7 +328,7 @@ int main()
                                 //@TODO get the max id used in UserAccount table
 
                                 ((UserAccount*)ptrData)->IDS.id = idmax+1;
-                                addUserAccountInTable(&accounts, &nbrAccount, (UserAccount*)ptrData);
+                                addUserAccountInTable(&accounts, &nbrAccount, (UserAccount*)ptrData, &ids, &nbrIDS);
                                 sendStatusLine(STATUS_CODE_CREATED);
                             }
                         }

@@ -404,50 +404,36 @@ int sendConnect(char* login, char* password)
 int splitStatusLine(char *statusLine, int* statusCode, char* statusMessage)
 {
     printf("%s\n",statusLine);
-    if(!strncmp(statusLine,"STATUS_CODE_OK",2))
+    sscanf(statusLine,"%d ",statusCode);
+
+    switch(*statusCode)
     {
-        *statusCode = STATUS_CODE_OK;
-        strncpy(statusMessage,REASON_PHRASE_OK,12);
+        case STATUS_CODE_OK:
+            strncpy(statusMessage,REASON_PHRASE_OK,12);
+            break;
+        case STATUS_CODE_CREATED:
+            strncpy(statusMessage,REASON_PHRASE_CREATED,12);
+            break;
+        case STATUS_CODE_BAD_REQUEST:
+            strncpy(statusMessage,REASON_PHRASE_BAD_REQUEST,12);
+            break;
+        case STATUS_CODE_NOT_CREATED:
+            strncpy(statusMessage,REASON_PHRASE_NOT_CREATED,12);
+            break;
+        case STATUS_CODE_INTERNAL_SERVER_ERROR:
+            strncpy(statusMessage,REASON_PHRASE_INTERNAL_SERVER_ERROR,12);
+            break;
+        case STATUS_CODE_CONFLICT:
+            strncpy(statusMessage,REASON_PHRASE_CONFLICT,12);
+            break;
+        case STATUS_CODE_FORBIDDEN:
+            strncpy(statusMessage,REASON_PHRASE_FORBIDDEN,12);
+            break;
+        default:
+            return FALSE;
+            break;
     }
-    else if(!strncmp(statusLine,"STATUS_CODE_CREATED",2))
-    {
-        *statusCode = STATUS_CODE_CREATED;
-        strncpy(statusMessage,REASON_PHRASE_CREATED,12);
-    }
-    else if(!strncmp(statusLine,"STATUS_CODE_BAD_REQUEST",2))
-    {
-        *statusCode = STATUS_CODE_BAD_REQUEST;
-        strncpy(statusMessage,REASON_PHRASE_BAD_REQUEST,12);
-    }
-    else if(!strncmp(statusLine,"STATUS_CODE_NOT_CREATED",2))
-    {
-        *statusCode = STATUS_CODE_NOT_CREATED;
-        strncpy(statusMessage,REASON_PHRASE_NOT_CREATED,12);
-    }
-    else if(!strncmp(statusLine,"STATUS_CODE_INTERNAL_SERVER_ERROR",2))
-    {
-        *statusCode = STATUS_CODE_INTERNAL_SERVER_ERROR;
-        strncpy(statusMessage,REASON_PHRASE_INTERNAL_SERVER_ERROR,12);
-    }
-    else if(!strncmp(statusLine,"STATUS_CODE_CONFLICT",2))
-    {
-        *statusCode = STATUS_CODE_CONFLICT;
-        strncpy(statusMessage,REASON_PHRASE_CONFLICT,12);
-    }
-    else if(!strncmp(statusLine,"STATUS_CODE_FORBIDDEN",2))
-    {
-        *statusCode = STATUS_CODE_FORBIDDEN;
-        strncpy(statusMessage,REASON_PHRASE_FORBIDDEN,12);
-    }
-    else
-    {
-        if(statusLine[0]=='-')
-            *statusCode = 0 - statusLine[1] - '0';
-        else
-            *statusCode = 10 * (statusLine[0] - '0') + statusLine[1] - '0';
-        strncpy(statusMessage,&statusLine[3],12);
-        return FALSE;
-    }
+    printf("%s\n",statusLine);
     return TRUE;
 }
 
@@ -514,11 +500,11 @@ int accountCreation()
 */
 int connection (UserAccount * user)
 {
-    int statusCode=STATUS_CODE_NOT_CREATED;
+    int statusCode=STATUS_CODE_BAD_REQUEST;
     size_t accountSize=0;
 
     char response[STATUS_LINE_LENGTH];
-    char * reasonPhrase=NULL;
+    char reasonPhrase[BUFFER_LENGTH];
 
     char login[USERACCOUNT_LOGIN_LENGTH];
     char password[USERACCOUNT_PASSWORD_LENGTH];
@@ -532,7 +518,7 @@ int connection (UserAccount * user)
     /* Try to send the request.
      * If the answer is NOT_CREATED, resend it 3 times maximum*/
     int i=0;
-    while (statusCode == STATUS_CODE_NOT_CREATED && i < 3)
+    while (statusCode != STATUS_CODE_OK && i < 3)
     {
         /* Send a connection request to the server */
         sendConnect(login,password);

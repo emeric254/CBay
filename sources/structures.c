@@ -667,8 +667,32 @@ int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * use
     return SUCCESS;
 }
 
+int addIDSInTable(ConfidentialIDS ** table, int * size, ConfidentialIDS toAdd)
+{
+    int i = 0;
+    ConfidentialIDS * newTable = NULL;
 
-int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * user)
+    *size += 1;
+    newTable = malloc((*size)*sizeof(ConfidentialIDS));
+
+    if(newTable == NULL)
+        return ERROR_POINTER;
+
+    for(i=0; i < *size -1 ; i++)
+    {
+        newTable[i] = *table[i];
+    }
+
+    newTable[*size -1] = toAdd;
+
+    free(*table);
+    table = &newTable;
+
+    return SUCCESS;
+}
+
+
+int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * user, ConfidentialIDS ** IDS, int * nbIDS)
 {
     int i = 0;
     UserAccount * newTable = NULL;
@@ -689,7 +713,7 @@ int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * user)
     free(*table);
     table = &newTable;
 
-    return SUCCESS;
+    return addIDSInTable(IDS, nbIDS, user->IDS);
 }
 
 

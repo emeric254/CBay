@@ -322,15 +322,17 @@ int addObjectBidInTable(ObjectBid ** table, int * size, ObjectBid * object);
 int removeUserAccountInTable(UserAccount ** table, int * size, UserAccount * user);
 
 
-/** \fn int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * object)
+/** \fn int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * user, ConfidentialIDS ** IDS, int * nbIDS)
  * \brief add an UserAccount to an UserAccount table.
  * \param table the UserAccount table to append of one UserAccount
  * \param size size of this table
  * \param user the UserAccount to add into this table
+ * \param IDS the ConfidentialIDS table to append UserAccount IDS
+ * \param nbIDS the UserAccount IDS to add to this table
  * \return status code for this operation.
  *
 */
-int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * user);
+int addUserAccountInTable(UserAccount ** table, int * size, UserAccount * user, ConfidentialIDS ** IDS, int * nbIDS);
 
 
 /** \fn int searchObjectBidInTable(ObjectBid * table, int size, ObjectBid * object, ObjectBid * ptrObject)
