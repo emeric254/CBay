@@ -572,8 +572,8 @@ int connection (UserAccount * user)
         else
             return ERROR_RECEIVING;
     }
-    else
-        return CONNECTION_DENIED;
+
+    return CONNECTION_DENIED;
 }
 
 /* listObjects
