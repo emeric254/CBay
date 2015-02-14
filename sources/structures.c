@@ -83,8 +83,6 @@ void userInputUserAccount(UserAccount * account)
         cleanBuffer();
     CLEAR();
 
-    printf("%s<<",account->name);
-
     printf("Enter your lastname\n");
     fgets(account->lastname,USERACCOUNT_LASTNAME_LENGTH-1,stdin);
     if(account->lastname[strlen(account->lastname)-1]=='\n')
@@ -349,7 +347,6 @@ int objInTable (ObjectBid *obj, ObjectBid *table, int size, ObjectBid * ptrObjec
             find = TRUE;
         i++;
     }
-
     ptrObject = (find) ? &table[i] : NULL ;
 
     return find;
@@ -549,8 +546,13 @@ int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_
 /* isObjectBid.
  *
  */
-int isObjectBid (int size)
+int isObjectBid (char ** data, int size)
 {
+    if ( strcmp(&(*data[size-3]),";\n") == 0  && *data[size-4] != ';')
+    {
+        //
+    }
+
     return (size == sizeof(ObjectBid)) ? TRUE : FALSE;
 }
 
@@ -558,18 +560,89 @@ int isObjectBid (int size)
 /* isObjectBidTable.
  *
  */
-int isObjectBidTable (int size)
+int isObjectBidTable (char ** data, int size)
 {
-    return ( (size % sizeof(ObjectBid)) == 0) ? TRUE : FALSE;
+    ObjectBid * ptrObject = NULL;
+/*
+    if ( strcmp(&(*data[size-4]),";;\n") == 0)
+    {
+        int i = 4;
+        ptrUser = malloc(sizeof(UserAccount));
+        ptrUser->type = *data[i++];
+
+        memcpy(ptrObject->IDS.id, &(*data[j]), sizeof(long int));
+        j+=sizeof(long int);
+
+        sscanf(&(*data[j]), "%s;", ptrObject->IDS.login);
+        j+=strlen(ptrUser->IDS.login)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrObject->IDS.password);
+        j+=strlen(ptrUser->IDS.password)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrObject->name);
+        j+=strlen(ptrUser->name)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrObject->lastname);
+        j+=strlen(ptrUser->lastname)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrObject->adress);
+        j+=strlen(ptrUser->adress)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrObject->mail);
+        j+=strlen(ptrUser->mail)+1;
+
+        free(*data);
+        if(*data!=NULL)
+            return ERROR_POINTER;
+        *data=ptrObject;
+    }
+*/
+    return (ptrObject == NULL) ? TRUE : FALSE;
 }
 
 
 /* isAccountUser.
  *
  */
-int isAccountUser (int size)
+int isAccountUser (char ** data, int size)
 {
-    return (size == sizeof(UserAccount)) ? TRUE : FALSE;
+    UserAccount * ptrUser = NULL;
+    if ( strcmp(&(*data[size-4]),";;\n") == 0)
+    {
+        int j = 4;
+        ptrUser = malloc(sizeof(UserAccount));
+        ptrUser->type = *data[j++];
+
+//        memcpy(&(ptrUser->IDS.id), &(*data[j]), sizeof(long int));
+        // ou
+        ptrUser->IDS.id = *data[j];
+        j+=sizeof(long int);
+
+        sscanf(&(*data[j]), "%s;", ptrUser->IDS.login);
+        j+=strlen(ptrUser->IDS.login)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrUser->IDS.password);
+        j+=strlen(ptrUser->IDS.password)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrUser->name);
+        j+=strlen(ptrUser->name)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrUser->lastname);
+        j+=strlen(ptrUser->lastname)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrUser->adress);
+        j+=strlen(ptrUser->adress)+1;
+
+        sscanf(&(*data[j]), "%s;", ptrUser->mail);
+        j+=strlen(ptrUser->mail)+1;
+
+        free(*data);
+        if(*data!=NULL)
+            return ERROR_POINTER;
+        *data=(char*)ptrUser;
+    }
+
+    return (ptrUser == NULL) ? TRUE : FALSE;
 }
 
 

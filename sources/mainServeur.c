@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "defines.h"
 #include "structures.h"
 #include "serveur.h"
 
@@ -69,8 +68,6 @@ int main()
         {
             length = receiveBinary(&message);
 
-//            printf("message >>%d>>%s\n",length,message);
-
             if (length > 0 && message != NULL)
             {
 
@@ -78,15 +75,11 @@ int main()
                 {
                     if(connected != TRUE) // not already connected
                     {
-                        if((state = splitConnectRequest(message, length, ptrLogin, ptrPassword, &sizeLogin, &sizePasword)) != SUCCESS)
+                        if((state = splitConnectRequest(message, length, login, password, &sizeLogin, &sizePasword)) != SUCCESS)
                         {
-                            fprintf(ERROROUTPUT,">>> %d", state);
                             fprintf(ERROROUTPUT,"%d >> %s >> %s\n", STATUS_CODE_BAD_REQUEST, REASON_PHRASE_BAD_REQUEST, message);
                             sendStatusLine(STATUS_CODE_BAD_REQUEST);
                         }
-
-                        strncpy(login,ptrLogin,sizeLogin);
-                        strncpy(password,ptrPassword,sizePasword);
 
                         // if pseudo && login in one of account >> then connected = TRUE;
                         if ( idsInTable(login, password, ids, nbrIDS, ptrIDS) == TRUE )
@@ -116,7 +109,7 @@ int main()
                             sendStatusLine(STATUS_CODE_BAD_REQUEST);
                         }
 
-                        if(isAccountUser(sizeData) == TRUE)
+                        if(isAccountUser(&message, sizeData) == TRUE)
                         {
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
                             {
@@ -144,7 +137,7 @@ int main()
                                 sendStatusLine(STATUS_CODE_BAD_REQUEST);
                             }
                         }
-                        else if(isObjectBid(sizeData) == TRUE)
+                        else if(isObjectBid(&message, sizeData) == TRUE)
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
@@ -188,7 +181,7 @@ int main()
                             sendStatusLine(STATUS_CODE_BAD_REQUEST);
                         }
 
-                        if(isAccountUser(sizeData) == TRUE)
+                        if(isAccountUser(&message, sizeData) == TRUE)
                         {
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
                             {
@@ -220,7 +213,7 @@ int main()
                                 }
                             }
                         }
-                        else if(isObjectBid(sizeData) == TRUE)
+                        else if(isObjectBid(&message, sizeData) == TRUE)
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
@@ -259,7 +252,7 @@ int main()
 
                     if(connected == TRUE)
                     {
-                        if(isAccountUser(sizeData) == TRUE)
+                        if(isAccountUser(&message, sizeData) == TRUE)
                         {
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
                             {
@@ -279,7 +272,7 @@ int main()
                                 }
                             }
                         }
-                        else if(isObjectBid(sizeData) == TRUE)
+                        else if(isObjectBid(&message, sizeData) == TRUE)
                         {
                             if(objInTable((ObjectBid*)ptrData, objects, nbrObjects, ptrObject) == TRUE)
                             {
@@ -313,7 +306,7 @@ int main()
                     }
                     else // not connected
                     {
-                        if(isAccountUser(sizeData) == TRUE)
+                        if(isAccountUser(&message, sizeData) == TRUE)
                         {
                             if(userInTable((UserAccount*)ptrData, accounts, nbrAccount, ptrAccount) == TRUE)
                             {
@@ -356,7 +349,6 @@ int main()
                         break;
                     case ERROR_RECEIVING:
                         fprintf(ERROROUTPUT, "%s >> %d\n", ERROR_OUTPUT_LABEL, ERROR_RECEIVING);
-                        end = TRUE; // end client connection
                         break;
                     default:
                         fprintf(ERROROUTPUT, "%s >> %d >> %d >> %s\n", ERROR_OUTPUT_LABEL, ERROR_UNKNOWN, length, message);

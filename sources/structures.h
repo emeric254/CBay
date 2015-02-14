@@ -251,7 +251,7 @@ int idsInTable (char login[USERACCOUNT_LOGIN_LENGTH], char password[USERACCOUNT_
  * \return status code for this operation.
  *
 */
-int isObjectBid (int size);
+int isObjectBid (char ** data, int size);
 
 
 /** \fn int isObjectBidTable (int size)
@@ -260,7 +260,7 @@ int isObjectBid (int size);
  * \return status code for this operation.
  *
 */
-int isObjectBidTable (int size);
+int isObjectBidTable (char ** data, int size);
 
 
 /** \fn int isAccountUser (int size)
@@ -269,7 +269,7 @@ int isObjectBidTable (int size);
  * \return status code for this operation.
  *
 */
-int isAccountUser (int size);
+int isAccountUser (char ** data, int size);
 
 
 /** \fn long int getCurrentTime()

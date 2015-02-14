@@ -108,7 +108,7 @@ int connectWait()
         return ERROR_UNKNOWN;
     }
 
-    if(getnameinfo(clientAddr, adressLength, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
+    if (getnameinfo(clientAddr, adressLength, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
         printf("new client conected: %s\n", machine);
     } else {
         printf("anonymous client connected.\n");
@@ -218,7 +218,7 @@ int sendBinary(char *data, size_t size)
 {
     int temp = 0;
     temp = send(mainSocket, data, size, 0);
-    if(temp == -1) {
+    if (temp == -1) {
         perror("sendBinary error.");
         return ERROR_SENDING;
     } else {
@@ -362,7 +362,7 @@ int sendHeaderField(int size, int type)
     headerField[64] = '\0'; // end of the message
 
 
-    if(temp == SUCCESS) // if correctly made > try to send it
+    if (temp == SUCCESS) // if correctly made > try to send it
         temp = sendString(headerField); // send this message, it's composed of characters (valid char array)
 
     return temp; // is it correctly made and send ?
@@ -489,8 +489,6 @@ int splitPutRequest(char* request, int size, char* data, int* sizeData)
 */
 int splitConnectRequest(char* request, int size, char* login, char* password, int* sizeLogin, int* sizePassword)
 {
-    free(login);
-    free(password);
     login = NULL;
     password = NULL;
 
@@ -502,8 +500,8 @@ int splitConnectRequest(char* request, int size, char* login, char* password, in
         return ERROR_READING;
     }
 
-    login = strndup(&request[8], USERACCOUNT_LOGIN_LENGTH);
-    password = strndup(&request[8+USERACCOUNT_LOGIN_LENGTH], USERACCOUNT_PASSWORD_LENGTH);
+    login = strtok(&request[8],";");
+    password = strtok(&request[8+strlen(login)-1],";");
 
     *sizeLogin = (strlen(login)>USERACCOUNT_LOGIN_LENGTH)?USERACCOUNT_LOGIN_LENGTH:strlen(login);
     *sizePassword = (strlen(password)>USERACCOUNT_PASSWORD_LENGTH)?USERACCOUNT_PASSWORD_LENGTH:strlen(password);
@@ -536,28 +534,33 @@ int splitDeleteRequest(char* request, int size, char* data, int* sizeData)
 
 int answerUserAccount(UserAccount * account)
 {
-    if(account==NULL)
+    if (account==NULL)
         return ERROR_POINTER;
 
     int state = sendStatusLine(STATUS_CODE_OK);
     if (state == SUCCESS)
         state = sendHeaderField(sizeof(UserAccount), CONTENT_TYPE_USERACCOUNT_ID);
-    if(state == SUCCESS)
+    if (state == SUCCESS)
         state = ERROR_SENDING;
+
+    //@TODO send UserAccount
+
     return SUCCESS;
 }
 
 
 int answerObjectBid(ObjectBid * object)
 {
-    if(object==NULL)
+    if (object==NULL)
         return ERROR_POINTER;
 
     int state = sendStatusLine(STATUS_CODE_OK);
     if (state == SUCCESS)
         sendHeaderField(sizeof(ObjectBid), CONTENT_TYPE_OBJECTBID_ID);
-    if(state == SUCCESS)
+    if (state == SUCCESS)
         state = ERROR_SENDING;
+
+    //@TODO send ObjectBid
 
     return SUCCESS;
 }
@@ -565,14 +568,16 @@ int answerObjectBid(ObjectBid * object)
 
 int answerObjectBidTable(ObjectBid * objects, int nbrObjects)
 {
-    if(objects==NULL)
+    if (objects==NULL)
         return ERROR_POINTER;
 
     int state = sendStatusLine(STATUS_CODE_OK);
     if (state == SUCCESS)
         sendHeaderField(sizeof(ObjectBid)*nbrObjects, CONTENT_TYPE_OBJECTBID_ID);
-    if(state == SUCCESS)
+    if (state == SUCCESS)
         state = ERROR_SENDING;
+
+    //@TODO send ObjectBid table
 
     return SUCCESS;
 }

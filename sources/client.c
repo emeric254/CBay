@@ -100,12 +100,12 @@ int receiveBinary(char *donnees, size_t tailleMax) {
     /* if max not reached,
      * keep on receiving data
      */
-    if(dejaRecu < tailleMax) {
+    if (dejaRecu < tailleMax) {
         retour = recv(clientSocket, donnees + dejaRecu, tailleMax - dejaRecu, 0);
-        if(retour < 0) {
+        if (retour < 0) {
             perror("receiveBinary error.");
             return -1;
-        } else if(retour == 0) {
+        } else if (retour == 0) {
             fprintf(ERROROUTPUT, "receiveBinary, le serveur a ferme la connexion.\n");
             return 0;
         } else {
@@ -126,7 +126,7 @@ int sendBinary(char *donnees, size_t taille) {
     int retour = 0;
     printf("%s\n",donnees);
     retour = send(clientSocket, donnees, taille, 0);
-    if(retour == -1) {
+    if (retour == -1) {
         perror("sendBinary error.");
         return -1;
     } else {
@@ -336,6 +336,8 @@ int sendGetUserAccount(UserAccount *account)
 
     int j = 4;
 
+    msg[j++] = account->type;
+
     memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
     j+=sizeof(long int);
 
@@ -382,6 +384,8 @@ int sendPutUserAccount(UserAccount *account)
 
     int j = 4;
 
+    msg[j++] = account->type;
+
     memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
     j+=sizeof(long int);
 
@@ -427,6 +431,8 @@ int sendDeleteUserAccount(UserAccount *account)
     msg[strlen(REQUEST_METHOD_DELETE )] = ' ';
 
     int j = 7;
+
+    msg[j++] = account->type;
 
     memcpy(&msg[j], &(account->IDS.id), sizeof(long int));
     j+=sizeof(long int);
